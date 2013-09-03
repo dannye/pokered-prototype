@@ -11365,7 +11365,7 @@ ENDC
 	jr .asm_438f
 
 .titlescreenTilemap ; 437f (1:437f)
-db $41,$42,$43,$42,$44,$42,$45,$46,$47,$48,$49,$4A,$4B,$4C,$4D,$4E ; ©'95.'96.'98 GAME FREAK inc.
+db $7F,$7F,$41,$42,$43,$44,$7F,$45,$46,$47,$48,$49,$4A,$4B,$4C,$7F ; ©2013 Danny-E 33
 
 .asm_438f
 	call SaveScreenTilesToBuffer2
@@ -11624,9 +11624,40 @@ Func_4541: ; 4541 (1:4541)
 	jp PlaceString
 
 CopyrightTextString: ; 4556 (1:4556)
-	db $60,$61,$62,$61,$63,$61,$64,$7F,$65,$66,$67,$68,$69,$6A,$4E             ; ©'95.'96.'98 Nintendo
-	db $60,$61,$62,$61,$63,$61,$64,$7F,$6B,$6C,$6D,$6E,$6F,$70,$71,$72,$4E     ; ©'95.'96.'98 Creatures inc.
-	db $60,$61,$62,$61,$63,$61,$64,$7F,$73,$74,$75,$76,$77,$78,$79,$7A,$7B,"@" ; ©'95.'96.'98 GAME FREAK inc.
+	db $4E,$7F,$60,$61,$62,$63,$7F,$64,$73,$74,$75,$76,$77,$78,$79,$4E,"@" ;©2013 Danny-E 33
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
 
 TitleMons: ; 4588 (1:4588)
 ; mons on the title screen are randomly chosen from here
@@ -11696,7 +11727,7 @@ PrintGameVersionOnTitleScreen: ; 4598 (1:4598)
 ; these point to special tiles specifically loaded for that purpose ad are no usual text
 VersionOnTitleScreenText: ; 45a1 (1:45a1)
 IF _RED
-	db $60,$61,$7F,$65,$66,$67,$68,$69,$50 ; "Red Version"
+	db $7F,$60,$61,$62,$63,$64,$7F,$7F,$50 ; "Prototype"
 ENDC
 IF _BLUE
 	db $61,$62,$63,$64,$65,$66,$67,$68,$50 ; "Blue Version"
