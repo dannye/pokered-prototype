@@ -19510,11 +19510,11 @@ Func_c52f: ; c52f (3:452f)
 	call PrintNumber
 	FuncCoord 4, 1 ; $c3b8
 	ld hl, Coord
-	ld de, Unknown_c579 ; $4579
+	ld de, SafariSteps ; $4579
 	call PlaceString
 	FuncCoord 1, 3 ; $c3dd
 	ld hl, Coord
-	ld de, Unknown_c57e ; $457e
+	ld de, SafariBallText ; $457e
 	call PlaceString
 	ld a, [W_NUMSAFARIBALLS] ; $da47
 	cp $a
@@ -19530,11 +19530,11 @@ Func_c52f: ; c52f (3:452f)
 	ld bc, $102
 	jp PrintNumber
 
-Unknown_c579: ; c579 (3:4579)
-INCBIN "baserom.gbc",$c579,$c57e - $c579
+SafariSteps: ; c579 (3:4579)
+	db "/500@"
 
-Unknown_c57e: ; c57e (3:457e)
-INCBIN "baserom.gbc",$c57e,$c586 - $c57e
+SafariBallText: ; c57e (3:457e)
+	db "BALL×× @"
 
 ; known jump sources: 47f (0:47f), b2e (0:b2e), b5a (0:b5a), c12 (0:c12), c2d (0:c2d), fd3 (0:fd3), 1a67f (6:667f), 52683 (14:6683)
 Func_c586: ; c586 (3:4586)
@@ -103381,7 +103381,7 @@ Func_70f60: ; 70f60 (1c:4f60)
 	call PlaceString
 	ld h, b
 	ld l, c
-	ld de, Unknown_70f89 ; $4f89
+	ld de, MonsNestText ; $4f89
 	call PlaceString
 	call WaitForTextScrollButtonPress
 	call Func_711ab
@@ -103390,8 +103390,8 @@ Func_70f60: ; 70f60 (1c:4f60)
 	ld [hl], a
 	ret
 
-Unknown_70f89: ; 70f89 (1c:4f89)
-INCBIN "baserom.gbc",$70f89,$70f90 - $70f89
+MonsNestText: ; 70f89 (1c:4f89)
+	db "'s NEST@"
 
 ; known jump sources: 30b3 (0:30b3)
 Func_70f90: ; 70f90 (1c:4f90)
