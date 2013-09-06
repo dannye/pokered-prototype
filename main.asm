@@ -15155,7 +15155,7 @@ OakSpeech: ; 6115 (1:6115)
 	call GBFadeOut2
 	call ClearScreen
 	call GetNidoPalID
-	ld a,NIDORINO
+	ld a,MEW
 	ld [$D0B5],a    ; pic displayed is stored at this location
 	ld [$CF91],a
 	call GetMonHeader      ; this is also related to the pic
@@ -18713,7 +18713,7 @@ Func_7c18: ; 7c18 (1:7c18)
 ; 0x7c49
 
 GetNidoPalID:
-	ld a, PAL_NIDORINO
+	ld a, PAL_MEW
 	jr GotPaletteID
 GetRedPalID:
 	call ClearScreen
