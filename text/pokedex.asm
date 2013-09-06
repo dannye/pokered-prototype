@@ -42,7 +42,7 @@ _VoltorbDexEntry:
 	db 0,"Usually found in",$4E
 	db "power plants.",$4E
 	db "Easily mistaken",$49
-	db "for a # BALL,",$4E
+	db "for a # Ball,",$4E
 	db "they have zapped",$4E
 	db "many people",$5F,"@"
 
@@ -55,9 +55,9 @@ _NidokingDexEntry:
 	db "bones",$5F,"@"
 
 _SlowbroDexEntry:
-	db 0,"The SHELLDER that",$4E
+	db 0,"The Shellder that",$4E
 	db "is latched onto",$4E
-	db "SLOWPOKE's tail",$49
+	db "Slowpoke's tail",$49
 	db "is said to feed",$4E
 	db "on the host's left",$4E
 	db "over scraps",$5F,"@"
@@ -76,7 +76,7 @@ _ExeggutorDexEntry:
 	db "one of its heads",$49
 	db "will drop off and",$4E
 	db "continue on as an",$4E
-	db "EXEGGCUTE",$5F,"@"
+	db "Exeggcute",$5F,"@"
 
 _LickitungDexEntry:
 	db 0,"Its tongue can be",$4E
@@ -104,7 +104,7 @@ _GrimerDexEntry:
 
 _GengarDexEntry:
 	db 0,"Under a full moon,",$4E
-	db "this #MON",$4E
+	db "this #mon",$4E
 	db "likes to mimic",$49
 	db "the shadows of",$4E
 	db "people and laugh",$4E
@@ -114,7 +114,7 @@ _NidoranFDexEntry:
 	db 0,"Although small,",$4E
 	db "its venomous",$4E
 	db "barbs render this",$49
-	db "#MON dangerous.",$4E
+	db "#mon dangerous.",$4E
 	db "The female has",$4E
 	db "smaller horns",$5F,"@"
 
@@ -131,7 +131,7 @@ _CuboneDexEntry:
 	db "removes its skull",$4E
 	db "helmet, no one",$49
 	db "has ever seen",$4E
-	db "this #MON's",$4E
+	db "this #mon's",$4E
 	db "real face",$5F,"@"
 
 _RhyhornDexEntry:
@@ -143,7 +143,7 @@ _RhyhornDexEntry:
 	db "trailer flying",$5F,"@"
 
 _LaprasDexEntry:
-	db 0,"A #MON that",$4E
+	db 0,"A #mon that",$4E
 	db "has been over-",$4E
 	db "hunted almost to",$49
 	db "extinction. It",$4E
@@ -151,7 +151,7 @@ _LaprasDexEntry:
 	db "across the water",$5F,"@"
 
 _ArcanineDexEntry:
-	db 0,"A #MON that",$4E
+	db 0,"A #mon that",$4E
 	db "has been admired",$4E
 	db "since the past",$49
 	db "for its beauty.",$4E
@@ -193,7 +193,7 @@ _TentacoolDexEntry:
 _GastlyDexEntry:
 	db 0,"Almost invisible,",$4E
 	db "this gaseous",$4E
-	db "#MON cloaks",$49
+	db "#mon cloaks",$49
 	db "the target and",$4E
 	db "puts it to sleep",$4E
 	db "without notice",$5F,"@"
@@ -208,14 +208,14 @@ _ScytherDexEntry:
 
 _StaryuDexEntry:
 	db 0,"An enigmatic",$4E
-	db "#MON that can",$4E
+	db "#mon that can",$4E
 	db "effortlessly",$49
 	db "regenerate any",$4E
 	db "appendage it",$4E
 	db "loses in battle",$5F,"@"
 
 _BlastoiseDexEntry:
-	db 0,"A brutal #MON",$4E
+	db 0,"A brutal #mon",$4E
 	db "with pressurized",$4E
 	db "water jets on its",$49
 	db "shell. They are",$4E
@@ -296,7 +296,7 @@ _GravelerDexEntry:
 
 _ChanseyDexEntry:
 	db 0,"A rare and elusive",$4E
-	db "#MON that is",$4E
+	db "#mon that is",$4E
 	db "said to bring",$49
 	db "happiness to those",$4E
 	db "who manage to get",$4E
@@ -354,7 +354,7 @@ _PsyduckDexEntry:
 	db 0,"While lulling its",$4E
 	db "enemies with its",$4E
 	db "vacant look, this",$49
-	db "wily #MON will",$4E
+	db "wily #mon will",$4E
 	db "use psychokinetic",$4E
 	db "powers",$5F,"@"
 
@@ -392,7 +392,7 @@ _ElectabuzzDexEntry:
 
 _MagnetonDexEntry:
 	db 0,"Formed by several",$4E
-	db "MAGNEMITEs linked",$4E
+	db "Magnemites linked",$4E
 	db "together. They",$49
 	db "frequently appear",$4E
 	db "when sunspots",$4E
@@ -457,7 +457,7 @@ _VenonatDexEntry:
 _DragoniteDexEntry:
 	db 0,"An extremely",$4E
 	db "rarely seen",$4E
-	db "marine #MON.",$49
+	db "marine #mon.",$49
 	db "Its intelligence",$4E
 	db "is said to match",$4E
 	db "that of humans",$5F,"@"
@@ -496,7 +496,7 @@ _MoltresDexEntry:
 
 _ArticunoDexEntry:
 	db 0,"A legendary bird",$4E
-	db "#MON that is",$4E
+	db "#mon that is",$4E
 	db "said to appear to",$49
 	db "doomed people who",$4E
 	db "are lost in icy",$4E
@@ -504,7 +504,7 @@ _ArticunoDexEntry:
 
 _ZapdosDexEntry:
 	db 0,"A legendary bird",$4E
-	db "#MON that is",$4E
+	db "#mon that is",$4E
 	db "said to appear",$49
 	db "from clouds while",$4E
 	db "dropping enormous",$4E
@@ -552,7 +552,7 @@ _NinetalesDexEntry:
 
 _PikachuDexEntry:
 	db 0,"When several of",$4E
-	db "these #MON",$4E
+	db "these #mon",$4E
 	db "gather, their",$49
 	db "electricity could",$4E
 	db "build and cause",$4E
@@ -568,14 +568,14 @@ _RaichuDexEntry:
 
 _DratiniDexEntry:
 	db 0,"Long considered a",$4E
-	db "mythical #MON",$4E
+	db "mythical #mon",$4E
 	db "until recently",$49
 	db "when a small",$4E
 	db "colony was found",$4E
 	db "living underwater",$5F,"@"
 
 _DragonairDexEntry:
-	db 0,"A mystical #MON",$4E
+	db 0,"A mystical #mon",$4E
 	db "that exudes a",$4E
 	db "gentle aura.",$49
 	db "Has the ability",$4E
@@ -583,7 +583,7 @@ _DragonairDexEntry:
 	db "conditions",$5F,"@"
 
 _KabutoDexEntry:
-	db 0,"A #MON that",$4E
+	db 0,"A #mon that",$4E
 	db "was resurrected",$4E
 	db "from a fossil",$49
 	db "found in what was",$4E
@@ -640,7 +640,7 @@ _OmanyteDexEntry:
 
 _OmastarDexEntry:
 	db 0,"A prehistoric",$4E
-	db "#MON that died",$4E
+	db "#mon that died",$4E
 	db "out when its",$49
 	db "heavy shell made",$4E
 	db "it impossible to",$4E
@@ -668,7 +668,7 @@ _EeveeDexEntry:
 	db "It may mutate if",$49
 	db "it is exposed to",$4E
 	db "radiation from",$4E
-	db "element STONEs",$5F,"@"
+	db "element Stones",$5F,"@"
 
 _FlareonDexEntry:
 	db 0,"When storing",$4E
@@ -715,8 +715,8 @@ _EkansDexEntry:
 	db "and stealthily.",$4E
 	db "Eats the eggs of",$49
 	db "birds, such as",$4E
-	db "PIDGEY and",$4E
-	db "SPEAROW, whole",$5F,"@"
+	db "Pidgey and",$4E
+	db "Spearow, whole",$5F,"@"
 
 _ParasDexEntry:
 	db 0,"Burrows to suck",$4E
@@ -753,7 +753,7 @@ _WeedleDexEntry:
 _KakunaDexEntry:
 	db 0,"Almost incapable",$4E
 	db "of moving, this",$4E
-	db "#MON can only",$49
+	db "#mon can only",$49
 	db "harden its shell",$4E
 	db "to protect itself",$4E
 	db "from predators",$5F,"@"
@@ -783,7 +783,7 @@ _PrimeapeDexEntry:
 	db "it is caught",$5F,"@"
 
 _DugtrioDexEntry:
-	db 0,"A team of DIGLETT",$4E
+	db 0,"A team of Diglett",$4E
 	db "triplets.",$4E
 	db "It triggers huge",$49
 	db "earthquakes by",$4E
@@ -815,7 +815,7 @@ _CaterpieDexEntry:
 	db "slopes and walls",$5F,"@"
 
 _MetapodDexEntry:
-	db 0,"This #MON is",$4E
+	db 0,"This #mon is",$4E
 	db "vulnerable to",$4E
 	db "attack while its",$49
 	db "shell is soft,",$4E
@@ -851,8 +851,8 @@ _HypnoDexEntry:
 	db "with an enemy, it",$4E
 	db "will use a mix of",$49
 	db "PSI moves such as",$4E
-	db "HYPNOSIS and",$4E
-	db "CONFUSION",$5F,"@"
+	db "Hypnosis and",$4E
+	db "Confusion",$5F,"@"
 
 _GolbatDexEntry:
 	db 0,"Once it strikes,",$4E
@@ -920,7 +920,7 @@ _ElectrodeDexEntry:
 
 _ClefableDexEntry:
 	db 0,"A timid fairy",$4E
-	db "#MON that is",$4E
+	db "#mon that is",$4E
 	db "rarely seen. It",$49
 	db "will run and hide",$4E
 	db "the moment it",$4E
@@ -929,9 +929,9 @@ _ClefableDexEntry:
 _WeezingDexEntry:
 	db 0,"Where two kinds",$4E
 	db "of poison gases",$4E
-	db "meet, 2 KOFFINGs",$49
+	db "meet, 2 Koffings",$49
 	db "can fuse into a",$4E
-	db "WEEZING over many",$4E
+	db "Weezing over many",$4E
 	db "years",$5F,"@"
 
 _PersianDexEntry:
@@ -963,7 +963,7 @@ _AbraDexEntry:
 	db "to read minds, it",$4E
 	db "will identify",$49
 	db "impending danger",$4E
-	db "and TELEPORT to",$4E
+	db "and Teleport to",$4E
 	db "safety",$5F,"@"
 
 _AlakazamDexEntry:
@@ -978,7 +978,7 @@ _PidgeottoDexEntry:
 	db 0,"Very protective",$4E
 	db "of its sprawling",$4E
 	db "territorial area,",$49
-	db "this #MON will",$4E
+	db "this #mon will",$4E
 	db "fiercely peck at",$4E
 	db "any intruder",$5F,"@"
 
@@ -988,7 +988,7 @@ _PidgeotDexEntry:
 	db "of water at high",$49
 	db "speed to pick off",$4E
 	db "unwary prey such",$4E
-	db "as MAGIKARP",$5F,"@"
+	db "as Magikarp",$5F,"@"
 
 _StarmieDexEntry:
 	db 0,"Its central core",$4E
@@ -1004,7 +1004,7 @@ _BulbasaurDexEntry:
 	db "back at birth.",$49
 	db "The plant sprouts",$4E
 	db "and grows with",$4E
-	db "this #MON",$5F,"@"
+	db "this #mon",$5F,"@"
 
 _VenusaurDexEntry:
 	db 0,"The plant blooms",$4E
@@ -1048,7 +1048,7 @@ _PonytaDexEntry:
 
 _RapidashDexEntry:
 	db 0,"Very competitive,",$4E
-	db "this #MON will",$4E
+	db "this #mon will",$4E
 	db "chase anything",$49
 	db "that moves fast",$4E
 	db "in the hopes of",$4E
@@ -1072,7 +1072,7 @@ _RaticateDexEntry:
 
 _NidorinoDexEntry:
 	db 0,"An aggressive",$4E
-	db "#MON that is",$4E
+	db "#mon that is",$4E
 	db "quick to attack.",$49
 	db "The horn on its",$4E
 	db "head secretes a",$4E
@@ -1095,7 +1095,7 @@ _GeodudeDexEntry:
 	db "or trip on them",$5F,"@"
 
 _PorygonDexEntry:
-	db 0,"A #MON that",$4E
+	db 0,"A #mon that",$4E
 	db "consists entirely",$4E
 	db "of programming",$49
 	db "code. Capable of",$4E
@@ -1104,7 +1104,7 @@ _PorygonDexEntry:
 
 _AerodactylDexEntry:
 	db 0,"A ferocious, pre-",$4E
-	db "historic #MON",$4E
+	db "historic #mon",$4E
 	db "that goes for the",$49
 	db "enemy's throat",$4E
 	db "with its serrated",$4E
@@ -1115,7 +1115,7 @@ _MagnemiteDexEntry:
 	db "to stay suspended.",$4E
 	db "Appears without",$49
 	db "warning and uses",$4E
-	db "THUNDER WAVE and",$4E
+	db "Thunder Wave and",$4E
 	db "similar moves",$5F,"@"
 
 _CharmanderDexEntry:
@@ -1184,7 +1184,7 @@ _VileplumeDexEntry:
 
 _BellsproutDexEntry:
 	db 0,"A carnivorous",$4E
-	db "#MON that traps",$4E
+	db "#mon that traps",$4E
 	db "and eats bugs.",$49
 	db "It uses its root",$4E
 	db "feet to soak up",$4E
@@ -1192,11 +1192,11 @@ _BellsproutDexEntry:
 
 _WeepinbellDexEntry:
 	db 0,"It spits out",$4E
-	db "POISONPOWDER to",$4E
+	db "PoisonPowder to",$4E
 	db "immobilize the",$49
 	db "enemy and then",$4E
 	db "finishes it with",$4E
-	db "a spray of ACID",$5F,"@"
+	db "a spray of Acid",$5F,"@"
 
 _VictreebelDexEntry:
 	db 0,"Said to live in",$4E

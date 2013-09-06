@@ -19,12 +19,12 @@ _DaisyBagFullText:
 	db "stuff with you.",$57
 
 _DaisyUseMapText:
-	db 0,"Use the TOWN MAP",$4F
+	db 0,"Use the Town Map",$4F
 	db "to find out where",$55
 	db "you are.",$57
 
 _BluesHouseText2:
-	db 0,"#MON are living",$4F
+	db 0,"#mon are living",$4F
 	db "things! If they",$55
 	db "get tired, give",$55
 	db "them a rest!",$57

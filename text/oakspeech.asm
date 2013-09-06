@@ -1,24 +1,24 @@
 _OakSpeechText1:
 	db 0,"Hello there!",$4F
 	db "Welcome to the",$55
-	db "world of #MON!",$51
-	db "My name is OAK!",$4F
+	db "world of #mon!",$51
+	db "My name is Oak!",$4F
 	db "People call me",$55
-	db "the #MON PROF!",$58
+	db "the #mon Prof!",$58
 
 _OakSpeechText2A:
 	db 0,"This world is",$4F
 	db "inhabited by",$55
 	db "creatures called",$55
-	db "#MON!@@"
+	db "#mon!@@"
 
 _OakSpeechText2B:
 	db 0,$51,"For some people,",$4F
-	db "#MON are",$55
+	db "#mon are",$55
 	db "pets. Others use",$55
 	db "them for fights.",$51
 	db "Myself...",$51
-	db "I study #MON",$4F
+	db "I study #mon",$4F
 	db "as a profession.",$58
 
 _IntroducePlayerText:
@@ -36,9 +36,9 @@ _IntroduceRivalText:
 _OakSpeechText3:
 	db 0,$52,"!",$51
 	db "Your very own",$4F
-	db "#MON legend is",$55
+	db "#mon legend is",$55
 	db "about to unfold!",$51
 	db "A world of dreams",$4F
 	db "and adventures",$55
-	db "with #MON",$55
+	db "with #mon",$55
 	db "awaits! Let's go!",$57
