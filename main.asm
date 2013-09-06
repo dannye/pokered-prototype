@@ -70715,7 +70715,7 @@ Func_4188a: ; 4188a (10:588a)
 	pop af
 	jr c, .asm_418d0
 	ld c, $28
-	call DelayFrames
+	call DisplayPresents
 .asm_418d0
 	ld a, $1f
 	ld [$c0ef], a
@@ -70848,6 +70848,18 @@ OTString67E5: ; 427e5 (10:67e5)
 DexPalBankswitch:
 	ld hl, SendDexPal
 	jp Bankswitch
+	
+DisplayPresents:
+	ld hl,$c483
+	ld c,$06
+	ld a,$67
+.loop
+	ld [hli],a
+	inc a
+	dec c
+	jr nz,.loop
+	ld c,$28
+	jp DelayFrames
 
 SECTION "bank11",ROMX,BANK[$11]
 
