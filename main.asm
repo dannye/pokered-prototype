@@ -19534,7 +19534,7 @@ SafariSteps: ; c579 (3:4579)
 	db "/500@"
 
 SafariBallText: ; c57e (3:457e)
-	db "BALL×× @"
+	db "Ball×× @"
 
 ; known jump sources: 47f (0:47f), b2e (0:b2e), b5a (0:b5a), c12 (0:c12), c2d (0:c2d), fd3 (0:fd3), 1a67f (6:667f), 52683 (14:6683)
 Func_c586: ; c586 (3:4586)
@@ -103391,7 +103391,7 @@ Func_70f60: ; 70f60 (1c:4f60)
 	ret
 
 MonsNestText: ; 70f89 (1c:4f89)
-	db "'s NEST@"
+	db "'s Nest@"
 
 ; known jump sources: 30b3 (0:30b3)
 Func_70f90: ; 70f90 (1c:4f90)
