@@ -2898,9 +2898,7 @@ CheckForUserInterruption: ; 12f8 (0:12f8)
 	and a,%00001001 ; Start button, A button
 	jr nz,.setCarry ; if either key is pressed
 	dec c
-	jr nz,CheckForUserInterruption
-.unsetCarry
-	and a
+	jp CheckCValue
 	ret
 .setCarry
 	scf
@@ -10735,6 +10733,22 @@ Func_3f0f: ; 3f0f (0:3f0f)
 	dw $7be8
 	dw $7c0d
 	dw $7c45
+	
+CheckCValue:
+	jr z,.zero
+	ld a,$64
+	cp c
+	jr nz,.notHalf
+	ld hl, SendTitleMonPalPacket
+	ld b, BANK(SendTitleMonPalPacket)
+	call Bankswitch
+	ld a, [W_WHICHTRADE]
+	ld c, $64
+.notHalf
+	jp CheckForUserInterruption
+.zero
+	and a
+	ret
 
 SECTION "bank1",ROMX,BANK[$1]
 
@@ -11373,7 +11387,7 @@ db $7F,$7F,$41,$42,$43,$44,$7F,$45,$46,$47,$48,$49,$4A,$4B,$4C,$7F ; ©2013 Dann
 	call EnableLCD
 ; 4398 (1:4398)
 IF _RED
-	ld a,CHARMANDER ; which Pokemon to show first on the title screen
+	ld a,MEWTWO ; which Pokemon to show first on the title screen
 ENDC
 IF _BLUE
 	ld a,SQUIRTLE ; which Pokemon to show first on the title screen
@@ -11504,16 +11518,13 @@ Func_4496: ; 4496 (1:4496)
 	call Func_4533
 .asm_449b
 	call GenRandom
-	and $f
-	ld c, a
-	ld b, $0
-	ld hl, TitleMons ; $4588
-	add hl, bc
-	ld a, [hl]
-	ld hl, W_WHICHTRADE ; $cd3d
-	cp [hl]
-	jr z, .asm_449b
-	ld [hl], a
+	cp $98
+	jr nc,.asm_449b
+	cp $00
+	jr z,.asm_449b
+	ld [$d11e], a
+	ld hl, PokedexToIndex
+	call PickNewTitleMon
 	call Func_4524
 	ld a, $90
 	ld [$FF00+$b0], a
@@ -11595,7 +11606,7 @@ Func_4519: ; 4519 (1:4519)
 Func_4524: ; 4524 (1:4524)
 	ld [$cf91], a
 	ld [$d0b5], a
-	FuncCoord 5, 10 ; $c46d
+	FuncCoord 7, 10 ; $c46f
 	ld hl, Coord
 	call GetMonHeader
 	jp LoadFrontSpriteByMonIndex
@@ -11658,63 +11669,22 @@ CopyrightTextString: ; 4556 (1:4556)
 	nop
 	nop
 	nop
-
-TitleMons: ; 4588 (1:4588)
-; mons on the title screen are randomly chosen from here
-IF _RED
-	db CHARMANDER
-	db SQUIRTLE
-	db BULBASAUR
-	db WEEDLE
-	db NIDORAN_M
-	db SCYTHER
-	db PIKACHU
-	db CLEFAIRY
-	db RHYDON
-	db ABRA
-	db GASTLY
-	db DITTO
-	db PIDGEOTTO
-	db ONIX
-	db PONYTA
-	db MAGIKARP
-ENDC
-IF _GREEN
-	db BULBASAUR
-	db CHARMANDER
-	db SQUIRTLE
-	db CATERPIE
-	db NIDORAN_F
-	db PINSIR
-	db PIKACHU
-	db CLEFAIRY
-	db RHYDON
-	db ABRA
-	db GASTLY
-	db DITTO
-	db PIDGEOTTO
-	db ONIX
-	db PONYTA
-	db MAGIKARP
-ENDC
-IF _BLUE
-	db SQUIRTLE
-	db CHARMANDER
-	db BULBASAUR
-	db MANKEY
-	db HITMONLEE
-	db VULPIX
-	db CHANSEY
-	db AERODACTYL
-	db JOLTEON
-	db SNORLAX
-	db GLOOM
-	db POLIWAG
-	db DODUO
-	db PORYGON
-	db GENGAR
-	db RAICHU
-ENDC
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
 
 ; prints version text (red, blue)
 PrintGameVersionOnTitleScreen: ; 4598 (1:4598)
@@ -18727,6 +18697,20 @@ GotPaletteID:
 	ld hl, SendIntroPal
 	ld b, BANK(SendIntroPal)
 	jp Bankswitch
+	
+PickNewTitleMon:
+	ld b, BANK(PokedexToIndex)
+	call Bankswitch
+	ld a, [$d11e]
+	ld hl, W_WHICHTRADE
+	cp [hl]
+	jp z, Func_4496 + 5
+	ld [hl], a
+	ld hl, SendTitleBlackPalPacket
+	ld b, BANK(SendTitleBlackPalPacket)
+	call Bankswitch
+	ld a, [W_WHICHTRADE]
+	ret
 
 SECTION "bank2",ROMX,BANK[$2]
 
@@ -105392,7 +105376,7 @@ PalPacket_72478: ; 72478 (1c:6478)
 	db $51,$1A,$00,$1B,$00,$1C,$00,$1D,$00,$00,$00,$00,$00,$00,$00,$00
 
 PalPacket_72488: ; 72488 (1c:6488)
-	db $51,$0E,$00,$0D,$00,$10,$00,$14,$00,$00,$00,$00,$00,$00,$00,$00
+	db $51,$0E,$00,$0D,$00,PAL_MEWTWO,$00,$14,$00,$00,$00,$00,$00,$00,$00,$00
 
 PalPacket_72498: ; 72498 (1c:6498)
 	db $51,$10,$00,$22,$00,$12,$00,$18,$00,$00,$00,$00,$00,$00,$00,$00
@@ -105720,54 +105704,32 @@ SetPalID
 	ld hl, $CF2E
 	ld [hld], a
 	jp SendSGBPacket
+	
+SendTitleMonPalPacket:
+	ld hl, PalPacket_72488
+	call CopyPalPacket
+	ld a, [$cf91]
+	ld [$d11e], a
+	ld a, $3a
+	call Predef
+	ld a, [$d11e]
+	call DeterminePaletteIDFront + $13
+SendTitlePalPacket:
+	ld [$cf32], a
+	ld hl, $cf2d
+	jp SendSGBPacket
+	
+SendTitleBlackPalPacket:
+	ld hl, PalPacket_72488
+	call CopyPalPacket
+	ld a, PAL_BLACK2
+	jr SendTitlePalPacket
 
 CopyPalPacket:
 	ld bc, $0010
 	ld de, $CF2D
 	jp CopyData
 
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
 	nop
 	nop
 	nop
@@ -132822,4 +132784,12 @@ SuperPalettes: ; 72660 (1c:6660)
 	RGB 31, 31, 31
 	RGB 28, 18, 17
 	RGB 22, 07, 08
+	RGB 00, 00, 00
+	RGB 31, 31, 31
+	RGB 00, 00, 00
+	RGB 00, 00, 00
+	RGB 00, 00, 00
+	RGB 31, 31, 31
+	RGB 00, 00, 00
+	RGB 00, 00, 00
 	RGB 00, 00, 00
