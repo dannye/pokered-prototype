@@ -105703,11 +105703,13 @@ LoadHoFPlayerBackSprite:
 PCBoxPal:
 	call TextBoxBorder
 SendDexPal:
+	ld hl, PalPacket_72428
 	call CopyPalPacket
 	ld a, $21
 	jr SetPalID
 
 SendIntroPal:
+	ld hl, PalPacket_72428
 	call CopyPalPacket
 	pop bc
 	pop de
@@ -105722,12 +105724,8 @@ SetPalID
 CopyPalPacket:
 	ld bc, $0010
 	ld de, $CF2D
-	ld hl, PalPacket_72428
 	jp CopyData
 
-	nop
-	nop
-	nop
 	nop
 	nop
 	nop
