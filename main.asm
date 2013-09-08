@@ -27676,21 +27676,19 @@ DrawBadges: ; ea03 (3:6a03)
 	ld [hli], a
 	inc a
 	ld [$cd3d], a
-
-; Names aren't printed if the badge is owned.
 	ld a, [de]
 	and a
 	ld a, [$cd3e]
-	jr nz, .SkipName
-	call .PlaceTiles
-	jr .PlaceBadge
-
-.SkipName
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
 	inc a
 	inc a
 	inc hl
-
-.PlaceBadge
 	ld [$cd3e], a
 	ld de, 20 - 1
 	add hl, de
@@ -30852,6 +30850,12 @@ RedPicFront: ; 12ede (4:6ede)
 	nop
 	nop
 	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
 	
 ShrinkPic1: ; 12fe8 (4:6fe8)
 	INCBIN "pic/trainer/shrink1.pic"
@@ -31443,10 +31447,18 @@ DrawTrainerInfo: ; 1349a (4:749a)
 	ld bc,$0080
 	push bc
 	call TrainerInfo_FarCopyData
-	ld hl,BlankLeaderNames ; $7c28
-	ld de,$9600
-	ld bc,$0170
-	call TrainerInfo_FarCopyData
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
 	pop bc
 	ld hl,BadgeNumbersTileGraphics  ; $7d98 ; badge number tile patterns
 	ld de,$8d80
@@ -45244,8 +45256,6 @@ RaichuPicBack:
 	nop
 	nop
 	nop
-	nop
-	nop
 
 ; known jump sources: 12a35 (4:6a35), 70320 (1c:4320)
 Func_27d6b: ; 27d6b (9:7d6b)
@@ -46165,6 +46175,15 @@ DugtrioPicBack:
 	nop
 	nop
 	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
 
 ; known jump sources: 3fa81 (f:7a81)
 Func_2bea9: ; 2bea9 (a:7ea9)
@@ -46305,9 +46324,234 @@ TentacruelPicBack:
 	INCBIN "pic/monback/tentacruelb.pic"
 GeodudePicFront:
 	INCBIN "pic/bmon/geodude.pic"
-GeodudePicBack:
-	INCBIN "pic/monback/geodudeb.pic"
-	
+
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
 	nop
 	nop
 	nop
@@ -46377,8 +46621,67 @@ UnnamedText_2fb93: ; 2fb93 (b:7b93)
 TrainerInfoTextBoxTileGraphics: ; 2fb98 (b:7b98)
 INCBIN "gfx/trainer_info.2bpp"
 
-BlankLeaderNames: ; 2fc28 (b:7c28)
-INCBIN "gfx/blank_leader_names.2bpp"
+GeodudePicBack:
+	INCBIN "pic/monback/geodudeb.pic"
+	
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
 
 CircleTile: ; 2fd88 (b:7d88)
 INCBIN "gfx/circle_tile.2bpp"
@@ -47038,44 +47341,6 @@ KrabbyPicBack:
 	nop
 	nop
 	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
 	
 RedPicBack:
 	INCBIN "pic/trainer/redb.pic"
@@ -47208,6 +47473,26 @@ FossilAerodactylPic:
 GhostPic:
 	INCBIN "pic/other/ghost.pic"
 	
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
 	nop
 	nop
 	nop
@@ -51225,7 +51510,7 @@ HaunterBaseStats: ; 38dee (e:4dee)
 
 	db 90 ; catch rate
 	db 126 ; base exp yield
-	db $66 ; sprite dimensions
+	db $77 ; sprite dimensions
 
 	dw HaunterPicFront
 	dw HaunterPicBack
@@ -51262,7 +51547,7 @@ GengarBaseStats: ; 38e0a (e:4e0a)
 
 	db 45 ; catch rate
 	db 190 ; base exp yield
-	db $66 ; sprite dimensions
+	db $77 ; sprite dimensions
 
 	dw GengarPicFront
 	dw GengarPicBack
@@ -53992,6 +54277,11 @@ db 1,2,3,0; LORELEI
 db 1,0    ; CHANNELER
 db 1,0    ; AGATHA
 db 1,3,0  ; LANCE
+
+
+; trainer data: from 5C53 to 652E
+
+; INCBIN "baserom.gbc",$3989e,$39914 - $3989e
 
 ; trainer pic pointers and base money.
 dw YoungsterPic
@@ -79427,6 +79717,57 @@ AgathaPic: ; 4fa71 (13:7a71)
 LancePic: ; 4fba2 (13:7ba2)
 	INCBIN "pic/trainer/lance.pic"
 	
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
 	nop
 	nop
 	nop
