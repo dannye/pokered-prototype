@@ -105973,6 +105973,10 @@ DeterminePaletteIDBack: ; 726B9 (1c:66B9)
 	ret nz
 	ld a, [hl]
 	ld [$D11E], a
+	cp IVYSAUR
+	jr z, IvyPal
+	cp VENUSAUR
+	jr z, VenusPal
 	and a
 	ld a, PAL_HERO
 	ret z
@@ -105988,6 +105992,12 @@ GetTrainerPalID
 	ld d, $00
 	add hl, de
 	ld a, [hl]
+	ret
+IvyPal
+	ld a, PAL_IVYSAURB
+	ret
+VenusPal
+	ld a, PAL_VENUSAURB
 	ret
 
 CopyPalTable:
@@ -106050,20 +106060,6 @@ CopyPalPacket:
 	ld de, $CF2D
 	jp CopyData
 
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
 	nop
 	nop
 	nop

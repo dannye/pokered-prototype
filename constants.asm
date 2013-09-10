@@ -2300,7 +2300,9 @@ PAL_CHANNELER     EQU $E8
 PAL_AGATHA        EQU $E9
 PAL_LANCE         EQU $EA
 PAL_HERO          EQU $EB
-PAL_BLACK2        EQU $ED
+PAL_IVYSAURB      EQU $EC
+PAL_VENUSAURB     EQU $ED
+PAL_BLACK2        EQU $EE
 
 ; map name constants
 PALLET_TOWN     EQU $00
