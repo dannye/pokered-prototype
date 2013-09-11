@@ -109759,23 +109759,23 @@ DeterminePaletteIDBack: ; 726B9 (1c:66B9)
 	and a
 	ld a, PAL_HERO
 	ret z
-GetMonPalID
+GetMonPalID:
 	push bc
 	ld a, $3A
 	call Predef               ; turn Pokemon ID number into Pokedex number
 	pop bc
 	ld a, [$D11E]
 	ld hl, MonsterPalettes
-GetTrainerPalID
+GetTrainerPalID:
 	ld e, a
 	ld d, $00
 	add hl, de
 	ld a, [hl]
 	ret
-IvyPal
+IvyPal:
 	ld a, PAL_IVYSAURB
 	ret
-VenusPal
+VenusPal:
 	ld a, PAL_VENUSAURB
 	ret
 
@@ -109819,10 +109819,7 @@ SendTitleMonPalPacket:
 	call CopyPalPacket
 	ld a, [$cf91]
 	ld [$d11e], a
-	ld a, $3a
-	call Predef
-	ld a, [$d11e]
-	call DeterminePaletteIDFront + $13
+	call GetMonPalID
 SendTitlePalPacket:
 	ld [$cf32], a
 	ld hl, $cf2d
@@ -109839,6 +109836,14 @@ CopyPalPacket:
 	ld de, $CF2D
 	jp CopyData
 
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
 	nop
 	nop
 	nop
