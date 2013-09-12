@@ -18704,7 +18704,10 @@ PickNewTitleMon:
 	ld a, [$d11e]
 	ld hl, W_WHICHTRADE
 	cp [hl]
-	jp z, Func_4496 + 5
+	jr nz,.newMon
+	pop af
+	jp Func_4496 + 5
+.newMon
 	ld [hl], a
 	ld hl, SendTitleBlackPalPacket
 	ld b, BANK(SendTitleBlackPalPacket)
