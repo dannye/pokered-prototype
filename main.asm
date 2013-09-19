@@ -34471,10 +34471,10 @@ Function1900b: ; 1900b (6:500b)
 	ret
 .asm_1901e
 	ld a, [W_YCOORD]
-	cp $8
+	cp $18
 	ret nz
 	ld a, [W_XCOORD]
-	cp $20
+	cp $16
 	ret nz
 	ld a, $e
 	ld [$ff00+$8c], a
@@ -34491,10 +34491,10 @@ Function1903d: ; 1903d (6:503d)
 	bit 5, a
 	ret nz
 	ld a, [W_YCOORD]
-	cp $9
+	cp $b
 	ret nz
 	ld a, [W_XCOORD]
-	cp $13
+	cp $15
 	ret nz
 	ld a, $5
 	ld [$ff00+$8c], a
