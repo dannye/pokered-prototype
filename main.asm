@@ -33711,7 +33711,7 @@ PalletTown_h: ; 182a1 (6:42a1)
 	db NORTH ; connections
 
 	db ROUTE_1
-	dw Route1Blocks + ((ROUTE_1_WIDTH * 15) + 0) ;y, x Strip Starting Point
+	dw Route1Blocks + ((ROUTE_1_WIDTH * 7) + 0) ;y, x Strip Starting Point
 	dw $C6EB + 0 ;Strip X-Offset to current map
 	db ROUTE_1_WIDTH ;"Bigness" (Unsure) ;Something to do with MapData
 	db ROUTE_1_WIDTH ;"Map Width" (Unsure) ;Something to do with TileSet
@@ -33734,7 +33734,7 @@ PalletTown_h: ; 182a1 (6:42a1)
 	nop
 
 PalletTownObject: ; 0x182c3 (size=58)
-	db $b ; border tile
+	db $a ; border tile
 
 	db $3 ; warps
 	db $d, $3, $0, REDS_HOUSE_1F
@@ -37616,21 +37616,21 @@ Route1_h: ; 0x1c0c3 to 0x1c0e5 (34 bytes) (bank=7) (id=12)
 	db $00 ; tileset
 	db ROUTE_1_HEIGHT, ROUTE_1_WIDTH ; dimensions (y, x)
 	dw Route1Blocks, Route1Texts, Route1Script ; blocks, texts, scripts
-	db NORTH | SOUTH ; connections
+	db SOUTH | EAST ; connections
 
 	; connections data
 
-	db VIRIDIAN_CITY
-	dw ViridianCityBlocks + (VIRIDIAN_CITY_HEIGHT - 3) * VIRIDIAN_CITY_WIDTH + 2, $c6e8 ; pointers (connected, current) (strip)
-	db $10, $14 ; bigness, width
-	db $23, $0a ; alignments (y, x)
-	dw $c8bd ; window
-
 	db PALLET_TOWN
-	dw PalletTownBlocks, $c83b ; pointers (connected, current) (strip)
+	dw PalletTownBlocks, $c823 ; pointers (connected, current) (strip)
 	db $0a, $0a ; bigness, width
 	db $00, $00 ; alignments (y, x)
 	dw $c6f9 ; window
+	
+	db VIRIDIAN_CITY
+	dw ViridianCityBlocks, $c6e5 ; pointers (connected, current) (strip)
+	db $12, $14 ; bigness, width
+	db $08, $00 ; alignments (y, x)
+	dw $c703 ; window
 
 	; end connections data
 
@@ -37642,11 +37642,11 @@ Route1Object: ; 0x1c0e5 (size=19)
 	db $0 ; warps
 
 	db $1 ; signs
-	db $1b, $9, $3 ; Route1Text3
+	db $f, $9, $3 ; Route1Text3
 
 	db $2 ; people
-	db SPRITE_BUG_CATCHER, $18 + 4, $5 + 4, $fe, $1, $1 ; person
-	db SPRITE_BUG_CATCHER, $d + 4, $f + 4, $fe, $2, $2 ; person
+	db SPRITE_BUG_CATCHER, $d + 4, $f + 4, $fe, $1, $1 ; person
+	db SPRITE_BUG_CATCHER, $3 + 4, $15 + 4, $fe, $2, $2 ; person
 
 ; XXX what is this?
 Unknown_1c0f8: ; 1c0f8 (7:40f8)
