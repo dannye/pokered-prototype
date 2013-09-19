@@ -33708,7 +33708,7 @@ PalletTown_h: ; 182a1 (6:42a1)
 	db $00 ; tileset
 	db PALLET_TOWN_HEIGHT, PALLET_TOWN_WIDTH ; dimensions
 	dw PalletTownBlocks, PalletTownTexts, PalletTownScript
-	db NORTH | SOUTH ; connections
+	db NORTH ; connections
 
 	db ROUTE_1
 	dw Route1Blocks + ((ROUTE_1_WIDTH * 15) + 0) ;y, x Strip Starting Point
@@ -33719,36 +33719,42 @@ PalletTown_h: ; 182a1 (6:42a1)
 	db (0 * -2) ;Player's new X-Coordinates
 	dw $C6E9 + ROUTE_1_HEIGHT * (ROUTE_1_WIDTH + 6) ;New UL Block Pos (Window)
 
-	db ROUTE_21
-	dw Route21Blocks,$C7AB ; pointers
-	db $0A,$0A ; bigness, width
-	db $00,$00 ; alignments
-	dw $C6F9 ; window
-
 	dw PalletTownObject
+	
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
 
 PalletTownObject: ; 0x182c3 (size=58)
 	db $b ; border tile
 
 	db $3 ; warps
-	db $5, $5, $0, REDS_HOUSE_1F
-	db $5, $d, $0, BLUES_HOUSE
+	db $d, $3, $0, REDS_HOUSE_1F
+	db $3, $3, $0, BLUES_HOUSE
 	db $b, $c, $1, OAKS_LAB
 
 	db $4 ; signs
-	db $d, $d, $4 ; PalletTownText4
-	db $9, $7, $5 ; PalletTownText5
-	db $5, $3, $6 ; PalletTownText6
-	db $5, $b, $7 ; PalletTownText7
+	db $b, $10, $4 ; PalletTownText4
+	db $5, $b, $5 ; PalletTownText5
+	db $d, $6, $6 ; PalletTownText6
+	db $5, $3, $7 ; PalletTownText7
 
 	db $3 ; people
 	db SPRITE_OAK, $5 + 4, $8 + 4, $ff, $ff, $1 ; person
-	db SPRITE_GIRL, $8 + 4, $3 + 4, $fe, $0, $2 ; person
-	db SPRITE_FISHER2, $e + 4, $b + 4, $fe, $0, $3 ; person
+	db SPRITE_GIRL, $e + 4, $d + 4, $fe, $0, $2 ; person
+	db SPRITE_FISHER2, $6 + 4, $c + 4, $fe, $0, $3 ; person
 
 	; warp-to
-	EVENT_DISP $a, $5, $5 ; REDS_HOUSE_1F
-	EVENT_DISP $a, $5, $d ; BLUES_HOUSE
+	EVENT_DISP $a, $d, $3 ; REDS_HOUSE_1F
+	EVENT_DISP $a, $3, $3 ; BLUES_HOUSE
 	EVENT_DISP $a, $b, $c ; OAKS_LAB
 
 PalletTownBlocks: ; 182fd (6:42fd)
