@@ -33764,7 +33764,7 @@ ViridianCity_h: ; 0x18357 to 0x18384 (45 bytes) (bank=6) (id=1)
 	db $00 ; tileset
 	db VIRIDIAN_CITY_HEIGHT, VIRIDIAN_CITY_WIDTH ; dimensions (y, x)
 	dw ViridianCityBlocks, ViridianCityTexts, ViridianCityScript ; blocks, texts, scripts
-	db NORTH | SOUTH | WEST ; connections
+	db NORTH | WEST ; connections
 
 	; connections data
 
@@ -33776,56 +33776,61 @@ ViridianCity_h: ; 0x18357 to 0x18384 (45 bytes) (bank=6) (id=1)
 	dw $C6E9 + ROUTE_2_HEIGHT * (ROUTE_2_WIDTH + 6) ; window
 
 	db ROUTE_1
-	dw Route1Blocks ; connection strip location
-	dw $C6EB + (VIRIDIAN_CITY_HEIGHT + 3) * (VIRIDIAN_CITY_WIDTH + 6) + 5 ; current map position
-	db ROUTE_1_WIDTH, ROUTE_1_WIDTH ; bigness, width
-	db 0, (5 * -2) ; alignments (y, x)
-	dw $C6EF + ROUTE_1_WIDTH ; window
-
-	db ROUTE_22
-	dw Route22Blocks - 3 + (ROUTE_22_WIDTH) ; connection strip location
-	dw $C6E8 + (VIRIDIAN_CITY_WIDTH + 6) * (4 + 3) ; current map position
-	db ROUTE_22_HEIGHT, ROUTE_22_WIDTH ; bigness, width
-	db (4 * -2), (ROUTE_22_WIDTH * 2) - 1 ; alignments (y, x)
-	dw $C6EE + 2 * ROUTE_22_WIDTH ; window
+	dw Route1Blocks + 15; connection strip location
+	dw $C79E ; current map position
+	db ROUTE_1_HEIGHT, ROUTE_1_WIDTH ; bigness, width
+	db $F8, $23 ; alignments (y, x)
+	dw $C6EF + (ROUTE_1_WIDTH * 2) - 1; window
 
 	; end connections data
 
 	dw ViridianCityObject ; objects
+	
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
 
 ViridianCityObject: ; 0x18384 (size=104)
 	db $f ; border tile
 
 	db $5 ; warps
-	db $19, $17, $0, VIRIDIAN_POKECENTER
-	db $13, $1d, $0, VIRIDIAN_MART
-	db $f, $15, $0, VIRIDIAN_SCHOOL
-	db $9, $15, $0, VIRIDIAN_HOUSE
-	db $7, $20, $0, VIRIDIAN_GYM
+	db $f, $5, $0, VIRIDIAN_POKECENTER
+	db $f, $17, $0, VIRIDIAN_MART
+	db $11, $21, $0, VIRIDIAN_SCHOOL
+	db $9, $1d, $0, VIRIDIAN_HOUSE
+	db $17, $16, $0, VIRIDIAN_GYM
 
 	db $6 ; signs
-	db $11, $11, $8 ; ViridianCityText8
-	db $1, $13, $9 ; ViridianCityText9
-	db $1d, $15, $a ; ViridianCityText10
-	db $13, $1e, $b ; MartSignText
-	db $19, $18, $c ; PokeCenterSignText
-	db $7, $1b, $d ; ViridianCityText13
+	db $12, $5, $8 ; ViridianCityText8
+	db $3, $12, $9 ; ViridianCityText9
+	db $d, $13, $a ; ViridianCityText10
+	db $f, $18, $b ; MartSignText
+	db $f, $6, $c ; PokeCenterSignText
+	db $1c, $12, $d ; ViridianCityText13
 
 	db $7 ; people
-	db SPRITE_BUG_CATCHER, $14 + 4, $d + 4, $fe, $0, $1 ; person
-	db SPRITE_GAMBLER, $8 + 4, $1e + 4, $ff, $ff, $2 ; person
-	db SPRITE_BUG_CATCHER, $19 + 4, $1e + 4, $fe, $0, $3 ; person
-	db SPRITE_GIRL, $9 + 4, $11 + 4, $ff, $d3, $4 ; person
-	db SPRITE_LYING_OLD_MAN, $9 + 4, $12 + 4, $ff, $ff, $5 ; person
-	db SPRITE_FISHER2, $17 + 4, $6 + 4, $ff, $d0, $6 ; person
-	db SPRITE_GAMBLER, $5 + 4, $11 + 4, $fe, $2, $7 ; person
+	db SPRITE_BUG_CATCHER, $f + 4, $c + 4, $fe, $0, $1 ; person
+	db SPRITE_GAMBLER, $1d + 4, $d + 4, $ff, $ff, $2 ; person
+	db SPRITE_BUG_CATCHER, $10 + 4, $1d + 4, $fe, $0, $3 ; person
+	db SPRITE_GIRL, $a + 4, $14 + 4, $ff, $d3, $4 ; person
+	db SPRITE_LYING_OLD_MAN, $a + 4, $15 + 4, $ff, $ff, $5 ; person
+	db SPRITE_FISHER2, $1f + 4, $21 + 4, $ff, $d0, $6 ; person
+	db SPRITE_GAMBLER, $6 + 4, $17 + 4, $fe, $2, $7 ; person
 
 	; warp-to
-	EVENT_DISP $14, $19, $17 ; VIRIDIAN_POKECENTER
-	EVENT_DISP $14, $13, $1d ; VIRIDIAN_MART
-	EVENT_DISP $14, $f, $15 ; VIRIDIAN_SCHOOL
-	EVENT_DISP $14, $9, $15 ; VIRIDIAN_HOUSE
-	EVENT_DISP $14, $7, $20 ; VIRIDIAN_GYM
+	EVENT_DISP $14, $f, $5 ; VIRIDIAN_POKECENTER
+	EVENT_DISP $14, $f, $17 ; VIRIDIAN_MART
+	EVENT_DISP $14, $11, $21 ; VIRIDIAN_SCHOOL
+	EVENT_DISP $14, $9, $1d ; VIRIDIAN_HOUSE
+	EVENT_DISP $14, $17, $16 ; VIRIDIAN_GYM
 
 ViridianCityBlocks: ; 183ec (6:43ec)
 	INCBIN "maps/viridiancity.blk"
