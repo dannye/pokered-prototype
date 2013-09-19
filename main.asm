@@ -75488,7 +75488,7 @@ BillsHouseHiddenObjects: ; 46f86 (11:6f86)
 	dbw $07,$6b6e
 	db $FF
 ViridianCityHiddenObjects: ; 46f8d (11:6f8d)
-	db $04,$0e,POTION
+	db $16,$20,POTION
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
 SafariZoneRestHouse2HiddenObjects: ; 46f94 (11:6f94)
