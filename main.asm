@@ -20546,7 +20546,7 @@ Func_9b81: ; 0x9b81
 	ld a, $c3
 	call PlayMusic
 	ld hl, $c006
-	ld de, Music_Cities1_branch_aa6f
+	ld de, Music_Cities1_Ch1
 	jp Func_9b60
 ; 0x9ba3
 
