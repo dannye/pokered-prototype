@@ -208,7 +208,7 @@ Music_Pokecenter_Ch2_branch_1:
 
 
 Music_Pokecenter_Ch3:
-	notetype 12, 1, 9
+	notetype 12, 1, 4
 
 Music_Pokecenter_Ch3_branch_1:
 	octave 4
