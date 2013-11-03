@@ -35509,7 +35509,7 @@ ViridianCity_h: ; 0x18357 to 0x18384 (45 bytes) (bank=6) (id=1)
 	nop
 
 ViridianCityObject: ; 0x18384 (size=104)
-	db $f ; border tile
+	db $43 ; border tile
 
 	db $5 ; warps
 	db $f, $5, $0, VIRIDIAN_POKECENTER
