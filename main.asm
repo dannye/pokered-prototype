@@ -35607,7 +35607,7 @@ PalletTownObject: ; 0x182c3 (size=58)
 
 	db $4 ; signs
 	db $b, $10, $4 ; PalletTownText4
-	db $5, $b, $5 ; PalletTownText5
+	db $6, $a, $5 ; PalletTownText5
 	db $d, $6, $6 ; PalletTownText6
 	db $5, $3, $7 ; PalletTownText7
 
