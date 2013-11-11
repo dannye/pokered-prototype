@@ -86156,7 +86156,7 @@ Route2Object: ; 0x54022 (size=72)
 	db $43 ; border tile
 
 	db $6 ; warps
-	db $5, $e, $0, DIGLETTS_CAVE_EXIT
+	db $3, $c, $0, DIGLETTS_CAVE_EXIT
 	db $7, $5, $1, VIRIDIAN_FOREST_EXIT
 	db $29, $7, $0, ROUTE_2_HOUSE
 	db $15, $c, $1, ROUTE_2_GATE
@@ -86172,7 +86172,7 @@ Route2Object: ; 0x54022 (size=72)
 	db SPRITE_BALL, $25 + 4, $11 + 4, $ff, $ff, $82, HP_UP ; item
 
 	; warp-to
-	EVENT_DISP $a, $5, $e ; DIGLETTS_CAVE_EXIT
+	EVENT_DISP $a, $3, $c ; DIGLETTS_CAVE_EXIT
 	EVENT_DISP $a, $7, $5 ; VIRIDIAN_FOREST_EXIT
 	EVENT_DISP $a, $29, $7 ; ROUTE_2_HOUSE
 	EVENT_DISP $a, $15, $c ; ROUTE_2_GATE
