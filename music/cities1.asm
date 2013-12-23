@@ -145,7 +145,7 @@ Music_Cities1_Ch2_branch_1:
 
 
 Music_Cities1_Ch3:
-	notetype 12, 1, 2
+	notetype 12, 2, 6
 	togglecall
 
 Music_Cities1_Ch3_branch_1:
