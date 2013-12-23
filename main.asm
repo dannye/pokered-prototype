@@ -10631,6 +10631,15 @@ PointerTable_3f22: ; 3f22 (0:3f22)
 	dw UnnamedText_fc0d                     ; id = 41
 	dw UnnamedText_fc45                     ; id = 42
 
+Music_Channel3Duty6:
+	db $00,$11,$22,$33,$44,$33,$22,$11,$FF,$EE,$CC,$AA,$88,$AA,$CC,$EE
+
+Music_Channel3Duty7:
+	db $C0,$A9,$87,$F5,$FF,$FE,$ED,$DC,$44,$33,$22,$F1,$02,$46,$8A,$CE
+
+Music_Channel3Duty8:
+	db $11,$00,$00,$08,$00,$13,$57,$9A,$B4,$BA,$A9,$98,$87,$65,$43,$21
+
 CheckCValue:
 	jr z,.zero
 	ld a,$64
@@ -18331,9 +18340,9 @@ Music2_Channel3DutyPointers: ; 0x8361
 	dw Music2_Channel3Duty3
 	dw Music2_Channel3Duty4
 	dw Music2_Channel3Duty5 ; used in the Lavender Town theme
-	dw SFX_02_3f_Ch1 ; unused
-	dw SFX_02_3f_Ch1 ; unused
-	dw SFX_02_3f_Ch1 ; unused
+	dw Music_Channel3Duty6
+	dw Music_Channel3Duty7
+	dw Music_Channel3Duty8
 
 ; these are the definitions for the channel 3 instruments
 ; each instrument definition is made up of 32 points (nibbles) that form
@@ -44539,9 +44548,9 @@ Music8_Channel3DutyPointers: ; 20361 (8:4361)
 	dw Music8_Channel3Duty3
 	dw Music8_Channel3Duty4
 	dw SFX_08_40_Ch1 ; unused
-	dw SFX_08_40_Ch1 ; unused
-	dw SFX_08_40_Ch1 ; unused
-	dw SFX_08_40_Ch1 ; unused
+	dw Music_Channel3Duty6
+	dw Music_Channel3Duty7
+	dw Music_Channel3Duty8
 
 ; these are the definitions for the channel 3 instruments
 ; each instrument definition is made up of 32 points (nibbles) that form
@@ -122218,9 +122227,9 @@ Music1f_Channel3DutyPointers: ; 7c361 (1f:4361)
 	dw Music1f_Channel3Duty3
 	dw Music1f_Channel3Duty4
 	dw Music1f_Channel3Duty5 ; used in the Pokemon Tower theme
-	dw SFX_1f_3f_Ch1 ; unused
-	dw SFX_1f_3f_Ch1 ; unused
-	dw SFX_1f_3f_Ch1 ; unused
+	dw Music_Channel3Duty6
+	dw Music_Channel3Duty7
+	dw Music_Channel3Duty8
 
 ; these are the definitions for the channel 3 instruments
 ; each instrument definition is made up of 32 points (nibbles) that form
