@@ -3,7 +3,7 @@ Music_Pokecenter_Ch1:
 	stereopanning 119
 	duty 2
 	togglecall
-	notetype 12, 12, 7
+	notetype 12, 6, 7
 	octave 2
 
 Music_Pokecenter_Ch1_branch_1:
@@ -118,7 +118,7 @@ Music_Pokecenter_Ch1_branch_1:
 
 Music_Pokecenter_Ch2:
 	duty 2
-	notetype 12, 12, 0
+	notetype 12, 8, 0
 	octave 3
 
 Music_Pokecenter_Ch2_branch_1:
@@ -208,7 +208,7 @@ Music_Pokecenter_Ch2_branch_1:
 
 
 Music_Pokecenter_Ch3:
-	notetype 12, 1, 4
+	notetype 12, 2, 4
 
 Music_Pokecenter_Ch3_branch_1:
 	octave 4
