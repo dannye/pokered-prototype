@@ -35892,9 +35892,9 @@ PewterCity_h: ; 0x18554 to 0x18576 (34 bytes) (bank=6) (id=2)
 	db $00 ; tileset
 	db PEWTER_CITY_HEIGHT, PEWTER_CITY_WIDTH ; dimensions (y, x)
 	dw PewterCityBlocks, PewterCityTextPointers, PewterCityScript ; blocks, texts, scripts
-	db SOUTH | EAST ; connections
+	db SOUTH | WEST ; connections
 	SOUTH_MAP_CONNECTION ROUTE_2, ROUTE_2_WIDTH, 5, 0, ROUTE_2_WIDTH, Route2Blocks, PEWTER_CITY_WIDTH, PEWTER_CITY_HEIGHT
-	EAST_MAP_CONNECTION ROUTE_3, ROUTE_3_WIDTH, 4, 0, ROUTE_3_HEIGHT, Route3Blocks, PEWTER_CITY_WIDTH
+	WEST_MAP_CONNECTION ROUTE_3, ROUTE_3_WIDTH, 4, 0, ROUTE_3_HEIGHT, Route3Blocks, PEWTER_CITY_WIDTH
 	dw PewterCityObject ; objects
 
 	db $0
@@ -35903,38 +35903,38 @@ PewterCityObject: ; 0x18577 (size=111)
 	db $a ; border tile
 
 	db $7 ; warps
-	db $7, $e, $0, MUSEUM_1F
-	db $5, $13, $2, MUSEUM_1F
-	db $11, $10, $0, PEWTER_GYM
-	db $d, $1d, $0, PEWTER_HOUSE_1
-	db $11, $17, $0, PEWTER_MART
-	db $1d, $7, $0, PEWTER_HOUSE_2
-	db $19, $d, $0, PEWTER_POKECENTER
+	db $7, $c, $0, MUSEUM_1F
+	db $5, $10, $2, MUSEUM_1F
+	db $f, $1c, $0, PEWTER_GYM
+	db $b, $13, $0, PEWTER_HOUSE_1
+	db $19, $b, $0, PEWTER_MART
+	db $d, $9, $0, PEWTER_HOUSE_2
+	db $15, $13, $0, PEWTER_POKECENTER
 
 	db $7 ; signs
-	db $1d, $13, $6 ; PewterCityText6
-	db $13, $21, $7 ; PewterCityText7
-	db $11, $18, $8 ; MartSignText
-	db $19, $e, $9 ; PokeCenterSignText
-	db $9, $f, $a ; PewterCityText10
-	db $11, $b, $b ; PewterCityText11
-	db $17, $19, $c ; PewterCityText12
+	db $10, $a, $6 ; PewterCityText6
+	db $12, $4, $7 ; PewterCityText7
+	db $19, $c, $8 ; MartSignText
+	db $15, $14, $9 ; PokeCenterSignText
+	db $6, $6, $a ; PewterCityText10
+	db $11, $1b, $b ; PewterCityText11
+	db $17, $f, $c ; PewterCityText12
 
 	db $5 ; people
-	db SPRITE_LASS, $f + 4, $8 + 4, $ff, $ff, $1 ; person
-	db SPRITE_BLACK_HAIR_BOY_1, $19 + 4, $11 + 4, $ff, $ff, $2 ; person
-	db SPRITE_BLACK_HAIR_BOY_2, $11 + 4, $1b + 4, $ff, $ff, $3 ; person
-	db SPRITE_BLACK_HAIR_BOY_2, $19 + 4, $1a + 4, $fe, $2, $4 ; person
-	db SPRITE_BUG_CATCHER, $10 + 4, $23 + 4, $ff, $d0, $5 ; person
+	db SPRITE_LASS, $f + 4, $12 + 4, $ff, $ff, $1 ; person
+	db SPRITE_BLACK_HAIR_BOY_1, $14 + 4, $1c + 4, $ff, $ff, $2 ; person
+	db SPRITE_BLACK_HAIR_BOY_2, $1a + 4, $10 + 4, $ff, $ff, $3 ; person
+	db SPRITE_BLACK_HAIR_BOY_2, $10 + 4, $c + 4, $fe, $2, $4 ; person
+	db SPRITE_BUG_CATCHER, $12 + 4, $2 + 4, $ff, $d0, $5 ; person
 
 	; warp-to
-	EVENT_DISP $14, $7, $e ; MUSEUM_1F
-	EVENT_DISP $14, $5, $13 ; MUSEUM_1F
-	EVENT_DISP $14, $11, $10 ; PEWTER_GYM
-	EVENT_DISP $14, $d, $1d ; PEWTER_HOUSE_1
-	EVENT_DISP $14, $11, $17 ; PEWTER_MART
-	EVENT_DISP $14, $1d, $7 ; PEWTER_HOUSE_2
-	EVENT_DISP $14, $19, $d ; PEWTER_POKECENTER
+	EVENT_DISP $14, $7, $c ; MUSEUM_1F
+	EVENT_DISP $14, $5, $10 ; MUSEUM_1F
+	EVENT_DISP $14, $f, $1c ; PEWTER_GYM
+	EVENT_DISP $14, $b, $13 ; PEWTER_HOUSE_1
+	EVENT_DISP $14, $19, $b ; PEWTER_MART
+	EVENT_DISP $14, $d, $9 ; PEWTER_HOUSE_2
+	EVENT_DISP $14, $15, $13 ; PEWTER_POKECENTER
 
 PewterCityBlocks: ; 185e6 (6:45e6)
 	INCBIN "maps/pewtercity.blk"
@@ -89315,9 +89315,9 @@ Route3_h: ; 0x541e6 to 0x54208 (34 bytes) (id=14)
 	db $00 ; tileset
 	db ROUTE_3_HEIGHT, ROUTE_3_WIDTH ; dimensions (y, x)
 	dw Route3Blocks, Route3TextPointers, Route3Script ; blocks, texts, scripts
-	db NORTH | WEST ; connections
+	db NORTH | EAST ; connections
 	NORTH_MAP_CONNECTION ROUTE_4, ROUTE_4_WIDTH, ROUTE_4_HEIGHT, 25, 0, ROUTE_4_WIDTH - 32, Route4Blocks
-	WEST_MAP_CONNECTION PEWTER_CITY, PEWTER_CITY_WIDTH, -3, 1, PEWTER_CITY_HEIGHT - 3, PewterCityBlocks, ROUTE_3_WIDTH
+	EAST_MAP_CONNECTION PEWTER_CITY, PEWTER_CITY_WIDTH, -4, 0, PEWTER_CITY_HEIGHT, PewterCityBlocks, ROUTE_3_WIDTH
 	dw Route3Object ; objects
 
 Route3Object: ; 0x54208 (size=77)
