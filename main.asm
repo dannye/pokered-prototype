@@ -35922,7 +35922,7 @@ PewterCityObject: ; 0x18577 (size=111)
 
 	db $5 ; people
 	db SPRITE_LASS, $f + 4, $12 + 4, $ff, $ff, $1 ; person
-	db SPRITE_BLACK_HAIR_BOY_1, $14 + 4, $1c + 4, $ff, $ff, $2 ; person
+	db SPRITE_BLACK_HAIR_BOY_1, $15 + 4, $1c + 4, $ff, $ff, $2 ; person
 	db SPRITE_BLACK_HAIR_BOY_2, $1a + 4, $10 + 4, $ff, $ff, $3 ; person
 	db SPRITE_BLACK_HAIR_BOY_2, $10 + 4, $c + 4, $fe, $2, $4 ; person
 	db SPRITE_BUG_CATCHER, $12 + 4, $2 + 4, $ff, $d0, $5 ; person
@@ -36770,8 +36770,8 @@ PewterCityScript0: ; 19251 (6:5251)
 	ret
 
 PewterCityScript_1925e: ; 1925e (6:525e)
-	ld a, [$d755]
-	bit 7, a
+	ld a, [$d754]
+	bit 1, a
 	ret nz
 	ld hl, CoordsData_19277
 	call ArePlayerCoordsInArray
@@ -36783,10 +36783,10 @@ PewterCityScript_1925e: ; 1925e (6:525e)
 	jp DisplayTextID
 
 CoordsData_19277: ; 19277 (6:5277)
-	db $11,$23
-	db $11,$24
-	db $12,$25
-	db $13,$25
+	db $13,$2
+	db $13,$1
+	db $14,$0
+	db $15,$0
 	db $ff
 
 PewterCityScript1: ; 19280 (6:5280)
@@ -36809,18 +36809,18 @@ PewterCityScript1: ; 19280 (6:5280)
 	call DisplayTextID
 	ld a, $3c
 	ld [$ff00+$eb], a
-	ld a, $30
+	ld a, $40
 	ld [$ff00+$ec], a
-	ld a, $c
+	ld a, $14
 	ld [$ff00+$ed], a
-	ld a, $11
+	ld a, $1f
 	ld [$ff00+$ee], a
 	ld a, $3
 	ld [$cf13], a
 	call Func_32f9
 	ld a, $3
 	ld [$ff00+$8c], a
-	ld de, MovementData_192ce ; $52ce
+	ld de, MovementData_19353 ; $52ce
 	call MoveSprite
 	ld a, $2
 	ld [W_PEWTERCITYCURSCRIPT], a
@@ -36877,9 +36877,9 @@ PewterCityScript4: ; 19305 (6:5305)
 	ld [$ff00+$eb], a
 	ld a, $40
 	ld [$ff00+$ec], a
-	ld a, $16
+	ld a, $c
 	ld [$ff00+$ed], a
-	ld a, $10
+	ld a, $e
 	ld [$ff00+$ee], a
 	ld a, $5
 	ld [$cf13], a
@@ -36934,7 +36934,7 @@ PewterCityTextPointers: ; 1938b (6:538b)
 	dw PewterCityText10
 	dw PewterCityText11
 	dw PewterCityText12
-	dw PewterCityText13
+	dw PewterGymGuy4
 	dw PewterCityText14
 
 PewterCityText1: ; 193a7 (6:53a7)
@@ -36947,17 +36947,17 @@ PewterCityText2: ; 193ac (6:53ac)
 
 PewterCityText3: ; 193b1 (6:53b1)
 	db $08 ; asm
-	ld hl, UnnamedText_193f1
+	ld hl, PewterGymGuy1
 	call PrintText
 	call YesNoChoice
 	ld a, [$cc26]
 	and a
 	jr nz, .asm_f46a9 ; 0x193bf
-	ld hl, UnnamedText_193f6
+	ld hl, PewterGymGuy2
 	call PrintText
 	jr .asm_ac429 ; 0x193c7
 .asm_f46a9 ; 0x193c9
-	ld hl, UnnamedText_193fb
+	ld hl, PewterGymGuy3
 	call PrintText
 	xor a
 	ldh [$b3], a
@@ -36975,20 +36975,20 @@ PewterCityText3: ; 193b1 (6:53b1)
 .asm_ac429 ; 0x193ee
 	jp TextScriptEnd
 
-UnnamedText_193f1: ; 193f1 (6:53f1)
-	TX_FAR _UnnamedText_193f1
+PewterGymGuy1: ; 193f1 (6:53f1)
+	TX_FAR _PewterGymGuy1
 	db "@"
 
-UnnamedText_193f6: ; 193f6 (6:53f6)
-	TX_FAR _UnnamedText_193f6
+PewterGymGuy2: ; 193f6 (6:53f6)
+	TX_FAR _PewterGymGuy2
 	db "@"
 
-UnnamedText_193fb: ; 193fb (6:53fb)
-	TX_FAR _UnnamedText_193fb
+PewterGymGuy3: ; 193fb (6:53fb)
+	TX_FAR _PewterGymGuy3
 	db "@"
 
-PewterCityText13: ; 19400 (6:5400)
-	TX_FAR _PewterCityText13
+PewterGymGuy4: ; 19400 (6:5400)
+	TX_FAR _PewterGymGuy4
 	db "@"
 
 PewterCityText4: ; 19405 (6:5405)
@@ -37022,7 +37022,7 @@ UnnamedText_19431: ; 19431 (6:5431)
 
 PewterCityText5: ; 19436 (6:5436)
 	db $08 ; asm
-	ld hl, UnnamedText_1945d
+	ld hl, PewterMuseumGuy1
 	call PrintText
 	xor a
 	ldh [$b4], a
@@ -37038,14 +37038,14 @@ PewterCityText5: ; 19436 (6:5436)
 	ld [W_PEWTERCITYCURSCRIPT], a
 	jp TextScriptEnd
 
-UnnamedText_1945d: ; 1945d (6:545d)
-	TX_FAR _UnnamedText_1945d
+PewterMuseumGuy1: ; 1945d (6:545d)
+	TX_FAR _PewterMuseumGuy1
 	db "@"
 
 PewterCityText14: ; 19462 (6:5462)
 
-UnnamedText_19462: ; 19462 (6:5462)
-	TX_FAR _UnnamedText_19462
+PewterMuseumGuy2: ; 19462 (6:5462)
+	TX_FAR _PewterMuseumGuy2
 	db "@"
 
 PewterCityText6: ; 19467 (6:5467)
@@ -39293,16 +39293,16 @@ Func_1a514: ; 1a514 (6:6514)
 
 RLEList_1a559: ; 1a559 (6:6559)
 	db $00, $01
-	db $40, $03
-	db $20, $0D
-	db $40, $06
+	db $10, $03
+	db $40, $0A
+	db $10, $07
 	db $FF
 
 RLEList_1a562: ; 1a562 (6:6562)
-	db $40, $06
-	db $80, $0D
-	db $40, $03
-	db $80, $01
+	db $C0, $07
+	db $40, $0A
+	db $C0, $04
+	db $FF, $FF
 	db $FF
 
 Func_1a56b: ; 1a56b (6:656b)
@@ -39353,20 +39353,20 @@ Func_1a581: ; 1a581 (6:6581)
 
 RLEList_1a5cd: ; 1a5cd (6:65cd)
 	db $00, $01
-	db $10, $02
-	db $80, $05
-	db $20, $0B
-	db $40, $05
-	db $20, $0F
+	db $10, $01
+	db $40, $02
+	db $20, $08
+	db $40, $0A
+	db $10, $0E
 	db $FF
 
 RLEList_1a5da: ; 1a5da (6:65da)
 	db $00, $02
-	db $80, $0F
-	db $40, $05
-	db $80, $0B
-	db $00, $05
-	db $C0, $03
+	db $C0, $0E
+	db $40, $0A
+	db $80, $08
+	db $40, $02
+	db $C0, $02
 	db $FF
 
 ; XXX why would this function want to return on POKEMONTOWER_7?
@@ -50872,46 +50872,46 @@ PointerTable_37ce6: ; 37ce6 (d:7ce6)
 	dw Unknown_37d06
 
 Unknown_37cea: ; 37cea (d:7cea)
-	db 18, 27
+	db 27, 16
 	dw .down
-	db 16, 27
+	db 25, 16
 	dw .up
-	db 17, 26
+	db 26, 15
 	dw .left
-	db 17, 28
+	db 26, 17
 	dw .right
 
 .down
-	db $40, $40, $ff
+	db $10, $40, $ff
 .up
-	db $10, $20, $ff
+	db $10, $80, $ff
 .left
-	db $40, $10, $ff
+	db $10, $10, $ff
 .right
-	db $40, $20, $ff
+	db $80, $40, $ff
 
 Unknown_37d06: ; 37d06 (d:7d06)
-	db 16, 34
+	db 18, 3
 	dw .one
-	db 17, 35
+	db 19, 2
 	dw .two
-	db 18, 37
+	db 20, 0
 	dw .three
-	db 19, 37
+	db 21, 0
 	dw .four
-	db 17, 36
+	db 19, 1
 	dw .five
 
 .one
-	db $20, $80, $80, $10, $ff
+	db $10, $80, $80, $20, $ff
 .two
-	db $20, $80, $10, $20, $ff
+	db $10, $80, $20, $10, $ff
 .three
-	db $20, $20, $20, $00, $00, $00, $00, $00, $00, $00, $00, $ff
+	db $10, $10, $10, $00, $00, $00, $00, $00, $00, $00, $00, $ff
 .four
-	db $20, $20, $40, $20, $ff
+	db $10, $10, $40, $10, $ff
 .five
-	db $20, $80, $20, $00, $00, $00, $00, $00, $00, $00, $00, $ff
+	db $10, $80, $10, $00, $00, $00, $00, $00, $00, $00, $00, $ff
 
 
 _Multiply: ; 37d41 (d:7d41)
@@ -97688,7 +97688,7 @@ MuseumF1Text3: ; 5c256 (17:4256)
 	ld bc, (OLD_AMBER << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, $d754
+	call RemoveMuseumGuy
 	set 1, [hl]
 	ld a, $34
 	ld [$cc4d], a
@@ -97909,10 +97909,16 @@ Func_5c3df: ; 5c3df (17:43df)
 	set 0, [hl]
 	ld hl, $d72a
 	set 0, [hl]
-	ld a, $4
-	ld [$cc4d], a
-	ld a, $11
-	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
 	ld a, $22
 	ld [$cc4d], a
 	ld a, $11
@@ -101384,6 +101390,14 @@ VermilionGymTrashFailText: ; 5df02 (17:5f02)
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd
+
+RemoveMuseumGuy:
+	ld a, $4
+	ld [$cc4d], a
+	ld a, $11
+	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
+	ld hl, $d754
+	ret
 
 SECTION "bank18",ROMX,BANK[$18]
 
@@ -137847,6 +137861,39 @@ _UsedCutText: ; a8315 (2a:4315)
 	TX_RAM $cd6d
 	db $0, " hacked", $4f
 	db "away with Cut!", $58
+
+_PewterGymGuy1: ; a4a56 (29:4a56)
+	db $0, "Have you tried", $4f
+	db "battling Brock?", $57
+
+_PewterGymGuy2: ; a4a75 (29:4a75)
+	db $0, "He's tough, isn't", $4f
+	db "he?", $57
+
+_PewterGymGuy3: ; a4aa2 (29:4aa2)
+	db $0, "Seriously?", $4f
+	db "You really", $55
+	db "have to try!", $57
+
+_PewterGymGuy4: ; a4ac6 (29:4ac6)
+	db $0, "He's right here!", $4f
+	db "Brock's a tough", $55
+	db "guy, but it's", $55
+	db "worth it!", $55
+	db "See you around!", $57
+
+_PewterMuseumGuy1: ; a4b87 (29:4b87)
+	db $0, "Hey! You just got", $4f
+	db "here! You can't", $55
+	db "leave Pewter City", $55
+	db "without seeing", $55
+	db "the Museum first!", $55
+	db "Follow me!", $57
+
+_PewterMuseumGuy2: ; a4bce (29:4bce)
+	db $0, "Man, this place is", $4f
+	db "cool! You're gonna", $55
+	db "love it!", $57
 
 SECTION "bank2B",ROMX,BANK[$2B]
 
