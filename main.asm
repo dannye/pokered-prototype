@@ -35904,7 +35904,7 @@ PewterCityObject: ; 0x18577 (size=111)
 
 	db $7 ; warps
 	db $7, $c, $0, MUSEUM_1F
-	db $5, $10, $2, MUSEUM_1F
+	db $5, $11, $2, MUSEUM_1F
 	db $f, $1c, $0, PEWTER_GYM
 	db $b, $13, $0, PEWTER_HOUSE_1
 	db $19, $b, $0, PEWTER_MART
@@ -35916,7 +35916,7 @@ PewterCityObject: ; 0x18577 (size=111)
 	db $12, $4, $7 ; PewterCityText7
 	db $19, $c, $8 ; MartSignText
 	db $15, $14, $9 ; PokeCenterSignText
-	db $6, $6, $a ; PewterCityText10
+	db $7, $7, $a ; PewterCityText10
 	db $11, $1b, $b ; PewterCityText11
 	db $17, $f, $c ; PewterCityText12
 
@@ -35929,7 +35929,7 @@ PewterCityObject: ; 0x18577 (size=111)
 
 	; warp-to
 	EVENT_DISP $14, $7, $c ; MUSEUM_1F
-	EVENT_DISP $14, $5, $10 ; MUSEUM_1F
+	EVENT_DISP $14, $5, $11 ; MUSEUM_1F
 	EVENT_DISP $14, $f, $1c ; PEWTER_GYM
 	EVENT_DISP $14, $b, $13 ; PEWTER_HOUSE_1
 	EVENT_DISP $14, $19, $b ; PEWTER_MART
@@ -89316,7 +89316,7 @@ Route3_h: ; 0x541e6 to 0x54208 (34 bytes) (id=14)
 	db ROUTE_3_HEIGHT, ROUTE_3_WIDTH ; dimensions (y, x)
 	dw Route3Blocks, Route3TextPointers, Route3Script ; blocks, texts, scripts
 	db NORTH | EAST ; connections
-	NORTH_MAP_CONNECTION ROUTE_4, ROUTE_4_WIDTH, ROUTE_4_HEIGHT, 25, 0, ROUTE_4_WIDTH - 32, Route4Blocks
+	NORTH_MAP_CONNECTION ROUTE_4, ROUTE_4_WIDTH, ROUTE_4_HEIGHT, 0, 0, ROUTE_4_WIDTH, Route4Blocks
 	EAST_MAP_CONNECTION PEWTER_CITY, PEWTER_CITY_WIDTH, -4, 0, PEWTER_CITY_HEIGHT, PewterCityBlocks, ROUTE_3_WIDTH
 	dw Route3Object ; objects
 
@@ -89326,18 +89326,18 @@ Route3Object: ; 0x54208 (size=77)
 	db $0 ; warps
 
 	db $1 ; signs
-	db $9, $3b, $a ; Route3Text10
+	db $3, $5, $a ; Route3Text10
 
 	db $9 ; people
-	db SPRITE_BLACK_HAIR_BOY_2, $b + 4, $39 + 4, $ff, $ff, $1 ; person
-	db SPRITE_BUG_CATCHER, $6 + 4, $a + 4, $ff, $d3, $42, BUG_CATCHER + $C8, $4 ; trainer
-	db SPRITE_BUG_CATCHER, $4 + 4, $e + 4, $ff, $d0, $43, YOUNGSTER + $C8, $1 ; trainer
-	db SPRITE_LASS, $9 + 4, $10 + 4, $ff, $d2, $44, LASS + $C8, $1 ; trainer
-	db SPRITE_BUG_CATCHER, $5 + 4, $13 + 4, $ff, $d0, $45, BUG_CATCHER + $C8, $5 ; trainer
-	db SPRITE_LASS, $4 + 4, $17 + 4, $ff, $d2, $46, LASS + $C8, $2 ; trainer
-	db SPRITE_BUG_CATCHER, $9 + 4, $16 + 4, $ff, $d2, $47, YOUNGSTER + $C8, $2 ; trainer
-	db SPRITE_BUG_CATCHER, $6 + 4, $18 + 4, $ff, $d3, $48, BUG_CATCHER + $C8, $6 ; trainer
-	db SPRITE_LASS, $a + 4, $21 + 4, $ff, $d1, $49, LASS + $C8, $3 ; trainer
+	db SPRITE_BLACK_HAIR_BOY_2, $4 + 4, $3d + 4, $ff, $ff, $1 ; person
+	db SPRITE_BUG_CATCHER, $6 + 4, $38 + 4, $ff, $d3, $42, BUG_CATCHER + $C8, $4 ; trainer
+	db SPRITE_BUG_CATCHER, $4 + 4, $15 + 4, $ff, $d0, $43, YOUNGSTER + $C8, $1 ; trainer
+	db SPRITE_LASS, $a + 4, $7 + 4, $ff, $d2, $44, LASS + $C8, $1 ; trainer
+	db SPRITE_BUG_CATCHER, $a + 4, $11 + 4, $ff, $d0, $45, BUG_CATCHER + $C8, $5 ; trainer
+	db SPRITE_LASS, $9 + 4, $35 + 4, $ff, $d2, $46, LASS + $C8, $2 ; trainer
+	db SPRITE_BUG_CATCHER, $4 + 4, $25 + 4, $ff, $d2, $47, YOUNGSTER + $C8, $2 ; trainer
+	db SPRITE_BUG_CATCHER, $e + 4, $2a + 4, $ff, $d3, $48, BUG_CATCHER + $C8, $6 ; trainer
+	db SPRITE_LASS, $f + 4, $9 + 4, $ff, $d1, $49, LASS + $C8, $3 ; trainer
 
 Route3Blocks: ; 54255 (15:4255)
 	INCBIN "maps/route3.blk"
@@ -89347,7 +89347,7 @@ Route4_h: ; 0x54390 to 0x543b2 (34 bytes) (id=15)
 	db ROUTE_4_HEIGHT, ROUTE_4_WIDTH ; dimensions (y, x)
 	dw Route4Blocks, Route4TextPointers, Route4Script; blocks, texts, scripts
 	db SOUTH | EAST ; connections
-	SOUTH_MAP_CONNECTION ROUTE_3, ROUTE_3_WIDTH, -3, 22, ROUTE_3_WIDTH - 22, Route3Blocks, ROUTE_4_WIDTH, ROUTE_4_HEIGHT
+	SOUTH_MAP_CONNECTION ROUTE_3, ROUTE_3_WIDTH, 0, 0, ROUTE_3_WIDTH, Route3Blocks, ROUTE_4_WIDTH, ROUTE_4_HEIGHT
 	EAST_MAP_CONNECTION CERULEAN_CITY, CERULEAN_CITY_WIDTH, -3, 1, CERULEAN_CITY_HEIGHT - 3, CeruleanCityBlocks, ROUTE_4_WIDTH
 	dw Route4Object ; objects
 
@@ -89355,24 +89355,24 @@ Route4Object: ; 0x543b2 (size=58)
 	db $2c ; border tile
 
 	db $3 ; warps
-	db $5, $b, $0, MT_MOON_POKECENTER
-	db $5, $12, $0, MT_MOON_1
-	db $5, $18, $7, MT_MOON_2
+	db $2d, $3, $0, MT_MOON_POKECENTER
+	db $31, $16, $0, MT_MOON_1
+	db $2d, $e, $7, MT_MOON_2
 
 	db $3 ; signs
-	db $5, $c, $4 ; PokeCenterSignText
-	db $7, $11, $5 ; Route4Text5
-	db $7, $1b, $6 ; Route4Text6
+	db $2d, $4, $4 ; PokeCenterSignText
+	db $32, $18, $5 ; Route4Text5
+	db $2e, $10, $6 ; Route4Text6
 
 	db $3 ; people
-	db SPRITE_LASS, $8 + 4, $9 + 4, $fe, $0, $1 ; person
-	db SPRITE_LASS, $3 + 4, $3f + 4, $ff, $d3, $42, LASS + $C8, $4 ; trainer
-	db SPRITE_BALL, $3 + 4, $39 + 4, $ff, $ff, $83, TM_04 ; item
+	db SPRITE_LASS, $28 + 4, $f + 4, $fe, $0, $1 ; person
+	db SPRITE_LASS, $28 + 4, $10 + 4, $ff, $d3, $42, LASS + $C8, $4 ; trainer
+	db SPRITE_BALL, $28 + 4, $11 + 4, $ff, $ff, $83, TM_04 ; item
 
 	; warp-to
-	EVENT_DISP $2d, $5, $b ; MT_MOON_POKECENTER
-	EVENT_DISP $2d, $5, $12 ; MT_MOON_1
-	EVENT_DISP $2d, $5, $18 ; MT_MOON_2
+	EVENT_DISP ROUTE_4_WIDTH, $2d, $3 ; MT_MOON_POKECENTER
+	EVENT_DISP ROUTE_4_WIDTH, $31, $16 ; MT_MOON_1
+	EVENT_DISP ROUTE_4_WIDTH, $2d, $e ; MT_MOON_2
 
 Route4Blocks: ; 543ec (15:43ec)
 	INCBIN "maps/route4.blk"
