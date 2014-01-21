@@ -89326,7 +89326,7 @@ Route3Object: ; 0x54208 (size=77)
 	db $0 ; warps
 
 	db $1 ; signs
-	db $3, $5, $a ; Route3Text10
+	db $4, $6, $a ; Route3Text10
 
 	db $9 ; people
 	db SPRITE_BLACK_HAIR_BOY_2, $4 + 4, $3d + 4, $ff, $ff, $1 ; person
@@ -89355,24 +89355,24 @@ Route4Object: ; 0x543b2 (size=58)
 	db $2c ; border tile
 
 	db $3 ; warps
-	db $2d, $3, $0, MT_MOON_POKECENTER
-	db $31, $16, $0, MT_MOON_1
-	db $2d, $e, $7, MT_MOON_2
+	db $1f, $15, $0, MT_MOON_POKECENTER
+	db $29, $18, $0, MT_MOON_1
+	db $21, $a, $7, MT_MOON_2
 
 	db $3 ; signs
-	db $2d, $4, $4 ; PokeCenterSignText
-	db $32, $18, $5 ; Route4Text5
-	db $2e, $10, $6 ; Route4Text6
+	db $1f, $16, $4 ; PokeCenterSignText
+	db $2b, $1a, $5 ; Route4Text5
+	db $2f, $d, $6 ; Route4Text6
 
 	db $3 ; people
-	db SPRITE_LASS, $28 + 4, $f + 4, $fe, $0, $1 ; person
-	db SPRITE_LASS, $28 + 4, $10 + 4, $ff, $d3, $42, LASS + $C8, $4 ; trainer
-	db SPRITE_BALL, $28 + 4, $11 + 4, $ff, $ff, $83, TM_04 ; item
+	db SPRITE_LASS, $2c + 4, $17 + 4, $fe, $0, $1 ; person
+	db SPRITE_LASS, $2 + 4, $8 + 4, $ff, $d3, $42, LASS + $C8, $4 ; trainer
+	db SPRITE_BALL, $14 + 4, $7 + 4, $ff, $ff, $83, TM_04 ; item
 
 	; warp-to
-	EVENT_DISP ROUTE_4_WIDTH, $2d, $3 ; MT_MOON_POKECENTER
-	EVENT_DISP ROUTE_4_WIDTH, $31, $16 ; MT_MOON_1
-	EVENT_DISP ROUTE_4_WIDTH, $2d, $e ; MT_MOON_2
+	EVENT_DISP ROUTE_4_WIDTH, $1f, $15 ; MT_MOON_POKECENTER
+	EVENT_DISP ROUTE_4_WIDTH, $29, $18 ; MT_MOON_1
+	EVENT_DISP ROUTE_4_WIDTH, $21, $a ; MT_MOON_2
 
 Route4Blocks: ; 543ec (15:43ec)
 	INCBIN "maps/route4.blk"
