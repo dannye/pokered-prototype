@@ -15,23 +15,23 @@ Music_Pokecenter: ; 8237 (2:4237)
 	dw Music_Pokecenter_Ch3
 
 Music_Gym: ; 8240 (2:4240)
-	db ( $80 | CH0 )
+	db ( $C0 | CH0 )
 	dw Music_Gym_Ch1
 	db CH1
 	dw Music_Gym_Ch2
 	db CH2
 	dw Music_Gym_Ch3
+	db CH3
+	dw Music_Gym_Ch4
 
 ; Viridian City, Pewter City, Saffron City
 Music_Cities1: ; 8249 (2:4249)
-	db ( $C0 | CH0 )
+	db ( $80 | CH0 )
 	dw Music_Cities1_Ch1
 	db CH1
 	dw Music_Cities1_Ch2
 	db CH2
 	dw Music_Cities1_Ch3
-	db CH3
-	dw Music_Cities1_Ch4
 
 ; Cerulean City, Fuchsia City
 Music_Cities2: ; 8255 (2:4255)

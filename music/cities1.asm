@@ -174,7 +174,3 @@ Music_Cities1_Ch3_branch_1:
 	note A_, 2
 	note F_, 2
 	loopchannel 0, Music_Cities1_Ch3_branch_1
-
-
-Music_Cities1_Ch4:
-	endchannel
