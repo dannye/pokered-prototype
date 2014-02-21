@@ -83036,39 +83036,39 @@ MtMoon1Text14: ; 49b01 (12:5b01)
 	db "@"
 
 MtMoon1Object: ; 0x49b06 (size=145)
-	db $3 ; border tile
+	db $19 ; border tile
 
 	db $5 ; warps
-	db $23, $e, $1, $ff
-	db $23, $f, $1, $ff
-	db $5, $5, $0, MT_MOON_2
-	db $b, $11, $2, MT_MOON_2
-	db $f, $19, $3, MT_MOON_2
+	db $23, $6, $1, $ff
+	db $23, $7, $1, $ff
+	db $1b, $23, $0, MT_MOON_2
+	db $e, $8, $2, MT_MOON_2
+	db $5, $22, $3, MT_MOON_2
 
 	db $1 ; signs
-	db $17, $f, $e ; MtMoon1Text14
+	db $19, $7, $e ; MtMoon1Text14
 
 	db $d ; people
-	db SPRITE_HIKER, $6 + 4, $5 + 4, $ff, $d0, $41, HIKER + $C8, $1 ; trainer
-	db SPRITE_BUG_CATCHER, $10 + 4, $c + 4, $ff, $d3, $42, YOUNGSTER + $C8, $3 ; trainer
-	db SPRITE_LASS, $4 + 4, $1e + 4, $ff, $d0, $43, LASS + $C8, $5 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $1f + 4, $18 + 4, $ff, $d1, $44, SUPER_NERD + $C8, $1 ; trainer
-	db SPRITE_LASS, $17 + 4, $10 + 4, $ff, $d0, $45, LASS + $C8, $6 ; trainer
-	db SPRITE_BUG_CATCHER, $16 + 4, $7 + 4, $ff, $d0, $46, BUG_CATCHER + $C8, $7 ; trainer
-	db SPRITE_BUG_CATCHER, $1b + 4, $1e + 4, $ff, $d3, $47, BUG_CATCHER + $C8, $8 ; trainer
-	db SPRITE_BALL, $14 + 4, $2 + 4, $ff, $ff, $88, POTION ; item
-	db SPRITE_BALL, $2 + 4, $2 + 4, $ff, $ff, $89, MOON_STONE ; item
-	db SPRITE_BALL, $1f + 4, $23 + 4, $ff, $ff, $8a, RARE_CANDY ; item
-	db SPRITE_BALL, $17 + 4, $24 + 4, $ff, $ff, $8b, ESCAPE_ROPE ; item
-	db SPRITE_BALL, $21 + 4, $14 + 4, $ff, $ff, $8c, POTION ; item
-	db SPRITE_BALL, $20 + 4, $5 + 4, $ff, $ff, $8d, TM_12 ; item
+	db SPRITE_HIKER, $8 + 4, $11 + 4, $ff, $d0, $41, HIKER + $C8, $1 ; trainer
+	db SPRITE_BUG_CATCHER, $1c + 4, $5 + 4, $ff, $d3, $42, YOUNGSTER + $C8, $3 ; trainer
+	db SPRITE_LASS, $2 + 4, $1e + 4, $ff, $d0, $43, LASS + $C8, $5 ; trainer
+	db SPRITE_BLACK_HAIR_BOY_2, $1b + 4, $16 + 4, $ff, $d1, $44, SUPER_NERD + $C8, $1 ; trainer
+	db SPRITE_LASS, $1e + 4, $1d + 4, $ff, $d0, $45, LASS + $C8, $6 ; trainer
+	db SPRITE_BUG_CATCHER, $8 + 4, $3 + 4, $ff, $d0, $46, BUG_CATCHER + $C8, $7 ; trainer
+	db SPRITE_BUG_CATCHER, $10 + 4, $1c + 4, $ff, $d3, $47, BUG_CATCHER + $C8, $8 ; trainer
+	db SPRITE_BALL, $16 + 4, $9 + 4, $ff, $ff, $88, POTION ; item
+	db SPRITE_BALL, $1f + 4, $14 + 4, $ff, $ff, $89, MOON_STONE ; item
+	db SPRITE_BALL, $2 + 4, $b + 4, $ff, $ff, $8a, RARE_CANDY ; item
+	db SPRITE_BALL, $d + 4, $25 + 4, $ff, $ff, $8b, ESCAPE_ROPE ; item
+	db SPRITE_BALL, $1a + 4, $25 + 4, $ff, $ff, $8c, POTION ; item
+	db SPRITE_BALL, $b + 4, $2 + 4, $ff, $ff, $8d, TM_12 ; item
 
 	; warp-to
-	EVENT_DISP $14, $23, $e
-	EVENT_DISP $14, $23, $f
-	EVENT_DISP $14, $5, $5 ; MT_MOON_2
-	EVENT_DISP $14, $b, $11 ; MT_MOON_2
-	EVENT_DISP $14, $f, $19 ; MT_MOON_2
+	EVENT_DISP $14, $23, $6
+	EVENT_DISP $14, $23, $7
+	EVENT_DISP $14, $1b, $23 ; MT_MOON_2
+	EVENT_DISP $14, $e, $8 ; MT_MOON_2
+	EVENT_DISP $14, $5, $22 ; MT_MOON_2
 
 MtMoon1Blocks: ; 49b97 (12:5b97)
 	INCBIN "maps/mtmoon1.blk"
@@ -83496,32 +83496,32 @@ MtMoon3AfterBattleText5: ; 49fd6 (12:5fd6)
 	db "@"
 
 MtMoon3Object: ; 0x49fdb (size=102)
-	db $3 ; border tile
+	db $19 ; border tile
 
 	db $4 ; warps
-	db $9, $19, $1, MT_MOON_2
-	db $11, $15, $4, MT_MOON_2
-	db $1b, $f, $5, MT_MOON_2
-	db $7, $5, $6, MT_MOON_2
+	db $20, $c, $1, MT_MOON_2
+	db $1b, $15, $4, MT_MOON_2
+	db $13, $21, $5, MT_MOON_2
+	db $9, $4, $2, $ff
 
 	db $0 ; signs
 
 	db $9 ; people
-	db SPRITE_BLACK_HAIR_BOY_2, $8 + 4, $c + 4, $ff, $d3, $41, SUPER_NERD + $C8, $2 ; trainer
-	db SPRITE_ROCKET, $10 + 4, $b + 4, $ff, $d0, $42, ROCKET + $C8, $1 ; trainer
-	db SPRITE_ROCKET, $16 + 4, $f + 4, $ff, $d0, $43, ROCKET + $C8, $2 ; trainer
-	db SPRITE_ROCKET, $b + 4, $1d + 4, $ff, $d1, $44, ROCKET + $C8, $3 ; trainer
-	db SPRITE_ROCKET, $11 + 4, $1d + 4, $ff, $d2, $45, ROCKET + $C8, $4 ; trainer
-	db SPRITE_OMANYTE, $6 + 4, $c + 4, $ff, $ff, $6 ; person
-	db SPRITE_OMANYTE, $6 + 4, $d + 4, $ff, $ff, $7 ; person
-	db SPRITE_BALL, $15 + 4, $19 + 4, $ff, $ff, $88, HP_UP ; item
-	db SPRITE_BALL, $5 + 4, $1d + 4, $ff, $ff, $89, TM_01 ; item
+	db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $3 + 4, $ff, $d3, $41, SUPER_NERD + $C8, $2 ; trainer
+	db SPRITE_ROCKET, $8 + 4, $1a + 4, $ff, $d0, $42, ROCKET + $C8, $1 ; trainer
+	db SPRITE_ROCKET, $1c + 4, $1b + 4, $ff, $d0, $43, ROCKET + $C8, $2 ; trainer
+	db SPRITE_ROCKET, $13 + 4, $11 + 4, $ff, $d1, $44, ROCKET + $C8, $3 ; trainer
+	db SPRITE_ROCKET, $1a + 4, $7 + 4, $ff, $d2, $45, ROCKET + $C8, $4 ; trainer
+	db SPRITE_OMANYTE, $10 + 4, $4 + 4, $ff, $ff, $6 ; person
+	db SPRITE_OMANYTE, $1e + 4, $25 + 4, $ff, $ff, $7 ; person
+	db SPRITE_BALL, $2 + 4, $6 + 4, $ff, $ff, $88, HP_UP ; item
+	db SPRITE_BALL, $15 + 4, $e + 4, $ff, $ff, $89, TM_01 ; item
 
 	; warp-to
-	EVENT_DISP $14, $9, $19 ; MT_MOON_2
-	EVENT_DISP $14, $11, $15 ; MT_MOON_2
-	EVENT_DISP $14, $1b, $f ; MT_MOON_2
-	EVENT_DISP $14, $7, $5 ; MT_MOON_2
+	EVENT_DISP $14, $20, $c ; MT_MOON_2
+	EVENT_DISP $14, $1b, $15 ; MT_MOON_2
+	EVENT_DISP $14, $13, $21 ; MT_MOON_2
+	EVENT_DISP $14, $9, $4 ; MT_MOON_2
 
 MtMoon3Blocks: ; 4a041 (12:6041)
 	INCBIN "maps/mtmoon3.blk"
@@ -87412,31 +87412,29 @@ MtMoonText1: ; 51a48 (14:5a48)
 	db "@"
 
 MtMoon2Object: ; 0x51a4d (size=68)
-	db $3 ; border tile
+	db $19 ; border tile
 
-	db $8 ; warps
-	db $5, $5, $2, MT_MOON_1
-	db $b, $11, $0, MT_MOON_3
-	db $9, $19, $3, MT_MOON_1
-	db $f, $19, $4, MT_MOON_1
-	db $11, $15, $1, MT_MOON_3
-	db $1b, $d, $2, MT_MOON_3
-	db $3, $17, $3, MT_MOON_3
-	db $3, $1b, $2, $ff
+	db $6 ; warps
+	db $17, $14, $2, MT_MOON_1
+	db $13, $5, $0, MT_MOON_3
+	db $a, $a, $3, MT_MOON_1
+	db $3, $15, $4, MT_MOON_1
+	db $e, $16, $1, MT_MOON_3
+	db $3, $3, $2, MT_MOON_3
 
 	db $0 ; signs
 
 	db $0 ; people
 
 	; warp-to
-	EVENT_DISP $e, $5, $5 ; MT_MOON_1
-	EVENT_DISP $e, $b, $11 ; MT_MOON_3
-	EVENT_DISP $e, $9, $19 ; MT_MOON_1
-	EVENT_DISP $e, $f, $19 ; MT_MOON_1
-	EVENT_DISP $e, $11, $15 ; MT_MOON_3
-	EVENT_DISP $e, $1b, $d ; MT_MOON_3
-	EVENT_DISP $e, $3, $17 ; MT_MOON_3
-	EVENT_DISP $e, $3, $1b
+	EVENT_DISP $e, $17, $14 ; MT_MOON_1
+	EVENT_DISP $e, $13, $5 ; MT_MOON_3
+	EVENT_DISP $e, $a, $a ; MT_MOON_1
+	EVENT_DISP $e, $3, $15 ; MT_MOON_1
+	EVENT_DISP $e, $e, $16 ; MT_MOON_3
+	EVENT_DISP $e, $3, $3 ; MT_MOON_3
+	
+	ds $10
 
 MtMoon2Blocks: ; 51a91 (14:5a91)
 	INCBIN "maps/mtmoon2.blk"
@@ -89357,7 +89355,7 @@ Route4Object: ; 0x543b2 (size=58)
 	db $3 ; warps
 	db $1f, $15, $0, MT_MOON_POKECENTER
 	db $29, $18, $0, MT_MOON_1
-	db $21, $a, $7, MT_MOON_2
+	db $21, $a, $3, MT_MOON_3
 
 	db $3 ; signs
 	db $1f, $16, $4 ; PokeCenterSignText
@@ -103064,7 +103062,7 @@ ViridianForestText14: ; 611d5 (18:51d5)
 	db "@"
 
 ViridianForestObject: ; 0x611da (size=127)
-	db $3 ; border tile
+	db $2 ; border tile
 
 	db $6 ; warps
 	db $0, $11, $2, VIRIDIAN_FOREST_EXIT
@@ -105321,10 +105319,9 @@ Tset0F_GFX: ; 6c000 (1b:4000)
 	INCBIN "gfx/tilesets/0f.2bpp"
 Tset0F_Block: ; 6c5c0 (1b:45c0)
 	INCBIN "gfx/blocksets/0f.bst"
-Tset11_GFX: ; 6cca0 (1b:4ca0)
-	INCBIN "gfx/tilesets/11.2bpp"
-Tset11_Block: ; 6d0c0 (1b:50c0)
-	INCBIN "gfx/blocksets/11.bst"
+
+	ds $c20
+
 Tset12_GFX: ; 6d8c0 (1b:58c0)
 	INCBIN "gfx/tilesets/12.2bpp"
 Tset12_Block: ; 6dea0 (1b:5ea0)
@@ -139181,3 +139178,8 @@ Tset00_GFX: ; c0000 (30:4000)
 	INCBIN "gfx/tilesets/00.2bpp"
 Tset00_Block:
 	INCBIN "gfx/blocksets/00.bst"
+
+Tset11_GFX: ; 6cca0 (1b:4ca0)
+	INCBIN "gfx/tilesets/11.2bpp"
+Tset11_Block: ; 6d0c0 (1b:50c0)
+	INCBIN "gfx/blocksets/11.bst"
