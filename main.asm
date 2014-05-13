@@ -58251,7 +58251,7 @@ HandlePoisonBurnLeechSeed: ; 3c3bd (f:43bd)
 	call PrintText
 	xor a
 	ld [$cc5b], a
-	ld a, $ba
+	ld a,BURN_PSN_ANIM
 	call PlayMoveAnimation   ; play burn/poison animation
 	pop hl
 	call HandlePoisonBurnLeechSeed_DecreaseOwnHP
@@ -58272,7 +58272,7 @@ HandlePoisonBurnLeechSeed: ; 3c3bd (f:43bd)
 	ld [H_WHOSETURN], a ; $FF00+$f3
 	xor a
 	ld [$cc5b], a
-	ld a, $47
+	ld a,ABSORB
 	call PlayMoveAnimation ; play leech seed animation (from opposing mon)
 	pop af
 	ld [H_WHOSETURN], a ; $FF00+$f3
@@ -59481,7 +59481,7 @@ Func_3cca4: ; 3cca4 (f:4ca4)
 	res 5, [hl]
 	ld a, $1
 	ld [H_WHOSETURN], a ; $FF00+$f3
-	ld a, $c3
+	ld a, POOF_ANIM
 	call PlayMoveAnimation
 	FuncCoord 4, 11 ; $c480
 	ld hl, Coord
@@ -60901,7 +60901,7 @@ asm_3d74b
 .next5
 	xor a
 	ld [$CC5B],a
-	ld a,$A7
+	ld a,STATUS_AFFECTED_ANIM
 	call PlayMoveAnimation
 asm_3d766
 	ld a,[W_PLAYERMOVEEFFECT]
@@ -61169,7 +61169,7 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 .next8
 	xor a
 	ld [$CC5B],a
-	ld a,$A7
+	ld a,STATUS_AFFECTED_ANIM
 	call PlayMoveAnimation
 .next9
 	ld hl,Func_3d80a ; $580a
@@ -63450,7 +63450,7 @@ Func_3e7d1: ; 3e7d1 (f:67d1)
 .asm_3e7e6
 	xor a
 	ld [$cc5b], a
-	ld a, $a7
+	ld a,STATUS_AFFECTED_ANIM
 	call PlayMoveAnimation
 asm_3e7ef: ; 3e7ef (f:67ef)
 	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
@@ -63542,7 +63542,7 @@ Func_3e88f: ; 3e88f (f:688f)
 	call PrintText
 	xor a
 	ld [$cc5b], a
-	ld a, $bd
+	ld a,SLP_ANIM
 	call PlayMoveAnimation
 	jr .asm_3e8b5
 .asm_3e8af
@@ -63620,7 +63620,7 @@ Func_3e8fd: ; 3e8fd (f:68fd)
 	call PrintText
 	xor a
 	ld [$cc5b], a
-	ld a, $bf
+	ld a,CONF_ANIM
 	call PlayMoveAnimation
 	call GenRandomInBattle
 	cp $80
@@ -63664,7 +63664,7 @@ Func_3e8fd: ; 3e8fd (f:68fd)
 	xor a
 	ld [$cc5b], a
 	ld [H_WHOSETURN], a ; $FF00+$f3
-	ld a, $1
+	ld a, POUND
 	call PlayMoveAnimation
 	ld a, $1
 	ld [H_WHOSETURN], a ; $FF00+$f3
@@ -63704,7 +63704,7 @@ asm_3e9d3: ; 3e9d3 (f:69d3)
 .asm_3e9e7
 	xor a
 	ld [$cc5b], a
-	ld a, $a7
+	ld a, STATUS_AFFECTED_ANIM
 	call PlayMoveAnimation
 .asm_3e9f0
 	ld hl, Func_3e88c ; $688c
