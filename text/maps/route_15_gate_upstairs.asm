@@ -1,4 +1,4 @@
-_UnnamedText_4968c: ; 8cbac (23:4bac)
+_UnnamedText_4968c:: ; 8cbac (23:4bac)
 	text "Exp.All gives"
 	line "Exp points to all"
 	cont "the #mon with"
@@ -15,7 +15,7 @@ _UnnamedText_4968c: ; 8cbac (23:4bac)
 	cont "store it via PC."
 	done
 
-_UnnamedText_49698: ; 8cc65 (23:4c65)
+_UnnamedText_49698:: ; 8cc65 (23:4c65)
 	text "Looked into the"
 	line "binoculars."
 

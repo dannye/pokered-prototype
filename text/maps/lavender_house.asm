@@ -1,7 +1,7 @@
-_LavenderHouse2Text1: ; 9a238 (26:6238)
+_LavenderHouse2Text1:: ; 9a238 (26:6238)
 	text "Cubone: Kyarugoo!@@"
 
-_UnnamedText_1d9dc: ; 9a24c (26:624c)
+_UnnamedText_1d9dc:: ; 9a24c (26:624c)
 	text "I hate those"
 	line "horrible Rockets!"
 
@@ -13,7 +13,7 @@ _UnnamedText_1d9dc: ; 9a24c (26:624c)
 	cont "from Team Rocket!"
 	done
 
-_UnnamedText_1d9e1: ; 9a2b9 (26:62b9)
+_UnnamedText_1d9e1:: ; 9a2b9 (26:62b9)
 	text "The Ghost of"
 	line "#mon Tower is"
 	cont "gone!"

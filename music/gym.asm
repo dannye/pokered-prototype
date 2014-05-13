@@ -1,4 +1,4 @@
-Music_Gym_Ch1:
+Music_Gym_Ch1::
 	tempo 0, 130
 	stereopanning 119
 	duty 0
@@ -30,7 +30,7 @@ Music_Gym_Ch1:
 	rest 8
 	notetype 12, 10, 0
 
-Music_Gym_Ch1_branch_1:
+Music_Gym_Ch1_branch_1::
 	note E_, 16
 	note D_, 12
 	note G_, 3
@@ -77,7 +77,7 @@ Music_Gym_Ch1_branch_1:
 	loopchannel 0, Music_Gym_Ch1_branch_1
 
 
-Music_Gym_Ch2:
+Music_Gym_Ch2::
 	duty 0
 	octave 2
 	notetype 12, 7, 0
@@ -88,7 +88,7 @@ Music_Gym_Ch2:
 	callchannel Music_Gym_Ch2_branch_3
 	notetype 12, 13, 0
 
-Music_Gym_Ch2_branch_1:
+Music_Gym_Ch2_branch_1::
 	note E_, 1
 	note F_, 1
 	note E_, 1
@@ -100,7 +100,7 @@ Music_Gym_Ch2_branch_1:
 	note E_, 10
 	rest 8
 
-Music_Gym_Ch2_branch_2:
+Music_Gym_Ch2_branch_2::
 	notetype 12, 11, 0
 	octave 1
 	note B_, 16
@@ -218,7 +218,7 @@ Music_Gym_Ch2_branch_2:
 	notetype 12, 15, 0
 	loopchannel 0, Music_Gym_Ch2_branch_2
 
-Music_Gym_Ch2_branch_3:
+Music_Gym_Ch2_branch_3::
 	note E_, 1
 	note F_, 1
 	note E_, 1
@@ -231,13 +231,13 @@ Music_Gym_Ch2_branch_3:
 	endchannel
 
 
-Music_Gym_Ch3:
+Music_Gym_Ch3::
 	notetype 12, 1, 0
 	rest 16
 	rest 16
 	octave 4
 
-Music_Gym_Ch3_branch_1:
+Music_Gym_Ch3_branch_1::
 	note B_, 1
 	octave 5
 	note C_, 1
@@ -252,7 +252,7 @@ Music_Gym_Ch3_branch_1:
 	rest 1
 	octave 4
 
-Music_Gym_Ch3_branch_2:
+Music_Gym_Ch3_branch_2::
 	note B_, 1
 	octave 5
 	note C_, 1
@@ -271,7 +271,7 @@ Music_Gym_Ch3_branch_2:
 	note G_, 1
 	note A_, 1
 
-Music_Gym_Ch3_branch_3:
+Music_Gym_Ch3_branch_3::
 	note B_, 14
 	octave 5
 	note D_, 1
@@ -380,7 +380,7 @@ Music_Gym_Ch3_branch_3:
 	loopchannel 0, Music_Gym_Ch3_branch_3
 
 
-Music_Gym_Ch4:
+Music_Gym_Ch4::
 	dspeed 12
 	rest 4
 	dnote 2, snare4
@@ -410,7 +410,7 @@ Music_Gym_Ch4:
 	dnote 1, snare6
 	dnote 1, snare6
 
-Music_Gym_Ch4_branch_1:
+Music_Gym_Ch4_branch_1::
 	dnote 1, snare6
 	dnote 1, snare6
 	dnote 1, snare6
@@ -427,7 +427,7 @@ Music_Gym_Ch4_branch_1:
 	dnote 1, snare6
 	loopchannel 16, Music_Gym_Ch4_branch_1
 
-Music_Gym_Ch4_branch_2:
+Music_Gym_Ch4_branch_2::
 	dnote 2, mutedsnare4
 	dnote 2, mutedsnare4
 	dnote 1, mutedsnare4

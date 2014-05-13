@@ -1,4 +1,4 @@
-Music_Pokecenter_Ch1:
+Music_Pokecenter_Ch1::
 	tempo 0, 149
 	stereopanning 119
 	duty 2
@@ -6,7 +6,7 @@ Music_Pokecenter_Ch1:
 	notetype 12, 6, 7
 	octave 2
 
-Music_Pokecenter_Ch1_branch_1:
+Music_Pokecenter_Ch1_branch_1::
 	note F#, 2
 	note G_, 2
 	note E_, 2
@@ -116,12 +116,12 @@ Music_Pokecenter_Ch1_branch_1:
 	loopchannel 0, Music_Pokecenter_Ch1_branch_1
 
 
-Music_Pokecenter_Ch2:
+Music_Pokecenter_Ch2::
 	duty 2
 	notetype 12, 8, 0
 	octave 3
 
-Music_Pokecenter_Ch2_branch_1:
+Music_Pokecenter_Ch2_branch_1::
 	note F#, 2
 	note G_, 2
 	note E_, 2
@@ -207,10 +207,10 @@ Music_Pokecenter_Ch2_branch_1:
 	loopchannel 0, Music_Pokecenter_Ch2_branch_1
 
 
-Music_Pokecenter_Ch3:
+Music_Pokecenter_Ch3::
 	notetype 12, 2, 4
 
-Music_Pokecenter_Ch3_branch_1:
+Music_Pokecenter_Ch3_branch_1::
 	octave 4
 	note F#, 2
 	note G_, 2
@@ -292,4 +292,3 @@ Music_Pokecenter_Ch3_branch_1:
 	note G_, 2
 	note D#, 4
 	loopchannel 0, Music_Pokecenter_Ch3_branch_1
-	

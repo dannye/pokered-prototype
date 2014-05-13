@@ -1,4 +1,4 @@
-Music_Cities1_Ch1:
+Music_Cities1_Ch1::
 	tempo 0, 234
 	duty 0
 	notetype 12, 12, 5
@@ -7,7 +7,7 @@ Music_Cities1_Ch1:
 	rest 16
 	rest 16
 
-Music_Cities1_Ch1_branch_1:
+Music_Cities1_Ch1_branch_1::
 	notetype 12, 12, 5
 	octave 2
 	note C_, 4
@@ -77,7 +77,7 @@ Music_Cities1_Ch1_branch_1:
 	loopchannel 0, Music_Cities1_Ch1_branch_1
 
 
-Music_Cities1_Ch2:
+Music_Cities1_Ch2::
 	duty 0
 	notetype 12, 12, 5
 	rest 16
@@ -85,7 +85,7 @@ Music_Cities1_Ch2:
 	rest 16
 	rest 16
 
-Music_Cities1_Ch2_branch_1:
+Music_Cities1_Ch2_branch_1::
 	rest 16
 	rest 16
 	octave 2
@@ -144,11 +144,11 @@ Music_Cities1_Ch2_branch_1:
 	loopchannel 0, Music_Cities1_Ch2_branch_1
 
 
-Music_Cities1_Ch3:
+Music_Cities1_Ch3::
 	notetype 12, 2, 6
 	togglecall
 
-Music_Cities1_Ch3_branch_1:
+Music_Cities1_Ch3_branch_1::
 	octave 2
 	note F_, 2
 	octave 3

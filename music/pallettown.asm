@@ -1,10 +1,10 @@
-Music_PalletTown_Ch1: ; a7c5 (2:67c5)
+Music_PalletTown_Ch1:: ; a7c5 (2::67c5)
 	tempo 0, 255
 	stereopanning 119
 	duty 0
 	octave 2
 
-Music_PalletTown_Ch1_branch_1:
+Music_PalletTown_Ch1_branch_1::
 	notetype 12, 10, 7
 	note C_, 2
 	note D_, 2
@@ -21,11 +21,11 @@ Music_PalletTown_Ch1_branch_1:
 	loopchannel 0, Music_PalletTown_Ch1_branch_1
 
 
-Music_PalletTown_Ch2:
+Music_PalletTown_Ch2::
 	duty 0
 	notetype 12, 7, 7
 
-Music_PalletTown_Ch2_branch_1:
+Music_PalletTown_Ch2_branch_1::
 	octave 3
 	note C_, 2
 	note D_, 2
@@ -41,7 +41,7 @@ Music_PalletTown_Ch2_branch_1:
 	note F_, 4
 	loopchannel 4, Music_PalletTown_Ch2_branch_1
 
-Music_PalletTown_Ch2_branch_2:
+Music_PalletTown_Ch2_branch_2::
 	notetype 12, 9, 7
 	octave 3
 	note G_, 2
@@ -83,7 +83,7 @@ Music_PalletTown_Ch2_branch_2:
 	loopchannel 0, Music_PalletTown_Ch2_branch_1
 
 
-Music_PalletTown_Ch3:
+Music_PalletTown_Ch3::
 	duty 0
 	notetype 12, 1, 2
 	rest 16
@@ -91,7 +91,7 @@ Music_PalletTown_Ch3:
 	rest 16
 	rest 16
 
-Music_PalletTown_Ch3_branch_1:
+Music_PalletTown_Ch3_branch_1::
 	octave 4
 	note G_, 2
 	note A_, 2
