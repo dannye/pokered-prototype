@@ -1,4 +1,3 @@
-INCLUDE "globals.asm"
 
 TEXT_1  EQU $20
 TEXT_2  EQU $21
