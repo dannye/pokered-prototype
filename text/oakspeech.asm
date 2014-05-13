@@ -1,44 +1,56 @@
 _OakSpeechText1:
-	db 0,"Hello there!",$4F
-	db "Welcome to the",$55
-	db "world of #mon!",$51
-	db "My name is Oak!",$4F
-	db "People call me",$55
-	db "the #mon Prof!",$58
+	text "Hello there!"
+	line "Welcome to the"
+	cont "world of #mon!"
+
+	para "My name is Oak!"
+	line "People call me"
+	cont "the #mon Prof!"
+	prompt
 
 _OakSpeechText2A:
-	db 0,"This world is",$4F
-	db "inhabited by",$55
-	db "creatures called",$55
-	db "#mon!@@"
+	text "This world is"
+	line "inhabited by"
+	cont "creatures called"
+	cont "#mon!@@"
 
 _OakSpeechText2B:
-	db 0,$51,"For some people,",$4F
-	db "#mon are",$55
-	db "pets. Others use",$55
-	db "them for fights.",$51
-	db "Myself...",$51
-	db "I study #mon",$4F
-	db "as a profession.",$58
+	text $51,"For some people,"
+	line "#mon are"
+	cont "pets. Others use"
+	cont "them for fights."
+
+	para "Myself..."
+
+	para "I study #mon"
+	line "as a profession."
+	prompt
 
 _IntroducePlayerText:
-	db 0,"First, what is",$4F
-	db "your name?",$58
+	text "First, what is"
+	line "your name?"
+	prompt
 
 _IntroduceRivalText:
-	db 0,"This is my grand-",$4F
-	db "son. He's been",$55
-	db "your rival since",$55
-	db "you were a baby.",$51
-	db "...Erm, what is",$4F
-	db "his name again?",$58
+	text "This is my grand-"
+	line "son. He's been"
+	cont "your rival since"
+	cont "you were a baby."
+
+	para "...Erm, what is"
+	line "his name again?"
+	prompt
 
 _OakSpeechText3:
-	db 0,$52,"!",$51
-	db "Your very own",$4F
-	db "#mon legend is",$55
-	db "about to unfold!",$51
-	db "A world of dreams",$4F
-	db "and adventures",$55
-	db "with #mon",$55
-	db "awaits! Let's go!",$57
+	text $52,"!"
+
+	para "Your very own"
+	line "#mon legend is"
+	cont "about to unfold!"
+
+	para "A world of dreams"
+	line "and adventures"
+	cont "with #mon"
+	cont "awaits! Let's go!"
+	done
+
