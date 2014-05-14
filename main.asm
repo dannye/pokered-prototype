@@ -30369,8 +30369,9 @@ DrawPartyMenu_: ; 12cd2 (4:6cd2)
 	ld [H_AUTOBGTRANSFERENABLED],a
 	call ClearScreen
 	call UpdateSprites ; move sprites
-	ld b, BANK(Func_71791)
-	ld hl, Func_71791
+RedrawPartyMenu_ReloadSprites:
+	ld b, BANK(LoadPartyMonSprites)
+	ld hl, LoadPartyMonSprites
 	call Bankswitch ; load pokemon icon graphics
 
 RedrawPartyMenu_: ; 12ce3 (4:6ce3)
@@ -30401,8 +30402,8 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	call GetPartyMonName
 	pop hl
 	call PlaceString ; print the pokemon's name
-	ld b, BANK(Func_71868)
-	ld hl, Func_71868
+	ld b, BANK(PlacePartyMonSprite)
+	ld hl, PlacePartyMonSprite
 	call Bankswitch ; place the appropriate pokemon icon
 	ld a,[$FF8C] ; loop counter
 	ld [wWhichPokemon],a
@@ -31463,7 +31464,7 @@ Func_13613: ; 13613 (4:7613)
 	call Func_13625
 	ld a, [wCurrentMenuItem] ; $cc26
 	call Func_13625
-	jp RedrawPartyMenu_
+	jp RedrawPartyMenu_ReloadSprites
 
 Func_13625: ; 13625 (4:7625)
 	push af
@@ -101446,17 +101447,7 @@ asm_7170a: ; 7170a (1c:570a)
 	ld bc, $10
 	ld a, [wCurrentMenuItem] ; $cc26
 	call AddNTimes
-	ld c, $40
-	ld a, [hl]
-	cp $4
-	jr z, .asm_71755
-	cp $8
-	jr nz, .asm_71759
-.asm_71755
-	dec hl
-	dec hl
-	ld c, $1
-.asm_71759
+	ld c, $2
 	ld b, $4
 	ld de, $4
 .asm_7175e
@@ -101470,8 +101461,10 @@ asm_7170a: ; 7170a (1c:570a)
 	ld a, c
 	jr .asm_71721
 
+	ds $d
+
 DataTable_71769: ; 71769 (1c:5769)
-	db $05,$10,$20
+	db $a,$18,$20
 
 Func_7176c: ; 7176c (1c:576c)
 	ld hl, MonOverworldSpritePointers ; $57c0
@@ -116970,3 +116963,116 @@ Cavern_GFX: ; 6cca0 (1b:4ca0)
 	INCBIN "gfx/tilesets/cavern.w128.t14.2bpp"
 Cavern_Block: ; 6d0c0 (1b:50c0)
 	INCBIN "gfx/blocksets/cavern.bst"
+
+SECTION "bank31",ROMX,BANK[$31]
+
+PartyMonSprites:
+	INCBIN "gfx/party_mon_sprites1.w32.2bpp"
+
+SECTION "bank32",ROMX,BANK[$32]
+
+	INCBIN "gfx/party_mon_sprites2.w32.2bpp"
+
+LoadPartyMonSprites:
+	call DisableLCD
+	ld de, $8000
+	ld hl, W_PARTYMON1
+.loop
+	ld a, [hli]
+	cp $ff
+	jr z, .done
+	push hl
+	push de
+	ld [$d11e], a
+	ld a, $3a
+	call Predef
+	xor a
+	ld [H_MULTIPLICAND], a
+	ld [H_MULTIPLICAND + 1], a
+	ld a, [$d11e]
+	dec a
+	ld [H_MULTIPLICAND + 2], a
+	ld a, $80
+	ld [H_MULTIPLIER], a
+	call Multiply
+	ld a, [H_PRODUCT + 2]
+	ld h, a
+	ld a, [H_PRODUCT + 3]
+	ld l, a
+	ld a, $3f
+	cp h
+	ld a, BANK(PartyMonSprites) + 1
+	jr c, .gotBank
+	ld a, h
+	add $40
+	ld h, a
+	ld a, BANK(PartyMonSprites)
+.gotBank
+	pop de
+	ld bc, $0080
+	call FarCopyData
+	pop hl
+	jr .loop
+.done
+	jp EnableLCD
+
+PlacePartyMonSprite:
+	push hl
+	push de
+	push bc
+	ld a, [$ff8c]
+	add a
+	add a
+	add a
+	add a
+	ld hl, wOAMBuffer
+	ld c, a
+	ld b, 0
+	add hl, bc
+	ld a, h
+	ld d, a
+	ld a, l
+	ld e, a
+	ld hl, PartyMonOAM
+	add hl, bc
+	ld bc, $10
+	call CopyData
+	ld hl, wOAMBuffer
+	ld de, $cc5b
+	ld bc, $60
+	call CopyData
+	pop bc
+	pop de
+	pop hl
+	ret
+
+PartyMonOAM:
+	db $10,$10,$00,$00
+	db $10,$18,$01,$00
+	db $18,$10,$04,$00
+	db $18,$18,$05,$00
+
+	db $20,$10,$08,$00
+	db $20,$18,$09,$00
+	db $28,$10,$0c,$00
+	db $28,$18,$0d,$00
+
+	db $30,$10,$10,$00
+	db $30,$18,$11,$00
+	db $38,$10,$14,$00
+	db $38,$18,$15,$00
+
+	db $40,$10,$18,$00
+	db $40,$18,$19,$00
+	db $48,$10,$1c,$00
+	db $48,$18,$1d,$00
+
+	db $50,$10,$20,$00
+	db $50,$18,$21,$00
+	db $58,$10,$24,$00
+	db $58,$18,$25,$00
+
+	db $60,$10,$28,$00
+	db $60,$18,$29,$00
+	db $68,$10,$2c,$00
+	db $68,$18,$2d,$00
