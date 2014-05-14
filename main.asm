@@ -10657,6 +10657,11 @@ GoodCopyVideoData:
 	pop de
 	jp FarCopyData2 ; if LCD is off, transfer all at once
 
+GBPalPartyMenu:
+	ld b, BANK(GBPalPartyMenu_)
+	ld hl, GBPalPartyMenu_
+	jp Bankswitch
+
 SECTION "bank1",ROMX,BANK[$1]
 
 SpriteFacingAndAnimationTable: ; 4000 (1:4000)
@@ -30572,7 +30577,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	ld a,1
 	ld [H_AUTOBGTRANSFERENABLED],a
 	call Delay3
-	jp GBPalNormal
+	jp GBPalPartyMenu
 .printItemUseMessage
 	and a,$0F
 	ld hl,PartyMenuItemUseMessagePointers
@@ -102861,7 +102866,7 @@ PalPacket_72428: ; 72428 (1c:6428)
 	db $51,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 
 
 PalPacket_72438: ; 72438 (1c:6438)
-	db $51,$10,$00,$1F,$00,$20,$00,$21,$00,$00,$00,$00,$00,$00,$00,$00
+	db $51,PAL_PARTYMENU,$00,$1F,$00,$20,$00,$21,$00,$00,$00,$00,$00,$00,$00,$00
 
 PalPacket_72448: ; 72448 (1c:6448)
 	db $51,$1E,$00,$1E,$00,$1E,$00,$1E,$00,$00,$00,$00,$00,$00,$00,$00
@@ -116951,6 +116956,10 @@ SuperPalettes: ; 72660 (1c:6660)
 	RGB 00, 00, 00
 	RGB 00, 00, 00
 	RGB 00, 00, 00
+	RGB 31, 31, 31
+	RGB 31, 25, 19
+	RGB 30, 16, 12
+	RGB 00, 00, 00
 
 SECTION "bank30",ROMX,BANK[$30]
 	
@@ -117076,3 +117085,10 @@ PartyMonOAM:
 	db $60,$18,$29,$00
 	db $68,$10,$2c,$00
 	db $68,$18,$2d,$00
+
+GBPalPartyMenu_:
+	ld a,%11100100
+	ld [rBGP],a
+	ld a,%11100100
+	ld [rOBP0],a
+	ret
