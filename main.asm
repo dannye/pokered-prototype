@@ -15281,13 +15281,16 @@ Func_6596: ; 6596 (1:6596)
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
-	ld b, $8
-	call GoPAL_SET
+	ld b, BANK(SendNicknamePal)
+	ld hl, SendNicknamePal
+	call Bankswitch
 	call LoadHpBarAndStatusTilePatterns
 	call Func_675b
-	ld b, BANK(Func_7176c)
-	ld hl, Func_7176c
-	call Bankswitch
+	nop
+	nop
+	nop
+	nop
+	nop
 	FuncCoord 0, 4 ; $c3f0
 	ld hl, Coord
 	ld b, $9
@@ -15313,7 +15316,7 @@ Func_6596: ; 6596 (1:6596)
 	ld [W_SUBANIMTRANSFORM], a ; $d08b
 .asm_65ed
 	call Func_676f
-	call GBPalNormal
+	call GBPalPartyMenu
 .asm_65f3
 	ld a, [$ceea]
 	and a
@@ -15675,8 +15678,8 @@ Func_68f8: ; 68f8 (1:68f8)
 	ld a, [$cf91]
 	ld [$cd5d], a
 	push af
-	ld b, BANK(Func_71882)
-	ld hl, Func_71882
+	ld b, BANK(LoadNicknameMonSprite)
+	ld hl, LoadNicknameMonSprite
 	call Bankswitch
 	pop af
 	ld [$d11e], a
@@ -103211,6 +103214,12 @@ SendDexPal:
 	ld a, PAL_REDBAR
 	jr SetPalID
 
+SendNicknamePal:
+	ld hl, PalPacket_72428
+	call CopyPalPacket
+	ld a, PAL_PARTYMENU
+	jr SetPalID
+
 SendIntroPal:
 	ld hl, PalPacket_72428
 	call CopyPalPacket
@@ -103246,7 +103255,7 @@ CopyPalPacket:
 	ld de, $CF2D
 	jp CopyData
 
-	ds $52
+	ds $48
 
 BorderPalettes: ; 72788 (1c:6788)
 IF _RED
@@ -116991,6 +117000,13 @@ LoadPartyMonSprites:
 	cp $ff
 	jr z, .done
 	push hl
+	call LoadPartyMonSprite
+	pop hl
+	jr .loop
+.done
+	jp EnableLCD
+
+LoadPartyMonSprite:
 	push de
 	ld [$d11e], a
 	ld a, $3a
@@ -117019,11 +117035,7 @@ LoadPartyMonSprites:
 .gotBank
 	pop de
 	ld bc, $0080
-	call FarCopyData
-	pop hl
-	jr .loop
-.done
-	jp EnableLCD
+	jp FarCopyData
 
 PlacePartyMonSprite:
 	push hl
@@ -117091,4 +117103,21 @@ GBPalPartyMenu_:
 	ld [rBGP],a
 	ld a,%11100100
 	ld [rOBP0],a
+	ret
+
+LoadNicknameMonSprite:
+	call DisableLCD
+	xor a
+	ld [H_DOWNARROWBLINKCNT2], a
+	ld a, [$cd5d]
+	ld de, $8000
+	call LoadPartyMonSprite
+	call EnableLCD
+	ld a, [$ff8c]
+	push af
+	xor a
+	ld [$ff8c], a
+	call PlacePartyMonSprite
+	pop af
+	ld [$ff8c], a
 	ret
