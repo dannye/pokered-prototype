@@ -100654,41 +100654,41 @@ TownMapOrder: ; 70f11 (1c:4f11)
 	db ROUTE_4
 	db CERULEAN_CITY
 	db UNKNOWN_DUNGEON_1
+	db ROUTE_24
+	db ROUTE_25
+	db BILLS_HOUSE
 	db ROUTE_5
 	db ROUTE_6
-	db BILLS_HOUSE
-	db ROUTE_7
-	db ROUTE_8
 	db VERMILION_CITY
 	db SS_ANNE_1
-	db ROUTE_9
+	db ROUTE_7
 	db ROCK_TUNNEL_1
-	db ROUTE_10
+	db ROUTE_8
 	db CELADON_CITY
+	db ROUTE_9
+	db ROUTE_10
 	db ROUTE_11
-	db ROUTE_12
-	db ROUTE_13
 	db FUCHSIA_CITY
 	db SAFARI_ZONE_CENTER
-	db ROUTE_14
-	db ROUTE_15
+	db ROUTE_12
+	db ROUTE_13
 	db POWER_PLANT
-	db ROUTE_16
+	db ROUTE_14
 	db LAVENDER_TOWN
 	db POKEMONTOWER_1
+	db ROUTE_15
+	db ROUTE_16
+	db SAFFRON_CITY
 	db ROUTE_17
 	db ROUTE_18
-	db SAFFRON_CITY
-	db ROUTE_19
-	db ROUTE_20
 	db SEAFOAM_ISLANDS_1
-	db ROUTE_21
+	db ROUTE_19
 	db CINNABAR_ISLAND
+	db ROUTE_20
+	db ROUTE_21
 	db ROUTE_22
-	db ROUTE_23
-	db ROUTE_24
 	db VICTORY_ROAD_1
-	db ROUTE_25
+	db ROUTE_23
 	db INDIGO_PLATEAU
 
 TownMapCursor: ; 70f40 (1c:4f40)
@@ -101177,27 +101177,27 @@ ExternalMapEntries: ; 71313 (1c:5313)
 	EMAP $3,$C,Route2Name
 	EMAP $1,$9,Route3Name
 	EMAP $0,$5,Route4Name
-	EMAP $2,$2,Route5Name
-	EMAP $1,$1,Route6Name
-	EMAP $4,$4,Route7Name
-	EMAP $4,$1,Route8Name
-	EMAP $7,$2,Route9Name
-	EMAP $8,$5,Route10Name
-	EMAP $7,$9,Route11Name
-	EMAP $5,$A,Route12Name
-	EMAP $6,$C,Route13Name
-	EMAP $9,$B,Route14Name
-	EMAP $B,$C,Route15Name
-	EMAP $C,$F,Route16Name
-	EMAP $E,$D,Route17Name
-	EMAP $F,$B,Route18Name
-	EMAP $F,$7,Route19Name
-	EMAP $C,$7,Route20Name
-	EMAP $A,$6,Route21Name
-	EMAP $9,$3,Route22Name
-	EMAP $B,$1,Route23Name
-	EMAP $D,$3,Route24Name
-	EMAP $F,$3,Route25Name
+	EMAP $4,$4,Route5Name
+	EMAP $4,$1,Route6Name
+	EMAP $7,$2,Route7Name
+	EMAP $8,$5,Route8Name
+	EMAP $7,$9,Route9Name
+	EMAP $5,$A,Route10Name
+	EMAP $6,$C,Route11Name
+	EMAP $9,$B,Route12Name
+	EMAP $B,$C,Route13Name
+	EMAP $C,$F,Route14Name
+	EMAP $E,$D,Route15Name
+	EMAP $F,$B,Route16Name
+	EMAP $F,$7,Route17Name
+	EMAP $C,$7,Route18Name
+	EMAP $A,$6,Route19Name
+	EMAP $9,$3,Route20Name
+	EMAP $B,$1,Route21Name
+	EMAP $D,$3,Route22Name
+	EMAP $F,$3,Route23Name
+	EMAP $2,$2,Route24Name
+	EMAP $1,$1,Route25Name
 
 InternalMapEntries: ; 71382 (1c:5382)
 	IMAP $29,$0,$F,PalletTownName
@@ -101320,13 +101320,13 @@ Route16Name: ; 71588 (1c:5588)
 Route17Name: ; 71591 (1c:5591)
 	db "Route 17@"
 Route18Name: ; 7159a (1c:559a)
-	db "Route 18@"
+	db "Sea Route 18@"
 Route19Name: ; 715a3 (1c:55a3)
 	db "Sea Route 19@"
 Route20Name: ; 715b0 (1c:55b0)
 	db "Sea Route 20@"
 Route21Name: ; 715bd (1c:55bd)
-	db "Sea Route 21@"
+	db "Route 21@"
 Route22Name: ; 715ca (1c:55ca)
 	db "Route 22@"
 Route23Name: ; 715d3 (1c:55d3)
