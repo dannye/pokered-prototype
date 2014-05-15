@@ -15130,11 +15130,11 @@ FlyWarpDataPtr: ; 6448 (1:6448)
 ; Macro Format:
 ;   FLYWARP_DATA [Map Width][Y-pos][X-pos]
 PalletTownFlyWarp: ; 647c (1:647c)
-	FLYWARP_DATA PALLET_TOWN_WIDTH,      6,  5
+	FLYWARP_DATA PALLET_TOWN_WIDTH,     14,  3
 ViridianCityFlyWarp: ; 6482 (1:6482)
-	FLYWARP_DATA VIRIDIAN_CITY_WIDTH,   26, 23
+	FLYWARP_DATA VIRIDIAN_CITY_WIDTH,   16,  5
 PewterCityFlyWarp: ; 6488 (1:6488)
-	FLYWARP_DATA PEWTER_CITY_WIDTH,     26, 13
+	FLYWARP_DATA PEWTER_CITY_WIDTH,     22, 19
 CeruleanCityFlyWarp: ; 648e (1:648e)
 	FLYWARP_DATA CERULEAN_CITY_WIDTH,   18, 19
 LavenderTownFlyWarp: ; 6494 (1:6494)
@@ -15152,7 +15152,7 @@ IndigoPlateauFlyWarp: ; 64b2 (1:64b2)
 SaffronCityFlyWarp: ; 64b8 (1:64b8)
 	FLYWARP_DATA SAFFRON_CITY_WIDTH,    30,  9
 Route4FlyWarp: ; 64be (1:64be)
-	FLYWARP_DATA ROUTE_4_WIDTH,          6, 11
+	FLYWARP_DATA ROUTE_4_WIDTH,         32, 21
 Route10FlyWarp: ; 64c4 (1:64c4)
 	FLYWARP_DATA ROUTE_10_WIDTH,        20, 11
 
