@@ -116985,11 +116985,11 @@ Cavern_Block: ; 6d0c0 (1b:50c0)
 SECTION "bank31",ROMX,BANK[$31]
 
 PartyMonSprites:
-	INCBIN "gfx/party_mon_sprites1.w32.2bpp"
+	INCBIN "gfx/party_mon_sprites.w32.2bpp",$0,$4000
 
 SECTION "bank32",ROMX,BANK[$32]
 
-	INCBIN "gfx/party_mon_sprites2.w32.2bpp"
+	INCBIN "gfx/party_mon_sprites.w32.2bpp",$4000,$b80
 
 LoadPartyMonSprites:
 	call DisableLCD
