@@ -1,16 +1,16 @@
-_UnnamedText_1d8d1:: ; 99e8d (26:5e8d)
+_LavenderHouse1Text_1d8d1:: ; 99e8d (26:5e8d)
 	text "That's odd, Mr.Fuji"
 	line "isn't here."
 	cont "Where'd he go?"
 	done
 
-_UnnamedText_1d8d6:: ; 99eba (26:5eba)
+_LavenderHouse1Text_1d8d6:: ; 99eba (26:5eba)
 	text "Mr.Fuji had been"
 	line "praying alone for"
 	cont "Cubone's mother."
 	done
 
-_UnnamedText_1d8f4:: ; 99eee (26:5eee)
+_LavenderHouse1Text_1d8f4:: ; 99eee (26:5eee)
 	text "This is really"
 	line "Mr.Fuji's house."
 
@@ -21,7 +21,7 @@ _UnnamedText_1d8f4:: ; 99eee (26:5eee)
 	cont "orphaned #mon!"
 	done
 
-_UnnamedText_1d8f9:: ; 99f4b (26:5f4b)
+_LavenderHouse1Text_1d8f9:: ; 99f4b (26:5f4b)
 	text "It's so warm!"
 	line "#mon are so"
 	cont "nice to hug!"
@@ -33,7 +33,7 @@ _LavenderHouse1Text3:: ; 99f72 (26:5f72)
 _LavenderHouse1Text4:: ; 99f85 (26:5f85)
 	text "Nidorino: Gaoo!@@"
 
-_UnnamedText_1d94c:: ; 99f97 (26:5f97)
+_LavenderHouse1Text_1d94c:: ; 99f97 (26:5f97)
 	text "Mr.Fuji: ", $52, "."
 
 	para "Your #dex quest"

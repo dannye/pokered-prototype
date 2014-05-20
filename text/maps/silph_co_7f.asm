@@ -1,4 +1,4 @@
-_UnnamedText_51dd3:: ; 84430 (21:4430)
+_MeetLaprasGuyText::
 	text "Oh! Hi! You're"
 	line "not a Rocket! You"
 	cont "came to save us?"
@@ -9,7 +9,7 @@ _UnnamedText_51dd3:: ; 84430 (21:4430)
 	cont "for saving us."
 	prompt
 
-_UnnamedText_51dd8:: ; 8449e (21:449e)
+_HeresYourLaprasText::
 	text "It's Lapras. It's"
 	line "very intelligent."
 
@@ -27,53 +27,53 @@ _UnnamedText_51dd8:: ; 8449e (21:449e)
 	cont "give you a lift!"
 	done
 
-_UnnamedText_51ddd:: ; 8455a (21:455a)
+_LaprasGuyText::
 	text "Team Rocket's"
 	line "Boss went to the"
 	cont "boardroom! Is our"
 	cont "President ok?"
 	done
 
-_UnnamedText_51de2:: ; 84599 (21:4599)
+_LaprasGuySavedText::
 	text "Saved at last!"
 	line "Thank you!"
 	done
 
-_UnnamedText_51e00:: ; 845b4 (21:45b4)
+_SilphCo7Text_51e00::
 	text "Team Rocket was"
 	line "after the Master"
 	cont "Ball which will"
 	cont "catch any #mon!"
 	done
 
-_UnnamedText_51e05:: ; 845f6 (21:45f6)
+_CanceledMasterBallText::
 	text "We canceled the"
 	line "Master Ball"
 	cont "project because"
 	cont "of Team Rocket."
 	done
 
-_UnnamedText_51e23:: ; 84633 (21:4633)
+_SilphCo7Text_51e23::
 	text "It would be bad"
 	line "if Team Rocket"
 	cont "took over Silph"
 	cont "or our #mon!"
 	done
 
-_UnnamedText_51e28:: ; 84670 (21:4670)
+_SilphCo7Text_51e28::
 	text "Wow! You chased"
 	line "off Team Rocket"
 	cont "all by yourself?"
 	done
 
-_UnnamedText_51e46:: ; 846a2 (21:46a2)
+_SilphCo7Text_51e46::
 	text "You! It's really"
 	line "dangerous here!"
 	cont "You came to save"
 	cont "me? You can't!"
 	done
 
-_UnnamedText_51e4b:: ; 846e2 (21:46e2)
+_SilphCo7Text_51e4b::
 	text "Safe at last!"
 	line "Oh thank you!"
 	done
@@ -142,5 +142,69 @@ _SilphCo7AfterBattleText4:: ; 84861 (21:4861)
 	text "Go on home"
 	line "before my Boss"
 	cont "gets ticked off!"
+	done
+
+_SilphCo7Text_51ebe:: ; 8488d (21:488d)
+	text $53, ": What"
+	line "kept you ", $52, "?"
+	done
+
+_SilphCo7Text_51ec3:: ; 848a2 (21:48a2)
+	text $53, ": Hahaha!"
+	line "I thought you'd"
+	cont "turn up if I"
+	cont "waited here!"
+
+	para "I guess Team"
+	line "Rocket slowed you"
+	cont "down! Not that I"
+	cont "care!"
+
+	para "I saw you in"
+	line "Saffron, so I"
+	cont "decided to see if"
+	cont "you got better!"
+	done
+
+_SilphCo7Text_51ec8:: ; 8494a (21:494a)
+	text "Oh ho!"
+	line "So, you are ready"
+	cont "for Boss Rocket!"
+	prompt
+
+_SilphCo7Text_51ecd:: ; 84975 (21:4975)
+	text $53, ": How can"
+	line "I put this?"
+
+	para "You're not good"
+	line "enough to play"
+	cont "with us big boys!"
+	prompt
+
+_SilphCo7Text_51ed2:: ; 849bd (21:49bd)
+	text "Well, ", $52, "!"
+
+	para "I'm moving on up"
+	line "and ahead!"
+
+	para "By checking my"
+	line "#dex, I'm"
+	cont "starting to see"
+	cont "what's strong and"
+	cont "how they evolve!"
+
+	para "I'm going to the"
+	line "#mon League"
+	cont "to boot out the"
+	cont "Elite Four!"
+
+	para "I'll become the"
+	line "world's most"
+	cont "powerful trainer!"
+
+	para $52, ", well"
+	line "good luck to you!"
+	cont "Don't sweat it!"
+	cont "Smell ya!"
 	done
 

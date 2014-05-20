@@ -13,7 +13,7 @@ _ViridianHouseText2:: ; 95dc7 (25:5dc7)
 	line "#mon too."
 	done
 
-_UnnamedText_1d5b1:: ; 95de1 (25:5de1)
+_ViridianHouseText_1d5b1:: ; 95de1 (25:5de1)
 	text "Speary: Tetweet!"
 	done
 

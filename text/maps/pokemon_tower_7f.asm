@@ -1,4 +1,4 @@
-_UnnamedText_60ec4:: ; 99c1a (26:5c1a)
+_PokemonTower7Text_60ec4:: ; 99c1a (26:5c1a)
 	text "Mr.Fuji: Heh? You"
 	line "came to save me?"
 
