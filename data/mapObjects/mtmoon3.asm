@@ -15,8 +15,8 @@ MtMoon3Object: ; 0x49fdb (size=102)
 	db SPRITE_ROCKET, $1c + 4, $1b + 4, $ff, $d0, $43, ROCKET + $C8, $2 ; trainer
 	db SPRITE_ROCKET, $13 + 4, $11 + 4, $ff, $d1, $44, ROCKET + $C8, $3 ; trainer
 	db SPRITE_ROCKET, $1a + 4, $7 + 4, $ff, $d2, $45, ROCKET + $C8, $4 ; trainer
-	db SPRITE_OMANYTE, $10 + 4, $4 + 4, $ff, $ff, $6 ; person
-	db SPRITE_OMANYTE, $1e + 4, $25 + 4, $ff, $ff, $7 ; person
+	db SPRITE_OMANYTE, $10 + 4, $4 + 4, $ff, $ff, $86, DOME_FOSSIL ; item
+	db SPRITE_OMANYTE, $1e + 4, $25 + 4, $ff, $ff, $87, HELIX_FOSSIL ; item
 	db SPRITE_BALL, $2 + 4, $6 + 4, $ff, $ff, $88, HP_UP ; item
 	db SPRITE_BALL, $15 + 4, $e + 4, $ff, $ff, $89, TM_01 ; item
 

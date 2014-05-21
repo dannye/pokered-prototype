@@ -1,43 +1,19 @@
-_MtMoon3Text_49f24:: ; 8095e (20:495e)
-	text "You want the"
-	line "Dome Fossil?"
-	done
-
-_MtMoon3Text_49f64:: ; 80979 (20:4979)
-	text "You want the"
-	line "Helix Fossil?"
-	done
-
-_MtMoon3Text_49f6f:: ; 80995 (20:4995)
-	text $52, " got the"
-	line "@"
-	TX_RAM $cf4b
-	text "!@@"
-
-_MtMoon3Text_49f7f:: ; 809a8 (20:49a8)
-	text "Look, you've got"
-	line "no room for this.@@"
-
-_MtMoon3Text_49f85:: ; 809cc (20:49cc)
+_MtMoon3BattleText1:: ; 809cc (20:49cc)
 	text "Hey, stop!"
 
-	para "I found these"
-	line "fossils! They're"
-	cont "both mine!"
+	para "Gimme your loot!"
+	line "I know you've got"
+	cont "some!"
 	done
 
-_MtMoon3Text_49f8a:: ; 80a01 (20:4a01)
+_MtMoon3EndBattleText1:: ; 80a01 (20:4a01)
 	text "Ok!"
-	line "I'll share!"
+	line "I'll let you keep"
+	cont "your loot this"
+	cont "time..."
 	prompt
 
-_MtMoon3Text_49f8f:: ; 80a11 (20:4a11)
-	text "We'll each take"
-	line "one!"
-	cont "No being greedy!"
-	done
-
-_MtMoon3Text_49f94:: ; 80a37 (20:4a37)
+_MtMoon3AfterBattleText1:: ; 80a37 (20:4a37)
 	text "Far away, on"
 	line "Cinnabar Island,"
 	cont "there's a #mon"
@@ -47,10 +23,6 @@ _MtMoon3Text_49f94:: ; 80a37 (20:4a37)
 	line "on regenerating"
 	cont "fossils."
 	done
-
-_MtMoon3Text_49f99:: ; 80a93 (20:4a93)
-	text "All right. Then"
-	line "this is mine!@@"
 
 _MtMoon3BattleText2:: ; 80ab3 (20:4ab3)
 	text "Team Rocket will"
