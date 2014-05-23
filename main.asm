@@ -10754,7 +10754,7 @@ ENDC
 	jr .asm_438f
 
 .titlescreenTilemap ; 437f (1:437f)
-	db $7F,$7F,$41,$42,$43,$44,$7F,$45,$46,$47,$48,$49,$4A,$4B,$4C,$7F ; ©2013 Danny-E 33
+	db $7F,$7F,$41,$42,$43,$44,$7F,$46,$47,$48,$49,$4A,$4B,$4C,$4D,$7F ; ©2014 Danny-E 33
 
 .asm_438f
 	call SaveScreenTilesToBuffer2
@@ -11006,13 +11006,24 @@ Func_4541: ; 4541 (1:4541)
 	FuncCoord 2, 7 ; $c42e
 	ld hl, Coord
 	ld de, CopyrightTextString ; $4556
+	call PlaceString
+	ld a, $e4
+	ld [rBGP], a ; $ff47
+	ld c, $30
+	call DelayFrames
+	ld de, CopyrightTextString2
+	call PlaceString
+	ld c, $30
+	call DelayFrames
+	ld de, CopyrightTextString3
 	jp PlaceString
 
 CopyrightTextString: ; 4556 (1:4556)
-	next $7F,$60,$61,$62,$63,$7F,$64,$73,$74,$75,$76,$77,$78,$79 ;©2013 Danny-E 33
-	next "@"
-
-	ds $31
+	db $73,$74,$75,$76,$77,$78,$79,$7A,"@"   ; Danny-E 33
+CopyrightTextString2:
+	next $64,$65,$66,$67,$68,$69,$6A,$6B,"@" ; Mickey-A 42
+CopyrightTextString3:
+	next $6C,$6D,$6E,$6F,$70,"@"             ; Jwibagi
 
 ; prints version text (red, blue)
 PrintGameVersionOnTitleScreen: ; 4598 (1:4598)
@@ -44184,8 +44195,6 @@ Func_4188a: ; 4188a (10:588a)
 	ld b, $c
 	call GoPAL_SET
 	callba Func_4538
-	ld a, $e4
-	ld [rBGP], a ; $ff47
 	ld c, $b4
 	call DelayFrames
 	call ClearScreen
