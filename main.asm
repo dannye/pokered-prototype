@@ -11034,7 +11034,7 @@ NintenText: ; 45aa (1:45aa)
 	db "NINTEN@"
 
 SonyText: ; 45b1 (1:45b1)
-	db "SONY@"
+	db "Gary@"
 
 ; loads pokemon data from one of multiple sources to $cf98
 ; loads base stats to $d0b8
@@ -14289,7 +14289,7 @@ OakSpeech: ; 6115 (1:6115)
 	call FadeInIntroPic
 	ld hl,IntroduceRivalText
 	call PrintText
-	call Func_69a4
+	;call Func_69a4
 
 Func_61bc: ; 61bc (1:61bc)
 	call GBFadeOut2
@@ -15326,15 +15326,15 @@ Func_6a6c: ; 6a6c (1:6a6c)
 IF _RED
 DefaultNamesPlayer: ; 6aa8 (1:6aa8)
 	db   "New Name"
-	next "Red"
 	next "Ash"
+	next "Dan"
 	next "Jack"
 	db   "@"
 
 DefaultNamesRival: ; 6abe (1:6abe)
 	db   "New Name"
-	next "Blue"
 	next "Gary"
+	next "Mike"
 	next "John"
 	db   "@"
 ENDC
@@ -15378,9 +15378,9 @@ Func_6ad6: ; 6ad6 (1:6ad6)
 	jp CopyData
 IF _RED
 DefaultNamesPlayerList: ; 6af2 (1:6af2)
-	db "New Name@Red@Ash@Jack@"
+	db "New Name@Ash@Dan@Jack@"
 DefaultNamesRivalList: ; 6b08 (1:6b08)
-	db "New Name@Blue@Gary@John@"
+	db "New Name@Gary@Mike@John@"
 ENDC
 IF _BLUE
 DefaultNamesPlayerList: ; 6af2 (1:6af2)

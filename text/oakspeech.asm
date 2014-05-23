@@ -1,56 +1,83 @@
 _OakSpeechText1::
-	text "Hello there!"
-	line "Welcome to the"
-	cont "world of #mon!"
+	text "Excuse me! Sorry"
+	line "to bother you,"
+	cont "but I need your"
+	cont "help!"
 
-	para "My name is Oak!"
-	line "People call me"
-	cont "the #mon Prof!"
+	para "Have you heard"
+	line "any news about"
+	cont "the #mon"
+	cont "scientists on"
+	cont "Cinnabar Island?"
 	prompt
 
 _OakSpeechText2A::
-	text "This world is"
-	line "inhabited by"
-	cont "creatures called"
-	cont "#mon!@@"
+	text "They've been"
+	line "researching an"
+	cont "ancient #mon"
+	cont "believed to be"
+	cont "extinct, named"
+	cont "Mew.@@"
 
 _OakSpeechText2B::
-	text $51,"For some people,"
-	line "#mon are"
-	cont "pets. Others use"
-	cont "them for fights."
+	text $51,"Until recently,"
+	line "their research"
+	cont "has only led them"
+	cont "to dead ends."
 
-	para "Myself..."
+	para "However, a few"
+	line "weeks ago they"
+	cont "came across what"
+	cont "they believed to"
+	cont "be DNA of Mew."
 
-	para "I study #mon"
-	line "as a profession."
+	para "They had enough"
+	line "of Mew's DNA to"
+	cont "create a clone of"
+	cont "this extinct"
+	cont "#mon."
+
+	para "They called this"
+	line "clone ",$72,"Mewtwo.",$73
+
+	para "Unfortunately,"
+	line "the Prototype"
+	cont "became much more"
+	cont "powerful than"
+	cont "they expected."
+
+	para "Mewtwo destroyed"
+	line "the research lab"
+	cont "on Cinnabar"
+	cont "Island and"
+	cont "escaped!"
 	prompt
 
 _IntroducePlayerText::
-	text "First, what is"
-	line "your name?"
+	text "I'm sorry, what is"
+	line "your name again?"
 	prompt
 
 _IntroduceRivalText::
-	text "This is my grand-"
-	line "son. He's been"
-	cont "your rival since"
-	cont "you were a baby."
+	text "This is my"
+	line "grandson, ",$53,"."
 
-	para "...Erm, what is"
-	line "his name again?"
+	para "I've asked him to"
+	line "help you."
 	prompt
 
 _OakSpeechText3::
-	text $52,"!"
+	text "Oh! I haven't even"
+	line "told you what I'm"
+	cont "asking of you"
+	cont "yet!"
 
-	para "Your very own"
-	line "#mon legend is"
-	cont "about to unfold!"
+	para "Just come to my"
+	line "lab and I'll"
+	cont "explain the rest"
+	cont "to you and ",$53
+	cont "there!"
 
-	para "A world of dreams"
-	line "and adventures"
-	cont "with #mon"
-	cont "awaits! Let's go!"
+	para "Hurry!"
 	done
 

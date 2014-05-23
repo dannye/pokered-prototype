@@ -20,28 +20,27 @@ _PewterCityText2:: ; a49e0 (29:49e0)
 	cont "into it!"
 	done
 
-_PewterCityText_193f1:: ; a4a56 (29:4a56)
-	text "Did you check out"
-	line "the Museum?"
+_PewterGymGuy1:: ; a4a56 (29:4a56)
+	text "Have you tried"
+	line "battling Brock?"
 	done
 
-_PewterCityText_193f6:: ; a4a75 (29:4a75)
-	text "Weren't those"
-	line "fossils from Mt."
-	cont "Moon amazing?"
+_PewterGymGuy2:: ; a4a75 (29:4a75)
+	text "He's tough, isn't"
+	line "he?"
 	done
 
-_PewterCityText_193fb:: ; a4aa2 (29:4aa2)
-	text "Really?"
-	line "You absolutely"
-	cont "have to go!"
+_PewterGymGuy3:: ; a4aa2 (29:4aa2)
+	text "Seriously?"
+	line "You really"
+	cont "have to try!"
 	done
 
-_PewterCityText13:: ; a4ac6 (29:4ac6)
-	text "It's right here!"
-	line "You have to pay"
-	cont "to get in, but"
-	cont "it's worth it!"
+_PewterGymGuy4:: ; a4ac6 (29:4ac6)
+	text "He's right here!"
+	line "Brock's a tough"
+	cont "guy, but it's"
+	cont "worth it!"
 	cont "See you around!"
 	done
 
@@ -62,18 +61,19 @@ _PewterCityText_19431:: ; a4b55 (29:4b55)
 	cont "out of my garden!"
 	done
 
-_PewterCityText_1945d:: ; a4b87 (29:4b87)
-	text "You're a trainer"
-	line "right? Brock's"
-	cont "looking for new"
-	cont "challengers!"
+_PewterMuseumGuy1:: ; a4b87 (29:4b87)
+	text "Hey! You just got"
+	line "here! You can't"
+	cont "leave Pewter City"
+	cont "without seeing"
+	cont "the Museum first!"
 	cont "Follow me!"
 	done
 
-_PewterCityText_19462:: ; a4bce (29:4bce)
-	text "If you have the"
-	line "right stuff, go"
-	cont "take on Brock!"
+_PewterMuseumGuy2:: ; a4bce (29:4bce)
+	text "Man, this place is"
+	line "cool! You're gonna"
+	cont "love it!"
 	done
 
 _PewterCityText6:: ; a4bfe (29:4bfe)

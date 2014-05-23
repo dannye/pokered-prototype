@@ -22,20 +22,19 @@ _ViridianMartText1:: ; 95c36 (25:5c36)
 	done
 
 _ViridianMartText4:: ; 95c58 (25:5c58)
-	text "Hey! You came from"
-	line "Pallet Town?"
+	text "Hey, ",$52,"!"
 	done
 
 ViridianMartParcelQuestText:: ; 95c79 (25:5c79)
-	text "You know Prof."
-	line "Oak, right?"
-
-	para "His order came in."
-	line "Will you take it"
-	cont "to him?"
+	text "Listen, I'm pretty"
+	line "busy today. Do"
+	cont "you think you can"
+	cont "take this letter"
+	cont "to Prof.Oak for"
+	cont "me? Thanks!"
 
 	para $52, " got"
-	line "Oak's Parcel!@@"
+	line "Oak's Letter!@@"
 
 _ViridianMartText2:: ; 95cd5 (25:5cd5)
 	text "This shop sells"

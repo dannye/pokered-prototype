@@ -1,22 +1,19 @@
 _OaksLabGaryText1:: ; 94d5b (25:4d5b)
-	text $53, ": Yo"
-	line $52, "! Gramps"
-	cont "isn't around!"
+	text $53, ": Hey,"
+	line $52, "! Do you"
+	cont "know where"
+	cont "grandpa is?"
 	done
 
 _OaksLabText40:: ; 94d79 (25:4d79)
-	text $53, ": Heh, I"
-	line "don't need to be"
-	cont "greedy like you!"
-
-	para "Go ahead and"
-	line "choose, ", $52, "!"
+	text $53, ": Go ahead"
+	line "and choose,"
+	cont $52, "!"
 	done
 
 _OaksLabText41:: ; 94dbd (25:4dbd)
-	text $53, ": My"
-	line "#mon looks a"
-	cont "lot stronger."
+	text $53, ": Wow! This"
+	line "is so cool!"
 	done
 
 _OaksLabText39:: ; 94ddf (25:4ddf)
@@ -44,8 +41,9 @@ _OaksLabBulbasaurText:: ; 94e57 (25:4e57)
 	done
 
 _OaksLabMonEnergeticText:: ; 94e80 (25:4e80)
-	text "This #mon is"
-	line "really energetic!"
+	text "This #mon has"
+	line "has a lot of"
+	cont "potential!"
 	prompt
 
 _OaksLabReceivedMonText:: ; 94ea0 (25:4ea0)
@@ -66,44 +64,34 @@ _OaksLabText_1d2f0:: ; 94ed2 (25:4ed2)
 	done
 
 _OaksLabText_1d2f5:: ; 94ef8 (25:4ef8)
-	text "Oak: If a wild"
-	line "#mon appears,"
-	cont "your #mon can"
-	cont "fight against it!"
+	text "Oak: Now go find"
+	line "Mewtwo!"
 	done
 
 _OaksLabText_1d2fa:: ; 94f36 (25:4f36)
 	text "Oak: ", $52, ","
-	line "raise your young"
-	cont "#mon by making"
-	cont "it fight!"
+	line "we have to find"
+	cont "Mewtwo before"
+	cont "Team Rocket!"
 	done
 
 _OaksLabDeliverParcelText1:: ; 94f69 (25:4f69)
 	text "Oak: Oh, ", $52, "!"
 
-	para "How is my old"
-	line "#mon?"
-
-	para "Well, it seems to"
-	line "like you a lot."
-
-	para "You must be"
-	line "talented as a"
-	cont "#mon trainer!"
+	para "How are you and"
+	line "your #mon"
+	cont "doing?"
 
 	para "What? You have"
 	line "something for me?"
 
 	para $52, " delivered"
-	line "Oak's Parcel.@@"
+	line "Oak's Letter.@@"
 
 _OaksLabDeliverParcelText2:: ; 9500f (25:500f)
 	db $0
-	para "Ah! This is the"
-	line "custom # Ball"
-	cont "I ordered!"
-	cont "Thank you!"
+	para "Hmm... Mhm..."
+	line "Right."
 	done
 
 _OaksLabAroundWorldText:: ; 95045 (25:5045)
@@ -134,7 +122,7 @@ _OaksLabGivePokeballsText2:: ; 950f2 (25:50f2)
 
 	para "Just throw a #"
 	line "Ball at it and try"
-	line "to catch it!"
+	cont "to catch it!"
 
 	para "This won't always"
 	line "work, though."
@@ -162,9 +150,9 @@ _OaksLabText_1d31d:: ; 951e9 (25:51e9)
 	prompt
 
 _OaksLabText_1d32c:: ; 95236 (25:5236)
-	text "It's encyclopedia-"
-	line "like, but the"
-	cont "pages are blank!"
+	text "It's a #dex,"
+	line "but the pages are"
+	cont "blank!"
 	done
 
 _OaksLabText8:: ; 95268 (25:5268)
@@ -182,49 +170,50 @@ _OaksLabText_1d340:: ; 9526b (25:526b)
 	done
 
 _OaksLabRivalWaitingText:: ; 952bb (25:52bb)
-	text $53, ": Gramps!"
-	line "I'm fed up with"
-	cont "waiting!"
+	text "Oak: Sorry I'm"
+	line "late. Anyway, I'm"
+	cont "glad you're here."
+
+	para "After the"
+	line "incident on"
+	cont "Cinnabar Island,"
+	cont "Team Rocket, a"
+	cont "gang of #mon"
+	cont "robbers, began an"
+	cont "investigation to"
+	cont "hunt down Mewtwo."
+
+	para "If Team Rocket"
+	line "gets their hands"
+	cont "on Mewtwo, they"
+	cont "could take down"
+	cont "anyone who gets"
+	cont "in their way!"
+	cont "We can't let that"
+	cont "happen!"
+
+	para "Unfortunately,"
+	line "the police are"
+	cont "too busy with"
+	cont "Team Rocket's"
+	cont "local crimes."
+	cont "I'm going to have"
+	cont "to ask you to"
+	cont "find Mewtwo"
+	cont "yourselves."
+
+	para "I'll give you each"
+	line "your own #mon."
+	cont "I need you to"
+	cont "find out what you"
+	cont "can and get to"
+	cont "Mewtwo before"
+	cont "Team Rocket!"
 	done
 
 _OaksLabChooseMonText:: ; 952df (25:52df)
-	text "Oak: ", $53, "?"
-	line "Let me think..."
-
-	para "Oh, that's right,"
-	line "I told you to"
-	cont "come! Just wait!"
-
-	para "Here, ", $52, "!"
-
-	para "There are 3"
-	line "#mon here!"
-
-	para "Haha!"
-
-	para "They are inside"
-	line "the # Balls."
-
-	para "When I was young,"
-	line "I was a serious"
-	cont "#mon trainer!"
-
-	para "In my old age, I"
-	line "have only 3 left,"
-	cont "but you can have"
-	cont "one! Choose!"
-	done
-
 _OaksLabRivalInterjectionText:: ; 953dc (25:53dc)
-	text $53, ": Hey!"
-	line "Gramps! What"
-	cont "about me?"
-	done
-
 _OaksLabBePatientText:: ; 953fc (25:53fc)
-	text "Oak: Be patient!"
-	line $53, ", you can"
-	cont "have one too!"
 	done
 
 _OaksLabLeavingText:: ; 95427 (25:5427)
@@ -246,37 +235,32 @@ _OaksLabRivalReceivedMonText:: ; 95461 (25:5461)
 _OaksLabRivalChallengeText:: ; 95477 (25:5477)
 	text $53, ": Wait"
 	line $52, "!"
-	cont "Let's check out"
-	cont "our #mon!"
 
-	para "Come on, I'll take"
-	line "you on!"
+	para "Don't you think we"
+	line "should try out a"
+	cont "quick battle"
+	cont "first?"
+
+	para "C'mon, don't go"
+	line "easy on me, ok?"
 	done
 
 _OaksLabText_1d3be:: ; 954b6 (25:54b6)
-	text "What?"
-	line "Unbelievable!"
-	cont "I picked the"
-	cont "wrong #mon!"
-	prompt
-
 _OaksLabText_1d3c3:: ; 954e4 (25:54e4)
-	text $53, ": Yeah! Am"
-	line "I great or what?"
+	text $53, ": Wow!"
+	line "Great match!"
 	prompt
 
 _OaksLabRivalToughenUpText:: ; 95502 (25:5502)
-	text $53, ": Okay!"
-	line "I'll make my"
-	cont "#mon fight to"
-	cont "toughen it up!"
-
-	para $52, "! Gramps!"
-	line "Smell you later!"
-	done
+	text $53, ": We both"
+	line "have a lot of"
+	cont "work to do for"
+	cont "sure. Well, we"
+	cont "better get going!"
+	prompt
 
 _OaksLabText21:: ; 95551 (25:5551)
-	text $53, ": Gramps!"
+	text $53, ": Grandpa!"
 	done
 
 _OaksLabText22:: ; 9555d (25:555d)
@@ -285,23 +269,20 @@ _OaksLabText22:: ; 9555d (25:555d)
 	done
 
 _OaksLabText23:: ; 9557b (25:557b)
-	text "Oak: Oh right! I"
-	line "have a request"
-	cont "of you two."
+	text "Oak: Good, I'm"
+	line "glad you're here,"
+	cont $53,"."
 	done
 
 _OaksLabText24:: ; 955a8 (25:55a8)
 	text "On the desk there"
 	line "is my invention,"
-	cont "#dex!"
+	cont "the #dex!"
 
 	para "It automatically"
 	line "records data on"
 	cont "#mon you've"
 	cont "seen or caught!"
-
-	para "It's a hi-tech"
-	line "encyclopedia!"
 	done
 
 _OaksLabText25:: ; 9562a (25:562a)
@@ -313,44 +294,36 @@ _OaksLabText25:: ; 9562a (25:562a)
 	line "#dex from Oak!@@"
 
 _OaksLabText26:: ; 95664 (25:5664)
-	text "To make a complete"
-	line "guide on all the"
-	cont "#mon in the"
-	cont "world..."
+	text "Well anyway, I"
+	line "think we might"
+	cont "have a lead on"
+	cont "Mewtwo."
 
-	para "That was my dream!"
+	para "I need you two to"
+	line "travel to Pewter"
+	cont "City and talk to"
+	cont "the scientists at"
+	cont "the museum."
 
-	para "But, I'm too old!"
-	line "I can't do it!"
-
-	para "So, I want you two"
-	line "to fulfill my"
-	cont "dream for me!"
-
-	para "Get moving, you"
-	line "two!"
-
-	para "This is a great"
-	line "undertaking in"
-	cont "#mon history!"
+	para "They might be"
+	line "able to help you"
+	cont "find Mewtwo!"
+	cont "Hurry!"
 	done
 
 _OaksLabText27:: ; 95741 (25:5741)
-	text $53, ": Alright"
-	line "Gramps! Leave it"
-	cont "all to me!"
+	text $53, ": Alright!"
+	line "Grandpa, we won't"
+	cont "let you down!"
 
-	para $52, ", I hate to"
-	line "say it, but I"
-	cont "don't need you!"
+	para $52, ", my"
+	line "sister, Daisy,"
+	cont "has an extra map"
+	cont "of Kanto."
 
-	para "I know! I'll"
-	line "borrow a Town Map"
-	cont "from my sis!"
-
-	para "I'll tell her not"
-	line "to lend you one,"
-	cont $52, "! Hahaha!"
+	para "Why don't you see"
+	line "if she will let"
+	cont "you borrow it?"
 	done
 
 _OaksLabText_1d405:: ; 957eb (25:57eb)

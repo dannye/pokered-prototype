@@ -43,10 +43,9 @@ _ViridianCityText_19157:: ; a44db (29:44db)
 	done
 
 _ViridianCityText_19175:: ; a4525 (29:4525)
-	text "Oh Grandpa! Don't"
-	line "be so mean!"
-	cont "He hasn't had his"
-	cont "coffee yet."
+	text "Oh Grandpa!"
+	line "Please take your"
+	cont "medicine!"
 	done
 
 _ViridianCityText_1917a:: ; a4560 (29:4560)
@@ -58,11 +57,14 @@ _ViridianCityText_1917a:: ; a4560 (29:4560)
 	done
 
 _ViridianCityText_19191:: ; a45b5 (29:45b5)
-	text "You can't go"
-	line "through here!"
+	text "Girl: Oh my gosh!"
+	line "Grandpa, I think"
+	cont "you're having a"
+	cont "heart attack!"
 
-	para "This is private"
-	line "property!"
+	para "Girl: Excuse me!"
+	line "Please give us"
+	cont "some space!"
 	done
 
 _ViridianCityText_191ca:: ; a45ea (29:45ea)
@@ -99,7 +101,7 @@ _TM42NoRoomText:: ; a46d7 (29:46d7)
 
 _ViridianCityText_1920a:: ; a46f9 (29:46f9)
 	text "Ahh, I've had my"
-	line "coffee now and I"
+	line "pills now and I"
 	cont "feel great!"
 
 	para "Sure you can go"

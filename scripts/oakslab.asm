@@ -133,18 +133,6 @@ OaksLabScript5: ; 1cbfd (7:4bfd)
 	ld a, $11
 	ld [$ff8c], a
 	call DisplayTextID
-	call Delay3
-	ld a, $12
-	ld [$ff8c], a
-	call DisplayTextID
-	call Delay3
-	ld a, $13
-	ld [$ff8c], a
-	call DisplayTextID
-	call Delay3
-	ld a, $14
-	ld [$ff8c], a
-	call DisplayTextID
 	ld hl, $d74b
 	set 1, [hl]
 	xor a

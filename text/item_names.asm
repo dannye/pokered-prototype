@@ -68,7 +68,7 @@ ItemNames: ; 472b (1:472b)
 	db "X Speed@"
 	db "X Special@"
 	db "Coin Case@"
-	db "Oak's Parcel@"
+	db "Oak's Letter@"
 	db "ItemFinder@"
 	db "Silph Scope@"
 	db "Poké Flute@"

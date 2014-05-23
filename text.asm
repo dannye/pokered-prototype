@@ -1115,8 +1115,8 @@ _UseNextMonText:: ; 8971a (22:571a)
 	done
 
 _Sony1WinText:: ; 8972a (22:572a)
-	text $53, ": Yeah! Am"
-	line "I great or what?"
+	text $53, ": Wow!"
+	line "Great match!"
 	prompt
 
 _PlayerBlackedOutText2:: ; 89748 (22:5748)
@@ -1910,8 +1910,8 @@ _DoYouWantToNicknameText:: ; 0x8a605
 	done
 
 _YourNameIsText:: ; 8a62f (22:662f)
-	text "Right! So your"
-	line "name is ", $52, "!"
+	text "Oh, right."
+	line "Of course."
 	prompt
 
 _HisNameIsText:: ; 8a64a (22:664a)
@@ -3198,40 +3198,6 @@ _UsedCutText:: ; a8315 (2a:4315)
 	text " hacked"
 	line "away with Cut!"
 	prompt
-
-_PewterGymGuy1:: ; a4a56 (29:4a56)
-	db $0, "Have you tried", $4f
-	db "battling Brock?", $57
-
-_PewterGymGuy2:: ; a4a75 (29:4a75)
-	db $0, "He's tough, isn't", $4f
-	db "he?", $57
-
-_PewterGymGuy3:: ; a4aa2 (29:4aa2)
-	db $0, "Seriously?", $4f
-	db "You really", $55
-	db "have to try!", $57
-
-_PewterGymGuy4:: ; a4ac6 (29:4ac6)
-	db $0, "He's right here!", $4f
-	db "Brock's a tough", $55
-	db "guy, but it's", $55
-	db "worth it!", $55
-	db "See you around!", $57
-
-_PewterMuseumGuy1:: ; a4b87 (29:4b87)
-	db $0, "Hey! You just got", $4f
-	db "here! You can't", $55
-	db "leave Pewter City", $55
-	db "without seeing", $55
-	db "the Museum first!", $55
-	db "Follow me!", $57
-
-_PewterMuseumGuy2:: ; a4bce (29:4bce)
-	db $0, "Man, this place is", $4f
-	db "cool! You're gonna", $55
-	db "love it!", $57
-
 
 SECTION "Pokedex Text", ROMX, BANK[POKEDEX_TEXT]
 
