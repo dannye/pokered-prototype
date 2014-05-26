@@ -1,5 +1,5 @@
 PewterCityObject: ; 0x18577 (size=111)
-	db $a ; border tile
+	db $a ; border block
 
 	db $7 ; warps
 	db $7, $c, $0, MUSEUM_1F

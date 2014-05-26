@@ -438,17 +438,17 @@ _RockTunnelPokecenterGuyText:: ; 883fc (22:43fc)
 	cont "Lavender Town!"
 	done
 
-_UnnamedText_624c1:: ; 88426 (22:4426)
+_UnusedBenchGuyText1:: ; 88426 (22:4426)
 	text "I wish I could"
 	line "catch #mon."
 	done
 
-_UnnamedText_624c6:: ; 88442 (22:4442)
+_UnusedBenchGuyText2:: ; 88442 (22:4442)
 	text "I'm tired from"
 	line "all the fun..."
 	done
 
-_UnnamedText_624cb:: ; 88460 (22:4460)
+_UnusedBenchGuyText3:: ; 88460 (22:4460)
 	text "Silph's manager"
 	line "is hiding in the"
 	cont "Safari Zone."
@@ -787,12 +787,12 @@ _ViridianSchoolNotebookText4:: ; 88e2c (22:4e2c)
 	line "#mon League!"
 	prompt
 
-_UnnamedText_52a10:: ; 88ec1 (22:4ec1)
+_FightingDojoText_52a10:: ; 88ec1 (22:4ec1)
 	text "Enemies on every"
 	line "side!"
 	done
 
-_UnnamedText_52a1d:: ; 88ed9 (22:4ed9)
+_FightingDojoText_52a1d:: ; 88ed9 (22:4ed9)
 	text "What goes around"
 	line "comes around!"
 	done
@@ -1920,7 +1920,7 @@ _HisNameIsText:: ; 8a64a (22:664a)
 	cont "name is ", $53, "!"
 	prompt
 
-_SSAnne8AfterBattleText2:: ; 8a677 (22:6677)
+_WillBeTradedText:: ; 8a677 (22:6677)
 	TX_RAM $cd3f
 	text " and"
 	line "@"

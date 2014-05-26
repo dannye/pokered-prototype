@@ -1,4 +1,3 @@
-
 Func_213c8:: ; 213c8 (8:53c8)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
@@ -534,7 +533,7 @@ MonWasReleasedText: ; 0x21820
 	TX_FAR _MonWasReleasedText
 	db "@"
 
-Func_21825:: ; 5824 (8:5825)
+PrintJustAMomentText1:: ; 5824 (8:5825)
 	ld a, [$ffaa]
 	cp $1
 	ret z
@@ -550,9 +549,9 @@ Func_21825:: ; 5824 (8:5825)
 	ld [$d12b], a
 	call EnableAutoTextBoxDrawing
 	ld a, $22
-	jp Func_3ef5
+	jp PrintPredefTextID
 
-Func_21845:: ; 5845 (8:5845)
+PrintJustAMomentText2:: ; 5845 (8:5845)
 	ld a, [$ffaa]
 	cp $2
 	ret z
@@ -568,7 +567,7 @@ Func_21845:: ; 5845 (8:5845)
 	ld [$d12b], a
 	call EnableAutoTextBoxDrawing
 	ld a, $22
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 JustAMomentText:: ; 21865 (8:5865)
 	TX_FAR _JustAMomentText
@@ -579,8 +578,8 @@ JustAMomentText:: ; 21865 (8:5865)
 	ret nz
 	call EnableAutoTextBoxDrawing
 	ld a, $23
-	jp Func_3ef5
+	jp PrintPredefTextID
 
-Unknown_21878:: ; 21878 (8:5878)
-	db $FD
+PredefText23:: ; 21878 (8:5878)
+	db $FD ; FuncTX_BillsPC
 

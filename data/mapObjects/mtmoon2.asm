@@ -1,5 +1,5 @@
 MtMoon2Object: ; 0x51a4d (size=68)
-	db $19 ; border tile
+	db $19 ; border block
 
 	db $6 ; warps
 	db $17, $14, $2, MT_MOON_1

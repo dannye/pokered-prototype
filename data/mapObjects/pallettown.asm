@@ -1,5 +1,5 @@
 PalletTownObject: ; 0x182c3 (size=58)
-	db $a ; border tile
+	db $a ; border block
 
 	db $3 ; warps
 	db $d, $3, $0, REDS_HOUSE_1F

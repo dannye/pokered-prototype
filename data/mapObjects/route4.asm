@@ -1,5 +1,5 @@
 Route4Object: ; 0x543b2 (size=58)
-	db $2c ; border tile
+	db $2c ; border block
 
 	db $3 ; warps
 	db $1f, $15, $0, MT_MOON_POKECENTER
@@ -13,8 +13,8 @@ Route4Object: ; 0x543b2 (size=58)
 
 	db $3 ; people
 	db SPRITE_LASS, $2c + 4, $17 + 4, $fe, $0, $1 ; person
-	db SPRITE_LASS, $2 + 4, $8 + 4, $ff, $d3, $42, LASS + $C8, $4 ; trainer
-	db SPRITE_BALL, $14 + 4, $7 + 4, $ff, $ff, $83, TM_04 ; item
+	db SPRITE_LASS, $2 + 4, $8 + 4, $ff, $d3, TRAINER | $2, LASS + $C8, $4
+	db SPRITE_BALL, $14 + 4, $7 + 4, $ff, $ff, ITEM | $3, TM_04
 
 	; warp-to
 	EVENT_DISP ROUTE_4_WIDTH, $1f, $15 ; MT_MOON_POKECENTER

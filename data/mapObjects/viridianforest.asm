@@ -1,5 +1,5 @@
 ViridianForestObject: ; 0x611da (size=127)
-	db $2 ; border tile
+	db $2 ; border block
 
 	db $6 ; warps
 	db $0, $11, $2, VIRIDIAN_FOREST_EXIT
@@ -19,12 +19,12 @@ ViridianForestObject: ; 0x611da (size=127)
 
 	db $8 ; people
 	db SPRITE_BUG_CATCHER, $a + 4, $1b + 4, $ff, $ff, $1 ; person
-	db SPRITE_BUG_CATCHER, $22 + 4, $1f + 4, $ff, $d2, $42, BUG_CATCHER + $C8, $1 ; trainer
-	db SPRITE_BUG_CATCHER, $1b + 4, $12 + 4, $ff, $d2, $43, BUG_CATCHER + $C8, $2 ; trainer
-	db SPRITE_BUG_CATCHER, $5 + 4, $9 + 4, $ff, $d2, $44, BUG_CATCHER + $C8, $3 ; trainer
-	db SPRITE_BALL, $1b + 4, $c + 4, $ff, $ff, $85, ANTIDOTE ; item
-	db SPRITE_BALL, $5 + 4, $14 + 4, $ff, $ff, $86, POTION ; item
-	db SPRITE_BALL, $24 + 4, $2 + 4, $ff, $ff, $87, POKE_BALL ; item
+	db SPRITE_BUG_CATCHER, $22 + 4, $1f + 4, $ff, $d2, TRAINER | $2, BUG_CATCHER + $C8, $1
+	db SPRITE_BUG_CATCHER, $1b + 4, $12 + 4, $ff, $d2, TRAINER | $3, BUG_CATCHER + $C8, $2
+	db SPRITE_BUG_CATCHER, $5 + 4, $9 + 4, $ff, $d2, TRAINER | $4, BUG_CATCHER + $C8, $3
+	db SPRITE_BALL, $1b + 4, $c + 4, $ff, $ff, ITEM | $5, ANTIDOTE
+	db SPRITE_BALL, $5 + 4, $14 + 4, $ff, $ff, ITEM | $6, POTION
+	db SPRITE_BALL, $24 + 4, $2 + 4, $ff, $ff, ITEM | $7, POKE_BALL
 	db SPRITE_BUG_CATCHER, $20 + 4, $3 + 4, $ff, $ff, $8 ; person
 
 	; warp-to

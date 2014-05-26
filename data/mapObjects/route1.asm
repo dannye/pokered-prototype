@@ -1,5 +1,5 @@
 Route1Object: ; 0x1c0e5 (size=19)
-	db $b ; border tile
+	db $b ; border block
 
 	db $0 ; warps
 

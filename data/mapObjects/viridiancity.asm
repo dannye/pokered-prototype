@@ -1,5 +1,5 @@
 ViridianCityObject: ; 0x18384 (size=104)
-	db $43 ; border tile
+	db $43 ; border block
 
 	db $5 ; warps
 	db $f, $5, $0, VIRIDIAN_POKECENTER

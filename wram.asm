@@ -140,7 +140,12 @@ wMenuWrappingEnabled:: ; cc4a
 ; set to 0 if you can't go past the top or bottom of the menu
 	ds 1
 
-	ds 10
+	ds 3
+
+wPredefID:: ; cc4e
+	ds 1
+wPredefRegisters:: ; cc4f
+	ds 6
 
 wTrainerHeaderFlagBit:: ; cc55
 	ds 1
@@ -266,8 +271,7 @@ wTileMapBackup2:: ; cd81
 	ds 20 * 18
 
 wBuffer:: ; cee9
-; used for temporary things
-
+; Temporary storage area of 30 bytes.
 wHPBarMaxHP:: ; cee9
 	ds 2
 wHPBarOldHP:: ; ceeb
@@ -276,25 +280,32 @@ wHPBarNewHP:: ; ceed
 	ds 2
 wHPBarDelta:: ; ceef
 	ds 1
-
 	ds 13
-
 wHPBarHPDifference:: ; cefd
 	ds 1
-
 	ds 9
 
 wAnimSoundID:: ; cf07
 ; sound ID during battle animations
 	ds 1
 
-	ds 12
+	ds 10
+
+wPredefParentBank:: ; cf12
+	ds 1
+
+	ds 1
 
 wCurSpriteMovement2:: ; cf14
 ; movement byte 2 of current sprite
 	ds 1
 
-	ds 74
+	ds 5
+
+wGBC:: ; cf1a
+	ds 1
+
+	ds 68
 
 wGymCityName:: ; cf5f
 wStringBuffer1:: ; cf5f
@@ -707,6 +718,7 @@ W_SPRITEDECODETABLE1PTR:: ; d0b3
 W_LISTTYPE:: ; d0b6
 	ds 1
 
+wPredefBank:: ; d0b7
 	ds 1
 
 W_MONHEADER:: ; d0b8
@@ -1477,3 +1489,7 @@ wEXPBarKeepFullFlag:: ; deec
 	ds 1
 
 ; deed
+
+SECTION "Stack", WRAMX[$dfff]
+wStack:: ; dfff
+	ds -$100
