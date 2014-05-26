@@ -196,7 +196,9 @@ BillsPCMenu:
 	call PlaceString
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	call PCBoxOWPal
+	call Delay3
+	ld b, $09
+	call GoPAL_SET
 	call HandleMenuInput
 	bit 1, a
 	jp nz, Func_21588 ; b button

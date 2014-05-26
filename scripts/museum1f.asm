@@ -199,7 +199,11 @@ Museum1FText3: ; 5c256 (17:4256)
 	ld bc, (OLD_AMBER << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
-	call RemoveMuseumGuy
+	ld a, $4
+	ld [$cc4d], a
+	ld a, $11
+	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
+	ld hl, $d754
 	set 1, [hl]
 	ld a, $34
 	ld [$cc4d], a

@@ -625,10 +625,6 @@ INCLUDE "audio/music/defeatedtrainer.asm"
 INCLUDE "audio/music/defeatedwildmon.asm"
 INCLUDE "audio/music/defeatedgymleader.asm"
 
-PCBoxOWPal:
-	call Delay3
-	ld b, $09
-	jp GoPAL_SET
 
 SECTION "Music 3", ROMX, BANK[AUDIO_3]
 

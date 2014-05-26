@@ -69,8 +69,6 @@ GetAnimationSpeed: ; 7170a (1c:570a)
 	ld a, c
 	jr .incTimer
 
-	ds $d
-
 PartyMonSpeeds: ; 71769 (1c:5769)
 	db $a,$18,$20
 

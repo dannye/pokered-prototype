@@ -206,8 +206,6 @@ Func_7033e: ; 7033e (1c:433e)
 	ld de, $9310
 	push de
 	jp LoadUncompressedBackSprite
-	nop
-	ld c, $1
 
 Func_7036d: ; 7036d (1c:436d)
 	ld b, $0

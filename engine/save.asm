@@ -432,7 +432,8 @@ Func_7393f: ; 7393f (1c:793f)
 	ld hl, wTileMap
 	ld b, $2
 	ld c, $9
-	call PCBoxPal
+	call TextBoxBorder
+	call SendPokeballPal
 	ld hl, ChooseABoxText
 	call PrintText
 	FuncCoord 11, 0 ; $c3ab

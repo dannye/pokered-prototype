@@ -317,8 +317,16 @@ PlayShootingStar: ; 4188a (10:588a)
 	push af
 	pop af
 	jr c, .asm_418d0
-	ld c, $28
-	call DisplayPresents
+	ld hl,$c483
+	ld c,$06
+	ld a,$67
+.loop
+	ld [hli],a
+	inc a
+	dec c
+	jr nz,.loop
+	ld c,$28
+	call DelayFrames
 .asm_418d0
 	ld a, Bank(Func_7d8ea)
 	ld [$c0ef], a

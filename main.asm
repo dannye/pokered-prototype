@@ -2619,7 +2619,17 @@ CheckForUserInterruption:: ; 12f8 (0:12f8)
 	and a,%00001001 ; Start button, A button
 	jr nz,.setCarry ; if either key is pressed
 	dec c
-	jp CheckCValue
+	jr z,.zero
+	ld a,$64
+	cp c
+	jr nz,.notHalf
+	callab SendTitleMonPalPacket
+	ld a, [wWhichTrade]
+	ld c, $64
+.notHalf
+	jp CheckForUserInterruption
+.zero
+	and a
 	ret
 .setCarry
 	scf
@@ -3211,8 +3221,6 @@ UncompressMonSprite:: ; 1627 (0:1627)
 	ld a,BANK(FossilKabutopsPic)
 .GotBank
 	jp UncompressSpriteData
-
-	ds $19
 
 ; de: destination location
 LoadMonFrontSprite:: ; 1665 (0:1665)
@@ -8509,7 +8517,6 @@ LoadHpBarAndStatusTilePatterns:: ; 36c0 (0:36c0)
 	ld hl,$8c00
 	ld bc,(BANK(EXPBarGraphics) << 8 | $9)
 	jp GoodCopyVideoData
-	ds $8
 
 ;Fills memory range with the specified byte.
 ;input registers a = fill_byte, bc = length, hl = address
@@ -10166,22 +10173,6 @@ PointerTable_3f22:: ; 3f22 (0:3f22)
 	dw ElevatorText                         ; id = 41
 	dw PokemonStuffText                     ; id = 42
 
-CheckCValue:
-	jr z,.zero
-	ld a,$64
-	cp c
-	jr nz,.notHalf
-	ld hl, SendTitleMonPalPacket
-	ld b, BANK(SendTitleMonPalPacket)
-	call Bankswitch
-	ld a, [wWhichTrade]
-	ld c, $64
-.notHalf
-	jp CheckForUserInterruption
-.zero
-	and a
-	ret
-
 GoodCopyVideoData:
 	ld a,[rLCDC]
 	bit 7,a ; is the LCD enabled?
@@ -10200,11 +10191,6 @@ GoodCopyVideoData:
 	pop hl
 	pop de
 	jp FarCopyData2 ; if LCD is off, transfer all at once
-
-GBPalPartyMenu:
-	ld b, BANK(GBPalPartyMenu_)
-	ld hl, GBPalPartyMenu_
-	jp Bankswitch
 
 
 SECTION "bank1",ROMX,BANK[$1]
@@ -10310,8 +10296,6 @@ Func_40b0: ; 40b0 (1:40b0)
 	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $7
 	jp Predef ; indirect jump to HealParty (f6a5 (3:76a5))
-
-	ds $149
 
 INCLUDE "data/baseStats/mew.asm"
 
@@ -13231,39 +13215,6 @@ Func_7c18: ; 7c18 (1:7c18)
 	ld [$cc3c], a
 	ret
 
-GetNidoPalID:
-	ld a, PAL_MEW
-	jr GotPaletteID
-GetRedPalID:
-	call ClearScreen
-	ld a, PAL_HERO
-	jr GotPaletteID
-GetRivalPalID:
-	call ClearScreen
-	ld a, PAL_GARY1
-GotPaletteID:
-	push af
-	ld hl, SendIntroPal
-	ld b, BANK(SendIntroPal)
-	jp Bankswitch
-	
-PickNewTitleMon:
-	ld b, BANK(PokedexToIndex)
-	call Bankswitch
-	ld a, [$d11e]
-	ld hl, wWhichTrade
-	cp [hl]
-	jr nz,.newMon
-	pop af
-	jp Func_4496 + 5
-.newMon
-	ld [hl], a
-	ld hl, SendTitleBlackPalPacket
-	ld b, BANK(SendTitleBlackPalPacket)
-	call Bankswitch
-	ld a, [wWhichTrade]
-	ret
-
 
 SECTION "bank3",ROMX,BANK[$3]
 
@@ -14321,13 +14272,6 @@ DrawBadges: ; ea03 (3:6a03)
 	ld a, [de]
 	and a
 	ld a, [$cd3e]
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
 	inc a
 	inc a
 	inc hl
@@ -15977,7 +15921,6 @@ INCLUDE "engine/menu/status_screen.asm"
 INCLUDE "engine/menu/party_menu.asm"
 
 RedPicFront:: INCBIN "pic/trainer/red.pic"
-	ds $11
 ShrinkPic1::  INCBIN "pic/trainer/shrink1.pic"
 ShrinkPic2::  INCBIN "pic/trainer/shrink2.pic"
 
@@ -16360,8 +16303,6 @@ PikachuPicBack::      INCBIN "pic/monback/pikachub.pic"
 RaichuPicFront::      INCBIN "pic/bmon/raichu.pic"
 RaichuPicBack::       INCBIN "pic/monback/raichub.pic"
 
-	ds $a1
-
 INCLUDE "engine/battle/9.asm"
 
 
@@ -16418,8 +16359,6 @@ DiglettPicBack::      INCBIN "pic/monback/diglettb.pic"
 DugtrioPicFront::     INCBIN "pic/bmon/dugtrio.pic"
 DugtrioPicBack::      INCBIN "pic/monback/dugtriob.pic"
 
-	ds $23c
-
 INCLUDE "engine/battle/a.asm"
 
 
@@ -16470,14 +16409,11 @@ TentacoolPicBack::    INCBIN "pic/monback/tentacoolb.pic"
 TentacruelPicFront::  INCBIN "pic/bmon/tentacruel.pic"
 TentacruelPicBack::   INCBIN "pic/monback/tentacruelb.pic"
 GeodudePicFront::     INCBIN "pic/bmon/geodude.pic"
-
-	ds $10f
+GeodudePicBack::      INCBIN "pic/monback/geodudeb.pic"
 
 INCLUDE "engine/battle/b.asm"
 
 TrainerInfoTextBoxTileGraphics:  INCBIN "gfx/trainer_info.2bpp"
-GeodudePicBack::                 INCBIN "pic/monback/geodudeb.pic"
-	ds $3a
 CircleTile:                      INCBIN "gfx/circle_tile.2bpp"
 BadgeNumbersTileGraphics:        INCBIN "gfx/badge_numbers.2bpp"
 
@@ -16537,8 +16473,6 @@ HypnoPicBack::       INCBIN "pic/monback/hypnob.pic"
 KrabbyPicFront::     INCBIN "pic/bmon/krabby.pic"
 KrabbyPicBack::      INCBIN "pic/monback/krabbyb.pic"
 
-	ds $177
-
 RedPicBack::  INCBIN "pic/trainer/redb.pic"
 OldManPic::  INCBIN "pic/trainer/oldman.pic"
 
@@ -16587,8 +16521,6 @@ FossilKabutopsPic::    INCBIN "pic/bmon/fossilkabutops.pic"
 FossilAerodactylPic::  INCBIN "pic/bmon/fossilaerodactyl.pic"
 GhostPic::             INCBIN "pic/other/ghost.pic"
 
-	ds $56
-
 INCLUDE "engine/titlescreen2.asm"
 INCLUDE "engine/battle/d.asm"
 INCLUDE "engine/slot_machine.asm"
@@ -16616,238 +16548,10 @@ TradingAnimationGraphics2:
 INCLUDE "engine/evos_moves.asm"
 INCLUDE "engine/battle/e_2.asm"
 
-PlayerPartyUpdated:
-	ld hl, PartyTileMap
-	jp PartyUpdateDone
-
-PartyTileMap:
-	db $73, $75, $6F
-
-EnemyHealthBarUpdated:
-	ld [hl], $72
-	ld a, [W_ISINBATTLE]
-	dec a
-	jr  nz, .noBattle
-	push hl
-	ld a, [$CFE5]
-	ld [$D11E], a
-	ld hl, IndexToPokedex
-	ld b, BANK(IndexToPokedex)
-	call Bankswitch
-	ld a, [$D11E]
-	dec a
-	ld c, a
-	ld a, $10
-	ld b, $2
-	ld hl, wPokedexOwned
-	call Predef
-	ld a, c
-	and a
-	jr z, .notOwned
-	FuncCoord 1, 1
-	ld hl, Coord
-	ld [hl], $E9
-.notOwned
-	pop hl
-.noBattle
-	ld de, $0001
-	jp HealthBarUpdateDone
-
 
 SECTION "bankF",ROMX,BANK[$F]
 
 INCLUDE "engine/battle/core.asm"
-
-LoadBackSpriteUnzoomed:
-	ld a, $66
-	ld de, $9310
-	push de
-	jp LoadUncompressedBackSprite
-
-PrintEXPBar:
-	call CalcEXPBarPixelLength
-	ld a, [H_QUOTIENT + 3] ; pixel length
-	ld [wEXPBarPixelLength], a
-	ld b, a
-	ld c, $08
-	ld d, $08
-	FuncCoord 17,11
-	ld hl, Coord
-.loop
-	ld a, b
-	sub c
-	jr nc, .skip
-	ld c, b
-	jr .loop
-.skip
-	ld b, a 
-	ld a, $c0
-	add c
-.loop2
-	ld [hld], a
-	dec d
-	ret z
-	ld a, b
-	and a
-	jr nz, .loop
-	ld a, $c0
-	jr .loop2
-
-CalcEXPBarPixelLength:
-	ld hl, wEXPBarKeepFullFlag
-	bit 0, [hl]
-	jr z, .start
-	res 0, [hl]
-	ld a, $40
-	ld [H_QUOTIENT + 3], a
-	ret
-	
-.start
-	; get the base exp needed for the current level
-	ld a, [W_PLAYERBATTSTATUS3]
-	ld hl, W_PLAYERMONID
-	bit 3, a
-	jr z, .skip
-	ld hl, W_PARTYMON1DATA
-	call BattleMonPartyAttr
-.skip
-	ld a, [hl]
-	ld [$d0b5], a
-	call GetMonHeader
-	ld a, [W_PLAYERMONLEVEL]
-	ld d, a
-	ld hl, CalcExperience
-	ld b, BANK(CalcExperience)
-	call Bankswitch
-	ld hl, H_MULTIPLICAND
-	ld de, wEXPBarBaseEXP
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
-	
-	; get the exp needed to gain a level
-	ld a, [W_PLAYERMONLEVEL]
-	ld d, a
-	inc d
-	ld hl, CalcExperience
-	ld b, BANK(CalcExperience)
-	call Bankswitch
-	
-	; get the address of the active Pokemon's current experience
-	ld hl, W_PARTYMON1_EXP
-	call BattleMonPartyAttr
-	
-	; current exp - base exp
-	ld b, h
-	ld c, l
-	ld hl, wEXPBarBaseEXP
-	ld de, wEXPBarCurEXP
-	call SubThreeByteNum
-	
-	; exp needed - base exp
-	ld bc, H_MULTIPLICAND
-	ld hl, wEXPBarBaseEXP
-	ld de, wEXPBarNeededEXP
-	call SubThreeByteNum
-	
-	; make the divisor an 8-bit number
-	ld hl, wEXPBarNeededEXP
-	ld de, wEXPBarCurEXP + 1
-	ld a, [hli]
-	and a
-	jr z, .twoBytes
-	ld a, [hli]
-	ld [hld], a
-	dec hl
-	ld a, [hli]
-	ld [hld], a
-	ld a, [de]
-	inc de
-	ld [de], a
-	dec de
-	dec de
-	ld a, [de]
-	inc de
-	ld [de], a
-	dec de
-	xor a
-	ld [hli], a
-	ld [de], a
-	inc de
-.twoBytes
-	ld a, [hl]
-	and a
-	jr z, .oneByte
-	srl a
-	ld [hli], a
-	ld a, [hl]
-	rr a
-	ld [hld], a
-	ld a, [de]
-	srl a
-	ld [de], a
-	inc de
-	ld a, [de]
-	rr a
-	ld [de], a
-	dec de
-	jr .twoBytes
-.oneByte
-	
-	; current exp * (8 tiles * 8 pixels)
-	ld hl, H_MULTIPLICAND
-	ld de, wEXPBarCurEXP
-	ld a, [de]
-	inc de
-	ld [hli], a
-	ld a, [de]
-	inc de
-	ld [hli], a
-	ld a, [de]
-	ld [hl], a
-	ld a, $40
-	ld [H_MULTIPLIER], a
-	call Multiply
-	
-	; product / needed exp = pixel length
-	ld a, [wEXPBarNeededEXP + 2]
-	ld [H_DIVISOR], a
-	ld b, $04
-	jp Divide
-
-; calculates the three byte number starting at [bc]
-; minus the three byte number starting at [hl]
-; and stores it into the three bytes starting at [de]
-; assumes that [hl] is smaller than [bc]
-SubThreeByteNum:
-	call .subByte
-	call .subByte
-.subByte
-	ld a, [bc]
-	inc bc
-	sub [hl]
-	inc hl
-	ld [de], a
-	jr nc, .noCarry
-	dec de
-	ld a, [de]
-	dec a
-	ld [de], a
-	inc de
-.noCarry
-	inc de
-	ret
-
-; return the address of the BattleMon's party struct attribute in hl
-BattleMonPartyAttr:
-	ld a, [wPlayerMonNumber]
-	ld bc, W_PARTYMON2DATA - W_PARTYMON1DATA
-	jp AddNTimes
 
 
 SECTION "bank10",ROMX,BANK[$10]
@@ -16856,22 +16560,6 @@ INCLUDE "engine/menu/pokedex.asm"
 INCLUDE "engine/trade.asm"
 INCLUDE "engine/intro.asm"
 INCLUDE "engine/trade2.asm"
-
-DexPalBankswitch:
-	ld hl, SendDexPal
-	jp Bankswitch
-	
-DisplayPresents:
-	ld hl,$c483
-	ld c,$06
-	ld a,$67
-.loop
-	ld [hli],a
-	inc a
-	dec c
-	jr nz,.loop
-	ld c,$28
-	jp DelayFrames
 
 
 SECTION "bank11",ROMX,BANK[$11]
@@ -17249,8 +16937,6 @@ ChannelerPic::     INCBIN "pic/trainer/channeler.pic"
 AgathaPic::        INCBIN "pic/trainer/agatha.pic"
 LancePic::         INCBIN "pic/trainer/lance.pic"
 
-	ds $388
-
 INCLUDE "data/mapHeaders/battlecenterm.asm"
 INCLUDE "scripts/battlecenterm.asm"
 INCLUDE "data/mapObjects/battlecenterm.asm"
@@ -17341,13 +17027,6 @@ INCLUDE "engine/overworld/card_key.asm"
 INCLUDE "engine/menu/prize_menu.asm"
 
 INCLUDE "engine/hidden_object_functions14.asm"
-
-HealthBarPal:
-	ld a, $02
-	ld hl, $CF1D
-	ld [hli], a
-	ld [hl], a
-	ret
 
 
 SECTION "bank15",ROMX,BANK[$15]
@@ -17440,78 +17119,6 @@ SilphCo8Blocks: INCBIN "maps/silphco8.blk"
 INCLUDE "engine/menu/diploma.asm"
 
 INCLUDE "engine/overworld/trainers.asm"
-
-AnimateEXPBarAgain:
-	call LoadMonData
-	call IsCurrentMonBattleMon
-	ret nz
-	xor a
-	ld [wEXPBarPixelLength], a
-	FuncCoord 17,11
-	ld hl, Coord
-	ld a, $c0
-	ld c, $08
-.loop
-	ld [hld], a
-	dec c
-	jr nz, .loop
-AnimateEXPBar:
-	call LoadMonData
-	call IsCurrentMonBattleMon
-	ret nz
-	ld a, (SFX_08_3d - $4000) / 3
-	call PlaySoundWaitForCurrent
-	ld hl, CalcEXPBarPixelLength
-	ld b, BANK(CalcEXPBarPixelLength)
-	call Bankswitch
-	ld a, [wEXPBarPixelLength]
-	ld b, a
-	ld a, [H_QUOTIENT + 3]
-	sub b
-	jr z, .done
-	ld b, a
-	ld c, $08
-	FuncCoord 17,11
-	ld hl, Coord
-.loop1
-	ld a, [hl]
-	cp $c8
-	jr nz, .loop2
-	dec hl
-	dec c
-	jr z, .done
-	jr .loop1
-.loop2
-	inc a
-	ld [hl], a
-	call DelayFrame
-	dec b
-	jr z, .done
-	jr .loop1
-.done
-	ld bc, $08
-	FuncCoord 10,11
-	ld hl, Coord
-	ld de, $c5ee
-	call CopyData
-	ld c, $20
-	jp DelayFrames
-
-KeepEXPBarFull:
-	call IsCurrentMonBattleMon
-	ret nz
-	ld a, [wEXPBarKeepFullFlag]
-	set 0, a
-	ld [wEXPBarKeepFullFlag], a
-	ld a, [W_CURENEMYLVL] ; $d127
-	ret
-
-IsCurrentMonBattleMon:
-	ld a, [wPlayerMonNumber]
-	ld b, a
-	ld a, [wWhichPokemon]
-	cp b
-	ret
 
 
 SECTION "bank16",ROMX,BANK[$16]
@@ -17759,14 +17366,6 @@ INCLUDE "engine/predefs17_2.asm"
 
 INCLUDE "engine/hidden_object_functions17.asm"
 
-RemoveMuseumGuy:
-	ld a, $4
-	ld [$cc4d], a
-	ld a, $11
-	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
-	ld hl, $d754
-	ret
-
 
 SECTION "bank18",ROMX,BANK[$18]
 
@@ -17893,8 +17492,6 @@ INCLUDE "engine/hidden_object_functions18.asm"
 
 SECTION "bank19",ROMX,BANK[$19]
 
-	ds $de0
-
 RedsHouse1_GFX:
 RedsHouse2_GFX:    INCBIN "gfx/tilesets/reds_house.w128.t7.2bpp"
 RedsHouse1_Block:
@@ -17951,7 +17548,6 @@ SECTION "bank1B",ROMX,BANK[$1B]
 
 Cemetery_GFX:      INCBIN "gfx/tilesets/cemetery.w128.t4.2bpp"
 Cemetery_Block:    INCBIN "gfx/blocksets/cemetery.bst"
-	ds $c20
 Lobby_GFX:         INCBIN "gfx/tilesets/lobby.w128.t2.2bpp"
 Lobby_Block:       INCBIN "gfx/blocksets/lobby.bst"
 Ship_GFX:          INCBIN "gfx/tilesets/ship.w128.t6.2bpp"
@@ -18233,133 +17829,4 @@ SECTION "bank32",ROMX,BANK[$32]
 
 INCBIN "gfx/party_mon_sprites.w32.2bpp",$4000,$b80
 
-LoadPartyMonSprites:
-	call DisableLCD
-	ld de, $8000
-	ld hl, W_PARTYMON1
-.loop
-	ld a, [hli]
-	cp $ff
-	jr z, .done
-	push hl
-	call LoadPartyMonSprite
-	pop hl
-	jr .loop
-.done
-	jp EnableLCD
-
-LoadPartyMonSprite:
-	push de
-	ld [$d11e], a
-	ld a, $3a
-	call Predef
-	xor a
-	ld [H_MULTIPLICAND], a
-	ld [H_MULTIPLICAND + 1], a
-	ld a, [$d11e]
-	dec a
-	ld [H_MULTIPLICAND + 2], a
-	ld a, $80
-	ld [H_MULTIPLIER], a
-	call Multiply
-	ld a, [H_PRODUCT + 2]
-	ld h, a
-	ld a, [H_PRODUCT + 3]
-	ld l, a
-	ld a, $3f
-	cp h
-	ld a, BANK(PartyMonSprites) + 1
-	jr c, .gotBank
-	ld a, h
-	add $40
-	ld h, a
-	ld a, BANK(PartyMonSprites)
-.gotBank
-	pop de
-	ld bc, $0080
-	jp FarCopyData
-
-PlacePartyMonSprite:
-	push hl
-	push de
-	push bc
-	ld a, [$ff8c]
-	add a
-	add a
-	add a
-	add a
-	ld hl, wOAMBuffer
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld a, h
-	ld d, a
-	ld a, l
-	ld e, a
-	ld hl, PartyMonOAM
-	add hl, bc
-	ld bc, $10
-	call CopyData
-	ld hl, wOAMBuffer
-	ld de, $cc5b
-	ld bc, $60
-	call CopyData
-	pop bc
-	pop de
-	pop hl
-	ret
-
-PartyMonOAM:
-	db $10,$10,$00,$00
-	db $10,$18,$01,$00
-	db $18,$10,$04,$00
-	db $18,$18,$05,$00
-
-	db $20,$10,$08,$00
-	db $20,$18,$09,$00
-	db $28,$10,$0c,$00
-	db $28,$18,$0d,$00
-
-	db $30,$10,$10,$00
-	db $30,$18,$11,$00
-	db $38,$10,$14,$00
-	db $38,$18,$15,$00
-
-	db $40,$10,$18,$00
-	db $40,$18,$19,$00
-	db $48,$10,$1c,$00
-	db $48,$18,$1d,$00
-
-	db $50,$10,$20,$00
-	db $50,$18,$21,$00
-	db $58,$10,$24,$00
-	db $58,$18,$25,$00
-
-	db $60,$10,$28,$00
-	db $60,$18,$29,$00
-	db $68,$10,$2c,$00
-	db $68,$18,$2d,$00
-
-GBPalPartyMenu_:
-	ld a,%11100100
-	ld [rBGP],a
-	ld a,%11100100
-	ld [rOBP0],a
-	ret
-
-LoadNicknameMonSprite:
-	call DisableLCD
-	xor a
-	ld [H_DOWNARROWBLINKCNT2], a
-	ld a, [$cd5d]
-	ld de, $8000
-	call LoadPartyMonSprite
-	call EnableLCD
-	ld a, [$ff8c]
-	push af
-	xor a
-	ld [$ff8c], a
-	call PlacePartyMonSprite
-	pop af
-	ld [$ff8c], a
-	ret
+INCLUDE "engine/mon_party_sprites2.asm"

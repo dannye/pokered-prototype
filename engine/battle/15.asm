@@ -147,6 +147,7 @@ Func_5525f: ; 5525f (15:525f)
 	call PrintText
 	xor a
 	ld [$cc49], a
+	call LoadMonData
 	call AnimateEXPBar
 	pop hl
 	ld bc, $13
@@ -236,6 +237,7 @@ Func_5525f: ; 5525f (15:525f)
 	call PrintText
 	xor a
 	ld [$cc49], a
+	call LoadMonData
 	call AnimateEXPBarAgain
 	ld d, $1
 	callab PrintStatsBox
@@ -364,3 +366,71 @@ GrewLevelText: ; 554dd (15:54dd)
 	TX_FAR _GrewLevelText
 	db $0b
 	db "@"
+
+AnimateEXPBarAgain:
+	call IsCurrentMonBattleMon
+	ret nz
+	xor a
+	ld [wEXPBarPixelLength], a
+	FuncCoord 17,11
+	ld hl, Coord
+	ld a, $c0
+	ld c, $08
+.loop
+	ld [hld], a
+	dec c
+	jr nz, .loop
+AnimateEXPBar:
+	call IsCurrentMonBattleMon
+	ret nz
+	ld a, (SFX_08_3d - $4000) / 3
+	call PlaySoundWaitForCurrent
+	callab CalcEXPBarPixelLength
+	ld a, [wEXPBarPixelLength]
+	ld b, a
+	ld a, [H_QUOTIENT + 3]
+	sub b
+	jr z, .done
+	ld b, a
+	ld c, $08
+	FuncCoord 17,11
+	ld hl, Coord
+.loop1
+	ld a, [hl]
+	cp $c8
+	jr nz, .loop2
+	dec hl
+	dec c
+	jr z, .done
+	jr .loop1
+.loop2
+	inc a
+	ld [hl], a
+	call DelayFrame
+	dec b
+	jr z, .done
+	jr .loop1
+.done
+	ld bc, $08
+	FuncCoord 10,11
+	ld hl, Coord
+	ld de, $c5ee
+	call CopyData
+	ld c, $20
+	jp DelayFrames
+
+KeepEXPBarFull:
+	call IsCurrentMonBattleMon
+	ret nz
+	ld a, [wEXPBarKeepFullFlag]
+	set 0, a
+	ld [wEXPBarKeepFullFlag], a
+	ld a, [W_CURENEMYLVL] ; $d127
+	ret
+
+IsCurrentMonBattleMon:
+	ld a, [wPlayerMonNumber]
+	ld b, a
+	ld a, [wWhichPokemon]
+	cp b
+	ret

@@ -1,0 +1,123 @@
+LoadNicknameMonSprite:
+	call DisableLCD
+	xor a
+	ld [H_DOWNARROWBLINKCNT2], a
+	ld a, [$cd5d]
+	ld de, $8000
+	call LoadPartyMonSprite
+	call EnableLCD
+	ld a, [$ff8c]
+	push af
+	xor a
+	ld [$ff8c], a
+	call PlacePartyMonSprite
+	pop af
+	ld [$ff8c], a
+	ret
+
+LoadPartyMonSprites:
+	call DisableLCD
+	ld de, $8000
+	ld hl, W_PARTYMON1
+.loop
+	ld a, [hli]
+	cp $ff
+	jr z, .done
+	push hl
+	call LoadPartyMonSprite
+	pop hl
+	jr .loop
+.done
+	jp EnableLCD
+
+LoadPartyMonSprite:
+	push de
+	ld [$d11e], a
+	ld a, $3a
+	call Predef
+	xor a
+	ld [H_MULTIPLICAND], a
+	ld [H_MULTIPLICAND + 1], a
+	ld a, [$d11e]
+	dec a
+	ld [H_MULTIPLICAND + 2], a
+	ld a, $80
+	ld [H_MULTIPLIER], a
+	call Multiply
+	ld a, [H_PRODUCT + 2]
+	ld h, a
+	ld a, [H_PRODUCT + 3]
+	ld l, a
+	ld a, $3f
+	cp h
+	ld a, BANK(PartyMonSprites) + 1
+	jr c, .gotBank
+	ld a, h
+	add $40
+	ld h, a
+	ld a, BANK(PartyMonSprites)
+.gotBank
+	pop de
+	ld bc, $0080
+	jp FarCopyData
+
+PlacePartyMonSprite:
+	push hl
+	push de
+	push bc
+	ld a, [$ff8c]
+	add a
+	add a
+	add a
+	add a
+	ld hl, wOAMBuffer
+	ld c, a
+	ld b, 0
+	add hl, bc
+	ld a, h
+	ld d, a
+	ld a, l
+	ld e, a
+	ld hl, PartyMonOAM
+	add hl, bc
+	ld bc, $10
+	call CopyData
+	ld hl, wOAMBuffer
+	ld de, $cc5b
+	ld bc, $60
+	call CopyData
+	pop bc
+	pop de
+	pop hl
+	ret
+
+PartyMonOAM:
+	db $10,$10,$00,$00
+	db $10,$18,$01,$00
+	db $18,$10,$04,$00
+	db $18,$18,$05,$00
+
+	db $20,$10,$08,$00
+	db $20,$18,$09,$00
+	db $28,$10,$0c,$00
+	db $28,$18,$0d,$00
+
+	db $30,$10,$10,$00
+	db $30,$18,$11,$00
+	db $38,$10,$14,$00
+	db $38,$18,$15,$00
+
+	db $40,$10,$18,$00
+	db $40,$18,$19,$00
+	db $48,$10,$1c,$00
+	db $48,$18,$1d,$00
+
+	db $50,$10,$20,$00
+	db $50,$18,$21,$00
+	db $58,$10,$24,$00
+	db $58,$18,$25,$00
+
+	db $60,$10,$28,$00
+	db $60,$18,$29,$00
+	db $68,$10,$2c,$00
+	db $68,$18,$2d,$00

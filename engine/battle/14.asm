@@ -16,8 +16,11 @@ Func_525af: ; 525af (14:65af)
 	ld [wPlayerMonNumber], a ; $cc2f
 	ld [$d078], a
 	ld [$d35d], a
-	call HealthBarPal
-	ld a, $00
+	ld a, $02
+	ld hl, $CF1D
+	ld [hli], a
+	ld [hl], a
+	xor a
 	ld hl, $ccd3
 	ld b, $3c
 .asm_525e1

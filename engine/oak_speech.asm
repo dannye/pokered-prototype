@@ -236,3 +236,19 @@ IntroPredef3B: ; 62a4 (1:62a4)
 	ld [$FFE1],a
 	ld a,1
 	jp Predef
+
+GetNidoPalID:
+	ld a, PAL_MEW
+	jr GotPaletteID
+GetRedPalID:
+	call ClearScreen
+	ld a, PAL_HERO
+	jr GotPaletteID
+GetRivalPalID:
+	call ClearScreen
+	ld a, PAL_GARY1
+GotPaletteID:
+	push af
+	ld hl, SendIntroPal
+	ld b, BANK(SendIntroPal)
+	jp Bankswitch

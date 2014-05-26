@@ -1387,7 +1387,8 @@ LoadPartyPokeballGfx: ; 3a85d (e:685d)
 	jp CopyVideoData
 
 SetupOwnPartyPokeballs: ; 3a869 (e:6869)
-	call PlayerPartyUpdated
+	ld hl, PartyTileMap
+	call PartyUpdateDone
 	ld hl, W_PARTYMON1DATA
 	ld de, W_NUMINPARTY ; $d163
 	call SetupPokeballs
@@ -1497,6 +1498,9 @@ PartyUpdateDone:
 	ld de, rIE ; $ffff
 	jr PlaceHUDTiles
 
+PartyTileMap:
+	db $73, $75, $6F
+
 PlayerBattleHUDGraphicsTiles: ; 3a916 (e:6916)
 ; The tile numbers for specific parts of the battle display for the player's pokemon
 	db $73 ; unused ($73 is hardcoded into the routine that uses these bytes)
@@ -1510,8 +1514,32 @@ PlaceEnemyHUDTiles: ; 3a919 (e:6919)
 	call CopyData
 	FuncCoord 1, 2 ; $c3c9
 	ld hl, Coord
-	jp EnemyHealthBarUpdated
-	jr PlaceHUDTiles
+	ld [hl], $72
+	ld a, [W_ISINBATTLE]
+	dec a
+	jr  nz, .noBattle
+	push hl
+	ld a, [$CFE5]
+	ld [$D11E], a
+	callab IndexToPokedex
+	ld a, [$D11E]
+	dec a
+	ld c, a
+	ld a, $10
+	ld b, $2
+	ld hl, wPokedexOwned
+	call Predef
+	ld a, c
+	and a
+	jr z, .notOwned
+	FuncCoord 1, 1
+	ld hl, Coord
+	ld [hl], $E9
+.notOwned
+	pop hl
+.noBattle
+	ld de, $0001
+	jp HealthBarUpdateDone
 
 EnemyBattleHUDGraphicsTiles: ; 3a92d (e:692d)
 ; The tile numbers for specific parts of the battle display for the enemy

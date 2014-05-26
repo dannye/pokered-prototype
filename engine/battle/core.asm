@@ -6256,8 +6256,6 @@ Func_3ec92: ; 3ec92 (f:6c92)
 	ld a, BANK(RedPicBack)
 	call UncompressSpriteFromDE
 	call LoadBackSpriteUnzoomed
-	nop
-	nop
 	ld hl, wOAMBuffer
 	xor a
 	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
@@ -6289,12 +6287,6 @@ Func_3ec92: ; 3ec92 (f:6c92)
 	ld e, a
 	dec b
 	jr nz, .asm_3ecb2
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
 	ld a, $a
 	ld [$0], a
 	xor a
@@ -6954,8 +6946,6 @@ LoadMonBackSprite: ; 3f103 (f:7103)
 	ld a, [H_LOADEDROMBANK]
 	ld b, a
 	jp CopyVideoData
-
-	ds $8
 
 Func_3f132: ; 3f132 (f:7132)
 	call JumpMoveEffect
@@ -8556,3 +8546,190 @@ Func_3fbbc: ; 3fbbc (f:7bbc)
 	pop de
 	pop hl
 	ret
+
+LoadBackSpriteUnzoomed:
+	ld a, $66
+	ld de, $9310
+	push de
+	jp LoadUncompressedBackSprite
+
+PrintEXPBar:
+	call CalcEXPBarPixelLength
+	ld a, [H_QUOTIENT + 3] ; pixel length
+	ld [wEXPBarPixelLength], a
+	ld b, a
+	ld c, $08
+	ld d, $08
+	FuncCoord 17,11
+	ld hl, Coord
+.loop
+	ld a, b
+	sub c
+	jr nc, .skip
+	ld c, b
+	jr .loop
+.skip
+	ld b, a 
+	ld a, $c0
+	add c
+.loop2
+	ld [hld], a
+	dec d
+	ret z
+	ld a, b
+	and a
+	jr nz, .loop
+	ld a, $c0
+	jr .loop2
+
+CalcEXPBarPixelLength:
+	ld hl, wEXPBarKeepFullFlag
+	bit 0, [hl]
+	jr z, .start
+	res 0, [hl]
+	ld a, $40
+	ld [H_QUOTIENT + 3], a
+	ret
+	
+.start
+	; get the base exp needed for the current level
+	ld a, [W_PLAYERBATTSTATUS3]
+	ld hl, W_PLAYERMONID
+	bit 3, a
+	jr z, .skip
+	ld hl, W_PARTYMON1DATA
+	call BattleMonPartyAttr
+.skip
+	ld a, [hl]
+	ld [$d0b5], a
+	call GetMonHeader
+	ld a, [W_PLAYERMONLEVEL]
+	ld d, a
+	callab CalcExperience
+	ld hl, H_MULTIPLICAND
+	ld de, wEXPBarBaseEXP
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	
+	; get the exp needed to gain a level
+	ld a, [W_PLAYERMONLEVEL]
+	ld d, a
+	inc d
+	callab CalcExperience
+	
+	; get the address of the active Pokemon's current experience
+	ld hl, W_PARTYMON1_EXP
+	call BattleMonPartyAttr
+	
+	; current exp - base exp
+	ld b, h
+	ld c, l
+	ld hl, wEXPBarBaseEXP
+	ld de, wEXPBarCurEXP
+	call SubThreeByteNum
+	
+	; exp needed - base exp
+	ld bc, H_MULTIPLICAND
+	ld hl, wEXPBarBaseEXP
+	ld de, wEXPBarNeededEXP
+	call SubThreeByteNum
+	
+	; make the divisor an 8-bit number
+	ld hl, wEXPBarNeededEXP
+	ld de, wEXPBarCurEXP + 1
+	ld a, [hli]
+	and a
+	jr z, .twoBytes
+	ld a, [hli]
+	ld [hld], a
+	dec hl
+	ld a, [hli]
+	ld [hld], a
+	ld a, [de]
+	inc de
+	ld [de], a
+	dec de
+	dec de
+	ld a, [de]
+	inc de
+	ld [de], a
+	dec de
+	xor a
+	ld [hli], a
+	ld [de], a
+	inc de
+.twoBytes
+	ld a, [hl]
+	and a
+	jr z, .oneByte
+	srl a
+	ld [hli], a
+	ld a, [hl]
+	rr a
+	ld [hld], a
+	ld a, [de]
+	srl a
+	ld [de], a
+	inc de
+	ld a, [de]
+	rr a
+	ld [de], a
+	dec de
+	jr .twoBytes
+.oneByte
+	
+	; current exp * (8 tiles * 8 pixels)
+	ld hl, H_MULTIPLICAND
+	ld de, wEXPBarCurEXP
+	ld a, [de]
+	inc de
+	ld [hli], a
+	ld a, [de]
+	inc de
+	ld [hli], a
+	ld a, [de]
+	ld [hl], a
+	ld a, $40
+	ld [H_MULTIPLIER], a
+	call Multiply
+	
+	; product / needed exp = pixel length
+	ld a, [wEXPBarNeededEXP + 2]
+	ld [H_DIVISOR], a
+	ld b, $04
+	jp Divide
+
+; calculates the three byte number starting at [bc]
+; minus the three byte number starting at [hl]
+; and stores it into the three bytes starting at [de]
+; assumes that [hl] is smaller than [bc]
+SubThreeByteNum:
+	call .subByte
+	call .subByte
+.subByte
+	ld a, [bc]
+	inc bc
+	sub [hl]
+	inc hl
+	ld [de], a
+	jr nc, .noCarry
+	dec de
+	ld a, [de]
+	dec a
+	ld [de], a
+	inc de
+.noCarry
+	inc de
+	ret
+
+; return the address of the BattleMon's party struct attribute in hl
+BattleMonPartyAttr:
+	ld a, [wPlayerMonNumber]
+	ld bc, W_PARTYMON2DATA - W_PARTYMON1DATA
+	jp AddNTimes

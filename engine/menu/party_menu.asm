@@ -219,7 +219,10 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	ld a,1
 	ld [H_AUTOBGTRANSFERENABLED],a
 	call Delay3
-	jp GBPalPartyMenu
+	ld a,%11100100
+	ld [rBGP],a
+	ld [rOBP0],a
+	ret
 .printItemUseMessage
 	and a,$0F
 	ld hl,PartyMenuItemUseMessagePointers

@@ -655,9 +655,7 @@ LoadHoFPlayerBackSprite:
 	ld a, $66
 	ret
 
-PCBoxPal:
-	call TextBoxBorder
-SendDexPal:
+SendPokeballPal:
 	ld hl, PalPacket_Empty
 	call CopyPalPacket
 	ld a, PAL_REDBAR
@@ -703,7 +701,5 @@ CopyPalPacket:
 	ld bc, $0010
 	ld de, $CF2D
 	jp CopyData
-
-	ds $48
 
 INCLUDE "data/sgb_border.asm"

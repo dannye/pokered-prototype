@@ -262,8 +262,14 @@ Func_4496: ; 4496 (1:4496)
 	cp $00
 	jr z,.new
 	ld [$d11e], a
-	ld hl, PokedexToIndex
-	call PickNewTitleMon
+	callab PokedexToIndex
+	ld a, [$d11e]
+	ld hl, wWhichTrade
+	cp [hl]
+	jr z, .new
+	ld [hl], a
+	callab SendTitleBlackPalPacket
+	ld a, [wWhichTrade]
 	call Func_4524
 
 	ld a, $90

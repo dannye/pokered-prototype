@@ -89,16 +89,9 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
-	ld b, BANK(SendNicknamePal)
-	ld hl, SendNicknamePal
-	call Bankswitch
+	callba SendNicknamePal
 	call LoadHpBarAndStatusTilePatterns
 	call LoadEDTile
-	nop
-	nop
-	nop
-	nop
-	nop
 	FuncCoord 0, 4 ; $c3f0
 	ld hl, Coord
 	ld b, $9
@@ -124,7 +117,9 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ld [W_SUBANIMTRANSFORM], a ; $d08b
 .asm_65ed
 	call PrintAlphabet
-	call GBPalPartyMenu
+	ld a,%11100100
+	ld [rBGP],a
+	ld [rOBP0],a
 .asm_65f3
 	ld a, [$ceea]
 	and a

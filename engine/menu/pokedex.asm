@@ -12,8 +12,7 @@ DisplayPokedexMenu_: ; 40000 (10:4000)
 	ld [$d11e],a
 	ld [$ffb7],a
 .setUpGraphics
-	ld b,$1C
-	call DexPalBankswitch
+	callab SendPokeballPal
 	callab LoadPokedexTilePatterns
 .doPokemonListMenu
 	ld hl,wTopMenuItemY

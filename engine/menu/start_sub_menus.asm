@@ -554,18 +554,6 @@ DrawTrainerInfo: ; 1349a (4:749a)
 	ld bc,$0080
 	push bc
 	call TrainerInfo_FarCopyData
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
 	pop bc
 	ld hl,BadgeNumbersTileGraphics  ; $7d98 ; badge number tile patterns
 	ld de,$8d80
