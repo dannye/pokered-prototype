@@ -9,7 +9,7 @@ MtMoon3Script: ; 49d0b (12:5d0b)
 
 MtMoon3Script_49d58: ; 49d58 (12:5d58)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_MTMOON3CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret

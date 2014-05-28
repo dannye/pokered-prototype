@@ -97,11 +97,11 @@ MainMenu: ; 5af2 (1:5af2)
 	set 5,[hl]
 .next6
 	xor a
-	ld [H_NEWLYPRESSEDBUTTONS],a
-	ld [H_NEWLYRELEASEDBUTTONS],a
-	ld [H_CURRENTPRESSEDBUTTONS],a
-	call GetJoypadState
-	ld a,[H_CURRENTPRESSEDBUTTONS]
+	ld [hJoyPressed],a
+	ld [hJoyReleased],a
+	ld [hJoyHeld],a
+	call Joypad
+	ld a,[hJoyHeld]
 	bit 0,a
 	jr nz,.next5
 	bit 1,a
@@ -315,8 +315,8 @@ Func_5d52: ; 5d52 (1:5d52)
 
 Func_5d5f: ; 5d5f (1:5d5f)
 	xor a
-	ld [H_NEWLYPRESSEDBUTTONS], a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyPressed], a
+	ld [hJoyHeld], a
 	ld [$ffb5], a
 	ld [$d72d], a
 	ld hl, $d732
@@ -483,7 +483,7 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	call PlaceMenuCursor
 	call SetOptionsFromCursorPositions
 .getJoypadStateLoop
-	call GetJoypadStateLowSensitivity
+	call JoypadLowSensitivity
 	ld a,[$ffb5]
 	ld b,a
 	and a,%11111011 ; any key besides select pressed?

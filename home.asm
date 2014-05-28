@@ -162,18 +162,18 @@ ReadJoypad::
 	and %1111
 	or b
 
-	ld [H_JOYPADSTATE], a
+	ld [hJoyInput], a
 
 	ld a, 1 << 4 + 1 << 5 ; deselect keys
 	ld [rJOYP], a
 	ret
 
-GetJoypadState::
+Joypad::
 ; Update the joypad state variables:
-; [H_NEWLYRELEASEDBUTTONS]  keys released since last time
-; [H_NEWLYPRESSEDBUTTONS]   keys pressed since last time
-; [H_CURRENTPRESSEDBUTTONS] currently pressed keys
-	homecall _GetJoypadState
+; [hJoyReleased]  keys released since last time
+; [hJoyPressed]   keys pressed since last time
+; [hJoyHeld] currently pressed keys
+	homecall _Joypad
 	ret
 
 
@@ -189,7 +189,7 @@ HandleMidJump::
 EnterMap::
 ; Load a new map.
 	ld a, $ff
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	call LoadMapData
 	callba Func_c335 ; initialize map variables
 	ld hl, $d72c
@@ -219,7 +219,7 @@ EnterMap::
 	set 5, [hl]
 	set 6, [hl]
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 
 OverworldLoop::
 	call DelayFrame
@@ -232,7 +232,7 @@ OverworldLoopLessDelay::
 	ld a,[wWalkCounter]
 	and a
 	jp nz,.moveAhead ; if the player sprite has not yet completed the walking animation
-	call GetJoypadStateOverworld ; get joypad state (which is possibly simulated)
+	call JoypadOverworld ; get joypad state (which is possibly simulated)
 	callba SafariZoneCheck
 	ld a,[$da46]
 	and a
@@ -250,10 +250,10 @@ OverworldLoopLessDelay::
 	ld a,[$d730]
 	bit 7,a ; are we simulating button presses?
 	jr z,.notSimulating
-	ld a,[H_CURRENTPRESSEDBUTTONS]
+	ld a,[hJoyHeld]
 	jr .checkIfStartIsPressed
 .notSimulating
-	ld a,[H_NEWLYPRESSEDBUTTONS]
+	ld a,[hJoyPressed]
 .checkIfStartIsPressed
 	bit 3,a ; start button
 	jr z,.startButtonNotPressed
@@ -329,7 +329,7 @@ OverworldLoopLessDelay::
 	ld [$d528],a ; zero the direction
 	jp OverworldLoop
 .checkIfDownButtonIsPressed
-	ld a,[H_CURRENTPRESSEDBUTTONS] ; current joypad state
+	ld a,[hJoyHeld] ; current joypad state
 	bit 7,a ; down button
 	jr z,.checkIfUpButtonIsPressed
 	ld a,$01
@@ -501,7 +501,7 @@ OverworldLoopLessDelay::
 	set 5,[hl]
 	set 6,[hl]
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS],a ; clear joypad state
+	ld [hJoyHeld],a ; clear joypad state
 	ld a,[W_CURMAP]
 	cp a,CINNABAR_GYM
 	jr nz,.notCinnabarGym
@@ -553,7 +553,7 @@ BikeSpeedup:: ; 06a0 (0:06a0)
 	ld a,[W_CURMAP]
 	cp a,ROUTE_17 ; Cycling Road
 	jr nz,.goFaster
-	ld a,[H_CURRENTPRESSEDBUTTONS] ; current joypad state
+	ld a,[hJoyHeld] ; current joypad state
 	and a,%01110000 ; bit mask for up, left, right buttons
 	ret nz
 .goFaster
@@ -600,10 +600,10 @@ CheckWarpsNoCollisionLoop:: ; 06cc (0:06cc)
 	jr nz,WarpFound1
 	push de
 	push bc
-	call GetJoypadState
+	call Joypad
 	pop bc
 	pop de
-	ld a,[H_CURRENTPRESSEDBUTTONS] ; current joypad state
+	ld a,[hJoyHeld] ; current joypad state
 	and a,%11110000 ; bit mask for directional buttons
 	jr z,CheckWarpsNoCollisionRetry2 ; if directional buttons aren't being pressed, do not pass through the warp
 	jr WarpFound1
@@ -929,9 +929,9 @@ HandleBlackOut::
 	call StopMusic
 	ld hl, $d72e
 	res 5, [hl]
-	ld a, Bank(Func_40b0) ; Bank(Func_40b0) and Bank(Func_62ce) need to be equal.
+	ld a, Bank(Func_40b0) ; also Bank(Func_62ce) and Bank(Func_5d5f)
 	ld [H_LOADEDROMBANK], a
-	ld [$2000], a
+	ld [MBC3RomBank], a
 	call Func_40b0
 	call Func_62ce
 	call Func_2312
@@ -2018,29 +2018,29 @@ DrawTileBlock:: ; 0f1d (0:0f1d)
 	ret
 
 ; function to update joypad state and simulate button presses
-GetJoypadStateOverworld:: ; 0f4d (0:0f4d)
+JoypadOverworld:: ; 0f4d (0:0f4d)
 	xor a
 	ld [$c103],a
 	ld [$c105],a
 	call RunMapScript
-	call GetJoypadState
+	call Joypad
 	ld a,[W_FLAGS_D733]
 	bit 3,a ; check if a trainer wants a challenge
 	jr nz,.notForcedDownwards
 	ld a,[W_CURMAP]
 	cp a,ROUTE_17 ; Cycling Road
 	jr nz,.notForcedDownwards
-	ld a,[H_CURRENTPRESSEDBUTTONS] ; current joypad state
+	ld a,[hJoyHeld] ; current joypad state
 	and a,%11110011 ; bit mask for all directions and A/B
 	jr nz,.notForcedDownwards
 	ld a,%10000000 ; down pressed
-	ld [H_CURRENTPRESSEDBUTTONS],a ; on the cycling road, if there isn't a trainer and the player isn't pressing buttons, simulate a down press
+	ld [hJoyHeld],a ; on the cycling road, if there isn't a trainer and the player isn't pressing buttons, simulate a down press
 .notForcedDownwards
 	ld a,[$d730]
 	bit 7,a
 	ret z
 ; if simulating button presses
-	ld a,[H_CURRENTPRESSEDBUTTONS] ; current joypad state
+	ld a,[hJoyHeld] ; current joypad state
 	ld b,a
 	ld a,[$cd3b] ; bit mask for button presses that override simulated ones
 	and b
@@ -2058,11 +2058,11 @@ GetJoypadStateOverworld:: ; 0f4d (0:0f4d)
 	inc h
 .noCarry
 	ld a,[hl]
-	ld [H_CURRENTPRESSEDBUTTONS],a ; store simulated button press in joypad state
+	ld [hJoyHeld],a ; store simulated button press in joypad state
 	and a
 	ret nz
-	ld [H_NEWLYPRESSEDBUTTONS],a
-	ld [H_NEWLYRELEASEDBUTTONS],a
+	ld [hJoyPressed],a
+	ld [hJoyReleased],a
 	ret
 ; if done simulating button presses
 .doneSimulating
@@ -2070,8 +2070,8 @@ GetJoypadStateOverworld:: ; 0f4d (0:0f4d)
 	ld [$cd3a],a
 	ld [$cd38],a
 	ld [$ccd3],a
-	ld [wJoypadForbiddenButtonsMask],a
-	ld [H_CURRENTPRESSEDBUTTONS],a
+	ld [wJoyIgnore],a
+	ld [hJoyHeld],a
 	ld hl,$d736
 	ld a,[hl]
 	and a,$f8
@@ -2608,9 +2608,9 @@ ForceBikeOrSurf:: ; 12ed (0:12ed)
 CheckForUserInterruption:: ; 12f8 (0:12f8)
 	call DelayFrame
 	push bc
-	call GetJoypadStateLowSensitivity
+	call JoypadLowSensitivity
 	pop bc
-	ld a,[H_CURRENTPRESSEDBUTTONS] ; currently pressed buttons
+	ld a,[hJoyHeld] ; currently pressed buttons
 	cp a,%01000110 ; Up, Select button, B button
 	jr z,.setCarry ; if all three keys are pressed
 	ld a,[$ffb5] ; either newly pressed buttons or currently pressed buttons at low sampling rate
@@ -4231,8 +4231,8 @@ TextCommand09:: ; 1bff (0:1bff)
 ; (no arguments)
 TextCommand0A:: ; 1c1d (0:1c1d)
 	push bc
-	call GetJoypadState
-	ld a,[H_CURRENTPRESSEDBUTTONS]
+	call Joypad
+	ld a,[hJoyHeld]
 	and a,%00000011 ; A and B buttons
 	jr nz,.skipDelay
 	ld c,30
@@ -4308,9 +4308,9 @@ TextCommand0C:: ; 1c78 (0:1c78)
 	ld a,$75 ; ellipsis
 	ld [hli],a
 	push de
-	call GetJoypadState
+	call Joypad
 	pop de
-	ld a,[H_CURRENTPRESSEDBUTTONS] ; joypad state
+	ld a,[hJoyHeld] ; joypad state
 	and a,%00000011 ; is A or B button pressed?
 	jr nz,.skipDelay ; if so, skip the delay
 	ld c,10
@@ -4951,8 +4951,8 @@ rLCDC_DEFAULT EQU %11100011
 
 	ld a, rLCDC_DEFAULT
 	ld [rLCDC], a
-	ld a, $10
-	ld [H_SOFTRESETCOUNTER], a
+	ld a, 16
+	ld [hSoftReset], a
 	call StopAllSounds
 
 	ei
@@ -6519,8 +6519,8 @@ AfterDisplayingTextID:: ; 29d6 (0:29d6)
 
 ; loop to hold the dialogue box open as long as the player keeps holding down the A button
 HoldTextDisplayOpen:: ; 29df (0:29df)
-	call GetJoypadState
-	ld a,[H_CURRENTPRESSEDBUTTONS]
+	call Joypad
+	ld a,[hJoyHeld]
 	bit 0,a ; is the A button being pressed?
 	jr nz,HoldTextDisplayOpen
 
@@ -6959,8 +6959,8 @@ DisplayChooseQuantityMenu:: ; 2d57 (0:2d57)
 	ld [$cf96],a ; initialize current quantity to 0
 	jp .incrementQuantity
 .waitForKeyPressLoop
-	call GetJoypadStateLowSensitivity
-	ld a,[H_NEWLYPRESSEDBUTTONS] ; newly pressed buttons
+	call JoypadLowSensitivity
+	ld a,[hJoyPressed] ; newly pressed buttons
 	bit 0,a ; was the A button pressed?
 	jp nz,.buttonAPressed
 	bit 1,a ; was the B button pressed?
@@ -7731,7 +7731,7 @@ CheckFightingMapTrainers:: ; 3219 (0:3219)
 	ld a, $4c
 	call Predef
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	xor a
 	ldh [$b4], a
 	call TrainerWalkUpToPlayer_Bank0
@@ -7743,14 +7743,14 @@ Func_324c:: ; 324c (0:324c)
 	ld a, [$d730]
 	and $1
 	ret nz
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, [$cf13]
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 
 Func_325d:: ; 325d (0:325d)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	call InitBattleEnemyParameters
 	ld hl, $d72d
 	set 6, [hl]
@@ -7798,10 +7798,10 @@ EndTrainerBattle:: ; 3275 (0:3275)
 
 ResetButtonPressedAndMapScript:: ; 32c1 (0:32c1)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
-	ld [H_CURRENTPRESSEDBUTTONS], a
-	ld [H_NEWLYPRESSEDBUTTONS], a
-	ld [H_NEWLYRELEASEDBUTTONS], a
+	ld [wJoyIgnore], a
+	ld [hJoyHeld], a
+	ld [hJoyPressed], a
+	ld [hJoyReleased], a
 	ld [W_CURMAPSCRIPT], a               ; reset battle status
 	ret
 
@@ -8308,23 +8308,23 @@ GetTrainerName:: ; 359e (0:359e)
 	ld hl, GetTrainerName_
 	jp Bankswitch
 
-; tests if player's money are at least as much as [$ff9f]
-; sets carry flag if not enough money
-; sets zero flag if amounts match exactly
-HasEnoughMoney:: ; 35a6 (0:35a6)
-	ld de, wPlayerMoney ; $d347
+
+HasEnoughMoney::
+; Check if the player has at least as much
+; money as the 3-byte BCD value at $ff9f.
+	ld de, wPlayerMoney
 	ld hl, $ff9f
-	ld c, $3
+	ld c, 3
 	jp StringCmp
 
-; tests if player's game corner coins are at least as many as [$ffa0]
-; sets carry flag if not enough coins
-; sets zero flag if amounts match exactly
-HasEnoughCoins:: ; 35b1 (0:35b1)
+HasEnoughCoins::
+; Check if the player has at least as many
+; coins as the 2-byte BCD value at $ffa0.
 	ld de, wPlayerCoins
 	ld hl, $ffa0
-	ld c, $2
+	ld c, 2
 	jp StringCmp
+
 
 BankswitchHome:: ; 35bc (0:35bc)
 ; switches to bank # in a
@@ -8446,7 +8446,7 @@ MoveSprite_:: ; 363d (0:363d)
 	ld [$CD3B],a
 	ld [$CCD3],a
 	dec a
-	ld [wJoypadForbiddenButtonsMask],a
+	ld [wJoyIgnore],a
 	ld [$CD3A],a
 	ret
 
@@ -8764,7 +8764,7 @@ CopyString:: ; 3829 (0:3829)
 ; there are esentially three modes of operation
 ; 1. Get newly pressed buttons only
 ;    ([$ffb7] == 0, [$ffb6] == any)
-;    Just copies [H_NEWLYPRESSEDBUTTONS] to [$ffb5].
+;    Just copies [hJoyPressed] to [$ffb5].
 ; 2. Get currently pressed buttons at low sample rate with delay
 ;    ([$ffb7] == 1, [$ffb6] != 0)
 ;    If the user holds down buttons for more than half a second,
@@ -8773,16 +8773,16 @@ CopyString:: ; 3829 (0:3829)
 ;    report only one button press.
 ; 3. Same as 2, but report no buttons as pressed if A or B is held down.
 ;    ([$ffb7] == 1, [$ffb6] == 0)
-GetJoypadStateLowSensitivity:: ; 3831 (0:3831)
-	call GetJoypadState
+JoypadLowSensitivity:: ; 3831 (0:3831)
+	call Joypad
 	ld a,[$ffb7] ; flag
 	and a ; get all currently pressed buttons or only newly pressed buttons?
-	ld a,[H_NEWLYPRESSEDBUTTONS] ; newly pressed buttons
+	ld a,[hJoyPressed] ; newly pressed buttons
 	jr z,.storeButtonState
-	ld a,[H_CURRENTPRESSEDBUTTONS] ; all currently pressed buttons
+	ld a,[hJoyHeld] ; all currently pressed buttons
 .storeButtonState
 	ld [$ffb5],a
-	ld a,[H_NEWLYPRESSEDBUTTONS] ; newly pressed buttons
+	ld a,[hJoyPressed] ; newly pressed buttons
 	and a ; have any buttons been newly pressed since last check?
 	jr z,.noNewlyPressedButtons
 .newlyPressedButtons
@@ -8799,7 +8799,7 @@ GetJoypadStateLowSensitivity:: ; 3831 (0:3831)
 	ret
 .delayOver
 ; if [$ffb6] = 0 and A or B is pressed, report no buttons as pressed
-	ld a,[H_CURRENTPRESSEDBUTTONS]
+	ld a,[hJoyHeld]
 	and a,%00000011 ; A and B buttons
 	jr z,.setShortDelay
 	ld a,[$ffb6] ; flag
@@ -8832,7 +8832,7 @@ WaitForTextScrollButtonPress:: ; 3865 (0:3865)
 	ld hl, Coord
 	call HandleDownArrowBlinkTiming
 	pop hl
-	call GetJoypadStateLowSensitivity
+	call JoypadLowSensitivity
 	ld a, $2d
 	call Predef ; indirect jump to Func_5a5f (5a5f (1:5a5f))
 	ld a, [$ffb5]
@@ -8922,8 +8922,8 @@ PrintLetterDelay:: ; 38d3 (0:38d3)
 	ld a,1
 	ld [H_FRAMECOUNTER],a
 .checkButtons
-	call GetJoypadState
-	ld a,[H_CURRENTPRESSEDBUTTONS]
+	call Joypad
+	ld a,[hJoyHeld]
 .checkAButton
 	bit 0,a ; is the A button pressed?
 	jr z,.checkBButton
@@ -9301,7 +9301,7 @@ HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 	callba AnimatePartyMon ; shake mini sprite of selected pokemon
 .getJoypadState
 	pop hl
-	call GetJoypadStateLowSensitivity
+	call JoypadLowSensitivity
 	ld a,[$ffb5]
 	and a ; was a key pressed?
 	jr nz,.keyPressed
@@ -10042,7 +10042,7 @@ Func_3ead:: ; 3ead (0:3ead)
 Func_3eb5:: ; 3eb5 (0:3eb5)
 	ld a, [H_LOADEDROMBANK]
 	push af
-	ld a, [H_CURRENTPRESSEDBUTTONS]
+	ld a, [hJoyHeld]
 	bit 0, a
 	jr z, .asm_3eea
 	ld a, Bank(Func_469a0)

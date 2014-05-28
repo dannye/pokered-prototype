@@ -129,14 +129,14 @@ OaksLabScript4: ; 1cbd2 (7:4bd2)
 
 OaksLabScript5: ; 1cbfd (7:4bfd)
 	ld a, $fc
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $11
 	ld [$ff8c], a
 	call DisplayTextID
 	ld hl, $d74b
 	set 1, [hl]
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 
 	ld a, $6
 	ld [W_OAKSLABCURSCRIPT], a
@@ -259,7 +259,7 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 	bit 0, a
 	ret nz
 	ld a, $fc
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $1
 	ld [$ff8c], a
 	ld a, $4
@@ -301,7 +301,7 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 	ld hl, $d74b
 	set 2, [hl]
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 
 	ld a, $a
 	ld [W_OAKSLABCURSCRIPT], a
@@ -377,7 +377,7 @@ OaksLabScript11: ; 1cdb9 (7:4db9)
 	set 6, [hl]
 	set 7, [hl]
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $8
 	ld [$d528], a
 	ld a, $c
@@ -386,7 +386,7 @@ OaksLabScript11: ; 1cdb9 (7:4db9)
 
 OaksLabScript12: ; 1ce03 (7:4e03)
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $8
 	ld [$d528], a
 	call UpdateSprites
@@ -445,7 +445,7 @@ OaksLabScript14: ; 1ce6d (7:4e6d)
 	ld a, $11
 	call Predef
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	call Func_2307 ; reset to map music
 	ld a, $12
 	ld [W_OAKSLABCURSCRIPT], a
@@ -474,7 +474,7 @@ OaksLabScript14: ; 1ce6d (7:4e6d)
 
 OaksLabScript15: ; 1ceb0 (7:4eb0)
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	call EnableAutoTextBoxDrawing
 	ld a, $ff
 	ld [$c0ee], a
@@ -524,7 +524,7 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	call EnableAutoTextBoxDrawing
 	call Func_2307
 	ld a, $fc
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	call OaksLabScript_1cefd
 	ld a, $16
 	ld [$ff8c], a
@@ -617,7 +617,7 @@ OaksLabScript17: ; 1cfd4 (7:4fd4)
 	ld a, $5
 	ld [W_PALLETTOWNCURSCRIPT], a
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 
 	ld a, $12
 	ld [W_OAKSLABCURSCRIPT], a
@@ -913,7 +913,7 @@ asm_1d1e5: ; 1d1e5 (7:51e5)
 	ld hl, $d72e
 	set 3, [hl]
 	ld a, $fc
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $8
 	ld [W_OAKSLABCURSCRIPT], a
 OaksLabMonChoiceEnd: ; 1d21f (7:521f)

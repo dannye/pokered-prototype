@@ -39,7 +39,7 @@ CeladonGameCornerScript_48bec: ; 48bec (12:4bec)
 
 CeladonGameCornerScript_48c07: ; 48c07 (12:4c07)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_CELADONGAMECORNERCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -57,7 +57,7 @@ CeladonGameCornerScript1: ; 48c19 (12:4c19)
 	cp $ff
 	jp z, CeladonGameCornerScript_48c07
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $d
 	ld [H_SPRITEHEIGHT], a
 	call DisplayTextID
@@ -94,7 +94,7 @@ CeladonGameCornerScript2: ; 48c69 (12:4c69)
 	bit 0, a
 	ret nz
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $46
 	ld [$cc4d], a
 	ld a, $11
@@ -157,7 +157,7 @@ CeladonGameCornerText2: ; 48ca9 (12:4ca9)
 	ld hl, $ffa1
 	ld de, $d349
 	ld c, $3
-	ld a, $c
+	ld a, $c ; SubtractBCDPredef
 	call Predef
 	xor a
 	ldh [$9f], a
@@ -167,7 +167,7 @@ CeladonGameCornerText2: ; 48ca9 (12:4ca9)
 	ld de, $d5a5
 	ld hl, $ffa1
 	ld c, $2
-	ld a, $b
+	ld a, $b ; AddBCDPredef
 	call Predef
 	call CeladonGameCornerScript_48f1e
 	ld hl, CeladonGameCornerText_48d27
@@ -236,7 +236,7 @@ CeladonGameCornerText5: ; 48d4a (12:4d4a)
 	ld de, $d5a5
 	ld hl, $ffa1
 	ld c, $2
-	ld a, $b
+	ld a, $b ; AddBCDPredef
 	call Predef
 	ld hl, $d77e
 	set 2, [hl]
@@ -319,7 +319,7 @@ CeladonGameCornerText9: ; 48dd9 (12:4dd9)
 	ld de, $d5a5
 	ld hl, $ffa1
 	ld c, $2
-	ld a, $b
+	ld a, $b ; AddBCDPredef
 	call Predef
 	ld hl, $d77e
 	set 4, [hl]
@@ -373,7 +373,7 @@ CeladonGameCornerText10: ; 48e3b (12:4e3b)
 	ld de, $d5a5
 	ld hl, $ffa1
 	ld c, $2
-	ld a, $b
+	ld a, $b ; AddBCDPredef
 	call Predef
 	ld hl, $d77e
 	set 3, [hl]

@@ -3,109 +3,60 @@ INCLUDE "constants.asm"
 
 INCLUDE "home.asm"
 
+
 SECTION "bank1",ROMX,BANK[$1]
 
-SpriteFacingAndAnimationTable: ; 4000 (1:4000)
-	dw SpriteFacingDownAndStanding, SpriteOAMParameters        ; facing down, walk animation frame 0
-	dw SpriteFacingDownAndWalking, SpriteOAMParameters         ; facing down, walk animation frame 1
-	dw SpriteFacingDownAndStanding, SpriteOAMParameters        ; facing down, walk animation frame 2
-	dw SpriteFacingDownAndWalking, SpriteOAMParametersFlipped  ; facing down, walk animation frame 3
-	dw SpriteFacingUpAndStanding, SpriteOAMParameters          ; facing up, walk animation frame 0
-	dw SpriteFacingUpAndWalking, SpriteOAMParameters           ; facing up, walk animation frame 1
-	dw SpriteFacingUpAndStanding, SpriteOAMParameters          ; facing up, walk animation frame 2
-	dw SpriteFacingUpAndWalking, SpriteOAMParametersFlipped    ; facing up, walk animation frame 3
-	dw SpriteFacingLeftAndStanding, SpriteOAMParameters        ; facing left, walk animation frame 0
-	dw SpriteFacingLeftAndWalking, SpriteOAMParameters         ; facing left, walk animation frame 1
-	dw SpriteFacingLeftAndStanding, SpriteOAMParameters        ; facing left, walk animation frame 2
-	dw SpriteFacingLeftAndWalking, SpriteOAMParameters         ; facing left, walk animation frame 3
-	dw SpriteFacingLeftAndStanding, SpriteOAMParametersFlipped ; facing right, walk animation frame 0
-	dw SpriteFacingLeftAndWalking, SpriteOAMParametersFlipped  ; facing right, walk animation frame 1
-	dw SpriteFacingLeftAndStanding, SpriteOAMParametersFlipped ; facing right, walk animation frame 2
-	dw SpriteFacingLeftAndWalking, SpriteOAMParametersFlipped  ; facing right, walk animation frame 3
-	dw SpriteFacingDownAndStanding, SpriteOAMParameters        ; ---
-	dw SpriteFacingDownAndStanding, SpriteOAMParameters        ; This table is used for sprites $a and $b.
-	dw SpriteFacingDownAndStanding, SpriteOAMParameters        ; All orientation and animation parameters
-	dw SpriteFacingDownAndStanding, SpriteOAMParameters        ; lead to the same result. Used for immobile
-	dw SpriteFacingDownAndStanding, SpriteOAMParameters        ; sprites like items on the ground
-	dw SpriteFacingDownAndStanding, SpriteOAMParameters        ; ---
-	dw SpriteFacingDownAndStanding, SpriteOAMParameters
-	dw SpriteFacingDownAndStanding, SpriteOAMParameters
-	dw SpriteFacingDownAndStanding, SpriteOAMParameters
-	dw SpriteFacingDownAndStanding, SpriteOAMParameters
-	dw SpriteFacingDownAndStanding, SpriteOAMParameters
-	dw SpriteFacingDownAndStanding, SpriteOAMParameters
-	dw SpriteFacingDownAndStanding, SpriteOAMParameters
-	dw SpriteFacingDownAndStanding, SpriteOAMParameters
-	dw SpriteFacingDownAndStanding, SpriteOAMParameters
-	dw SpriteFacingDownAndStanding, SpriteOAMParameters
+INCLUDE "data/facing.asm"
 
-SpriteFacingDownAndStanding: ; 4080 (1:4080)
-	db $00,$01,$02,$03
-SpriteFacingDownAndWalking: ; 4084 (1:4084)
-	db $80,$81,$82,$83
-SpriteFacingUpAndStanding: ; 4088 (1:4088)
-	db $04,$05,$06,$07
-SpriteFacingUpAndWalking: ; 408c (1:408c)
-	db $84,$85,$86,$87
-SpriteFacingLeftAndStanding: ; 4090 (1:4090)
-	db $08,$09,$0a,$0b
-SpriteFacingLeftAndWalking: ; 4094 (1:4094)
-	db $88,$89,$8a,$8b
-
-SpriteOAMParameters: ; 4098 (1:4098)
-	db $00,$00, $00                                      ; top left
-	db $00,$08, $00                                      ; top right
-	db $08,$00, OAMFLAG_CANBEMASKED                      ; bottom left
-	db $08,$08, OAMFLAG_CANBEMASKED | OAMFLAG_ENDOFDATA  ; bottom right
-SpriteOAMParametersFlipped: ; 40a4 (1:40a4)
-	db $00,$08, OAMFLAG_VFLIPPED
-	db $00,$00, OAMFLAG_VFLIPPED
-	db $08,$08, OAMFLAG_VFLIPPED | OAMFLAG_CANBEMASKED
-	db $08,$00, OAMFLAG_VFLIPPED | OAMFLAG_CANBEMASKED | OAMFLAG_ENDOFDATA
-
-Func_40b0: ; 40b0 (1:40b0)
+Func_40b0::
+; Reset player status on blackout.
 	xor a
 	ld [$cf0b], a
 	ld [$d700], a
-	ld [W_ISINBATTLE], a ; $d057
+	ld [W_ISINBATTLE], a
 	ld [$d35d], a
 	ld [$cf10], a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld [$cc57], a
 	ld [wFlags_0xcd60], a
+
 	ld [$ff9f], a
-	ld [$ffa0], a
-	ld [$ffa1], a
+	ld [$ff9f + 1], a
+	ld [$ff9f + 2], a
 	call HasEnoughMoney
-	jr c, .asm_40ff
-	ld a, [wPlayerMoney] ; $d347
+	jr c, .lostmoney ; never happens
+
+	; Halve the player's money.
+	ld a, [wPlayerMoney]
 	ld [$ff9f], a
-	ld a, [wPlayerMoney + 1] ; $d348
-	ld [$ffa0], a
-	ld a, [wPlayerMoney + 2] ; $d349
-	ld [$ffa1], a
+	ld a, [wPlayerMoney + 1]
+	ld [$ff9f + 1], a
+	ld a, [wPlayerMoney + 2]
+	ld [$ff9f + 2], a
 	xor a
 	ld [$ffa2], a
 	ld [$ffa3], a
-	ld a, $2
+	ld a, 2
 	ld [$ffa4], a
-	ld a, $d
-	call Predef ; indirect jump to Func_f71e (f71e (3:771e))
+	ld a, $d ; DivideBCDPredef
+	call Predef
 	ld a, [$ffa2]
-	ld [wPlayerMoney], a ; $d347
-	ld a, [$ffa3]
-	ld [wPlayerMoney + 1], a ; $d348
-	ld a, [$ffa4]
-	ld [wPlayerMoney + 2], a ; $d349
-.asm_40ff
+	ld [wPlayerMoney], a
+	ld a, [$ffa2 + 1]
+	ld [wPlayerMoney + 1], a
+	ld a, [$ffa2 + 2]
+	ld [wPlayerMoney + 2], a
+
+.lostmoney
 	ld hl, $d732
 	set 2, [hl]
 	res 3, [hl]
 	set 6, [hl]
-	ld a, $ff
-	ld [wJoypadForbiddenButtonsMask], a
-	ld a, $7
-	jp Predef ; indirect jump to HealParty (f6a5 (3:76a5))
+	ld a, %11111111
+	ld [wJoyIgnore], a
+	ld a, $7 ; HealParty
+	jp Predef
+
 
 INCLUDE "data/baseStats/mew.asm"
 
@@ -116,58 +67,62 @@ INCLUDE "engine/titlescreen.asm"
 NintenText: db "NINTEN@"
 SonyText:   db "Gary@"
 
-; loads pokemon data from one of multiple sources to $cf98
-; loads base stats to $d0b8
-; INPUT:
-; [$cf92] = index of pokemon within party/box
-; [$cc49] = source
-; 00: player's party
-; 01: enemy's party
-; 02: current box
-; 03: daycare
-; OUTPUT:
-; [$cf91] = pokemon ID
-; $cf98 = base address of pokemon data
-; $d0b8 = base address of base stats
-LoadMonData_: ; 45b6 (1:45b6)
-	ld a,[W_DAYCAREMONDATA] ; daycare pokemon ID
-	ld [$cf91],a
-	ld a,[$cc49]
-	cp a,$03
-	jr z,.GetMonHeader
-	ld a,[wWhichPokemon]
-	ld e,a
+
+LoadMonData_:
+; Load monster [wWhichPokemon] from list [$cc49]:
+;  0: partymon
+;  1: enemymon
+;  2: boxmon
+;  3: daycaremon
+; Return monster id at $cf91 and its data at $cf98.
+; Also load base stats at $d0b8 for convenience.
+
+	ld a, [W_DAYCAREMONDATA]
+	ld [$cf91], a
+	ld a, [$cc49]
+	cp 3
+	jr z, .GetMonHeader
+
+	ld a, [wWhichPokemon]
+	ld e, a
 	callab Func_39c37 ; get pokemon ID
+
 .GetMonHeader
-	ld a,[$cf91]
-	ld [$d0b5],a ; input for GetMonHeader
-	call GetMonHeader ; load base stats to $d0b8
-	ld hl,W_PARTYMON1DATA
-	ld bc,44
-	ld a,[$cc49]
-	cp a,$01
-	jr c,.getMonEntry
-	ld hl,wEnemyMons ; enemy pokemon 1 data
-	jr z,.getMonEntry
-	cp a,$02
-	ld hl,W_BOXMON1DATA ; box pokemon 1 data
-	ld bc,33
-	jr z,.getMonEntry
-	ld hl, W_DAYCAREMONDATA ; daycare pokemon data
+	ld a, [$cf91]
+	ld [$d0b5], a ; input for GetMonHeader
+	call GetMonHeader
+
+	ld hl, W_PARTYMON1DATA
+	ld bc, 44
+	ld a, [$cc49]
+	cp 1
+	jr c, .getMonEntry
+
+	ld hl, wEnemyMons
+	jr z, .getMonEntry
+
+	cp 2
+	ld hl, W_BOXMON1DATA
+	ld bc, 33
+	jr z, .getMonEntry
+
+	ld hl, W_DAYCAREMONDATA
 	jr .copyMonData
-.getMonEntry ; add the product of the index and the size of each entry
-	ld a,[wWhichPokemon]
+
+.getMonEntry
+	ld a, [wWhichPokemon]
 	call AddNTimes
+
 .copyMonData
-	ld de,$cf98
-	ld bc,44
+	ld de, $cf98
+	ld bc, 44
 	jp CopyData
 
-INCLUDE "data/item_prices.asm"
 
+INCLUDE "data/item_prices.asm"
 INCLUDE "text/item_names.asm"
 
-UnusedNames: ; 4a92 (1:4a92)
+UnusedNames:
 	db "かみなりバッヂ@"
 	db "かいがらバッヂ@"
 	db "おじぞうバッヂ@"
@@ -188,184 +143,8 @@ UnusedNames: ; 4a92 (1:4a92)
 	db "マスター@"
 	db "エクセレント"
 
-; calculates the OAM data for all currently visible sprites and writes it to wOAMBuffer
-PrepareOAMData: ; 4b0f (1:4b0f)
-	ld a, [$cfcb]
-	dec a
-	jr z, .asm_4b1e
-	cp $ff
-	ret nz
-	ld [$cfcb], a
-	jp HideSprites
-.asm_4b1e
-	xor a
-	ld [$ff90], a
-.asm_4b21
-	ld [$ff8f], a
-	ld d, $c1
-	ld a, [$ff8f]
-	ld e, a
-	ld a, [de]         ; c1x0
-	and a
-	jp z, .asm_4bad
-	inc e
-	inc e
-	ld a, [de]         ; c1x2 read combined orientation and animation info
-	ld [$d5cd], a
-	cp $ff
-	jr nz, .spriteVisible   ; $ff -> offscreen, don't draw
-	call Func_4bd1
-	jr .asm_4bad
-.spriteVisible
-	cp $a0
-	jr c, .considerOrientation ; if >= $a0, ignore the sprite orientation and animation (by using a different conversion table)
-	and $f
-	add $10
-	jr .asm_4b48
-.considerOrientation
-	and $f                     ; the lower nybble contains orientation and animation info
-.asm_4b48
-	ld l, a
-	push de
-	inc d
-	ld a, e
-	add $5
-	ld e, a
-	ld a, [de]         ; c2x7
-	and $80
-	ld [$ff94], a          ; temp store bit 7 for later use in OAM flags (draws sprite behind background (used for grass))
-	pop de
-	ld h, $0
-	ld bc, SpriteFacingAndAnimationTable
-	add hl, hl
-	add hl, hl
-	add hl, bc                 ; skip to the table location determined by orientation and animation
-	ld a, [hli]
-	ld c, a
-	ld a, [hli]
-	ld b, a
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	call Func_4bd1
-	ld a, [$ff90]
-	ld e, a
-	ld d, $c3                ; wOAMBuffer+x is buffer for OAM data
-.spriteTilesLoop             ; loops 4 times for the 4 tiles a sprite consists of
-	ld a, [$ff92]        ; temp for sprite Y position
-	add $10                  ; Y=16 is top of screen (Y=0 is invisible)
-	add [hl]                 ; add Y offset from table
-	ld [de], a               ; write new sprite OAM Y position
-	inc hl
-	ld a, [$ff91]        ; temp for sprite X position
-	add $8                   ; X=8 is left of screen (X=0 is invisible)
-	add [hl]                 ; add X offset from table
-	inc e
-	ld [de], a               ; write new sprite OAM X position
-	inc e
-	ld a, [bc]               ; read pattern number offset (accomodates orientation (offset 0,4 or 8) and animation (offset 0 or $80))
-	inc bc
-	push bc
-	ld b, a
-	ld a, [$d5cd]            ; temp copy of c1x2
-	swap a                   ; high nybble determines sprite used (0 is always player sprite, next are some npcs)
-	and $f
-	cp $b                    ; sprites $a and $b have no orientation or animation and therefore only 4 tiles
-	jr nz, .calcTileOffset   ; (instead of 12), so tile b's offset is a special case
-	ld a, $7c                ; = $a * 12 + 4
-	jr .doneCalcTileOffset
-.calcTileOffset
-	sla a
-	sla a
-	ld c, a
-	sla a
-	add c                    ; a *= 12 (each sprite consists of 12 tiles)
-.doneCalcTileOffset
-	add b                    ; add orientation and animation offset
-	pop bc
-	ld [de], a               ; write OAM sprite pattern number
-	inc hl
-	inc e
-	ld a, [hl]
-	bit 1, a                 ; bit 1 is ignored for OAM, it's used here as an "always in foregroud" flag.
-	jr z, .alwaysInForeground
-	ld a, [$ff94]        ; load bit 7 (set to $80 if sprite is in grass and should be drawn behind it)
-	or [hl]
-.alwaysInForeground
-	inc hl
-	ld [de], a               ; write OAM sprite flags
-	inc e
-	bit 0, a                 ; test for OAMFLAG_ENDOFDATA
-	jr z, .spriteTilesLoop
-	ld a, e
-	ld [$ff90], a
-.asm_4bad
-	ld a, [$ff8f]
-	add $10
-	cp $0
-	jp nz, .asm_4b21
-	ld a, [$ff90]
-	ld l, a
-	ld h, $c3
-	ld de, $4
-	ld b, $a0
-	ld a, [$d736]
-	bit 6, a
-	ld a, $a0
-	jr z, .clearUnusedOAMEntriesLoop
-	ld a, $90
-.clearUnusedOAMEntriesLoop
-	cp l
-	ret z
-	ld [hl], b
-	add hl, de
-	jr .clearUnusedOAMEntriesLoop
-
-Func_4bd1: ; 4bd1 (1:4bd1)
-	inc e
-	inc e
-	ld a, [de]            ; c1x4
-	ld [$ff92], a
-	inc e
-	inc e
-	ld a, [de]            ; c1x6
-	ld [$ff91], a
-	ld a, $4
-	add e
-	ld e, a
-	ld a, [$ff92]
-	add $4
-	and $f0
-	ld [de], a            ; c1xa (sprite Y pos (snapped to whole steps (?))
-	inc e
-	ld a, [$ff91]
-	and $f0
-	ld [de], a            ; c1xb (sprite X pos (snapped to whole steps (?))
-	ret
-
-; copies DMA routine to HRAM. By GB specifications, all DMA needs to be done in HRAM (no other memory section is available during DMA)
-WriteDMACodeToHRAM: ; 4bed (1:4bed)
-	ld c, $80
-	ld b, $a
-	ld hl, DMARoutine
-.copyLoop
-	ld a, [hli]
-	ld [$ff00+c], a
-	inc c
-	dec b
-	jr nz, .copyLoop
-	ret
-
-; this routine is copied to HRAM and executed there on every VBlank
-DMARoutine: ; 4bfb (1:4bfb)
-	ld a, $c3
-	ld [$ff46], a   ; start DMA
-	ld a, $28
-.waitLoop               ; wait for DMA to finish
-	dec a
-	jr nz, .waitLoop
-	ret
-
+INCLUDE "engine/overworld/oam.asm"
+INCLUDE "engine/oam_dma.asm"
 
 PrintWaitingText:
 	FuncCoord 3, 10
@@ -712,922 +491,8 @@ TestBattle:
 	ld [H_AUTOBGTRANSFERENABLED], a
 	jr .loop
 
-
-PickupItem:
-	call EnableAutoTextBoxDrawing
-
-	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
-	ld b, a
-	ld hl, W_MISSABLEOBJECTLIST
-.missableObjectsListLoop
-	ld a, [hli]
-	cp $ff
-	ret z
-	cp b
-	jr z, .isMissable
-	inc hl
-	jr .missableObjectsListLoop
-
-.isMissable
-	ld a, [hl]
-	ld [$ffdb], a
-
-	ld hl, W_MAPSPRITEEXTRADATA
-	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
-	dec a
-	add a
-	ld d, 0
-	ld e, a
-	add hl, de
-	ld a, [hl]
-	ld b, a ; item
-	ld c, 1 ; quantity
-	call GiveItem
-	jr nc, .BagFull
-
-	ld a, [$ffdb]
-	ld [$cc4d], a
-	ld a, $11 ; RemoveMissableObject
-	call Predef
-	ld a, 1
-	ld [$cc3c], a
-	ld hl, FoundItemText
-	jr .print
-
-.BagFull
-	ld hl, NoMoreRoomForItemText
-.print
-	call PrintText
-	ret
-
-FoundItemText:
-	TX_FAR _FoundItemText
-	db $0B
-	db "@"
-
-NoMoreRoomForItemText:
-	TX_FAR _NoMoreRoomForItemText
-	db "@"
-
-
-UpdatePlayerSprite: ; 4e31 (1:4e31)
-	ld a, [wSpriteStateData2]
-	and a
-	jr z, .asm_4e41
-	cp $ff
-	jr z, .asm_4e4a
-	dec a
-	ld [wSpriteStateData2], a
-	jr .asm_4e4a
-.asm_4e41
-	FuncCoord 8, 9 ; $c45c
-	ld a, [Coord]
-	ld [$ff93], a
-	cp $60
-	jr c, .asm_4e50
-.asm_4e4a
-	ld a, $ff
-	ld [$c102], a
-	ret
-.asm_4e50
-	call Func_4c70
-	ld h, $c1
-	ld a, [wWalkCounter] ; $cfc5
-	and a
-	jr nz, .asm_4e90
-	ld a, [$d528]
-	bit 2, a
-	jr z, .asm_4e65
-	xor a
-	jr .asm_4e86
-.asm_4e65
-	bit 3, a
-	jr z, .asm_4e6d
-	ld a, $4
-	jr .asm_4e86
-.asm_4e6d
-	bit 1, a
-	jr z, .asm_4e75
-	ld a, $8
-	jr .asm_4e86
-.asm_4e75
-	bit 0, a
-	jr z, .asm_4e7d
-	ld a, $c
-	jr .asm_4e86
-.asm_4e7d
-	xor a
-	ld [$c107], a
-	ld [$c108], a
-	jr .asm_4eab
-.asm_4e86
-	ld [$c109], a
-	ld a, [$cfc4]
-	bit 0, a
-	jr nz, .asm_4e7d
-.asm_4e90
-	ld a, [$d736]
-	bit 7, a
-	jr nz, .asm_4eb6
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $7
-	ld l, a
-	ld a, [hl]
-	inc a
-	ld [hl], a
-	cp $4
-	jr nz, .asm_4eab
-	xor a
-	ld [hl], a
-	inc hl
-	ld a, [hl]
-	inc a
-	and $3
-	ld [hl], a
-.asm_4eab
-	ld a, [$c108]
-	ld b, a
-	ld a, [$c109]
-	add b
-	ld [$c102], a
-.asm_4eb6
-	ld a, [$ff93]
-	ld c, a
-	ld a, [W_GRASSTILE]
-	cp c
-	ld a, $0
-	jr nz, .asm_4ec3
-	ld a, $80
-.asm_4ec3
-	ld [$c207], a
-	ret
-
-Func_4ec7: ; 4ec7 (1:4ec7)
-	push bc
-	push af
-	ld a, [$ffda]
-	ld c, a
-	pop af
-	add c
-	ld l, a
-	pop bc
-	ret
-
-Func_4ed1: ; 4ed1 (1:4ed1)
-	ld a, [H_CURRENTSPRITEOFFSET]
-	swap a
-	dec a
-	add a
-	ld hl, W_MAPSPRITEDATA ; $d4e4
-	add l
-	ld l, a
-	ld a, [hl]        ; read movement byte 2
-	ld [wCurSpriteMovement2], a
-	ld h, $c1
-	ld a, [H_CURRENTSPRITEOFFSET]
-	ld l, a
-	inc l
-	ld a, [hl]        ; c1x1
-	and a
-	jp z, InitializeSpriteStatus
-	call CheckSpriteAvailability
-	ret c             ; if sprite is invisible, on tile >=$60, in grass or player is currently walking
-	ld h, $c1
-	ld a, [H_CURRENTSPRITEOFFSET]
-	ld l, a
-	inc l
-	ld a, [hl]        ; c1x1
-	bit 7, a
-	jp nz, InitializeSpriteFacingDirection  ; c1x1 >= $80
-	ld b, a
-	ld a, [$cfc4]
-	bit 0, a
-	jp nz, notYetMoving
-	ld a, b
-	cp $2
-	jp z, UpdateSpriteMovementDelay  ; c1x1 == 2
-	cp $3
-	jp z, UpdateSpriteInWalkingAnimation  ; c1x1 == 3
-	ld a, [wWalkCounter] ; $cfc5
-	and a
-	ret nz           ; don't do anything yet if player is currently moving (redundant, already tested in CheckSpriteAvailability)
-	call InitializeSpriteScreenPosition
-	ld h, $c2
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $6
-	ld l, a
-	ld a, [hl]       ; c2x6: movement byte 1
-	inc a
-	jr z, .asm_4f59  ; value $FF
-	inc a
-	jr z, .asm_4f59  ; value $FE
-	dec a
-	ld [hl], a       ; (temporarily) increment movement byte 1
-	dec a
-	push hl
-	ld hl, $cf0f
-	dec [hl]         ; decrement $cf0f
-	pop hl
-	ld de, $cc5b
-	call LoadDEPlusA ; a = [$cc5b + movement byte 1]
-	cp $e0
-	jp z, ChangeFacingDirection
-	cp $ff
-	jr nz, .asm_4f4b
-	ld [hl], a       ; reset movement byte 1 to initial value
-	ld hl, $d730
-	res 0, [hl]
-	xor a
-	ld [$cd38], a
-	ld [$cd3a], a
-	ret
-.asm_4f4b
-	cp $fe
-	jr nz, .asm_4f5f
-	ld [hl], $1     ; set movement byte 1 to $1
-	ld de, $cc5b
-	call LoadDEPlusA ; a = [$cc5b + $fe] (?)
-	jr .asm_4f5f
-.asm_4f59
-	call getTileSpriteStandsOn
-	call Random
-.asm_4f5f
-	ld b, a
-	ld a, [wCurSpriteMovement2]
-	cp $d0
-	jr z, .moveDown    ; movement byte 2 = $d0 forces down
-	cp $d1
-	jr z, .moveUp      ; movement byte 2 = $d1 forces up
-	cp $d2
-	jr z, .moveLeft    ; movement byte 2 = $d2 forces left
-	cp $d3
-	jr z, .moveRight   ; movement byte 2 = $d3 forces right
-	ld a, b
-	cp $40             ; a < $40: down (or left)
-	jr nc, .notDown
-	ld a, [wCurSpriteMovement2]
-	cp $2
-	jr z, .moveLeft    ; movement byte 2 = $2 only allows left or right
-.moveDown
-	ld de, 2*20
-	add hl, de         ; move tile pointer two rows down
-	ld de, $100
-
-	ld bc, $400
-	jr TryWalking
-.notDown
-	cp $80             ; $40 <= a < $80: up (or right)
-	jr nc, .notUp
-	ld a, [wCurSpriteMovement2]
-	cp $2
-	jr z, .moveRight   ; movement byte 2 = $2 only allows left or right
-.moveUp
-	ld de, -2*20 ; $ffd8
-	add hl, de         ; move tile pointer two rows up
-	ld de, $ff00
-	ld bc, $804
-	jr TryWalking
-.notUp
-	cp $c0             ; $80 <= a < $c0: left (or up)
-	jr nc, .notLeft
-	ld a, [wCurSpriteMovement2]
-	cp $1
-	jr z, .moveUp      ; movement byte 2 = $1 only allows up or down
-.moveLeft
-	dec hl
-	dec hl             ; move tile pointer two columns left
-	ld de, $ff
-	ld bc, $208
-	jr TryWalking
-.notLeft              ; $c0 <= a: right (or down)
-	ld a, [wCurSpriteMovement2]
-	cp $1
-	jr z, .moveDown    ; movement byte 2 = $1 only allows up or down
-.moveRight
-	inc hl
-	inc hl             ; move tile pointer two columns right
-	ld de, $1
-	ld bc, $10c
-	jr TryWalking
-
-; changes facing direction by zeroing the movement delta and calling TryWalking
-ChangeFacingDirection: ; 4fc8 (1:4fc8)
-	ld de, $0
-	; fall through
-
-; b: direction (1,2,4 or 8)
-; c: new facing direction (0,4,8 or $c)
-; d: Y movement delta (-1, 0 or 1)
-; e: X movement delta (-1, 0 or 1)
-; hl: pointer to tile the sprite would wlak onto
-; set carry on failure, clears carry on success
-TryWalking: ; 4fcb (1:4fcb)
-	push hl
-	ld h, $c1
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $9
-	ld l, a
-	ld [hl], c          ; c1x9 (update facing direction)
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $3
-	ld l, a
-	ld [hl], d          ; c1x3 (update Y movement delta)
-	inc l
-	inc l
-	ld [hl], e          ; c1x5 (update X movement delta)
-	pop hl
-	push de
-	ld c, [hl]          ; read tile to walk onto
-	call CanWalkOntoTile
-	pop de
-	ret c               ; cannot walk there (reinitialization of delay values already done)
-	ld h, $c2
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $4
-	ld l, a
-	ld a, [hl]          ; c2x4: Y position
-	add d
-	ld [hli], a         ; update Y position
-	ld a, [hl]          ; c2x5: X position
-	add e
-	ld [hl], a          ; update X position
-	ld a, [H_CURRENTSPRITEOFFSET]
-	ld l, a
-	ld [hl], $10        ; c2x0=16: walk animation counter
-	dec h
-	inc l
-	ld [hl], $3         ; c1x1: set movement status to walking
-	jp UpdateSpriteImage
-
-; update the walking animation parameters for a sprite that is currently walking
-UpdateSpriteInWalkingAnimation: ; 4ffe (1:4ffe)
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $7
-	ld l, a
-	ld a, [hl]                       ; c1x7 (counter until next walk animation frame)
-	inc a
-	ld [hl], a                       ; c1x7 += 1
-	cp $4
-	jr nz, .noNextAnimationFrame
-	xor a
-	ld [hl], a                       ; c1x7 = 0
-	inc l
-	ld a, [hl]                       ; c1x8 (walk animation frame)
-	inc a
-	and $3
-	ld [hl], a                       ; advance to next animation frame every 4 ticks (16 ticks total for one step)
-.noNextAnimationFrame
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $3
-	ld l, a
-	ld a, [hli]                      ; c1x3 (movement Y delta)
-	ld b, a
-	ld a, [hl]                       ; c1x4 (screen Y position)
-	add b
-	ld [hli], a                      ; update screen Y position
-	ld a, [hli]                      ; c1x5 (movement X delta)
-	ld b, a
-	ld a, [hl]                       ; c1x6 (screen X position)
-	add b
-	ld [hl], a                       ; update screen X position
-	ld a, [H_CURRENTSPRITEOFFSET]
-	ld l, a
-	inc h
-	ld a, [hl]                       ; c2x0 (walk animantion counter)
-	dec a
-	ld [hl], a                       ; update walk animantion counter
-	ret nz
-	ld a, $6                         ; walking finished, update state
-	add l
-	ld l, a
-	ld a, [hl]                       ; c2x6 (movement byte 1)
-	cp $fe
-	jr nc, .initNextMovementCounter  ; values $fe and $ff
-	ld a, [H_CURRENTSPRITEOFFSET]
-	inc a
-	ld l, a
-	dec h
-	ld [hl], $1                      ; c1x1 = 1 (movement status ready)
-	ret
-.initNextMovementCounter
-	call Random
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $8
-	ld l, a
-	ld a, [hRandomAdd]
-	and $7f
-	ld [hl], a                       ; c2x8: set next movement delay to a random value in [0,$7f]
-	dec h                            ;       note that value 0 actually makes the delay $100 (bug?)
-	ld a, [H_CURRENTSPRITEOFFSET]
-	inc a
-	ld l, a
-	ld [hl], $2                      ; c1x1 = 2 (movement status)
-	inc l
-	inc l
-	xor a
-	ld b, [hl]                       ; c1x3 (movement Y delta)
-	ld [hli], a                      ; reset movement Y delta
-	inc l
-	ld c, [hl]                       ; c1x5 (movement X delta)
-	ld [hl], a                       ; reset movement X delta
-	ret
-
-; update delay value (c2x8) for sprites in the delayed state (c1x1)
-UpdateSpriteMovementDelay: ; 5057 (1:5057)
-	ld h, $c2
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $6
-	ld l, a
-	ld a, [hl]              ; c2x6: movement byte 1
-	inc l
-	inc l
-	cp $fe
-	jr nc, .tickMoveCounter ; values $fe or $ff
-	ld [hl], $0
-	jr .moving
-.tickMoveCounter
-	dec [hl]                ; c2x8: frame counter until next movement
-	jr nz, notYetMoving
-.moving
-	dec h
-	ld a, [H_CURRENTSPRITEOFFSET]
-	inc a
-	ld l, a
-	ld [hl], $1             ; c1x1 = 1 (mark as ready to move)
-notYetMoving: ; 5073 (1:5073)
-	ld h, $c1
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $8
-	ld l, a
-	ld [hl], $0             ; c1x8 = 0 (walk animation frame)
-	jp UpdateSpriteImage
-
-InitializeSpriteFacingDirection: ; 507f (1:507f)
-	ld a, [$d72d]
-	bit 5, a
-	jr nz, notYetMoving
-	res 7, [hl]
-	ld a, [$d52a]
-	bit 3, a
-	jr z, .notFacingDown
-	ld c, $0                ; make sprite face down
-	jr .facingDirectionDetermined
-.notFacingDown
-	bit 2, a
-	jr z, .notFacingUp
-	ld c, $4                ; make sprite face up
-	jr .facingDirectionDetermined
-.notFacingUp
-	bit 1, a
-	jr z, .notFacingRight
-	ld c, $c                ; make sprite face right
-	jr .facingDirectionDetermined
-.notFacingRight
-	ld c, $8                ; make sprite face left
-.facingDirectionDetermined
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $9
-	ld l, a
-	ld [hl], c              ; c1x9: set facing direction
-	jr notYetMoving
-
-InitializeSpriteStatus: ; 50ad (1:50ad)
-	ld [hl], $1   ; $c1x1: set movement status to ready
-	inc l
-	ld [hl], $ff  ; $c1x2: set sprite image to $ff (invisible/off screen)
-	inc h
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $2
-	ld l, a
-	ld a, $8
-	ld [hli], a   ; $c2x2: set Y displacement to 8
-	ld [hl], a    ; $c2x3: set X displacement to 8
-	ret
-
-; calculates the spprite's scrren position form its map position and the player position
-InitializeSpriteScreenPosition: ; 50bd (1:50bd)
-	ld h, $c2
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $4
-	ld l, a
-	ld a, [W_YCOORD] ; $d361
-	ld b, a
-	ld a, [hl]      ; c2x4 (Y position + 4)
-	sub b           ; relative to player position
-	swap a          ; * 16
-	sub $4          ; - 4
-	dec h
-	ld [hli], a     ; c1x4 (screen Y position)
-	inc h
-	ld a, [W_XCOORD] ; $d362
-	ld b, a
-	ld a, [hli]     ; c2x6 (X position + 4)
-	sub b           ; relative to player position
-	swap a          ; * 16
-	dec h
-	ld [hl], a      ; c1x6 (screen X position)
-	ret
-
-; tests if sprite is off screen or otherwise unable to do anything
-CheckSpriteAvailability: ; 50dc (1:50dc)
-	ld a, $12
-	call Predef ; indirect jump to IsMissableObjectHidden (f1a6 (3:71a6))
-	ld a, [$ffe5]
-	and a
-	jp nz, .spriteInvisible
-	ld h, $c2
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $6
-	ld l, a
-	ld a, [hl]      ; c2x6: movement byte 1
-	cp $fe
-	jr c, .skipXVisibilityTest ; movement byte 1 < $fe
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $4
-	ld l, a
-	ld b, [hl]      ; c2x4: Y pos (+4)
-	ld a, [W_YCOORD] ; $d361
-	cp b
-	jr z, .skipYVisibilityTest
-	jr nc, .spriteInvisible ; above screen region
-	add $8                  ; screen is 9 tiles high
-	cp b
-	jr c, .spriteInvisible  ; below screen region
-.skipYVisibilityTest
-	inc l
-	ld b, [hl]      ; c2x5: X pos (+4)
-	ld a, [W_XCOORD] ; $d362
-	cp b
-	jr z, .skipXVisibilityTest
-	jr nc, .spriteInvisible ; left of screen region
-	add $9                  ; screen is 10 tiles wide
-	cp b
-	jr c, .spriteInvisible  ; right of screen region
-.skipXVisibilityTest
-	call getTileSpriteStandsOn
-	ld d, $60
-	ld a, [hli]
-	cp d
-	jr nc, .spriteInvisible ; standing on tile with ID >=$60 (bottom left tile)
-	ld a, [hld]
-	cp d
-	jr nc, .spriteInvisible ; standing on tile with ID >=$60 (bottom right tile)
-	ld bc, -20 ; $ffec
-	add hl, bc              ; go back one row of tiles
-	ld a, [hli]
-	cp d
-	jr nc, .spriteInvisible ; standing on tile with ID >=$60 (top left tile)
-	ld a, [hl]
-	cp d
-	jr c, .spriteVisible    ; standing on tile with ID >=$60 (top right tile)
-.spriteInvisible
-	ld h, $c1
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $2
-	ld l, a
-	ld [hl], $ff       ; c1x2
-	scf
-	jr .done
-.spriteVisible
-	ld c, a
-	ld a, [wWalkCounter] ; $cfc5
-	and a
-	jr nz, .done           ; if player is currently walking, we're done
-	call UpdateSpriteImage
-	inc h
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $7
-	ld l, a
-	ld a, [W_GRASSTILE]
-	cp c
-	ld a, $0
-	jr nz, .notInGrass
-	ld a, $80
-.notInGrass
-	ld [hl], a       ; c2x7
-	and a
-.done
-	ret
-
-UpdateSpriteImage: ; 5157 (1:5157)
-	ld h, $c1
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $8
-	ld l, a
-	ld a, [hli]        ; c1x8: walk animation frame
-	ld b, a
-	ld a, [hl]         ; c1x9: facing direction
-	add b
-	ld b, a
-	ld a, [$ff93]  ; current sprite offset
-	add b
-	ld b, a
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $2
-	ld l, a
-	ld [hl], b         ; c1x2: sprite to display
-	ret
-
-; tests if sprite can walk the specified direction
-; b: direction (1,2,4 or 8)
-; c: ID of tile the sprite would walk onto
-; d: Y movement delta (-1, 0 or 1)
-; e: X movement delta (-1, 0 or 1)
-; set carry on failure, clears carry on success
-CanWalkOntoTile: ; 516e (1:516e)
-	ld h, $c2
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $6
-	ld l, a
-	ld a, [hl]         ; c2x6 (movement byte 1)
-	cp $fe
-	jr nc, .canMove    ; values $fe and $ff
-	and a
-	ret
-.canMove
-	ld a, [W_TILESETCOLLISIONPTR]
-	ld l, a
-	ld a, [W_TILESETCOLLISIONPTR+1]
-	ld h, a
-.tilePassableLoop
-	ld a, [hli]
-	cp $ff
-	jr z, .impassable
-	cp c
-	jr nz, .tilePassableLoop
-	ld h, $c2
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $6
-	ld l, a
-	ld a, [hl]         ; $c2x6 (movement byte 1)
-	inc a
-	jr z, .impassable  ; if $ff, no movement allowed (however, changing direction is)
-	ld h, $c1
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $4
-	ld l, a
-	ld a, [hli]        ; c1x4 (screen Y pos)
-	add $4             ; align to blocks (Y pos is always 4 pixels off)
-	add d              ; add Y delta
-	cp $80             ; if value is >$80, the destination is off screen (either $81 or $FF underflow)
-	jr nc, .impassable ; don't walk off screen
-	inc l
-	ld a, [hl]         ; c1x6 (screen X pos)
-	add e              ; add X delta
-	cp $90             ; if value is >$90, the destination is off screen (either $91 or $FF underflow)
-	jr nc, .impassable ; don't walk off screen
-	push de
-	push bc
-	call Func_4c70
-	pop bc
-	pop de
-	ld h, $c1
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $c
-	ld l, a
-	ld a, [hl]         ; c1xc (forbidden directions flags(?))
-	and b              ; check against chosen direction (1,2,4 or 8)
-	jr nz, .impassable ; direction forbidden, don't go there
-	ld h, $c2
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $2
-	ld l, a
-	ld a, [hli]        ; c2x2 (sprite Y displacement, initialized at $8, keep track of where a sprite did go)
-	bit 7, d           ; check if going upwards (d=$ff)
-	jr nz, .upwards
-	add d
-	cp $5
-	jr c, .impassable  ; if c2x2+d < 5, don't go ;bug: this tests probably were supposed to prevent sprites
-	jr .checkHorizontal                          ; from walking out too far, but this line makes sprites get stuck
-.upwards                                         ; whenever they walked upwards 5 steps
-	sub $1                                       ; on the other hand, the amount a sprite can walk out to the
-	jr c, .impassable  ; if d2x2 == 0, don't go  ; right of bottom is not limited (until the counter overflows)
-.checkHorizontal
-	ld d, a
-	ld a, [hl]         ; c2x3 (sprite X displacement, initialized at $8, keep track of where a sprite did go)
-	bit 7, e           ; check if going left (e=$ff)
-	jr nz, .left
-	add e
-	cp $5              ; compare, but no conditional jump like in the vertical check above (bug?)
-	jr .passable
-.left
-	sub $1
-	jr c, .impassable  ; if d2x3 == 0, don't go
-.passable
-	ld [hld], a        ; update c2x3
-	ld [hl], d         ; update c2x2
-	and a              ; clear carry (marking success)
-	ret
-.impassable
-	ld h, $c1
-	ld a, [H_CURRENTSPRITEOFFSET]
-	inc a
-	ld l, a
-	ld [hl], $2        ; c1x1 = 2 (set movement status to delayed)
-	inc l
-	inc l
-	xor a
-	ld [hli], a        ; c1x3 = 0 (clear Y movement delta)
-	inc l
-	ld [hl], a         ; c1x5 = 0 (clear X movement delta)
-	inc h
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $8
-	ld l, a
-	call Random
-	ld a, [hRandomAdd]
-	and $7f
-	ld [hl], a         ; c2x8: set next movement delay to a random value in [0,$7f] (again with delay $100 if value is 0)
-	scf                ; set carry (marking failure to walk)
-	ret
-
-; calculates the tile pointer pointing to the tile the current sprite stancs on
-; this is always the lower left tile of the 2x2 tile blocks all sprites are snapped to
-; hl: output pointer
-getTileSpriteStandsOn: ; 5207 (1:5207)
-	ld h, $c1
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $4
-	ld l, a
-	ld a, [hli]     ; c1x4: screen Y position
-	add $4          ; align to 2*2 tile blocks (Y position is always off 4 pixels to the top)
-	and $f0         ; in case object is currently moving
-	srl a           ; screen Y tile * 4
-	ld c, a
-	ld b, $0
-	inc l
-	ld a, [hl]      ; c1x6: screen Y position
-	srl a
-	srl a
-	srl a           ; screen X tile
-	add $14         ; screen X tile + 20
-	ld d, $0
-	ld e, a
-	ld hl, wTileMap
-	add hl, bc
-	add hl, bc
-	add hl, bc
-	add hl, bc
-	add hl, bc
-	add hl, de     ; wTileMap + 20*(screen Y tile + 1) + screen X tile
-	ret
-
-; loads [de+a] into a
-LoadDEPlusA: ; 522f (1:522f)
-	add e
-	ld e, a
-	jr nc, .noCarry
-	inc d
-.noCarry
-	ld a, [de]
-	ret
-
-Func_5236: ; 5236 (1:5236)
-	ld a, [$d730]
-	bit 7, a
-	ret z
-	ld hl, $d72e
-	bit 7, [hl]
-	set 7, [hl]
-	jp z, Func_52a6
-	ld hl, $cc97
-	ld a, [$cd37]
-	add l
-	ld l, a
-	jr nc, .asm_5251
-	inc h
-.asm_5251
-	ld a, [hl]
-	cp $40
-	jr nz, .asm_525f
-	call Func_52b2
-	ld c, $4
-	ld a, $fe
-	jr .asm_5289
-.asm_525f
-	cp $0
-	jr nz, .asm_526c
-	call Func_52b2
-	ld c, $0
-	ld a, $2
-	jr .asm_5289
-.asm_526c
-	cp $80
-	jr nz, .asm_5279
-	call Func_52b7
-	ld c, $8
-	ld a, $fe
-	jr .asm_5289
-.asm_5279
-	cp $c0
-	jr nz, .asm_5286
-	call Func_52b7
-	ld c, $c
-	ld a, $2
-	jr .asm_5289
-.asm_5286
-	cp $ff
-	ret
-.asm_5289
-	ld b, a
-	ld a, [hl]
-	add b
-	ld [hl], a
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $9
-	ld l, a
-	ld a, c
-	ld [hl], a
-	call Func_52c3
-	ld hl, $cf18
-	dec [hl]
-	ret nz
-	ld a, $8
-	ld [$cf18], a
-	ld hl, $cd37
-	inc [hl]
-	ret
-
-Func_52a6: ; 52a6 (1:52a6)
-	xor a
-	ld [$cd37], a
-	ld a, $8
-	ld [$cf18], a
-	jp Func_52c3
-
-Func_52b2: ; 52b2 (1:52b2)
-	ld a, $4
-	ld b, a
-	jr asm_52ba
-
-Func_52b7: ; 52b7 (1:52b7)
-	ld a, $6
-	ld b, a
-asm_52ba: ; 52ba (1:52ba)
-	ld hl, wSpriteStateData1
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add l
-	add b
-	ld l, a
-	ret
-
-Func_52c3: ; 52c3 (1:52c3)
-	ld hl, wSpriteStateData2
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $e
-	ld l, a
-	ld a, [hl]
-	dec a
-	swap a
-	ld b, a
-	ld hl, wSpriteStateData1
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $9
-	ld l, a
-	ld a, [hl]
-	cp $0
-	jr z, .asm_52ea
-	cp $4
-	jr z, .asm_52ea
-	cp $8
-	jr z, .asm_52ea
-	cp $c
-	jr z, .asm_52ea
-	ret
-.asm_52ea
-	add b
-	ld b, a
-	ld [$ffe9], a
-	call Func_5301
-	ld hl, wSpriteStateData1
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $2
-	ld l, a
-	ld a, [$ffe9]
-	ld b, a
-	ld a, [$ffea]
-	add b
-	ld [hl], a
-	ret
-
-Func_5301: ; 5301 (1:5301)
-	ld a, [H_CURRENTSPRITEOFFSET]
-	add $7
-	ld l, a
-	ld a, [hl]
-	inc a
-	ld [hl], a
-	cp $4
-	ret nz
-	xor a
-	ld [hl], a
-	inc l
-	ld a, [hl]
-	inc a
-	and $3
-	ld [hl], a
-	ld [$ffea], a
-	ret
+INCLUDE "engine/overworld/item.asm"
+INCLUDE "engine/overworld/movement.asm"
 
 INCLUDE "engine/cable_club.asm"
 
@@ -3073,56 +1938,57 @@ Func_7c18: ; 7c18 (1:7c18)
 
 SECTION "bank3",ROMX,BANK[$3]
 
-_GetJoypadState::
-	ld a, [H_JOYPADSTATE]
+_Joypad::
+	ld a, [hJoyInput]
 	cp A_BUTTON + B_BUTTON + SELECT + START ; soft reset
-	jp z, HandleJoypadResetButtons
+	jp z, TrySoftReset
 	ld b, a
-	ld a, [H_OLDPRESSEDBUTTONS]
+	ld a, [hJoyHeldLast]
 	ld e, a
 	xor b
 	ld d, a
 	and e
-	ld [H_NEWLYRELEASEDBUTTONS], a
+	ld [hJoyReleased], a
 	ld a, d
 	and b
-	ld [H_NEWLYPRESSEDBUTTONS], a
+	ld [hJoyPressed], a
 	ld a, b
-	ld [H_OLDPRESSEDBUTTONS], a
+	ld [hJoyHeldLast], a
 	ld a, [$d730]
 	bit 5, a
 	jr nz, DiscardButtonPresses
-	ld a, [H_OLDPRESSEDBUTTONS]
-	ld [H_CURRENTPRESSEDBUTTONS], a
-	ld a, [wJoypadForbiddenButtonsMask]
+	ld a, [hJoyHeldLast]
+	ld [hJoyHeld], a
+	ld a, [wJoyIgnore]
 	and a
 	ret z
 	cpl
 	ld b, a
-	ld a, [H_CURRENTPRESSEDBUTTONS]
+	ld a, [hJoyHeld]
 	and b
-	ld [H_CURRENTPRESSEDBUTTONS], a
-	ld a, [H_NEWLYPRESSEDBUTTONS]
+	ld [hJoyHeld], a
+	ld a, [hJoyPressed]
 	and b
-	ld [H_NEWLYPRESSEDBUTTONS], a
+	ld [hJoyPressed], a
 	ret
 
-; clears all button presses
-DiscardButtonPresses: ; c034 (3:4034)
+DiscardButtonPresses:
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
-	ld [H_NEWLYPRESSEDBUTTONS], a
-	ld [H_NEWLYRELEASEDBUTTONS], a
+	ld [hJoyHeld], a
+	ld [hJoyPressed], a
+	ld [hJoyReleased], a
 	ret
 
-HandleJoypadResetButtons: ; c03c (3:403c)
+TrySoftReset:
 	call DelayFrame
+	; reset joypad (to make sure the
+	; player is really trying to reset)
 	ld a, $30
-	ld [rJOYP], a ; reset joypad state (to enusre the user really intends to reset)
-	ld hl, H_SOFTRESETCOUNTER
+	ld [rJOYP], a
+	ld hl, hSoftReset
 	dec [hl]
 	jp z, SoftReset
-	jp GetJoypadState
+	jp Joypad
 
 INCLUDE "data/map_songs.asm"
 
@@ -3136,9 +2002,9 @@ Func_c335: ; c335 (3:4335)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld [$d13b], a
 	ld [W_LONEATTACKNO], a ; $d05c
-	ld [H_NEWLYPRESSEDBUTTONS], a
-	ld [H_NEWLYRELEASEDBUTTONS], a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyPressed], a
+	ld [hJoyReleased], a
+	ld [hJoyHeld], a
 	ld [$cd6a], a
 	ld [$d5a3], a
 	ld hl, $d73f
@@ -3663,7 +2529,7 @@ Func_c69c: ; c69c (3:469c)
 	ld hl, W_PARTYMON1NAME ; $d2b5
 	call GetPartyMonName
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	call EnableAutoTextBoxDrawing
 	ld a, $d0
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
@@ -4537,7 +3403,7 @@ Func_f225: ; f225 (3:7225)
 	bit 6, [hl]
 	set 6, [hl]
 	ret z
-	ld a, [H_CURRENTPRESSEDBUTTONS]
+	ld a, [hJoyHeld]
 	and $f0
 	ret z
 	ld a, $5a
@@ -4545,7 +3411,7 @@ Func_f225: ; f225 (3:7225)
 	ld a, [$d71c]
 	and a
 	jp nz, Func_f2dd
-	ld a, [H_CURRENTPRESSEDBUTTONS]
+	ld a, [hJoyHeld]
 	ld b, a
 	ld a, [$c109]
 	cp $4
@@ -4598,7 +3464,7 @@ Func_f2b5: ; f2b5 (3:72b5)
 	ret nz
 	callab Func_79f54
 	call DiscardButtonPresses
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	call Func_f2dd
 	set 7, [hl]
 	ld a, [$d718]
@@ -5297,12 +4163,10 @@ HealParty:
 	ret
 
 
-; predef $9
-; predef $a
-; predef $d
-; predef $e
-Func_f71e: ; f71e (3:771e)
+DivideBCDPredef::
 	call GetPredefRegisters
+
+DivideBCD::
 	xor a
 	ld [$ffa5], a
 	ld [$ffa6], a
@@ -5450,15 +4314,18 @@ Func_f800: ; f800 (3:7800)
 	ld de, $ffa1
 	ld hl, $ffa4
 	push bc
-	call Func_f839
+	call SubtractBCD
 	pop bc
 	jr .asm_f803
 
-Func_f81d: ; f81d (3:781d)
+
+AddBCDPredef::
 	call GetPredefRegisters
+
+AddBCD::
 	and a
 	ld b, c
-.asm_f822
+.add
 	ld a, [de]
 	adc [hl]
 	daa
@@ -5466,25 +4333,26 @@ Func_f81d: ; f81d (3:781d)
 	dec de
 	dec hl
 	dec c
-	jr nz, .asm_f822
-	jr nc, .asm_f835
+	jr nz, .add
+	jr nc, .done
 	ld a, $99
 	inc de
-.asm_f830
+.fill
 	ld [de], a
 	inc de
 	dec b
-	jr nz, .asm_f830
-.asm_f835
+	jr nz, .fill
+.done
 	ret
 
-Func_f836: ; f836 (3:7836)
+
+SubtractBCDPredef::
 	call GetPredefRegisters
 
-Func_f839: ; f839 (3:7839)
+SubtractBCD::
 	and a
 	ld b, c
-.asm_f83b
+.sub
 	ld a, [de]
 	sbc [hl]
 	daa
@@ -5492,17 +4360,17 @@ Func_f839: ; f839 (3:7839)
 	dec de
 	dec hl
 	dec c
-	jr nz, .asm_f83b
-	jr nc, .asm_f84f
-	ld a, $0
+	jr nz, .sub
+	jr nc, .done
+	ld a, $00
 	inc de
-.asm_f849
+.fill
 	ld [de], a
 	inc de
 	dec b
-	jr nz, .asm_f849
+	jr nz, .fill
 	scf
-.asm_f84f
+.done
 	ret
 
 
