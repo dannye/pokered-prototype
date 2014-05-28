@@ -45,8 +45,8 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	jr nc, .asm_194f7 ; 0x194d5 $20
 	ld a, [$cd3d]
 	cp $1
-	ld a, $8
-	ld b, $0
+	ld a, $2
+	ld b, $c
 	jr nz, .asm_194e6 ; 0x194e0 $4
 	ld a, $4
 	ld b, $4
@@ -79,21 +79,16 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld a, $f0
 	ld [wJoypadForbiddenButtonsMask], a
-	ld a, [W_XCOORD]
-	cp $14
-	jr z, .asm_19535 ; 0x19526 $d
-	ld a, $1
-	ld [$ff8c], a
-	ld a, $5
-	ld [$ff8b], a
-	call Func_3500
-	ld [hl], $19
-.asm_19535
 	ld a, $5
 	ld [$cc4d], a
 	ld a, $15
 	call Predef
+	ld a, [W_XCOORD]
+	cp $19
 	ld de, CeruleanCityMovement1
+	jr z, .asm_19535 ; 0x19526 $d
+	ld de, CeruleanCityMovement2
+.asm_19535
 	ld a, $1
 	ld [$ff8c], a
 	call MoveSprite
@@ -102,17 +97,20 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ret
 
 CeruleanCityCoords1: ; 1954f (6:554f)
-	db $07,$1e
-	db $09,$1e
+	db $06,$1e
+	db $07,$1f
 	db $ff
 
 CeruleanCityCoords2: ; 19554 (6:5554)
-	db $06,$14
-	db $06,$15
+	db $08,$19
+	db $08,$1a
 	db $ff
 
 CeruleanCityMovement1: ; 19559 (6:5559)
 	db $00,$00,$00,$FF
+
+CeruleanCityMovement2:
+	db $00,$00,$C0,$00,$FF
 
 CeruleanCityScript_1955d: ; 1955d (6:555d)
 	ld a,1
@@ -182,7 +180,7 @@ CeruleanCityScript2: ; 195b1 (6:55b1)
 	ld [$ff8c], a
 	call SetSpriteMovementBytesToFF
 	ld a, [W_XCOORD]
-	cp $14
+	cp $19
 	jr nz, .asm_195f0 ; 0x195e9 $5
 	ld de, CeruleanCityMovement4
 	jr .asm_195f3 ; 0x195ee $3

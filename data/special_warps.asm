@@ -95,7 +95,7 @@ ViridianCityFlyWarp: ; 6482 (1:6482)
 PewterCityFlyWarp: ; 6488 (1:6488)
 	FLYWARP_DATA PEWTER_CITY_WIDTH,     22, 19
 CeruleanCityFlyWarp: ; 648e (1:648e)
-	FLYWARP_DATA CERULEAN_CITY_WIDTH,   18, 19
+	FLYWARP_DATA CERULEAN_CITY_WIDTH,   24, 15
 LavenderTownFlyWarp: ; 6494 (1:6494)
 	FLYWARP_DATA LAVENDER_TOWN_WIDTH,    6,  3
 VermilionCityFlyWarp: ; 649a (1:649a)
