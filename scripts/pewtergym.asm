@@ -66,16 +66,6 @@ PewterGymScript_5c3df: ; 5c3df (17:43df)
 	set 0, [hl]
 	ld hl, wd72a
 	set 0, [hl]
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
 	ld a, $22
 	ld [wcc4d], a
 	ld a, $11

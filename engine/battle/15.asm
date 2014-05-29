@@ -159,6 +159,7 @@ Func_5525f: ; 5525f (15:525f)
 	cp d
 	jp z, Func_55436
 	call KeepEXPBarFull
+	ld a, [W_CURENEMYLVL] ; $d127
 	push af
 	push hl
 	ld a, d
@@ -425,7 +426,6 @@ KeepEXPBarFull:
 	ld a, [wEXPBarKeepFullFlag]
 	set 0, a
 	ld [wEXPBarKeepFullFlag], a
-	ld a, [W_CURENEMYLVL] ; $d127
 	ret
 
 IsCurrentMonBattleMon:

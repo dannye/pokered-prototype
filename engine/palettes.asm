@@ -258,8 +258,6 @@ PointerTable_71f73: ; 71f73 (1c:5f73)
 LoopCounts_71f8f: ; 71f8f (1c:5f8f)
 	db $06,$06,$06,$12,$06,$06,$06,$06
 
-	ds $1F
-
 SendBlkPacket_PartyMenu: ; 71fb6 (1c:5fb6)
 	ld hl, BlkPacket_PartyMenu ; $62f4
 	ld de, wcf2e

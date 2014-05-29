@@ -5,5 +5,3 @@ PalletTown_h: ; 182a1 (6:42a1)
 	db NORTH ; connections
 	NORTH_MAP_CONNECTION ROUTE_1, ROUTE_1_WIDTH, ROUTE_1_HEIGHT, 0, 0, ROUTE_1_WIDTH, Route1Blocks
 	dw PalletTownObject
-	
-	ds $B
