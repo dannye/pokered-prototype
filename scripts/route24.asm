@@ -48,7 +48,7 @@ Route24Script0: ; 513d5 (14:53d5)
 	ret
 
 CoordsData_5140e: ; 5140e (14:540e)
-	db $0F,$0A,$FF
+	db $05,$03,$FF
 
 Route24Script4: ; 51411 (14:5411)
 	ld a, [wcd38]

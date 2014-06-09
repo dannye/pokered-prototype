@@ -2,7 +2,7 @@ MapSongBanks: ; c04d (3:404d)
 	db MUSIC_PALLET_TOWN, BANK(Music_PalletTown) ;PALLET_TOWN
 	db MUSIC_CITIES1, BANK(Music_Cities1) ; VIRIDIAN_CITY
 	db MUSIC_CITIES1, BANK(Music_Cities1) ; PEWTER_CITY
-	db MUSIC_CITIES2, BANK(Music_Cities2) ; CERULEAN_CITY
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; CERULEAN_CITY
 	db MUSIC_LAVENDER, BANK(Music_Lavender) ; LAVENDER_TOWN
 	db MUSIC_VERMILION, BANK(Music_Vermilion) ; VERMILION_CITY
 	db MUSIC_CELADON, BANK(Music_Celadon) ; CELADON_CITY
@@ -13,8 +13,8 @@ MapSongBanks: ; c04d (3:404d)
 	db MUSIC_CITIES1, BANK(Music_Cities1) ; unused
 	db MUSIC_ROUTES1, BANK(Music_Routes1) ; ROUTE_1
 	db MUSIC_ROUTES1, BANK(Music_Routes1) ; ROUTE_2
-	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_3
-	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_4
+	db MUSIC_ROUTES1, BANK(Music_Routes1) ; ROUTE_3
+	db MUSIC_ROUTES1, BANK(Music_Routes1) ; ROUTE_4
 	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_5
 	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_6
 	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_7
@@ -34,8 +34,8 @@ MapSongBanks: ; c04d (3:404d)
 	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_21
 	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_22
 	db MUSIC_INDIGO_PLATEAU, BANK(Music_IndigoPlateau) ; ROUTE_23
-	db MUSIC_ROUTES2, BANK(Music_Routes2) ; ROUTE_24
-	db MUSIC_ROUTES2, BANK(Music_Routes2) ; ROUTE_25
+	db MUSIC_ROUTES1, BANK(Music_Routes1) ; ROUTE_24
+	db MUSIC_ROUTES1, BANK(Music_Routes1) ; ROUTE_25
 	db MUSIC_PALLET_TOWN, BANK(Music_PalletTown) ; RedsHouse1F
 	db MUSIC_PALLET_TOWN, BANK(Music_PalletTown) ; RedsHouse2F
 	db MUSIC_PALLET_TOWN, BANK(Music_PalletTown) ; BluesHouse
@@ -61,11 +61,11 @@ MapSongBanks: ; c04d (3:404d)
 	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; MtMoon1
 	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; MtMoon2
 	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; MtMoon3
-	db MUSIC_CITIES2, BANK(Music_Cities2) ; CeruleanHouseTrashed
-	db MUSIC_CITIES2, BANK(Music_Cities2) ; CeruleanHouse1
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; CeruleanHouseTrashed
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; CeruleanHouse1
 	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; CeruleanPokecenter
 	db MUSIC_GYM, BANK(Music_Gym) ; CeruleanGym
-	db MUSIC_CITIES2, BANK(Music_Cities2) ; BikeShop
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; BikeShop
 	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; CeruleanMart
 	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; MtMoonPokecenter
 	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; CeruleanHouseTrashed
@@ -87,7 +87,7 @@ MapSongBanks: ; c04d (3:404d)
 	db MUSIC_DUNGEON2, BANK(Music_Dungeon2) ; DiglettsCaveEntranceRoute11
 	db MUSIC_VERMILION, BANK(Music_Vermilion) ; Route11GateUpstairs
 	db MUSIC_CITIES1, BANK(Music_Cities1) ; Route12Gate
-	db MUSIC_CITIES2, BANK(Music_Cities2) ; BillsHouse
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; BillsHouse
 	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; VermilionPokecenter
 	db MUSIC_VERMILION, BANK(Music_Vermilion) ; FanClub
 	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; VermilionMart

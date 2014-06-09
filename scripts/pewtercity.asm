@@ -61,7 +61,7 @@ PewterCityScript1: ; 19280 (6:5280)
 	call DisplayTextID
 	ld a, $3c
 	ld [$ffeb], a
-	ld a, $40
+	ld a, $50
 	ld [$ffec], a
 	ld a, $14
 	ld [$ffed], a
@@ -78,8 +78,8 @@ PewterCityScript1: ; 19280 (6:5280)
 	ld [W_PEWTERCITYCURSCRIPT], a
 	ret
 
-MovementData_PewterMuseumGuyExit: ; 192ce (6:52ce)
-	db $00,$00,$00,$00,$FF
+MovementData_PewterGymGuyExit: ; 192ce (6:52ce)
+	db $C0,$C0,$C0,$C0,$C0,$FF
 
 PewterCityScript2: ; 192d3 (6:52d3)
 	ld a, [wd730]
@@ -127,7 +127,7 @@ PewterCityScript4: ; 19305 (6:5305)
 	call DisplayTextID
 	ld a, $3c
 	ld [$ffeb], a
-	ld a, $40
+	ld a, $50
 	ld [$ffec], a
 	ld a, $c
 	ld [$ffed], a
@@ -138,13 +138,13 @@ PewterCityScript4: ; 19305 (6:5305)
 	call Func_32f9
 	ld a, $5
 	ld [$ff8c], a
-	ld de, MovementData_PewterGymGuyExit
+	ld de, MovementData_PewterMuseumGuyExit
 	call MoveSprite
 	ld a, $5
 	ld [W_PEWTERCITYCURSCRIPT], a
 	ret
 
-MovementData_PewterGymGuyExit: ; 19353 (6:5353)
+MovementData_PewterMuseumGuyExit: ; 19353 (6:5353)
 	db $C0,$C0,$C0,$C0,$C0,$FF
 
 PewterCityScript5: ; 19359 (6:5359)

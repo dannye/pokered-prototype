@@ -4,20 +4,20 @@ CeruleanCityObject: ; 0x18786 (size=170)
 	db $a ; warps
 	db $b, $1d, $0, TRASHED_HOUSE
 	db $1d, $1c, $0, CERULEAN_HOUSE
-	db $17, $f, $0, CERULEAN_POKECENTER
+	db $15, $19, $0, CERULEAN_POKECENTER
 	db $f, $14, $0, CERULEAN_GYM
 	db $f, $23, $0, BIKE_SHOP
-	db $15, $19, $0, CERULEAN_MART
+	db $17, $f, $0, CERULEAN_MART
 	db $1, $4, $0, UNKNOWN_DUNGEON_1
 	db $9, $1d, $2, TRASHED_HOUSE
 	db $1b, $11, $1, CERULEAN_HOUSE_3
 	db $19, $11, $0, CERULEAN_HOUSE_3
 
 	db $6 ; signs
-	db $12, $16, $c ; CeruleanCityText12
+	db $15, $17, $c ; CeruleanCityText12
 	db $5, $18, $d ; CeruleanCityText13
-	db $15, $1a, $e ; MartSignText
-	db $17, $10, $f ; PokeCenterSignText
+	db $17, $10, $e ; MartSignText
+	db $15, $1a, $f ; PokeCenterSignText
 	db $f, $26, $10 ; CeruleanCityText16
 	db $f, $d, $11 ; CeruleanCityText17
 
@@ -37,10 +37,10 @@ CeruleanCityObject: ; 0x18786 (size=170)
 	; warp-to
 	EVENT_DISP CERULEAN_CITY_WIDTH, $b, $1d ; TRASHED_HOUSE
 	EVENT_DISP CERULEAN_CITY_WIDTH, $1d, $1c ; CERULEAN_HOUSE
-	EVENT_DISP CERULEAN_CITY_WIDTH, $17, $f ; CERULEAN_POKECENTER
+	EVENT_DISP CERULEAN_CITY_WIDTH, $15, $19 ; CERULEAN_POKECENTER
 	EVENT_DISP CERULEAN_CITY_WIDTH, $f, $14 ; CERULEAN_GYM
 	EVENT_DISP CERULEAN_CITY_WIDTH, $f, $23 ; BIKE_SHOP
-	EVENT_DISP CERULEAN_CITY_WIDTH, $15, $19 ; CERULEAN_MART
+	EVENT_DISP CERULEAN_CITY_WIDTH, $17, $f ; CERULEAN_MART
 	EVENT_DISP CERULEAN_CITY_WIDTH, $1, $4 ; UNKNOWN_DUNGEON_1
 	EVENT_DISP CERULEAN_CITY_WIDTH, $9, $1d ; TRASHED_HOUSE
 	EVENT_DISP CERULEAN_CITY_WIDTH, $1b, $11 ; CERULEAN_HOUSE_3

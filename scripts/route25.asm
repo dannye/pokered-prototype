@@ -61,7 +61,7 @@ Route25TextPointers: ; 51628 (14:5628)
 Route25TrainerHeaders: ; 5163e (14:563e)
 Route25TrainerHeader0: ; 5163e (14:563e)
 	db $1 ; flag's bit
-	db ($2 << 4) ; trainer's view range
+	db ($1 << 4) ; trainer's view range
 	dw wd7f1 ; flag's byte
 	dw Route25BattleText1 ; 0x5705 TextBeforeBattle
 	dw Route25AfterBattleText1 ; 0x570f TextAfterBattle
