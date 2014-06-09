@@ -32,12 +32,6 @@ SetDefaultNames: ; 60ca (1:60ca)
 	jp CopyData
 
 OakSpeech: ; 6115 (1:6115)
-	ld a,$FF
-	call PlaySound ; stop music
-	ld a, BANK(Music_Routes2) ; bank of song
-	ld c,a
-	ld a, MUSIC_ROUTES2 ; song #
-	call PlayMusic  ; plays music
 	call ClearScreen
 	call LoadTextBoxTilePatterns
 	call SetDefaultNames
@@ -92,7 +86,6 @@ OakSpeech: ; 6115 (1:6115)
 	call FadeInIntroPic
 	ld hl,IntroduceRivalText
 	call PrintText
-	;call Func_69a4
 
 Func_61bc: ; 61bc (1:61bc)
 	call GBFadeOut2

@@ -66,13 +66,13 @@ Music_GameCorner:: ; 7c28b (1f:428b)
 
 Music_IntroBattle:: ; 7c294 (1f:4294)
 	db ( $C0 | CH0 )
-	dw Music_IntroBattle_Ch1
+	dw $0000
 	db CH1
-	dw Music_IntroBattle_Ch2
+	dw $0000
 	db CH2
-	dw Music_IntroBattle_Ch3
+	dw $0000
 	db CH3
-	dw Music_IntroBattle_Ch4
+	dw $0000
 
 ; Power Plant, Unknown Dungeon, Rocket HQ
 Music_Dungeon1:: ; 7c2a0 (1f:42a0)

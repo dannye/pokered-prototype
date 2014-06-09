@@ -31,39 +31,6 @@ YourNameIsText: ; 699f (1:699f)
 	TX_FAR _YourNameIsText
 	db "@"
 
-Func_69a4: ; 69a4 (1:69a4)
-	call Func_6a12 ; 0x69a4 call 0x6a12
-	ld de, DefaultNamesRival
-	call Func_6a6c
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
-	and a
-	jr z, .asm_69c1
-	ld hl, DefaultNamesRivalList
-	call Func_6ad6
-	ld de, W_RIVALNAME ; wd34a
-	call Func_69ec
-	jr .asm_69e1
-.asm_69c1
-	ld hl, W_RIVALNAME ; wd34a
-	ld a, $1
-	ld [wd07d], a
-	call DisplayNamingScreen
-	ld a, [wcf4b]
-	cp $50
-	jr z, .asm_69c1
-	call GetRivalPalID
-	call Delay3
-	ld de, Rival1Pic ; $6049
-	ld b, $13
-	call IntroPredef3B
-.asm_69e1
-	ld hl, HisNameIsText
-	jp PrintText
-
-HisNameIsText: ; 69e7 (1:69e7)
-	TX_FAR _HisNameIsText
-	db "@"
-
 Func_69ec: ; 69ec (1:69ec)
 	push de
 	ld hl, wTileMap
@@ -185,37 +152,12 @@ Func_6a6c: ; 6a6c (1:6a6c)
 .namestring ; 6aa3 (1:6aa3)
 	db "Name@"
 
-IF _RED
 DefaultNamesPlayer: ; 6aa8 (1:6aa8)
 	db   "New Name"
 	next "Ash"
 	next "Dan"
 	next "Jack"
 	db   "@"
-
-DefaultNamesRival: ; 6abe (1:6abe)
-	db   "New Name"
-	next "Gary"
-	next "Mike"
-	next "John"
-	db   "@"
-ENDC
-
-IF _BLUE
-DefaultNamesPlayer: ; 6aa8 (1:6aa8)
-	db   "NEW NAME"
-	next "BLUE"
-	next "GARY"
-	next "JOHN"
-	db   "@"
-
-DefaultNamesRival: ; 6abe (1:6abe)
-	db   "NEW NAME"
-	next "RED"
-	next "ASH"
-	next "JACK"
-	db   "@"
-ENDC
 
 Func_6ad6: ; 6ad6 (1:6ad6)
 	ld b, a
@@ -238,18 +180,9 @@ Func_6ad6: ; 6ad6 (1:6ad6)
 	ld de, wcd6d
 	ld bc, $14
 	jp CopyData
-IF _RED
+
 DefaultNamesPlayerList: ; 6af2 (1:6af2)
 	db "New Name@Ash@Dan@Jack@"
-DefaultNamesRivalList: ; 6b08 (1:6b08)
-	db "New Name@Gary@Mike@John@"
-ENDC
-IF _BLUE
-DefaultNamesPlayerList: ; 6af2 (1:6af2)
-	db "NEW NAME@BLUE@GARY@JOHN@"
-DefaultNamesRivalList: ; 6b08 (1:6b08)
-	db "NEW NAME@RED@ASH@JACK@"
-ENDC
 
 TextTerminator_6b20: ; 6b20 (1:6b20)
 	db "@"
