@@ -94,10 +94,6 @@ ENDC
 	inc a
 	dec b
 	jr nz, .asm_4361
-	call Func_44dd
-	ld hl, wOAMBuffer + $28
-	ld a, $74
-	ld [hl], a
 	FuncCoord 2, 17
 	ld hl, Coord
 	ld de, .titlescreenTilemap ; $437f
@@ -218,7 +214,6 @@ ENDC
 	ld c, $1
 	call CheckForUserInterruption
 	jr c, .asm_4459
-	callba Func_372ac
 	call Func_4496
 	jr .asm_443b
 .asm_4459

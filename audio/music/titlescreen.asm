@@ -198,6 +198,8 @@ Music_TitleScreen_Ch1::
 	rest 2
 	note D#, 16
 	note F_, 16
+	notetype 12, 15, 7
+	octave 2
 	note A#, 6
 	note A#, 6
 	note A_, 8
@@ -206,6 +208,8 @@ Music_TitleScreen_Ch1::
 	note F_, 2
 	note G_, 4
 	note G_, 6
+	octave 3
+	notetype 12, 12, 7
 	note D_, 2
 	note D_, 2
 	note F_, 2
@@ -351,9 +355,9 @@ Music_TitleScreen_Ch2::
 	note A_, 2
 	note A_, 2
 	note A#, 2
-	note A#, 2
 	notetype 12, 15, 7
 	duty 3
+	note A#, 2
 	octave 4
 	note D#, 4
 	note D#, 4
