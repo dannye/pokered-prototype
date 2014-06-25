@@ -67,8 +67,7 @@ _ScrollTrainerPicAfterBattle: ; 396d3 (e:56d3)
 	ld b, $1
 	call GoPAL_SET
 	callab _LoadTrainerPic
-	FuncCoord 19, 0
-	ld hl, Coord
+	hlCoord 19, 0
 	ld c, $0
 .asm_396e9
 	inc c
@@ -1173,8 +1172,7 @@ AIRecoverHP: ; 3a6da (e:66da)
 
 Func_3a718: ; 3a718 (e:6718)
 	call AIPrintItemUse_
-	FuncCoord 2, 2
-	ld hl,Coord
+	hlCoord 2, 2
 	xor a
 	ld [wListMenuID],a
 	predef UpdateHPBar2
@@ -1491,8 +1489,7 @@ PartyUpdateDone:
 	ld de, wTrainerFacingDirection
 	ld bc, $3
 	call CopyData
-	FuncCoord 18, 10
-	ld hl, Coord
+	hlCoord 18, 10
 	ld de, rIE ; $ffff
 	jr PlaceHUDTiles
 
@@ -1510,8 +1507,7 @@ PlaceEnemyHUDTiles: ; 3a919 (e:6919)
 	ld de, wTrainerFacingDirection
 	ld bc, $3
 	call CopyData
-	FuncCoord 1, 2
-	ld hl, Coord
+	hlCoord 1, 2
 	ld [hl], $72
 	ld a, [W_ISINBATTLE]
 	dec a
@@ -1529,8 +1525,7 @@ PlaceEnemyHUDTiles: ; 3a919 (e:6919)
 	ld a, c
 	and a
 	jr z, .notOwned
-	FuncCoord 1, 1
-	ld hl, Coord
+	hlCoord 1, 1
 	ld [hl], $E9
 .notOwned
 	pop hl
