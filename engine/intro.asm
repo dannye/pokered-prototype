@@ -13,7 +13,7 @@ PlayIntro: ; 41682 (10:5682)
 	ret
 
 Func_417f0: ; 417f0 (10:57f0)
-	ld hl, $9c00
+	ld hl, vBGMap1
 	ld bc, $240
 	jr asm_417fe
 
@@ -40,28 +40,26 @@ Func_41807: ; 41807 (10:5807)
 
 Func_41842: ; 41842 (10:5842)
 	ld c, $0
-	ld a, $31
-	jp Predef ; indirect jump to Func_79dda
+	predef_jump Func_79dda
 
 Func_41849: ; 41849 (10:5849)
-	ld a, $33
-	call Predef ; indirect jump to Func_79869
+	predef Func_79869
 	ld a, b
 	jp PlaySound
 
 LoadIntroGraphics: ; 41852 (10:5852)
 	ld hl, BattleTransitionTile
-	ld de, $9010
+	ld de, vChars2 + $10
 	ld bc, $10
 	ld a, BANK(BattleTransitionTile)
 	call FarCopyData2
 	ld hl, GameFreakIntro ; $5959
-	ld de, $9600
+	ld de, vChars2 + $600
 	ld bc, $140
 	ld a, BANK(GameFreakIntro)
 	call FarCopyData2
 	ld hl, GameFreakIntro ; $5959
-	ld de, $8800
+	ld de, vChars1
 	ld bc, $140
 	ld a, BANK(GameFreakIntro)
 	jp FarCopyData2
@@ -99,7 +97,7 @@ PlayShootingStar: ; 4188a (10:588a)
 	ld c,$28
 	call DelayFrames
 .asm_418d0
-	ld a, Bank(Func_7d8ea)
+	ld a, BANK(Music_TitleScreen)
 	ld [wc0ef], a
 	ld [wc0f0], a
 	call Func_417f8
@@ -115,10 +113,10 @@ Func_418e9: ; 418e9 (10:58e9)
 	ld hl, Coord
 	ld c, $50
 	call Func_41807
-	ld hl, $9c00
+	ld hl, vBGMap1
 	ld c, $80
 	call Func_41807
-	ld hl, $9dc0
+	ld hl, vBGMap1 + $1c0
 	ld c, $80
 	jp Func_41807
 
@@ -126,6 +124,6 @@ Func_4190c: ; 4190c (10:590c)
 	ret
 
 GameFreakIntro: ; 41959 (10:5959)
-	INCBIN "gfx/gamefreak_intro.h8.2bpp"
+	INCBIN "gfx/gamefreak_intro.2bpp"
 	INCBIN "gfx/gamefreak_logo.2bpp"
 	ds $10 ; blank tile

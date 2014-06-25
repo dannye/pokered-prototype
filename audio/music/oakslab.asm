@@ -1,127 +1,127 @@
 Music_OaksLab_Ch1::
-	tempo 0, 164
-	stereopanning 119
+	tempo 164
+	volume 7, 7
 	vibrato 6, 2, 5
 	duty 1
 	notetype 12, 9, 4
 	rest 8
 	octave 3
-	note B_, 1
+	B_ 1
 	octave 4
-	note C#, 1
-	note D#, 1
-	note E_, 1
-	note C#, 1
-	note D#, 1
-	note E_, 1
-	note F#, 1
+	C# 1
+	D# 1
+	E_ 1
+	C# 1
+	D# 1
+	E_ 1
+	F# 1
 
 Music_OaksLab_Ch1_branch_1::
-	note D#, 6
-	note C#, 1
+	D# 6
+	C# 1
 	octave 3
-	note B_, 1
-	note F#, 1
-	note G#, 1
-	note F#, 1
+	B_ 1
+	F# 1
+	G# 1
+	F# 1
 	rest 1
-	note F#, 1
+	F# 1
 	rest 1
-	note A_, 1
-	note A#, 1
-	note B_, 2
-	note F#, 1
-	note G#, 1
-	note F#, 1
+	A_ 1
+	A# 1
+	B_ 2
+	F# 1
+	G# 1
+	F# 1
 	rest 1
-	note F#, 1
+	F# 1
 	rest 1
-	note F#, 1
-	note G#, 1
-	note F#, 1
+	F# 1
+	G# 1
+	F# 1
 	rest 1
-	note A#, 4
+	A# 4
 	octave 4
-	note D#, 6
-	note C#, 1
+	D# 6
+	C# 1
 	octave 3
-	note B_, 1
-	note G#, 1
-	note B_, 1
-	note D#, 1
+	B_ 1
+	G# 1
+	B_ 1
+	D# 1
 	rest 1
-	note D#, 1
+	D# 1
 	rest 1
-	note A#, 1
-	note B_, 1
-	note F#, 1
-	note A#, 1
-	note D#, 1
+	A# 1
+	B_ 1
+	F# 1
+	A# 1
+	D# 1
 	rest 1
-	note D#, 1
+	D# 1
 	rest 1
-	note F#, 1
-	note A#, 1
-	note D#, 1
+	F# 1
+	A# 1
+	D# 1
 	rest 1
-	note D#, 1
+	D# 1
 	rest 1
-	note A#, 4
-	note E_, 2
+	A# 4
+	E_ 2
 	octave 2
-	note B_, 1
+	B_ 1
 	octave 3
-	note E_, 1
-	note G#, 2
-	note E_, 1
-	note G#, 1
-	note B_, 1
+	E_ 1
+	G# 2
+	E_ 1
+	G# 1
+	B_ 1
 	octave 4
-	note C#, 1
+	C# 1
 	octave 3
-	note B_, 1
+	B_ 1
 	octave 4
-	note C#, 1
+	C# 1
 	octave 3
-	note B_, 4
-	note F#, 2
-	note D#, 1
-	note F#, 1
-	note B_, 2
-	note F#, 1
-	note B_, 1
+	B_ 4
+	F# 2
+	D# 1
+	F# 1
+	B_ 2
+	F# 1
+	B_ 1
 	octave 4
-	note D#, 1
-	note E_, 1
-	note D#, 1
-	note E_, 1
-	note D#, 4
+	D# 1
+	E_ 1
+	D# 1
+	E_ 1
+	D# 4
 	octave 3
-	note A#, 2
+	A# 2
 	octave 4
-	note C#, 2
-	note E_, 2
-	note F#, 2
-	note C#, 2
-	note E_, 2
-	note F#, 2
-	note E_, 2
-	note C#, 2
+	C# 2
+	E_ 2
+	F# 2
+	C# 2
+	E_ 2
+	F# 2
+	E_ 2
+	C# 2
 	octave 3
-	note A#, 1
+	A# 1
 	rest 1
-	note B_, 1
+	B_ 1
 	rest 1
 	octave 4
-	note C#, 1
+	C# 1
 	rest 1
-	note D#, 1
+	D# 1
 	rest 1
-	note E_, 1
+	E_ 1
 	rest 1
-	note F_, 1
+	F_ 1
 	rest 1
-	note F#, 1
+	F# 1
 	rest 1
 	loopchannel 0, Music_OaksLab_Ch1_branch_1
 
@@ -130,73 +130,73 @@ Music_OaksLab_Ch2::
 	duty 3
 	notetype 12, 10, 7
 	octave 3
-	note B_, 1
+	B_ 1
 	octave 4
-	note C#, 1
-	note D#, 1
-	note E_, 1
-	note C#, 1
-	note D#, 1
-	note E_, 1
-	note F#, 1
-	note D#, 1
-	note E_, 1
-	note F#, 1
-	note G#, 1
-	note E_, 1
-	note F#, 1
-	note G#, 1
-	note A#, 1
+	C# 1
+	D# 1
+	E_ 1
+	C# 1
+	D# 1
+	E_ 1
+	F# 1
+	D# 1
+	E_ 1
+	F# 1
+	G# 1
+	E_ 1
+	F# 1
+	G# 1
+	A# 1
 
 Music_OaksLab_Ch2_branch_1::
-	note B_, 6
-	note A#, 1
-	note G#, 1
-	note F#, 6
-	note F_, 1
-	note F#, 1
-	note G#, 4
-	note F#, 8
-	note F#, 4
-	note G#, 6
-	note F#, 1
-	note E_, 1
-	note D#, 6
-	note D_, 1
-	note D#, 1
-	note E_, 4
-	note D#, 8
-	note D#, 4
-	note E_, 6
+	B_ 6
+	A# 1
+	G# 1
+	F# 6
+	F_ 1
+	F# 1
+	G# 4
+	F# 8
+	F# 4
+	G# 6
+	F# 1
+	E_ 1
+	D# 6
+	D_ 1
+	D# 1
+	E_ 4
+	D# 8
+	D# 4
+	E_ 6
 	octave 3
-	note B_, 1
+	B_ 1
 	octave 4
-	note E_, 1
-	note G#, 8
-	note F#, 6
-	note D#, 1
-	note F#, 1
-	note B_, 8
-	note A#, 4
-	note B_, 2
-	note A#, 2
-	note G#, 4
-	note A#, 2
-	note G#, 2
-	note F#, 2
-	note C#, 1
+	E_ 1
+	G# 8
+	F# 6
+	D# 1
+	F# 1
+	B_ 8
+	A# 4
+	B_ 2
+	A# 2
+	G# 4
+	A# 2
+	G# 2
+	F# 2
+	C# 1
 	rest 1
-	note D#, 1
+	D# 1
 	rest 1
-	note E_, 1
+	E_ 1
 	rest 1
-	note F#, 1
+	F# 1
 	rest 1
-	note G_, 1
+	G_ 1
 	rest 1
-	note G#, 1
+	G# 1
 	rest 1
-	note A#, 1
+	A# 1
 	rest 1
 	loopchannel 0, Music_OaksLab_Ch2_branch_1
 
@@ -205,96 +205,96 @@ Music_OaksLab_Ch3::
 	notetype 12, 2, 6
 	rest 8
 	octave 3
-	note F#, 1
-	note E_, 1
-	note D#, 1
-	note C#, 1
-	note E_, 1
-	note D#, 1
-	note C#, 1
+	F# 1
+	E_ 1
+	D# 1
+	C# 1
+	E_ 1
+	D# 1
+	C# 1
 	octave 2
-	note A#, 1
+	A# 1
 
 Music_OaksLab_Ch3_branch_1::
-	note B_, 6
+	B_ 6
 	octave 3
-	note D#, 1
-	note F#, 1
-	note B_, 6
-	note D#, 1
-	note C#, 1
+	D# 1
+	F# 1
+	B_ 6
+	D# 1
+	C# 1
 	octave 2
-	note B_, 4
+	B_ 4
 	octave 3
-	note B_, 8
+	B_ 8
 	octave 4
-	note D#, 4
+	D# 4
 	octave 3
-	note G#, 6
-	note D#, 1
-	note G#, 1
+	G# 6
+	D# 1
+	G# 1
 	octave 2
-	note G#, 6
+	G# 6
 	octave 3
-	note D#, 1
-	note G#, 1
-	note D#, 6
-	note F#, 2
-	note A#, 2
-	note G#, 2
-	note F#, 2
-	note D#, 2
-	note E_, 2
+	D# 1
+	G# 1
+	D# 6
+	F# 2
+	A# 2
+	G# 2
+	F# 2
+	D# 2
+	E_ 2
 	rest 4
-	note E_, 1
-	note E_, 1
-	note E_, 1
+	E_ 1
+	E_ 1
+	E_ 1
 	rest 1
-	note E_, 1
+	E_ 1
 	rest 1
-	note B_, 4
-	note F#, 2
+	B_ 4
+	F# 2
 	rest 4
-	note F#, 1
-	note F#, 1
+	F# 1
+	F# 1
 	octave 2
-	note B_, 1
+	B_ 1
 	rest 1
-	note B_, 1
+	B_ 1
 	rest 1
 	octave 3
-	note B_, 4
-	note F#, 2
+	B_ 4
+	F# 2
 	octave 4
-	note F#, 2
+	F# 2
 	octave 3
-	note E_, 2
+	E_ 2
 	octave 4
-	note E_, 2
+	E_ 2
 	octave 3
-	note C#, 2
+	C# 2
 	octave 4
-	note C#, 2
+	C# 2
 	octave 2
-	note A#, 2
+	A# 2
 	octave 3
-	note A#, 2
+	A# 2
 	octave 2
-	note F#, 2
+	F# 2
 	octave 3
-	note A#, 1
+	A# 1
 	rest 1
-	note G#, 1
+	G# 1
 	rest 1
-	note F#, 1
+	F# 1
 	rest 1
-	note E_, 1
+	E_ 1
 	rest 1
-	note D#, 1
+	D# 1
 	rest 1
-	note C#, 1
+	C# 1
 	rest 1
 	octave 2
-	note A#, 1
+	A# 1
 	rest 1
 	loopchannel 0, Music_OaksLab_Ch3_branch_1

@@ -2,8 +2,8 @@ LoadNicknameMonSprite:
 	call DisableLCD
 	xor a
 	ld [H_DOWNARROWBLINKCNT2], a
-	ld a, [$cd5d]
-	ld de, $8000
+	ld a, [wcd5d]
+	ld de, vNPCSprites
 	call LoadPartyMonSprite
 	call EnableLCD
 	ld a, [$ff8c]
@@ -17,8 +17,8 @@ LoadNicknameMonSprite:
 
 LoadPartyMonSprites:
 	call DisableLCD
-	ld de, $8000
-	ld hl, W_PARTYMON1
+	ld de, vNPCSprites
+	ld hl, wPartySpecies
 .loop
 	ld a, [hli]
 	cp $ff
@@ -32,13 +32,12 @@ LoadPartyMonSprites:
 
 LoadPartyMonSprite:
 	push de
-	ld [$d11e], a
-	ld a, $3a
-	call Predef
+	ld [wd11e], a
+	predef IndexToPokedex
 	xor a
 	ld [H_MULTIPLICAND], a
 	ld [H_MULTIPLICAND + 1], a
-	ld a, [$d11e]
+	ld a, [wd11e]
 	dec a
 	ld [H_MULTIPLICAND + 2], a
 	ld a, $80
@@ -83,7 +82,7 @@ PlacePartyMonSprite:
 	ld bc, $10
 	call CopyData
 	ld hl, wOAMBuffer
-	ld de, $cc5b
+	ld de, wcc5b
 	ld bc, $60
 	call CopyData
 	pop bc
