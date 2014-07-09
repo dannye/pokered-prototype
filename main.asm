@@ -6517,10 +6517,10 @@ INCLUDE "data/super_palettes.asm"
 
 SECTION "bank30",ROMX,BANK[$30]
 	
-Overworld_GFX:    INCBIN "gfx/tilesets/overworld.w128.t2.2bpp"
+Overworld_GFX:    INCBIN "gfx/tilesets/overworld.t2.2bpp"
 Overworld_Block:  INCBIN "gfx/blocksets/overworld.bst"
 
-Cavern_GFX:       INCBIN "gfx/tilesets/cavern.w128.t14.2bpp"
+Cavern_GFX:       INCBIN "gfx/tilesets/cavern.t14.2bpp"
 Cavern_Block:     INCBIN "gfx/blocksets/cavern.bst"
 
 
