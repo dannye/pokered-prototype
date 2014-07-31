@@ -27,10 +27,10 @@ VBlank::
 	call VBlankCopyDouble
 	call UpdateMovingBgTiles
 	call $ff80 ; hOAMDMA
-	ld a, Bank(PrepareOAMData)
-	ld [H_LOADEDROMBANK], a
-	ld [MBC3RomBank], a
-	call PrepareOAMData
+	;ld a, Bank(PrepareOAMData)
+	;ld [H_LOADEDROMBANK], a
+	;ld [MBC3RomBank], a
+	;call PrepareOAMData
 
 	; VBlank-sensitive operations end.
 
@@ -95,6 +95,13 @@ DelayFrame::
 
 NOT_VBLANKED EQU 1
 
+	push bc
+	push de
+	push hl
+	callba PrepareOAMData
+	pop hl
+	pop de
+	pop bc
 	ld a, NOT_VBLANKED
 	ld [H_VBLANKOCCURRED], a
 .halt
