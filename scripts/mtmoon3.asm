@@ -16,7 +16,7 @@ MtMoon3Script_49d58: ; 49d58 (12:5d58)
 
 MtMoon3ScriptPointers: ; 49d63 (12:5d63)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 MtMoon3TextPointers: ; 49e34 (12:5e34)

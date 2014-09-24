@@ -4,7 +4,7 @@ PlayIntro: ; 41682 (10:5682)
 	inc a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call PlayShootingStar
-	call GBFadeOut2
+	call GBFadeOutToWhite
 	xor a
 	ld [$ffae], a
 	ld [H_AUTOBGTRANSFERENABLED], a

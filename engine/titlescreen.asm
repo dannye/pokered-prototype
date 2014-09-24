@@ -11,7 +11,7 @@ SetDefaultNamesBeforeTitlescreen: ; 42b7 (1:42b7)
 	ld de, W_RIVALNAME ; wd34a
 	call CopyFixedLengthText
 	xor a
-	ld [$ffb0], a
+	ld [hWY], a
 	ld [wd358], a
 	ld hl, wd732
 	ld [hli], a
@@ -26,12 +26,12 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	xor a
-	ld [$ffd7], a
+	ld [hTilesetType], a
 	ld [$ffae], a
 	ld a, $40
 	ld [$ffaf], a
 	ld a, $90
-	ld [$ffb0], a
+	ld [hWY], a
 	call ClearScreen
 	call DisableLCD
 	call LoadFontTilePatterns
@@ -123,7 +123,7 @@ ENDC
 	call Func_4533
 	call SaveScreenTilesToBuffer1
 	ld a, $40
-	ld [$ffb0], a
+	ld [hWY], a
 	call LoadScreenTilesFromBuffer2
 	ld a, $98
 	call Func_4533
@@ -178,7 +178,7 @@ ENDC
 	call PlaySound
 	call PrintGameVersionOnTitleScreen
 	ld a, $90
-	ld [$ffb0], a
+	ld [hWY], a
 	ld d, $90
 .asm_440a
 	ld h, d
@@ -220,7 +220,7 @@ ENDC
 	call GBPalWhiteOutWithDelay3
 	call ClearSprites
 	xor a
-	ld [$ffb0], a
+	ld [hWY], a
 	inc a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call ClearScreen
@@ -265,7 +265,7 @@ Func_4496: ; 4496 (1:4496)
 	call Func_4524
 
 	ld a, $90
-	ld [$ffb0], a
+	ld [hWY], a
 	ld d, 1 ; scroll out
 	callba TitleScroll
 	ret
@@ -274,7 +274,7 @@ Func_44c1: ; 44c1 (1:44c1)
 	ld d, 0 ; scroll in
 	callba TitleScroll
 	xor a
-	ld [$ffb0], a
+	ld [hWY], a
 	ret
 
 Func_44cf: ; 44cf (1:44cf)
@@ -348,7 +348,7 @@ Func_4533: ; 4533 (1:4533)
 
 LoadCopyrightAndTextBoxTiles: ; 4538 (1:4538)
 	xor a
-	ld [$ffb0], a
+	ld [hWY], a
 	call ClearScreen
 	call LoadTextBoxTilePatterns
 
