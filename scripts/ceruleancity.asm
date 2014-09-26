@@ -8,7 +8,7 @@ CeruleanCityScript_1948c: ; 1948c (6:548c)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_CERULEANCITYCURSCRIPT], a
-	ld a, $5
+	ld a, HS_CERULEAN_RIVAL
 	ld [wcc4d], a
 	predef_jump HideObject
 
@@ -78,7 +78,7 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ld [hJoyHeld], a
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld a, $5
+	ld a, HS_CERULEAN_RIVAL
 	ld [wcc4d], a
 	predef ShowObject
 	ld a, [W_XCOORD]
@@ -202,7 +202,7 @@ CeruleanCityScript3: ; 19610 (6:5610)
 	ld a, [wd730]
 	bit 0, a
 	ret nz
-	ld a, $5
+	ld a, HS_CERULEAN_RIVAL
 	ld [wcc4d], a
 	predef HideObject
 	xor a

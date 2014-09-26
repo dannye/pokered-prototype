@@ -198,13 +198,12 @@ Museum1FText3: ; 5c256 (17:4256)
 	ld bc, (OLD_AMBER << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
-	ld a, $4
-	ld [$cc4d], a
-	ld a, $11
-	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
+	ld a, HS_GYM_GUY
+	ld [wcc4d], a
+	predef HideObject
 	ld hl, wd754
 	set 1, [hl]
-	ld a, $34
+	ld a, HS_OLD_AMBER
 	ld [wcc4d], a
 	predef HideObject
 	ld hl, ReceivedOldAmberText
