@@ -1,5 +1,6 @@
 Route25Script: ; 515cb (14:55cb)
 	call Route25Script_515e1
+	call HideRoute24_25Rockets
 	call EnableAutoTextBoxDrawing
 	ld hl, Route25TrainerHeaders
 	ld de, Route25ScriptPointers
@@ -26,15 +27,58 @@ Route25Script_515e1: ; 515e1 (14:55e1)
 	bit 4, [hl]
 	ret z
 	set 7, [hl]
-	ld a, HS_NUGGET_BRIDGE_GUY
-	ld [wcc4d], a
-	predef HideObject
+	set 2, [hl]
 	ld a, HS_BILL_1
 	ld [wcc4d], a
 	predef HideObject
 	ld a, HS_BILL_2
 	ld [wcc4d], a
 	predef_jump ShowObject
+
+HideRoute24_25Rockets:
+	ld hl, wd7f2
+	bit 2, [hl]
+	ret z
+	ld a, [W_YCOORD]
+	cp $6
+	ret nz
+	ld a, [W_XCOORD]
+	cp $8
+	ret nz
+	res 2, [hl]
+	ld a, $c
+	ld [H_DOWNARROWBLINKCNT2], a
+	call DisplayTextID
+	call GBFadeOutToBlack
+	ld hl, Route24_25Rockets
+.loop
+	ld a, [hli]
+	cp $ff
+	jp z, GBFadeInFromBlack
+	ld [wcc4d], a
+	push hl
+	predef HideObject
+	pop hl
+	jr .loop
+
+Route24_25Rockets:
+	db HS_ROUTE_24_ROCKET_1
+	db HS_ROUTE_24_ROCKET_2
+	db HS_ROUTE_24_ROCKET_3
+	db HS_ROUTE_24_ROCKET_4
+	db HS_ROUTE_24_ROCKET_5
+	db HS_ROUTE_24_ROCKET_6
+	db HS_ROUTE_24_ROCKET_7
+	db HS_ROUTE_25_ROCKET_1
+	db HS_ROUTE_25_ROCKET_2
+	db HS_ROUTE_25_ROCKET_3
+	db HS_ROUTE_25_ROCKET_4
+	db HS_ROUTE_25_ROCKET_5
+	db HS_ROUTE_25_ROCKET_6
+	db HS_ROUTE_25_ROCKET_7
+	db HS_ROUTE_25_ROCKET_8
+	db HS_ROUTE_25_ROCKET_9
+	db $ff
 
 Route25ScriptPointers: ; 51622 (14:5622)
 	dw CheckFightingMapTrainers
@@ -53,6 +97,7 @@ Route25TextPointers: ; 51628 (14:5628)
 	dw Route25Text9
 	dw Predef5CText
 	dw Route25Text11
+	dw Route25RocketLeaderText
 
 Route25TrainerHeaders: ; 5163e (14:563e)
 Route25TrainerHeader0: ; 5163e (14:563e)
@@ -302,4 +347,8 @@ Route25AfterBattleText9: ; 51787 (14:5787)
 
 Route25Text11: ; 5178c (14:578c)
 	TX_FAR _Route25Text11
+	db "@"
+
+Route25RocketLeaderText:
+	TX_FAR _Route25RocketLeaderText
 	db "@"

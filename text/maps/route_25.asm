@@ -155,3 +155,8 @@ _Route25Text11:: ; 945d3 (25:45d3)
 	line "Bill lives here!"
 	done
 
+_Route25RocketLeaderText::
+	text "Rocket: Alright,"
+	line "Bill's not here."
+	cont "Let's move out."
+	done

@@ -7,77 +7,10 @@ Route24Script: ; 513ad (14:53ad)
 	ld [W_ROUTE24CURSCRIPT], a
 	ret
 
-Route24Script_513c0: ; 513c0 (14:53c0)
-	xor a
-	ld [wJoyIgnore], a
-	ld [W_ROUTE24CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
-	ret
-
 Route24ScriptPointers: ; 513cb (14:53cb)
-	dw Route24Script0
+	dw CheckFightingMapTrainers
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
-	dw Route24Script3
-	dw Route24Script4
-
-Route24Script0: ; 513d5 (14:53d5)
-	ld a, [wd7ef]
-	bit 0, a
-	jp nz, CheckFightingMapTrainers
-	ld hl, CoordsData_5140e ; $540e
-	call ArePlayerCoordsInArray
-	jp nc, CheckFightingMapTrainers
-	xor a
-	ld [hJoyHeld], a
-	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
-	call DisplayTextID
-	ld hl, wd7f0
-	bit 1, [hl]
-	res 1, [hl]
-	ret z
-	ld a, $80
-	ld [wSimulatedJoypadStatesEnd], a
-	ld a, $1
-	ld [wSimulatedJoypadStatesIndex], a
-	call StartSimulatingJoypadStates
-	ld a, $4
-	ld [W_ROUTE24CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
-	ret
-
-CoordsData_5140e: ; 5140e (14:540e)
-	db $05,$03,$FF
-
-Route24Script4: ; 51411 (14:5411)
-	ld a, [wSimulatedJoypadStatesIndex]
-	and a
-	ret nz
-	call Delay3
-	ld a, $0
-	ld [W_ROUTE24CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
-	ret
-
-Route24Script3: ; 51422 (14:5422)
-	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
-	cp $ff
-	jp z, Route24Script_513c0
-	call UpdateSprites
-	ld a, $f0
-	ld [wJoyIgnore], a
-	ld hl, wd7ef
-	set 1, [hl]
-	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
-	call DisplayTextID
-	xor a
-	ld [wJoyIgnore], a
-	ld a, $0
-	ld [W_ROUTE24CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
-	ret
 
 Route24TextPointers: ; 5144b (14:544b)
 	dw Route24Text1
@@ -98,6 +31,15 @@ Route24TrainerHeader0: ; 5145b (14:545b)
 	dw Route24AfterBattleText1 ; 0x557b TextAfterBattle
 	dw Route24EndBattleText1 ; 0x5576 TextEndBattle
 	dw Route24EndBattleText1 ; 0x5576 TextEndBattle
+
+Route24TrainerHeader1:
+	db $1 ; flag's bit
+	db ($4 << 4) ; trainer's view range
+	dw wd7ef ; flag's byte
+	dw Route24Text_51510 ; TextBeforeBattle
+	dw Route24Text_51530 ; TextAfterBattle
+	dw Route24Text_5152b ; TextEndBattle
+	dw Route24Text_5152b ; TextEndBattle
 
 Route24TrainerHeader2: ; 51467 (14:5467)
 	db $3 ; flag's bit
@@ -147,66 +89,13 @@ Route24TrainerHeader6: ; 51497 (14:5497)
 	db $ff
 
 Route24Text1: ; 514a4 (14:54a4)
-	db $8
-	ld hl, wd7f0
-	res 1, [hl]
-	ld a, [wd7ef]
-	bit 0, a
-	jr nz, .asm_a03f5 ; 0x514af $48
-	ld hl, Route24Text_51510
-	call PrintText
-	ld bc, (NUGGET << 8) | 1
-	call GiveItem
-	jr nc, .BagFull
-	ld hl, wd7ef
-	set 0, [hl]
-	ld hl, Route24Text_5151a
-	call PrintText
-	ld hl, Route24Text_51526
-	call PrintText
-	ld hl, wd72d
-	set 6, [hl]
-	set 7, [hl]
-	ld hl, Route24Text_5152b
-	ld de, Route24Text_5152b
-	call SaveEndBattleTextPointers
-	ld a, [$ff8c]
-	ld [wSpriteIndex], a
-	call EngageMapTrainer
-	call InitBattleEnemyParameters
-	xor a
-	ld [hJoyHeld], a
-	ld a, $3
-	ld [W_ROUTE24CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
-	jp TextScriptEnd
-.asm_a03f5 ; 0x514f9
-	ld hl, Route24Text_51530
-	call PrintText
-	jp TextScriptEnd
-.BagFull
-	ld hl, Route24Text_51521
-	call PrintText
-	ld hl, wd7f0
-	set 1, [hl]
+	db $08 ; asm
+	ld hl, Route24TrainerHeader1
+	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24Text_51510: ; 51510 (14:5510)
 	TX_FAR _Route24Text_51510 ; 0x92721
-	db $0B
-	TX_FAR _Route24Text_51515 ; 0x92755
-	db "@"
-
-Route24Text_5151a: ; 5151a (14:551a)
-	TX_FAR _Route24Text_5151a ; 0x92779
-	db $0B, $6, "@"
-
-Route24Text_51521: ; 51521 (14:5521)
-	TX_FAR _Route24Text_51521
-	db "@"
-
-Route24Text_51526: ; 51526 (14:5526)
-	TX_FAR _Route24Text_51526
 	db "@"
 
 Route24Text_5152b: ; 5152b (14:552b)

@@ -42,9 +42,6 @@ const_value = 0
 	const HS_ROUTE_16_SNORLAX             ; 21
 	const HS_ROUTE_22_RIVAL_1             ; 22
 	const HS_ROUTE_22_RIVAL_2             ; 23
-	const HS_NUGGET_BRIDGE_GUY            ; 24
-	const HS_ROUTE_24_ITEM                ; 25 X
-	const HS_ROUTE_25_ITEM                ; 26 X
 	const HS_DAISY_SITTING                ; 27
 	const HS_DAISY_WALKING                ; 28
 	const HS_TOWN_MAP                     ; 29
@@ -192,7 +189,6 @@ const_value = 0
 	const HS_SILPH_CO_11F_1               ; B7
 	const HS_SILPH_CO_11F_2               ; B8
 	const HS_SILPH_CO_11F_3               ; B9
-	const HS_MAP_F4_1                     ; BA XXX sprite doesn't exist
 	const HS_MANSION_2_ITEM               ; BB X
 	const HS_MANSION_3_ITEM_1             ; BC X
 	const HS_MANSION_3_ITEM_2             ; BD X
@@ -234,3 +230,21 @@ const_value = 0
 	const HS_SEAFOAM_ISLANDS_5_BOULDER_1  ; E1
 	const HS_SEAFOAM_ISLANDS_5_BOULDER_2  ; E2
 	const HS_ARTICUNO                     ; E3 X
+	const HS_ROUTE_24_ROCKET_1
+	const HS_ROUTE_24_ROCKET_2
+	const HS_ROUTE_24_ROCKET_3
+	const HS_ROUTE_24_ROCKET_4
+	const HS_ROUTE_24_ROCKET_5
+	const HS_ROUTE_24_ROCKET_6
+	const HS_ROUTE_24_ROCKET_7
+	const HS_ROUTE_24_ITEM
+	const HS_ROUTE_25_ROCKET_1
+	const HS_ROUTE_25_ROCKET_2
+	const HS_ROUTE_25_ROCKET_3
+	const HS_ROUTE_25_ROCKET_4
+	const HS_ROUTE_25_ROCKET_5
+	const HS_ROUTE_25_ROCKET_6
+	const HS_ROUTE_25_ROCKET_7
+	const HS_ROUTE_25_ROCKET_8
+	const HS_ROUTE_25_ROCKET_9
+	const HS_ROUTE_25_ITEM

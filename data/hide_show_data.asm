@@ -249,7 +249,7 @@ MapHSPointers: ; c8f5 (3:48f5)
 	dw MapHSXX
 	dw MapHSXX
 	dw MapHSXX
-	dw MapHSF4
+	dw MapHSXX
 	dw MapHSXX
 	dw MapHSXX
 	dw MapHSXX
@@ -319,11 +319,6 @@ MapHS1B: ; cb4d (3:4b4d)
 MapHS21: ; cb50 (3:4b50)
 	db ROUTE_22,$01,Hide
 	db ROUTE_22,$02,Hide
-MapHS23: ; cb56 (3:4b56)
-	db ROUTE_24,$01,Show
-	db ROUTE_24,$08,Show
-MapHS24: ; cb5c (3:4b5c)
-	db ROUTE_25,$0A,Show
 MapHS27: ; cb5f (3:4b5f)
 	db BLUES_HOUSE,$01,Show
 	db BLUES_HOUSE,$02,Hide
@@ -514,8 +509,6 @@ MapHSEB: ; cd0f (3:4d0f)
 	db SILPH_CO_11F,$03,Show
 	db SILPH_CO_11F,$04,Show
 	db SILPH_CO_11F,$05,Show
-MapHSF4: ; cd18 (3:4d18)
-	db $F4,$02,Show
 MapHSD6: ; cd1b (3:4d1b)
 	db MANSION_2,$02,Show
 MapHSD7: ; cd1e (3:4d1e)
@@ -573,5 +566,25 @@ MapHSA2: ; cd8d (3:4d8d)
 	db SEAFOAM_ISLANDS_5,$01,Hide
 	db SEAFOAM_ISLANDS_5,$02,Hide
 	db SEAFOAM_ISLANDS_5,$03,Show
+MapHS23:
+	db ROUTE_24,$01,Show
+	db ROUTE_24,$02,Show
+	db ROUTE_24,$03,Show
+	db ROUTE_24,$04,Show
+	db ROUTE_24,$05,Show
+	db ROUTE_24,$06,Show
+	db ROUTE_24,$07,Show
+	db ROUTE_24,$08,Show
+MapHS24:
+	db ROUTE_25,$01,Show
+	db ROUTE_25,$02,Show
+	db ROUTE_25,$03,Show
+	db ROUTE_25,$04,Show
+	db ROUTE_25,$05,Show
+	db ROUTE_25,$06,Show
+	db ROUTE_25,$07,Show
+	db ROUTE_25,$08,Show
+	db ROUTE_25,$09,Show
+	db ROUTE_25,$0A,Show
 
 	db $FF,$01,Show
