@@ -1,24 +1,16 @@
-# Build Red/Blue. Yellow is WIP.
-roms := pokered.gbc pokeblue.gbc
+roms := prototype.gbc
 
 
-.PHONY: all clean red blue yellow compare
+.PHONY: prototype clean compare
 
 all:    $(roms)
-red:    pokered.gbc
-blue:   pokeblue.gbc
-yellow: pokeyellow.gbc
+prototype:    prototype.gbc
 
-versions := red blue yellow
+versions := prototype
 
 
 # Header options for rgbfix.
-dmg_opt =  -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03
-cgb_opt = -cjsv -k 01 -l 0x33 -m 0x1b -p 0 -r 03
-
-red_opt    = $(dmg_opt) -t "POKEMON RED"
-blue_opt   = $(dmg_opt) -t "POKEMON BLUE"
-yellow_opt = $(cgb_opt) -t "POKEMON YELLOW"
+dmg_opt =  -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON PRO"
 
 
 
@@ -85,11 +77,11 @@ $(all_obj): $$*.asm $$($$*_dep)
 # Link objects together to build a rom.
 
 # Make a symfile for debugging. rgblink will segfault if a mapfile isn't made too.
-link = rgblink -n poke$*.sym -m poke$*.map
+link = rgblink -n $*.sym -m $*.map
 
-poke%.gbc: $$(%_obj)
+%.gbc: $$(%_obj)
 	$(link) -o $@ $^
-	rgbfix $($*_opt) $@
+	rgbfix $(dmg_opt) $@
 
 
 clean:

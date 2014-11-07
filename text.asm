@@ -15,7 +15,7 @@ POKEDEX_TEXT EQU $2b
 MOVE_NAMES   EQU $2c
 
 INCLUDE "macros.asm"
-
+INCLUDE "charmap.asm"
 
 
 SECTION "Text 1", ROMX, BANK[TEXT_1]

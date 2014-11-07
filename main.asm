@@ -1,4 +1,5 @@
 INCLUDE "constants.asm"
+INCLUDE "charmap.asm"
 
 NPC_SPRITES_1 EQU $4
 NPC_SPRITES_2 EQU $5
@@ -6331,13 +6332,7 @@ SECTION "bank1A",ROMX,BANK[$1A]
 
 INCLUDE "engine/battle/1a.asm"
 
-Version_GFX:
-IF DEF(_RED)
-	INCBIN "gfx/red/redgreenversion.1bpp" ; 10 tiles
-ENDC
-IF DEF(_BLUE)
-	INCBIN "gfx/blue/blueversion.1bpp" ; 8 tiles
-ENDC
+Version_GFX:       INCBIN "gfx/prototypeversion.1bpp" ; 10 tiles
 
 Dojo_GFX:
 Gym_GFX:           INCBIN "gfx/tilesets/gym.2bpp"
