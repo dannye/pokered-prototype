@@ -45,4 +45,3 @@ _ViridianMartText3:: ; 95cf6 (25:5cf6)
 	text "No! Potions are"
 	line "all sold out."
 	done
-

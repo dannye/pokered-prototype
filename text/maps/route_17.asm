@@ -133,7 +133,7 @@ _Route17AfterBattleText9:: ; 915dd (24:55dd)
 	done
 
 _Route17BattleText10:: ; 91600 (24:5600)
-	text "Get lost kid!"
+	text "Get lost, kid!"
 	line "I'm bushed!"
 	done
 

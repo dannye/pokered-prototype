@@ -117,4 +117,3 @@ _MtMoon1Text14:: ; 8093a (20:493a)
 	text "Beware! Zubat is"
 	line "a blood sucker!"
 	done
-

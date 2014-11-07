@@ -91,4 +91,3 @@ _SafariZoneEntranceText_753f0:: ; 9e993 (27:6993)
 	text "Sorry, you're a"
 	line "regular here!"
 	done
-

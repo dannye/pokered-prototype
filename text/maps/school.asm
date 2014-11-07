@@ -11,4 +11,3 @@ _SchoolText2:: ; 95d40 (25:5d40)
 	line "the blackboard"
 	cont "carefully!"
 	done
-

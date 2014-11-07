@@ -12,4 +12,3 @@ _PewterPokecenterText5:: ; 98744 (26:4744)
 	text "Jigglypuff: Puu"
 	line "pupuu!"
 	done
-

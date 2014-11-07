@@ -1,6 +1,6 @@
 _LanceBeforeBattleText:: ; 85d3c (21:5d3c)
 	text "Ah! I heard about"
-	line "you ", $52, "!"
+	line "you, ", $52, "!"
 
 	para "I lead the Elite"
 	line "Four! You can"

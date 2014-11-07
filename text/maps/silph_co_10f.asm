@@ -40,4 +40,3 @@ _SilphCo10AfterBattleText2:: ; 84e66 (21:4e66)
 	line "with beating me?"
 	cont "Then go on home!"
 	done
-

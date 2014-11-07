@@ -5,7 +5,7 @@ _TM39PreReceiveText:: ; 8c86b (23:486b)
 
 	para "You can have this"
 	line "TM. I don't need"
-	cont "it any more..."
+	cont "it anymore..."
 	prompt
 
 _ReceivedTM39Text:: ; 8c8c6 (23:48c6)

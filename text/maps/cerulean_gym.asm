@@ -125,7 +125,7 @@ _CeruleanGymText_5c82f:: ; 98db0 (26:4db0)
 	text "You beat Misty!"
 	line "What'd I tell ya?"
 
-	para "You and me kid,"
+	para "You and me, kid,"
 	line "we make a pretty"
 	cont "darn good team!"
 	done

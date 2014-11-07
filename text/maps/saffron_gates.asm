@@ -3,7 +3,7 @@ _SaffronGateText_1dfe7:: ; 8aa5c (22:6a5c)
 	line "Gee, I'm thirsty,"
 	cont "though!"
 
-	para "Oh wait there,"
+	para "Oh, wait there,"
 	line "the road's closed."
 	done
 

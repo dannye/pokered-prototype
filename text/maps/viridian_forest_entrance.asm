@@ -11,4 +11,3 @@ _ViridianForestEntranceText2:: ; 8a8ab (22:68ab)
 	cont "bite is wicked!"
 	cont "Did you get one?"
 	done
-

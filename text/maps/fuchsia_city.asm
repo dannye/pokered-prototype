@@ -58,7 +58,7 @@ _FuchsiaCityText18:: ; a6011 (29:6011)
 	cont "Leader: Koga"
 
 	para "The Poisonous"
-	line "Ninja Master"
+	line "Ninja Master!"
 	done
 
 _FuchsiaCityChanseyText:: ; a6050 (29:6050)

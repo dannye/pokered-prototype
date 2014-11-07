@@ -22,4 +22,3 @@ LAB          EQU 20
 CLUB         EQU 21
 FACILITY     EQU 22
 PLATEAU      EQU 23
-

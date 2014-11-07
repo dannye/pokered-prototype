@@ -3,7 +3,7 @@ _DayCareMText_56437:: ; 8c000 (23:4000)
 	line "@@"
 
 _DayCareMText_5643b:: ; 8c013 (23:4013)
-	text "come again."
+	text "Come again."
 	done
 
 _DayCareMText_56440:: ; 8c020 (23:4020)

@@ -18,4 +18,3 @@ _CopycatsHouse1FText2:: ; a1535 (28:5535)
 _CopycatsHouse1FText3:: ; a1596 (28:5596)
 	text "Chansey: Chaan!"
 	line "Sii!@@"
-

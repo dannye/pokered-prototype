@@ -19,4 +19,3 @@ _VermilionGymText_5cb6d:: ; 9aaa5 (26:6aa5)
 	para "The same as I'll"
 	line "do to you!"
 	done
-

@@ -140,4 +140,3 @@ _PewterGymText_5c529:: ; 9849f (26:449f)
 	line "You're #mon"
 	cont "champ material!"
 	done
-

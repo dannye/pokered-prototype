@@ -43,4 +43,3 @@ _Museum2FText7:: ; 9694b (25:694b)
 	line "fell on Mt.Moon."
 	cont "(Moon Stone?)"
 	done
-

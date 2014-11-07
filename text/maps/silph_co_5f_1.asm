@@ -47,6 +47,6 @@ _SilphCo5AfterBattleText3:: ; 82a43 (20:6a43)
 _SilphCo5BattleText4:: ; 82a81 (20:6a81)
 	text "Whaaat? There"
 	line "shouldn't be any"
-	cont "children here?"
+	cont "children here!"
 	done
 

@@ -3170,7 +3170,7 @@ _WrongMon3Text:: ; a8284 (2a:4284)
 	done
 
 _Thanks3Text:: ; a82bc (2a:42bc)
-	text "Thanks pal!"
+	text "Thanks, pal!"
 	done
 
 _AfterTrade3Text:: ; a82c9 (2a:42c9)

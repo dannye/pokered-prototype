@@ -58,7 +58,7 @@ _SilphCo11Text2:: ; 8502f (21:502f)
 	done
 
 _SilphCo11Text3:: ; 85075 (21:5075)
-	text "Ah ", $52, "!"
+	text "Ah, ", $52, "!"
 	line "So we meet again!"
 
 	para "The President and"
@@ -70,7 +70,7 @@ _SilphCo11Text3:: ; 85075 (21:5075)
 	line "out of grown-up"
 	cont "matters..."
 
-	para "Or, experience a"
+	para "or, experience a"
 	line "world of pain!"
 	done
 
