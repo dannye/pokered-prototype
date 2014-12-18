@@ -55,14 +55,19 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	ld bc, $100
 	ld a, BANK(PokemonLogoGraphics)
 	call FarCopyData2          ; second chunk
+	ld hl, GottaCatchEmAllTiles
+	ld de, vChars2 + $500
+	ld bc, $1A0
+	ld a, BANK(GottaCatchEmAllTiles)
+	call FarCopyData2
 	ld hl, Version_GFX ; $402f
-	ld de,vChars2 + $600
+	ld de,vChars2 + $700
 	ld bc,$50
 
 	ld a, BANK(Version_GFX)
-	call FarCopyDataDouble
+	call FarCopyData2
 	call Func_4519
-	hlCoord 2, 1
+	hlCoord 2, 0
 	ld a, $80
 	ld de, $14
 	ld c, $6
@@ -78,7 +83,7 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	add hl, de
 	dec c
 	jr nz, .asm_434d
-	hlCoord 2, 7
+	hlCoord 2, 6
 	ld a, $31
 	ld b, $10
 .asm_4361
@@ -86,6 +91,21 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	inc a
 	dec b
 	jr nz, .asm_4361
+	hlCoord 4, 7
+	ld a, $50
+	ld b, $D
+.catchemallloop
+	ld [hli], a
+	inc a
+	dec b
+	jr nz, .catchemallloop
+	hlCoord 4, 8
+	ld b, $D
+.catchemallloop2
+	ld [hli], a
+	inc a
+	dec b
+	jr nz, .catchemallloop2
 	hlCoord 2, 17
 	ld de, .titlescreenTilemap ; $437f
 	ld b, $10
@@ -108,12 +128,16 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 
 	ld [wWhichTrade], a ; wWhichTrade
 	call Func_4524
-	ld a, $9b
+	ld a, $e0
+	ld [$ffbc], a
+	ld a, $9a
 	call Func_4533
 	call SaveScreenTilesToBuffer1
-	ld a, $40
+	ld a, $48
 	ld [hWY], a
 	call LoadScreenTilesFromBuffer2
+	xor a
+	ld [$ffbc], a
 	ld a, $98
 	call Func_4533
 	ld b, $6
@@ -171,7 +195,7 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	ld d, $90
 .asm_440a
 	ld h, d
-	ld l, $40
+	ld l, $48
 	call Func_44cf
 	ld h, $0
 	ld l, $50
@@ -369,10 +393,10 @@ CopyrightTextString3:
 
 ; prints version text (red, blue)
 PrintGameVersionOnTitleScreen: ; 4598 (1:4598)
-	hlCoord 7, 8
+	hlCoord 7, 9
 	ld de, VersionOnTitleScreenText
 	jp PlaceString
 
 ; these point to special tiles specifically loaded for that purpose and are not usual text
 VersionOnTitleScreenText: ; 45a1 (1:45a1)
-	db $7F,$60,$61,$62,$63,$64,$7F,$7F,"@" ; "Prototype"
+	db $7F,$70,$71,$72,$73,$74,$7F,$7F,"@" ; "Prototype"

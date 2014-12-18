@@ -4726,6 +4726,7 @@ TextBoxGraphics:                INCBIN "gfx/text_box.2bpp"
 PokedexTileGraphics:            INCBIN "gfx/pokedex.2bpp"
 WorldMapTileGraphics:           INCBIN "gfx/town_map.2bpp"
 PlayerCharacterTitleGraphics:   INCBIN "gfx/player_title.2bpp"
+GottaCatchEmAllTiles:           INCBIN "gfx/gotta_catch_em_all.2bpp"
 
 
 SECTION "Battle (bank 4)", ROMX, BANK[$4]
@@ -6332,7 +6333,7 @@ SECTION "bank1A",ROMX,BANK[$1A]
 
 INCLUDE "engine/battle/1a.asm"
 
-Version_GFX:       INCBIN "gfx/prototypeversion.1bpp" ; 10 tiles
+Version_GFX:       INCBIN "gfx/prototypeversion.2bpp" ; 10 tiles
 
 Dojo_GFX:
 Gym_GFX:           INCBIN "gfx/tilesets/gym.2bpp"

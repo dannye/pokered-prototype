@@ -41,7 +41,7 @@ _TitleScroll: ; 3726a (d:726a)
 
 .loop
 	ld h, d
-	ld l, $48
+	ld l, $50
 	call .ScrollBetween
 
 	ld h, $00

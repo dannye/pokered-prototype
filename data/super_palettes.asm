@@ -80,9 +80,9 @@ SuperPalettes: ; 72660 (1c:6660)
 
 	; PAL_LOGO1
 	RGB 31, 31, 31
-	RGB 30, 30, 17
-	RGB 17, 23, 10
 	RGB 16, 05, 20
+	RGB 18, 19, 18
+	RGB 05, 12, 22
 
 	; PAL_LOGO2
 	RGB 31, 31, 31
