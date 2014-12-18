@@ -1,6 +1,6 @@
 Music_Cities1_Ch1::
 	tempo 234
-	duty 0
+	duty 3
 	notetype 12, 12, 5
 	rest 16
 	rest 16
@@ -8,7 +8,7 @@ Music_Cities1_Ch1::
 	rest 16
 
 Music_Cities1_Ch1_branch_1::
-	notetype 12, 12, 5
+	notetype 12, 10, 5
 	octave 2
 	C_ 4
 	C_ 4
@@ -42,7 +42,7 @@ Music_Cities1_Ch1_branch_1::
 	F_ 4
 	octave 2
 	D_ 4
-	notetype 12, 12, 7
+	notetype 12, 8, 7
 	rest 2
 	C_ 4
 	A_ 4
@@ -78,8 +78,8 @@ Music_Cities1_Ch1_branch_1::
 
 
 Music_Cities1_Ch2::
-	duty 0
-	notetype 12, 12, 5
+	duty 2
+	notetype 12, 13, 5
 	rest 16
 	rest 16
 	rest 16
@@ -128,11 +128,11 @@ Music_Cities1_Ch2_branch_1::
 	A_ 4
 	F_ 4
 	rest 8
-	notetype 12, 12, 7
+	notetype 12, 13, 7
 	A_ 8
 	F_ 8
 	rest 8
-	notetype 12, 12, 5
+	notetype 12, 13, 5
 	C_ 6
 	D_ 2
 	C_ 3
