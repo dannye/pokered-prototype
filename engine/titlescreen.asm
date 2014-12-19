@@ -261,7 +261,9 @@ Func_4496: ; 4496 (1:4496)
 
 .new
 ; Generate a new TitleMon.
+	REPT 10
 	call Random
+	ENDR
 	cp $98
 	jr nc,.new
 	cp $00
