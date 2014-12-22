@@ -374,7 +374,7 @@ PlayBattleMusic:: ; 0x90c6
 	ld a, [W_GYMLEADERNO]
 	and a
 	jr z, .notGymLeaderBattle
-	ld a, MUSIC_GYM_LEADER_BATTLE
+	ld a, MUSIC_WILD_BATTLE
 	jr .playSong
 .notGymLeaderBattle
 	ld a, [W_CUROPPONENT]
@@ -384,13 +384,13 @@ PlayBattleMusic:: ; 0x90c6
 	jr z, .finalBattle
 	cp LANCE + $c8
 	jr nz, .normalTrainerBattle
-	ld a, MUSIC_GYM_LEADER_BATTLE ; lance also plays gym leader theme
+	ld a, MUSIC_WILD_BATTLE ; lance also plays gym leader theme
 	jr .playSong
 .normalTrainerBattle
-	ld a, MUSIC_TRAINER_BATTLE
+	ld a, MUSIC_WILD_BATTLE
 	jr .playSong
 .finalBattle
-	ld a, MUSIC_FINAL_BATTLE
+	ld a, MUSIC_WILD_BATTLE
 	jr .playSong
 .wildBattle
 	ld a, MUSIC_WILD_BATTLE
