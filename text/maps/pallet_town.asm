@@ -8,22 +8,24 @@ _OakWalksUpText::
 	done
 
 _PalletTownText2::
-	text "I'm raising"
-	line "#mon too!"
+	text "This town is"
+	line "tucked away"
+	cont "behind many hills"
+	cont "and mountains."
 
-	para "When they get"
-	line "strong, they can"
-	cont "protect me!"
+	para "I think we'll be"
+	line "safe from any"
+	cont "Mewtwo attack."
 	done
 
 _PalletTownText3::
-	text "Technology is"
-	line "incredible!"
+	text "I really wanna"
+	line "see what's beyond"
+	cont "that route..."
 
-	para "You can now store"
-	line "and recall items"
-	cont "and #mon as"
-	cont "data via PC!"
+	para "But I'm too out of"
+	line "shape to make it"
+	cont "out of there."
 	done
 
 _PalletTownText4::

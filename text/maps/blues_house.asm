@@ -1,7 +1,9 @@
 _DaisyInitialText::
-	text "Hi ",$52,"!"
-	line $53," is out at"
-	cont "Grandpa's lab."
+	text "Hey, ",$52,","
+	line "you should check"
+	cont "Grandpa's lab if"
+	cont "you're looking for"
+	cont $53,"."
 	done
 
 _DaisyOfferMapText::

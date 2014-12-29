@@ -1,12 +1,11 @@
 _MomWakeUpText::
-	text "Mom: Right."
-	line "All boys leave"
-	cont "home some day."
-	cont "It said so on TV."
+	text "Mom: ",$52,","
+	line "Prof.Oak from"
+	cont "next door said he"
+	cont "had a quest set"
+	cont "up for you."
 
-	para "Prof.Oak, next"
-	line "door, is looking"
-	cont "for you."
+	para "Be safe, honey."
 	done
 
 _MomHealText1::
@@ -24,12 +23,17 @@ _MomHealText2::
 	done
 
 _StandByMeText::
-	text "There's a movie"
-	line "on TV. Four boys"
-	cont "are walking on"
-	cont "railroad tracks."
+	text "The latest report"
+	line "places Mewtwo at"
+	cont "the site of Rock"
+	cont "Tunnel."
 
-	para "I better go too."
+	para "Travelers are"
+	line "warned to return"
+	cont "to their homes if"
+	cont "they hear any"
+	cont "disturbances in"
+	cont "the vicinity."
 	done
 
 _TVWrongSideText::

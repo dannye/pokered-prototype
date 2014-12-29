@@ -1194,9 +1194,7 @@ OaksLabText27: ; 1d3f6 (7:53f6)
 	TX_FAR _OaksLabText27
 	db "@"
 
-OaksLabText38: ; 1d3fb (7:53fb)
 OaksLabText37: ; 1d3fb (7:53fb)
-OaksLabText11: ; 1d3fb (7:53fb)
 OaksLabText10: ; 1d3fb (7:53fb)
 	db $08 ; asm
 	ld hl, OaksLabText_1d405
@@ -1205,4 +1203,15 @@ OaksLabText10: ; 1d3fb (7:53fb)
 
 OaksLabText_1d405: ; 1d405 (7:5405)
 	TX_FAR _OaksLabText_1d405
+	db "@"
+
+OaksLabText38: ; 1d3fb (7:53fb)
+OaksLabText11: ; 1d3fb (7:53fb)
+	db $08 ; asm
+	ld hl, OaksLabTextAide2
+	call PrintText
+	jp TextScriptEnd
+
+OaksLabTextAide2:
+	TX_FAR _OaksLabTextAide2
 	db "@"

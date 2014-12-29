@@ -808,9 +808,13 @@ _IndigoPlateauHQText:: ; 88f08 (22:4f08)
 
 _RedBedroomSNESText:: ; 88f27 (22:4f27)
 	text $52, " is"
-	line "playing the SNES!"
-	cont "...Okay!"
-	cont "It's time to go!"
+	line "playing The"
+	cont "Legend of Zelda:"
+	cont "A Link to the"
+	cont "Past."
+
+	para "Uh oh, I'm out of"
+	line "hearts!"
 	done
 
 _Route15UpstairsBinocularsText:: ; 88f58 (22:4f58)

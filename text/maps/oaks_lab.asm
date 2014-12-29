@@ -160,13 +160,11 @@ _OaksLabText8:: ; 95268 (25:5268)
 	done
 
 _OaksLabText_1d340:: ; 9526b (25:526b)
-	text "Prof.Oak is the"
-	line "authority on"
-	cont "#mon!"
-
-	para "Many #mon"
-	line "trainers hold him"
-	cont "in high regard!"
+	text "If there's any"
+	line "person who can"
+	cont "figure out how to"
+	cont "defeat Mewtwo,"
+	cont "it's Prof.Oak."
 	done
 
 _OaksLabRivalWaitingText:: ; 952bb (25:52bb)
@@ -327,8 +325,26 @@ _OaksLabText27:: ; 95741 (25:5741)
 	done
 
 _OaksLabText_1d405:: ; 957eb (25:57eb)
-	text "I study #mon as"
-	line "Prof.Oak's Aide."
+	text "We've had to halt"
+	line "our research"
+	cont "after we"
+	cont "received news of"
+	cont "a destructive"
+	cont "#mon on the"
+	cont "run."
+	done
+
+_OaksLabTextAide2::
+	text "I don't see why we"
+	line "have to stop our"
+	cont "work to stop"
+	cont "Mewtwo."
+
+	para "Our goal here is"
+	line "to further"
+	cont "knowledge, not"
+	cont "act as #mon"
+	cont "control."
 	done
 
 _OaksLabText_441cc:: ; 9580c (25:580c)
