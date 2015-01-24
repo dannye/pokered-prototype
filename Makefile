@@ -24,7 +24,7 @@ MD5 := md5sum -c --quiet
 # The compare target is a shortcut to check that the build matches the original roms exactly.
 # This is for contributors to make sure a change didn't affect the contents of the rom.
 # More thorough comparison can be made by diffing the output of hexdump -C against both roms.
-compare:
+compare: red blue
 	@$(MD5) roms.md5
 
 
@@ -76,8 +76,8 @@ $(all_obj): $$*.asm $$($$*_dep)
 
 # Link objects together to build a rom.
 
-# Make a symfile for debugging. rgblink will segfault if a mapfile isn't made too.
-link = rgblink -n $*.sym -m $*.map
+# Make a symfile for debugging.
+link = rgblink -n $*.sym
 
 %.gbc: $$(%_obj)
 	$(link) -o $@ $^
@@ -85,5 +85,5 @@ link = rgblink -n $*.sym -m $*.map
 
 
 clean:
-	rm -f $(roms) $(all_obj)
+	rm -f $(roms) $(all_obj) poke*.sym
 	find . \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pic' \) -exec rm {} +
