@@ -1,20 +1,22 @@
 _ViridianCityText1:: ; a43cc (29:43cc)
-	text "Those # Balls"
-	line "at your waist!"
-	cont "You have #mon!"
-
-	para "It's great that"
-	line "you can carry and"
-	cont "use #mon any"
-	cont "time, anywhere!"
+	text "This place is so"
+	line "serene, it'd be"
+	cont "the perfect place"
+	cont "for a home."
 	done
 
 _ViridianCityText_19122:: ; a4437 (29:4437)
-	text "This #mon Gym"
-	line "is always closed."
+	text "I've been hanging"
+	line "around in front"
+	cont "of the Gym to see"
+	cont "if I could catch"
+	cont "a glimpse of the"
+	cont "leader."
 
-	para "I wonder who the"
-	line "Leader is?"
+	para "They have to go"
+	line "out for a"
+	cont "bathroom break"
+	cont "sometime..."
 	done
 
 _ViridianCityText_19127:: ; a4474 (29:4474)
@@ -23,23 +25,23 @@ _ViridianCityText_19127:: ; a4474 (29:4474)
 	done
 
 _ViridianCityText_1914d:: ; a4494 (29:4494)
-	text "You want to know"
-	line "about the 2 kinds"
-	cont "of caterpillar"
-	cont "#mon?"
+	text "Wanna know the"
+	line "difference"
+	cont "between Viridian"
+	cont "and Pewter?"
 	done
 
 _ViridianCityText_19152:: ; a44cd (29:44cd)
-	text "Oh, ok then!"
+	text "I'm sure you'll"
+	line "figure it out on"
+	cont "your own."
 	done
 
 _ViridianCityText_19157:: ; a44db (29:44db)
-	text "Caterpie has no"
-	line "poison, but"
-	cont "Weedle does."
-
-	para "Watch out for its"
-	line "Poison Sting!"
+	text "We have a gym"
+	line "leader whose"
+	cont "identity is"
+	cont "unknown."
 	done
 
 _ViridianCityText_19175:: ; a4525 (29:4525)

@@ -392,10 +392,14 @@ _GymStatueText2:: ; 882a5 (22:42a5)
 	done
 
 _ViridianCityPokecenterGuyText:: ; 882d7 (22:42d7)
-	text "#mon Centers"
-	line "heal your tired,"
-	cont "hurt or fainted"
-	cont "#mon!"
+	text "Even if your"
+	line "#mon are fine,"
+	cont "#mon Centers"
+	cont "are great places"
+	cont "to rest."
+
+	para "At least I'd say"
+	line "so myself."
 	done
 
 _PewterCityPokecenterGuyText:: ; 8830c (22:430c)
