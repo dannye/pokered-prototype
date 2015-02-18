@@ -599,7 +599,7 @@ Mon016_EvosMoves: ; 3b39c (e:739c)
 Mon079_EvosMoves: ; 3b3ad (e:73ad)
 ;SLOWPOKE
 ;Evolutions
-	db EV_LEVEL,37,SLOWBRO
+	db EV_FUSE,SHELLDER,1,SLOWBRO
 	db 0
 ;Learnset
 	db 18,DISABLE
@@ -803,7 +803,7 @@ Mon082_EvosMoves: ; 3b485 (e:7485)
 Mon109_EvosMoves: ; 3b493 (e:7493)
 ;KOFFING
 ;Evolutions
-	db EV_LEVEL,35,WEEZING
+	db EV_FUSE,KOFFING,1,WEEZING
 	db 0
 ;Learnset
 	db 32,SLUDGE
@@ -846,7 +846,7 @@ Mon086_EvosMoves: ; 3b4b3 (e:74b3)
 Mon050_EvosMoves: ; 3b4c2 (e:74c2)
 ;DIGLETT
 ;Evolutions
-	db EV_LEVEL,26,DUGTRIO
+	db EV_FUSE,DIGLETT,2,DUGTRIO
 	db 0
 ;Learnset
 	db 15,GROWL
@@ -1981,7 +1981,7 @@ Mon184_EvosMoves: ; 3b921 (e:7921)
 Mon081_EvosMoves: ; 3b923 (e:7923)
 ;MAGNEMITE
 ;Evolutions
-	db EV_LEVEL,30,MAGNETON
+	db EV_FUSE,MAGNEMITE,2,MAGNETON
 	db 0
 ;Learnset
 	db 21,SONICBOOM

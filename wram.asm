@@ -2249,7 +2249,10 @@ wEXPBarCurEXP::       ds 3
 wEXPBarNeededEXP::    ds 3
 wEXPBarKeepFullFlag:: ds 1
 
-; deed
+wRemovePokemon:: ds 1
+wWhichPokemonRemove:: ds 6
+
+; def3
 
 SECTION "Stack", WRAMX[$dfff], BANK[1]
 wStack:: ; dfff

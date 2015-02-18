@@ -2053,6 +2053,11 @@ _EvolvedText:: ; 946c2 (25:46c2)
 	text " evolved"
 	done
 
+_FusedText::
+	TX_RAM wcf4b
+	text " fused"
+	done
+
 _IntoText:: ; 946cf (25:46cf)
 	db $0
 	line "into @"
@@ -2072,6 +2077,13 @@ _IsEvolvingText:: ; 946fb (25:46fb)
 	TX_RAM wcf4b
 	db $0
 	line "is evolving!"
+	done
+
+_IsFusingText::
+	text "What? @"
+	TX_RAM wcf4b
+	db $0
+	line "is fusing!"
 	done
 
 _FellAsleepText:: ; 94715 (25:4715)
