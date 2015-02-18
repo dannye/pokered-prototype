@@ -5072,6 +5072,8 @@ INCLUDE "engine/menu/oaks_pc.asm"
 
 INCLUDE "engine/hidden_object_functions7.asm"
 
+INCLUDE "engine/menu/bills_pc.asm"
+
 
 SECTION "Pics 1", ROMX, BANK[PICS_1]
 
