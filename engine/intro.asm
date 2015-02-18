@@ -6,7 +6,7 @@ PlayIntro: ; 41682 (10:5682)
 	call PlayShootingStar
 	call GBFadeOutToWhite
 	xor a
-	ld [$ffae], a
+	ld [hSCX], a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call ClearSprites
 	call DelayFrame
@@ -37,9 +37,9 @@ Func_41807: ; 41807 (10:5807)
 	jr nz, .asm_41809
 	ret
 
-Func_41842: ; 41842 (10:5842)
+CopyTileIDsFromList_ZeroBaseTileID: ; 41842 (10:5842)
 	ld c, $0
-	predef_jump Func_79dda
+	predef_jump CopyTileIDsFromList
 
 Func_41849: ; 41849 (10:5849)
 	predef Func_79869

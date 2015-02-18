@@ -183,12 +183,21 @@ wTileMap:: ; c3a0
 ; buffer for tiles that are visible on screen (20 columns by 18 rows)
 	ds 20 * 18
 
+wSerialPartyMonsPatchList:: ; c508
+; list of indexes to patch with SERIAL_NO_DATA_BYTE after transfer
+
 wTileMapBackup:: ; c508
 ; buffer for temporarily saving and restoring current screen's tiles
 ; (e.g. if menus are drawn on top)
-	ds 20 * 18
+;	ds 20 * 18
 
-	ds 120
+	ds 200
+
+wSerialEnemyMonsPatchList:: ; c5d0
+; list of indexes to patch with SERIAL_NO_DATA_BYTE after transfer
+	ds 200
+
+	ds 80
 
 wTempPic::
 wOverworldMap:: ; c6e8
@@ -257,7 +266,12 @@ wListScrollOffset:: ; cc36
 	ds 1
 
 wcc37:: ds 1
-wcc38:: ds 2
+
+wTradeCenterPointerTableIndex:: ; cc38
+	ds 1
+
+	ds 1
+
 wcc3a:: ds 1
 wcc3b:: ds 1
 
@@ -265,12 +279,46 @@ wDoNotWaitForButtonPressAfterDisplayingText:: ; cc3c
 ; if non-zero, skip waiting for a button press after displaying text in DisplayTextID
 	ds 1
 
+wSerialSyncAndExchangeNybbleReceiveData:: ; cc3d
+; the final received nybble is stored here by Serial_SyncAndExchangeNybble
+
+wSerialExchangeNybbleTempReceiveData:: ; cc3d
+; temporary nybble used by Serial_ExchangeNybble
+
+wLinkMenuSelectionReceiveBuffer:: ; cc3d
+; two byte buffer
+; the received menu selection is stored twice
+
 wcc3d:: ds 1
-wcc3e:: ds 4
-wcc42:: ds 1
-wcc43:: ds 4
+
+wSerialExchangeNybbleReceiveData:: ; cc3e
+; the final received nybble is stored here by Serial_ExchangeNybble
+	ds 1
+
+	ds 3
+
+wSerialExchangeNybbleSendData:: ; cc42
+; this nybble is sent when using Serial_SyncAndExchangeNybble or Serial_ExchangeNybble
+
+wLinkMenuSelectionSendBuffer:: ; cc42
+; two byte buffer
+; the menu selection byte is stored twice before sending
+
+	ds 5
+
+wLinkTimeoutCounter:: ; cc47
+; 1 byte
+
+wUnknownSerialCounter:: ; cc47
+; 2 bytes
+
 wcc47:: ds 1
 wcc48:: ds 1
+
+wWhichTradeMonSelectionMenu:: ; cc49
+; $00 = player mons
+; $01 = enemy mons
+
 wcc49:: ds 1
 
 wMenuWrappingEnabled:: ; cc4a
@@ -348,7 +396,8 @@ wPlayerSelectedMove:: ; ccdc
 wEnemySelectedMove:: ; ccdd
 	ds 1
 
-wccde:: ds 1
+wLinkBattleRandomNumberListIndex:: ; ccde
+	ds 1
 
 wAICount:: ; ccdf
 ; number of times remaining that AI action can occur
@@ -379,8 +428,8 @@ wcced:: ds 1
 wccee:: ds 1
 wccef:: ds 1
 wccf0:: ds 1
-wccf1:: ds 1
-wccf2:: ds 1
+wPlayerUsedMove:: ds 1
+wEnemyUsedMove:: ds 1
 wccf3:: ds 1
 wccf4:: ds 1
 
@@ -390,24 +439,32 @@ wPartyFoughtCurrentEnemyFlags::
 
 wccf6:: ds 1
 wccf7:: ds 14
-wcd05:: ds 1
-wcd06:: ds 9
 
-wPlayerMonUnmodifiedLevel:: ; cd0f
-	ds 0
-wcd0f:: ; overload, used in in-game trade code
+wUnknownSlotVar:: ; cd05
+
+wEnemyNumHits:: ; cd05
+; number of hits by enemy in attacks like Double Slap, etc.
+
+wEnemyBideAccumulatedDamage:: ; cd05
+; the amount of damage accumulated by the enemy while biding (2 bytes)
+
+ds 10
+
+wInGameTradeGiveMonSpecies:: ; cd0f
+
+wPlayerMonUnmodifiedLevel:: ; cd0f 
 	ds 1
+
+wInGameTradeTextPointerTablePointer:: ; cd10
+
 wPlayerMonUnmodifiedMaxHP:: ; cd10
-	ds 0
-wcd10:: ; overload, used in in-game trade code
-	ds 1
-wcd11:: ; overload, used in in-game trade code
-	ds 1
+	ds 2
+
+wInGameTradeTextPointerTableIndex:: ; cd12
+
 wPlayerMonUnmodifiedAttack:: ; cd12
-	ds 0
-wcd12:: ; overload, used in in-game trade code
 	ds 1
-wcd13:: ; overload, used in in-game trade code (to store name string)
+wInGameTradeGiveMonName:: ; cd13
 	ds 1
 wPlayerMonUnmodifiedDefense:: ; cd14
 	ds 2
@@ -429,6 +486,9 @@ wPlayerMonSpeedMod:: ; cd1c
 	ds 1
 wPlayerMonSpecialMod:: ; cd1d
 	ds 1
+
+wInGameTradeReceiveMonName:: ; cd1e
+
 wPlayerMonAccuracyMod:: ; cd1e
 	ds 1
 wPlayerMonEvasionMod:: ; cd1f
@@ -444,8 +504,10 @@ wEnemyMonUnmodifiedAttack:: ; cd26
 	ds 2
 wEnemyMonUnmodifiedDefense:: ; cd28
 	ds 1
-wcd29:: ; overload, used in in-game trade code
+
+wInGameTradeMonNick:: ; cd29
 	ds 1
+
 wEnemyMonUnmodifiedSpeed:: ; cd2a
 	ds 2
 wEnemyMonUnmodifiedSpecial:: ; cd2c
@@ -474,7 +536,10 @@ wEnemyMonAccuracyMod:: ; cd32
 wEnemyMonEvasionMod:: ; cd33
 	ds 1
 
-wcd34:: ds 3
+wInGameTradeReceiveMonSpecies::
+	ds 1
+
+	ds 2
 
 wNPCMovementDirections2Index:: ; cd37
 
@@ -500,6 +565,10 @@ wOverrideSimulatedJoypadStatesMask:: ; cd3b
 
 	ds 1
 
+wTradedPlayerMonSpecies:: ; cd3d
+
+wTradingWhichPlayerMon:: ; cd3d
+
 wChangeBoxSavedMapTextPointer:: ; cd3d
 
 wFlyAnimUsingCoordList:: ; cd3d
@@ -519,6 +588,10 @@ wWhichTrade:: ; cd3d
 wTrainerSpriteOffset:: ; cd3d
 	ds 1
 
+wTradedEnemyMonSpecies:: ; cd3e
+
+wTradingWhichEnemyMon:: ; cd3e
+
 wFlyAnimCounter:: ; cd3e
 
 wPlayerSpinInPlaceAnimFrameDelayDelta:: ; cd3e
@@ -529,6 +602,8 @@ wHiddenObjectFunctionRomBank:: ; cd3e
 
 wTrainerEngageDistance:: ; cd3e
 	ds 1
+
+wNameOfPlayerMonToBeTraded:: ; cd3f
 
 wFlyAnimBirdSpriteImageIndex:: ; cd3f
 
@@ -549,7 +624,9 @@ wHiddenObjectY:: ; cd40
 wTrainerScreenY:: ; cd40
 	ds 1
 
-wHiddenObjectX:: ; cd40
+wTradedPlayerMonOT:: ; cd41
+
+wHiddenObjectX:: ; cd41
 
 wTrainerScreenX:: ; cd41
 	ds 1
@@ -564,13 +641,21 @@ wcd48:: ds 1
 wcd49:: ds 1
 wcd4a:: ds 1
 wcd4b:: ds 1
+
+wTradedPlayerMonOTID:: ; cd4c
+
 wcd4c:: ds 1
 wcd4d:: ds 1
+
+wTradedEnemyMonOT:: ; cd4e
+
 wcd4e:: ds 1
 wcd4f:: ds 1
 wcd50:: ds 9
-wcd59:: ds 1
-wcd5a:: ds 1
+
+wTradedEnemyMonOTID:: ; cd59
+	ds 2
+
 wcd5b:: ds 1
 wcd5c:: ds 1
 wcd5d:: ds 1
@@ -580,6 +665,7 @@ wcd5f:: ds 1
 wFlags_0xcd60:: ; cd60
 ; bit 0: is player engaged by trainer (to avoid being engaged by multiple trainers simultaneously)
 ; bit 1: boulder dust animation (from using Strength) pending
+; bit 5: don't play sound when A or B is pressed in menu
 ; bit 6: tried pushing against boulder once (you need to push twice before it will move)
 	ds 1
 
@@ -597,6 +683,9 @@ wcd71:: ds 1
 wcd72:: ds 5
 wcd77:: ds 1
 wcd78:: ds 9
+
+wSerialOtherGameboyRandomNumberListBlock:: ; cd81
+; buffer for transferring the random number list generated by the other gameboy
 
 wTileMapBackup2:: ; cd81
 ; second buffer for temporarily saving and restoring current screen's tiles (e.g. if menus are drawn on top)
@@ -698,12 +787,15 @@ wStringBuffer2:: ; cf70
 wStringBuffer3:: ; cf81
 	ds 9 + 1
 
-wcf8b:: ds 1
-wcf8c:: ds 1
+wList:: ; cf8b
+	ds 2
+
 wcf8d:: ds 1
 wcf8e:: ds 1
-wcf8f:: ds 1
-wcf90:: ds 1
+
+wItemPrices:: ; cf8f
+	ds 2
+
 wcf91:: ds 1
 
 wWhichPokemon:: ; cf92
@@ -712,6 +804,12 @@ wWhichPokemon:: ; cf92
 
 wcf93:: ds 1
 
+wHPBarType:: ; cf94
+; type of HP bar
+; $00 = enemy HUD in battle
+; $01 = player HUD in battle / status screen
+; $02 = party menu
+
 wListMenuID:: ; cf94
 ; ID used by DisplayListMenuID
 	ds 1
@@ -719,24 +817,16 @@ wListMenuID:: ; cf94
 wcf95:: ds 1
 wcf96:: ds 1
 wcf97:: ds 1
-wcf98:: ds 1
-wcf99:: ds 1
-wcf9a:: ds 1
-wcf9b:: ds 1
-wcf9c:: ds 4
-wcfa0:: ds 4
-wcfa4:: ds 2
-wcfa6:: ds 2
-wcfa8:: ds 7
-wcfaf:: ds 10
-wcfb9:: ds 1
-wcfba:: ds 1
-wcfbb:: ds 1
-wcfbc:: ds 2
-wcfbe:: ds 2
-wcfc0:: ds 2
-wcfc2:: ds 2
-wcfc4:: ds 1
+
+; LoadMonData copies mon data here
+wLoadedMon:: party_struct wLoadedMon ; cf98
+
+wFontLoaded:: ; cfc4
+; bit 0: The space in VRAM that is used to store walk animation tile patterns
+;        for the player and NPCs is in use for font tile patterns.
+;        This means that NPC movement must be disabled.
+; The other bits are unused.
+	ds 1
 
 wWalkCounter:: ; cfc5
 ; walk animation counter
@@ -891,8 +981,13 @@ wCriticalHitOrOHKO:: ; d05e
 W_MOVEMISSED:: ; d05f
 	ds 1
 
-wd060:: ds 1
-wd061:: ds 1
+wPlayerStatsToDouble:: ; d060
+; always 0
+	ds 1
+
+wPlayerStatsToHalve:: ; d061
+; always 0
+	ds 1
 
 W_PLAYERBATTSTATUS1:: ; d062
 ; bit 0 - bide
@@ -922,8 +1017,13 @@ W_PLAYERBATTSTATUS3:: ; d064
 ; bit 3 - tranformed
 	ds 1
 
-wd065:: ds 1
-wd066:: ds 1
+wEnemyStatsToDouble:: ; d065
+; always 0
+	ds 1
+
+wEnemyStatsToHalve:: ; d066
+; always 0
+	ds 1
 
 W_ENEMYBATTSTATUS1:: ; d067
 	ds 1
@@ -936,7 +1036,8 @@ wPlayerNumAttacksLeft::
 ; when the player is attacking multiple times, the number of attacks left
 	ds 1
 
-wd06b:: ds 1
+W_PLAYERCONFUSEDCOUNTER:: ; wd06b
+	ds 1
 
 W_PLAYERTOXICCOUNTER:: ; d06c
 	ds 1
@@ -946,10 +1047,11 @@ W_PLAYERDISABLEDMOVE:: ; d06d
 	ds 1
 
 wEnemyNumAttacksLeft::
-; when the player is attacking multiple times, the number of attacks left
+; when the enemy is attacking multiple times, the number of attacks left
 	ds 1
 
-wd070:: ds 1
+W_ENEMYCONFUSEDCOUNTER:: ; wd070
+	ds 1
 
 W_ENEMYTOXICCOUNTER:: ; d071
 	ds 1
@@ -958,11 +1060,16 @@ W_ENEMYDISABLEDMOVE:: ; d072
 
 	ds 1
 
-W_NUMHITS:: ; d074
-; number of hits in attacks like Doubleslap, etc.
-	ds 1
+wPlayerNumHits:: ; d074
+; number of hits by player in attacks like Double Slap, etc.
 
-wd075:: ds 3
+wPlayerBideAccumulatedDamage:: ; d074
+; the amount of damage accumulated by the player while biding (2 bytes)
+
+wUnknownSerialCounter2:: ; d075
+; 2 bytes
+
+ds 4
 
 wEscapedFromBattle::
 ; non-zero when an item or move that allows escape from battle was used
@@ -1118,7 +1225,7 @@ W_SPRITEDECODETABLE1PTR:: ; d0b3
 
 wd0b5:: ds 1
 
-W_LISTTYPE:: ; d0b6
+wNameListType:: ; d0b6
 	ds 1
 
 wPredefBank:: ; d0b7
@@ -1174,13 +1281,23 @@ W_MONHPADDING:: ; d0d7
 
 
 W_DAMAGE:: ; d0d7
+	ds 2
+
+ds 2
+
+wRepelRemainingSteps:: ; wd0db
+    ds 1
+
+wMoves:: ; wd0dc
+; list of moves for FormatMovesString
+	ds 4
+
+wMoveNum:: ; d0e0
 	ds 1
 
-wd0d8:: ds 3
-wd0db:: ds 1
-wd0dc:: ds 4
-wd0e0:: ds 1
-wd0e1:: ds 56
+wMovesString:: ; d0e1
+	ds 56
+
 wd119:: ds 1
 
 wWalkBikeSurfStateCopy:: ; d11a
@@ -1200,7 +1317,10 @@ wNumRunAttempts::
 wd121:: ds 1
 wd122:: ds 2
 wd124:: ds 1
-wd125:: ds 1
+
+wTextBoxID:: ; d125
+	ds 1
+
 wd126:: ds 1
 
 W_CURENEMYLVL:: ; d127
@@ -1210,10 +1330,10 @@ wd128:: ds 1
 wd129:: ds 1
 wd12a:: ds 1
 
-W_ISLINKBATTLE:: ; d12b
+wLinkState:: ; d12b
 	ds 1
 
-wd12c:: ds 1
+wTwoOptionMenuID:: ds 1
 wd12d:: ds 1
 wd12e:: ds 1
 wd12f:: ds 1
@@ -1245,10 +1365,20 @@ W_PRIZE3:: ; d13f
 
 	ds 1
 
+wSerialRandomNumberListBlock:: ; d141
+; the first 7 bytes are the preamble
+
 wd141:: ds 2
 wd143:: ds 2
 wd145:: ds 3
-wd148:: ds 10
+
+wLinkBattleRandomNumberList:: ; d148
+; shared list of 9 random numbers, indexed by wLinkBattleRandomNumberListIndex
+	ds 10
+
+wSerialPlayerDataBlock:: ; d152
+; the first 6 bytes are the preamble
+
 wd152:: ds 1
 wd153:: ds 3
 wd156:: ds 1
@@ -1881,7 +2011,11 @@ wd736:: ; d736
 ; bit 6: jumping down a ledge
 	ds 1
 
-wd737:: ds 4
+wCompletedInGameTradeFlags:: ; d737
+	ds 2
+
+	ds 2
+
 wd73b:: ds 1
 wd73c:: ds 3
 
@@ -1897,7 +2031,16 @@ wd743:: ds 1
 wd744:: ds 3
 wd747:: ds 3
 wd74a:: ds 1
-wd74b:: ds 1
+
+wd74b:: ; d74b
+; bit 0: Prof. Oak has lead the player to the north end of his lab
+; bit 1: Prof. Oak has asked the player to choose a pokemon
+; bit 2: the player and the rival have received their pokemon
+; bit 3: the player has battled the rival in Oak's lab
+; bit 4: Prof. Oak has given the player 5 pokeballs
+; bit 5: received pokedex
+	ds 1
+
 wd74c:: ds 2
 wd74e:: ds 3
 wd751:: ds 1
@@ -2022,6 +2165,9 @@ wd87f:: ds 1
 wd880:: ds 1
 wd881:: ds 1
 wd882:: ds 5
+
+wLinkEnemyTrainerName:: ; d887
+; linked game's trainer name
 
 W_GRASSRATE:: ; d887
 	ds 1

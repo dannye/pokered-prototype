@@ -16,10 +16,11 @@ PrizeMenuMon1Entries: ; 52859 (14:6859)
 	db CLEFAIRY
 	db NIDORINA
 	db "@"
+
 PrizeMenuMon1Cost: ; 5285d (14:685d)
-	db $01,$80
-	db $05,$00
-	db $12,$00
+	coins 180
+	coins 500
+	coins 1200
 	db "@"
 
 PrizeMenuMon2Entries: ; 52864 (14:6864)
@@ -27,10 +28,11 @@ PrizeMenuMon2Entries: ; 52864 (14:6864)
 	db SCYTHER
 	db PORYGON
 	db "@"
+
 PrizeMenuMon2Cost: ; 52868 (14:6868)
-	db $28,$00
-	db $55,$00
-	db $99,$99
+	coins 2800
+	coins 5500
+	coins 9999
 	db "@"
 
 PrizeMenuTMsEntries: ; 5286f (14:686f)
@@ -38,8 +40,9 @@ PrizeMenuTMsEntries: ; 5286f (14:686f)
 	db TM_15
 	db TM_50
 	db "@"
+
 PrizeMenuTMsCost: ; 52873 (14:6873)
-	db $33,$00 ; 3300 Coins
-	db $55,$00 ; 5500 Coins
-	db $77,$00 ; 7700 Coins
+	coins 3300
+	coins 5500
+	coins 7700
 	db "@"
