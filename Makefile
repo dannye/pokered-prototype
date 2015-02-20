@@ -85,5 +85,5 @@ link = rgblink -n $*.sym
 
 
 clean:
-	rm -f $(roms) $(all_obj) poke*.sym
+	rm -f $(roms) $(all_obj) $(roms:.gbc=.sym)
 	find . \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pic' \) -exec rm {} +
