@@ -88,6 +88,8 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
+	ld b, $8
+	call GoPAL_SET
 	callba SendNicknamePal
 	call LoadHpBarAndStatusTilePatterns
 	call LoadEDTile
