@@ -68,8 +68,6 @@ ResetStatusAndHalveMoneyOnBlackout::
 	predef_jump HealParty
 
 
-INCLUDE "data/baseStats/mew.asm"
-
 INCLUDE "engine/battle/safari_zone.asm"
 
 INCLUDE "engine/titlescreen.asm"
@@ -5375,14 +5373,6 @@ BaseStats: INCLUDE "data/base_stats.asm"
 INCLUDE "data/cries.asm"
 INCLUDE "engine/battle/e.asm"
 
-TradingAnimationGraphics:
-	INCBIN "gfx/game_boy.norepeat.2bpp"
-	INCBIN "gfx/link_cable.2bpp"
-
-TradingAnimationGraphics2:
-; Pokeball traveling through the link cable.
-	INCBIN "gfx/trade2.2bpp"
-
 INCLUDE "engine/evos_moves.asm"
 INCLUDE "engine/battle/e_2.asm"
 
@@ -6345,6 +6335,14 @@ Interior_Block:    INCBIN "gfx/blocksets/interior.bst"
 Plateau_GFX:       INCBIN "gfx/tilesets/plateau.t10.2bpp"
 Plateau_Block:     INCBIN "gfx/blocksets/plateau.bst"
 
+TradingAnimationGraphics:
+	INCBIN "gfx/game_boy.norepeat.2bpp"
+	INCBIN "gfx/link_cable.2bpp"
+
+TradingAnimationGraphics2:
+; Pokeball traveling through the link cable.
+	INCBIN "gfx/trade2.2bpp"
+
 
 SECTION "bank1A",ROMX,BANK[$1A]
 
@@ -6635,14 +6633,80 @@ MewtwoPicFront::      INCBIN "pic/bmon/mewtwo.pic"
 MewtwoPicBack::       INCBIN "pic/monback/mewtwob.pic"
 MewPicFront::         INCBIN "pic/bmon/mew.pic"
 MewPicBack::          INCBIN "pic/monback/mewb.pic"
+PichuPicFront::       INCBIN "pic/bmon/pichu.pic"
+PichuPicBack::        INCBIN "pic/monback/pichub.pic"
+CleffaPicFront::      INCBIN "pic/bmon/cleffa.pic"
+CleffaPicBack::       INCBIN "pic/monback/cleffab.pic"
+IgglybuffPicFront::   INCBIN "pic/bmon/igglybuff.pic"
+IgglybuffPicBack::    INCBIN "pic/monback/igglybuffb.pic"
+CrobatPicFront::      INCBIN "pic/bmon/crobat.pic"
+CrobatPicBack::       INCBIN "pic/monback/crobatb.pic"
+BellossomPicFront::   INCBIN "pic/bmon/bellossom.pic"
+BellossomPicBack::    INCBIN "pic/monback/bellossomb.pic"
+PolitoedPicFront::    INCBIN "pic/bmon/politoed.pic"
+PolitoedPicBack::     INCBIN "pic/monback/politoedb.pic"
+SlowkingPicFront::    INCBIN "pic/bmon/slowking.pic"
+SlowkingPicBack::     INCBIN "pic/monback/slowkingb.pic"
+MagnezonePicFront::   INCBIN "pic/bmon/magnezone.pic"
+MagnezonePicBack::    INCBIN "pic/monback/magnezoneb.pic"
+SteelixPicFront::     INCBIN "pic/bmon/steelix.pic"
+SteelixPicBack::      INCBIN "pic/monback/steelixb.pic"
+TyroguePicFront::     INCBIN "pic/bmon/tyrogue.pic"
+TyroguePicBack::      INCBIN "pic/monback/tyrogueb.pic"
+HitmontopPicFront::   INCBIN "pic/bmon/hitmontop.pic"
+HitmontopPicBack::    INCBIN "pic/monback/hitmontopb.pic"
+LickilickyPicFront::  INCBIN "pic/bmon/lickilicky.pic"
+LickilickyPicBack::   INCBIN "pic/monback/lickilickyb.pic"
+RhyperiorPicFront::   INCBIN "pic/bmon/rhyperior.pic"
+RhyperiorPicBack::    INCBIN "pic/monback/rhyperiorb.pic"
+HappinyPicFront::     INCBIN "pic/bmon/happiny.pic"
+HappinyPicBack::      INCBIN "pic/monback/happinyb.pic"
+BlisseyPicFront::     INCBIN "pic/bmon/blissey.pic"
+BlisseyPicBack::      INCBIN "pic/monback/blisseyb.pic"
 
 
 SECTION "bank2F",ROMX,BANK[$2F]
 
-INCLUDE "data/super_palettes.asm"
+TangrowthPicFront::   INCBIN "pic/bmon/tangrowth.pic"
+TangrowthPicBack::    INCBIN "pic/monback/tangrowthb.pic"
+KingdraPicFront::     INCBIN "pic/bmon/kingdra.pic"
+KingdraPicBack::      INCBIN "pic/monback/kingdrab.pic"
+MimeJrPicFront::      INCBIN "pic/bmon/mimejr.pic"
+MimeJrPicBack::       INCBIN "pic/monback/mimejrb.pic"
+ScizorPicFront::      INCBIN "pic/bmon/scizor.pic"
+ScizorPicBack::       INCBIN "pic/monback/scizorb.pic"
+SmoochumPicFront::    INCBIN "pic/bmon/smoochum.pic"
+SmoochumPicBack::     INCBIN "pic/monback/smoochumb.pic"
+ElekidPicFront::      INCBIN "pic/bmon/elekid.pic"
+ElekidPicBack::       INCBIN "pic/monback/elekidb.pic"
+ElectivirePicFront::  INCBIN "pic/bmon/electivire.pic"
+ElectivirePicBack::   INCBIN "pic/monback/electivireb.pic"
+MagbyPicFront::       INCBIN "pic/bmon/magby.pic"
+MagbyPicBack::        INCBIN "pic/monback/magbyb.pic"
+MagmortarPicFront::   INCBIN "pic/bmon/magmortar.pic"
+MagmortarPicBack::    INCBIN "pic/monback/magmortarb.pic"
+EspeonPicFront::      INCBIN "pic/bmon/espeon.pic"
+EspeonPicBack::       INCBIN "pic/monback/espeonb.pic"
+UmbreonPicFront::     INCBIN "pic/bmon/umbreon.pic"
+UmbreonPicBack::      INCBIN "pic/monback/umbreonb.pic"
+LeafeonPicFront::     INCBIN "pic/bmon/leafeon.pic"
+LeafeonPicBack::      INCBIN "pic/monback/leafeonb.pic"
+GlaceonPicFront::     INCBIN "pic/bmon/glaceon.pic"
+GlaceonPicBack::      INCBIN "pic/monback/glaceonb.pic"
+Porygon2PicFront::    INCBIN "pic/bmon/porygon2.pic"
+Porygon2PicBack::     INCBIN "pic/monback/porygon2b.pic"
+PorygonZPicFront::    INCBIN "pic/bmon/porygonz.pic"
+PorygonZPicBack::     INCBIN "pic/monback/porygonzb.pic"
+MunchlaxPicFront::    INCBIN "pic/bmon/munchlax.pic"
+MunchlaxPicBack::     INCBIN "pic/monback/munchlaxb.pic"
 
 
 SECTION "bank30",ROMX,BANK[$30]
+
+INCLUDE "data/super_palettes.asm"
+
+
+SECTION "bank31",ROMX,BANK[$31]
 	
 Overworld_GFX:    INCBIN "gfx/tilesets/overworld.t2.2bpp"
 Overworld_Block:  INCBIN "gfx/blocksets/overworld.bst"
@@ -6651,13 +6715,13 @@ Cavern_GFX:       INCBIN "gfx/tilesets/cavern.t14.2bpp"
 Cavern_Block:     INCBIN "gfx/blocksets/cavern.bst"
 
 
-SECTION "bank31",ROMX,BANK[$31]
-
-PartyMonSprites:  INCBIN "gfx/party_mon_sprites.w32.2bpp",$0,$4000
-
-
 SECTION "bank32",ROMX,BANK[$32]
 
-INCBIN "gfx/party_mon_sprites.w32.2bpp",$4000,$b80
+PartyMonSprites:  INCBIN "gfx/party_mon_sprites.2bpp",$0,$4000
+
+
+SECTION "bank33",ROMX,BANK[$33]
+
+INCBIN "gfx/party_mon_sprites.2bpp",$4000,$1b00
 
 INCLUDE "engine/mon_party_sprites2.asm"

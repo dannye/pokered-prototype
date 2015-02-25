@@ -1408,9 +1408,7 @@ wPokedexOwned:: ; d2f7
 	flag_array NUM_POKEMON
 wPokedexOwnedEnd::
 
-wPokedexSeen:: ; d30a
-	flag_array NUM_POKEMON
-wPokedexSeenEnd::
+	ds 2 * ((151 + 7) / 8) - (wPokedexOwnedEnd - wPokedexOwned)
 
 
 wNumBagItems:: ; d31d
@@ -1587,7 +1585,13 @@ wDestinationWarpID:: ; d42f
 ; if $ff, the player's coordinates are not updated when entering the map
 	ds 1
 
-	ds 128
+
+wPokedexSeen::
+	flag_array NUM_POKEMON
+wPokedexSeenEnd::
+
+
+	ds 128 - (wPokedexSeenEnd - wPokedexSeen)
 
 wd4b0:: ds 1
 wd4b1:: ds 32
@@ -1886,6 +1890,7 @@ W_SEAFOAMISLANDS5CURSCRIPT:: ; d668
 W_ROUTE18GATECURSCRIPT:: ; d669
 	ds 1
 
+wEvolutionData::
 	ds 134
 
 wd6f0:: ds 14
@@ -2249,10 +2254,11 @@ wEXPBarCurEXP::       ds 3
 wEXPBarNeededEXP::    ds 3
 wEXPBarKeepFullFlag:: ds 1
 
-wRemovePokemon:: ds 1
+wCheckLevel::         ds 1
+wRemovePokemon::      ds 1
 wWhichPokemonRemove:: ds 6
 
-; def3
+; def5
 
 SECTION "Stack", WRAMX[$dfff], BANK[1]
 wStack:: ; dfff

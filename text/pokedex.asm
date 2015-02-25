@@ -1,3 +1,5 @@
+SECTION "Pokedex Text", ROMX, BANK[POKEDEX_TEXT]
+
 _RhydonDexEntry::
 	text "Protected by an"
 	next "armor-like hide,"
@@ -298,6 +300,26 @@ _TangelaDexEntry::
 	next "shake as it walks"
 	dex
 
+_PichuDexEntry::
+	text "It is not yet"
+	next "skilled at storing"
+	next "electricity."
+
+	page "It may send out a"
+	next "jolt if amused or"
+	next "startled"
+	dex
+
+_CleffaDexEntry::
+	text "Because of its"
+	next "unusual, star-like"
+	next "silhouette, people"
+
+	page "believe that it"
+	next "came here on"
+	next "a meteor"
+	dex
+
 _GrowlitheDexEntry::
 	text "Very protective"
 	next "of its territory."
@@ -468,6 +490,16 @@ _GolemDexEntry::
 	next "without damage"
 	dex
 
+_IgglybuffDexEntry::
+	text "Instead of walking"
+	next "with its short"
+	next "legs, it moves"
+
+	page "around by bouncing"
+	next "on its soft,"
+	next "tender body"
+	dex
+
 _MagmarDexEntry::
 	text "Its body always"
 	next "burns with an"
@@ -476,6 +508,16 @@ _MagmarDexEntry::
 	page "enables it to"
 	next "hide perfectly"
 	next "among flames"
+	dex
+
+_CrobatDexEntry::
+	text "As a result of its"
+	next "pursuit of faster,"
+	next "yet more silent"
+
+	page "flight, a new set"
+	next "of wings grew on"
+	next "its hind legs"
 	dex
 
 _ElectabuzzDexEntry::
@@ -506,6 +548,16 @@ _KoffingDexEntry::
 	page "its body, it is"
 	next "prone to exploding"
 	next "without warning"
+	dex
+
+_BellossomDexEntry::
+	text "Bellossom gather"
+	next "at times and"
+	next "appear to dance."
+
+	page "They say that the"
+	next "dance is a ritual"
+	next "to summon the sun"
 	dex
 
 _MankeyDexEntry::
@@ -548,6 +600,36 @@ _TaurosDexEntry::
 	next "long tails"
 	dex
 
+_PolitoedDexEntry::
+	text "Whenever three or"
+	next "more of these get"
+	next "together, they"
+
+	page "sing in a loud"
+	next "voice that sounds"
+	next "like bellowing"
+	dex
+
+_SlowkingDexEntry::
+	text "It has incredible"
+	next "intellect and in-"
+	next "tuition. Whatever"
+
+	page "the situation, it"
+	next "remains calm and"
+	next "collected"
+	dex
+
+_MagnezoneDexEntry::
+	text "A group tried to"
+	next "use scientific"
+	next "means to make"
+
+	page "Magnezone evolve,"
+	next "but their efforts"
+	next "ended in failure"
+	dex
+
 _FarfetchdDexEntry::
 	text "The sprig of"
 	next "green onions it"
@@ -576,6 +658,36 @@ _DragoniteDexEntry::
 	page "Its intelligence"
 	next "is said to match"
 	next "that of humans"
+	dex
+
+_SteelixDexEntry::
+	text "Its body has been"
+	next "compressed deep"
+	next "under the ground."
+
+	page "As a result, it is"
+	next "even harder than a"
+	next "diamond"
+	dex
+
+_TyrogueDexEntry::
+	text "It is always"
+	next "bursting with en-"
+	next "ergy. To make it-"
+
+	page "self stronger, it"
+	next "keeps on fighting"
+	next "even if it loses"
+	dex
+
+_HitmontopDexEntry::
+	text "It launches kicks"
+	next "while spinning. If"
+	next "it spins at high"
+
+	page "speed, it may bore"
+	next "its way into the"
+	next "ground"
 	dex
 
 _DoduoDexEntry::
@@ -668,6 +780,36 @@ _KrabbyDexEntry::
 	next "sideways"
 	dex
 
+_LickilickyDexEntry::
+	text "The long tongue is"
+	next "always soggy with"
+	next "slobber. The"
+
+	page "saliva contains a"
+	next "solvent that"
+	next "causes numbness"
+	dex
+
+_RhyperiorDexEntry::
+	text "It can launch a"
+	next "rock held in its"
+	next "hand like a miss-"
+
+	page "ile by tightening"
+	next "then expanding its"
+	next "muscles instantly"
+	dex
+
+_HappinyDexEntry::
+	text "It loves round"
+	next "white things. It"
+	next "carries an egg-"
+
+	page "shaped rock in"
+	next "imitation of"
+	next "Chansey"
+	dex
+
 _VulpixDexEntry::
 	text "At the time of"
 	next "birth, it has"
@@ -706,6 +848,26 @@ _RaichuDexEntry::
 	page "itself from its"
 	next "own high voltage"
 	next "power"
+	dex
+
+_BlisseyDexEntry::
+	text "It has a very com-"
+	next "passionate nature."
+	next "If it sees a sick"
+
+	page "#mon, it will"
+	next "nurse the sufferer"
+	next "back to health"
+	dex
+
+_TangrowthDexEntry::
+	text "It ensnares prey"
+	next "by extending arms"
+	next "made of vines."
+
+	page "Losing arms to"
+	next "predators does not"
+	next "trouble it"
 	dex
 
 _DratiniDexEntry::
@@ -766,6 +928,26 @@ _SeadraDexEntry::
 	page "its wing-like"
 	next "pectoral fins and"
 	next "stout tail"
+	dex
+
+_KingdraDexEntry::
+	text "It stores energy"
+	next "by sleeping at"
+	next "underwater depths"
+
+	page "at which no other"
+	next "life forms can"
+	next "survive"
+	dex
+
+_MimeJrDexEntry::
+	text "It mimics the"
+	next "expressions and"
+	next "motions of those"
+
+	page "it sees to under-"
+	next "stand the feelings"
+	next "of others"
 	dex
 
 _SandshrewDexEntry::
@@ -958,6 +1140,16 @@ _BeedrillDexEntry::
 	next "and tail"
 	dex
 
+_ScizorDexEntry::
+	text "It swings its eye-"
+	next "patterned pincers"
+	next "up to scare its"
+
+	page "foes. This makes"
+	next "it look like it"
+	next "has three heads"
+	dex
+
 _DodrioDexEntry::
 	text "Uses its three"
 	next "brains to execute"
@@ -1008,6 +1200,26 @@ _DewgongDexEntry::
 	next "cold waters"
 	dex
 
+_SmoochumDexEntry::
+	text "Its lips are the"
+	next "most sensitive"
+	next "parts on its body."
+
+	page "It always uses its"
+	next "lips first to"
+	next "examine things"
+	dex
+
+_ElekidDexEntry::
+	text "It rotates its"
+	next "arms to generate"
+	next "electricity, but"
+
+	page "it tires easily,"
+	next "so it charges up"
+	next "only a little bit"
+	dex
+
 _CaterpieDexEntry::
 	text "Its short feet"
 	next "are tipped with"
@@ -1046,6 +1258,16 @@ _MachampDexEntry::
 	page "that can send the"
 	next "victim clear over"
 	next "the horizon"
+	dex
+
+_ElectivireDexEntry::
+	text "It pushes the tips"
+	next "of its two tails"
+	next "against the foe,"
+
+	page "then lets loose"
+	next "with over 20,000"
+	next "volts of power"
 	dex
 
 _GolduckDexEntry::
@@ -1108,6 +1330,26 @@ _MagikarpDexEntry::
 	next "that exist today"
 	dex
 
+_MagbyDexEntry::
+	text "Each and every"
+	next "time it inhales"
+	next "and exhales, hot"
+
+	page "embers dribble out"
+	next "of its mouth and"
+	next "nostrils"
+	dex
+
+_MagmortarDexEntry::
+	text "When launching"
+	next "3,600 degrees F"
+	next "fireballs, its"
+
+	page "body takes on a"
+	next "whitish hue from"
+	next "the intense heat"
+	dex
+
 _MukDexEntry::
 	text "Thickly covered"
 	next "with a filthy,"
@@ -1116,6 +1358,16 @@ _MukDexEntry::
 	page "is so toxic, even"
 	next "its footprints"
 	next "contain poison"
+	dex
+
+_EspeonDexEntry::
+	text "It uses the fine"
+	next "hair that covers"
+	next "its body to sense"
+
+	page "air currents and"
+	next "predict its"
+	next "enemy's actions"
 	dex
 
 _KinglerDexEntry::
@@ -1136,6 +1388,16 @@ _CloysterDexEntry::
 	page "volleys. Its"
 	next "innards have"
 	next "never been seen"
+	dex
+
+_UmbreonDexEntry::
+	text "When darkness"
+	next "falls, the rings"
+	next "on the body begin"
+
+	page "to glow, striking"
+	next "fear in the hearts"
+	next "of anyone nearby"
 	dex
 
 _ElectrodeDexEntry::
@@ -1186,6 +1448,16 @@ _MarowakDexEntry::
 	page "bone skillfully"
 	next "like a boomerang"
 	next "to KO targets"
+	dex
+
+_LeafeonDexEntry::
+	text "Leafeon is always"
+	next "surrounded by"
+	next "fresh clean air"
+
+	page "because it uses"
+	next "photosynthesis"
+	next "just like a plant"
 	dex
 
 _HaunterDexEntry::
@@ -1278,6 +1550,16 @@ _TentacruelDexEntry::
 	next "immobilize prey"
 	dex
 
+_GlaceonDexEntry::
+	text "As a protective"
+	next "technique, it can"
+	next "completely freeze"
+
+	page "its fur to make"
+	next "its hairs stand"
+	next "like needles"
+	dex
+
 _GoldeenDexEntry::
 	text "Its tail fin"
 	next "billows like an"
@@ -1296,6 +1578,36 @@ _SeakingDexEntry::
 	page "swimming power-"
 	next "fully up rivers"
 	next "and creeks"
+	dex
+
+_Porygon2DexEntry::
+	text "Further research"
+	next "enhanced its abil-"
+	next "ities. Sometimes,"
+
+	page "it may exhibit"
+	next "motions that were"
+	next "not programmed"
+	dex
+
+_PorygonZDexEntry::
+	text "Additional soft-"
+	next "ware was installed"
+	next "to make it a"
+
+	page "better #mon."
+	next "It began acting"
+	next "oddly, however"
+	dex
+
+_MunchlaxDexEntry::
+	text "It wolfs down its"
+	next "weight in food"
+	next "once a day,"
+
+	page "swallowing food"
+	next "whole with almost"
+	next "no chewing"
 	dex
 
 _PonytaDexEntry::
@@ -1387,6 +1699,9 @@ _AerodactylDexEntry::
 	next "with its serrated"
 	next "saw-like fangs"
 	dex
+
+
+SECTION "Pokedex Text 2", ROMX, BANK[POKEDEX_TEXT_2]
 
 _MagnemiteDexEntry::
 	text "Uses anti-gravity"

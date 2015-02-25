@@ -11,8 +11,9 @@ TEXT_9  EQU $28
 TEXT_10 EQU $29
 TEXT_11 EQU $2a
 
-POKEDEX_TEXT EQU $2b
-MOVE_NAMES   EQU $2c
+POKEDEX_TEXT   EQU $2b
+POKEDEX_TEXT_2 EQU $2c
+MOVE_NAMES     EQU $2c
 
 INCLUDE "macros.asm"
 INCLUDE "charmap.asm"
@@ -3215,8 +3216,6 @@ _UsedCutText:: ; a8315 (2a:4315)
 	text " hacked"
 	line "away with Cut!"
 	prompt
-
-SECTION "Pokedex Text", ROMX, BANK[POKEDEX_TEXT]
 
 INCLUDE "text/pokedex.asm"
 

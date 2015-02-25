@@ -115,7 +115,7 @@ LoadSAVCheckSum2: ; 736bd (1c:76bd)
 	call CopyData
 	ld hl, $a5a3
 	ld de, wPokedexOwned ; wPokedexOwned
-	ld bc, wPokedexSeenEnd - wPokedexOwned
+	ld bc, wNumBagItems - wPokedexOwned
 	call CopyData
 	and a
 	jp SAVGoodChecksum
@@ -257,7 +257,7 @@ SaveSAVtoSRAM2: ; 7380f (1c:780f)
 	call CopyData
 	ld hl, wPokedexOwned ; pokédex only
 	ld de, $a5a3
-	ld bc, wPokedexSeenEnd - wPokedexOwned
+	ld bc, wNumBagItems - wPokedexOwned
 	call CopyData
 	ld hl, $a598
 	ld bc, $f8b

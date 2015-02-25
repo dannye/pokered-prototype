@@ -67,6 +67,8 @@ Evolution_PartyMonLoop: ; loop over party mons
 	and a ; have we reached the end of the evolution data?
 	jr z, Evolution_PartyMonLoop
 	ld b, a ; evolution type
+	cp EV_STAT
+	jr z, .checkStatEvo
 	cp EV_FUSE
 	jr z, .checkFuseEvo
 	cp EV_TRADE
@@ -84,10 +86,38 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, b
 	cp EV_LEVEL
 	jp z, .checkLevel
-	jr .checkTradeEvo
+	jp .checkTradeEvo
+.checkStatEvo
+	; compares the mons attack and defense stats
+	ld c, 0
+	ld a, [wLoadedMonAttack]
+	ld d, a
+	ld a, [wLoadedMonDefense]
+	cp d
+	jr z, .hiByteEqual
+	jr nc, .defenseGreater
+	jr .attackGreater
+.hiByteEqual
+	ld a, [wLoadedMonAttack + 1]
+	ld d, a
+	ld a, [wLoadedMonDefense + 1]
+	cp d
+	jr z, .equal
+	jr nc, .defenseGreater
+.attackGreater
+	inc c
+.defenseGreater
+	inc c
+.equal
+	ld a, [hli]
+	cp c
+	jp nz, .nextEvoEntry1
+	jp .checkLevel
 .checkFuseEvo
 	ld a, $ff
 	ld [wWhichPokemonRemove], a
+	ld a, [hli] ; does the level matter?
+	ld [wCheckLevel], a
 	ld a, [hli] ; mon required
 	ld b, a
 	push hl
@@ -117,6 +147,21 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, e
 	ld [wWhichPokemon], a
 	jr c, .noMatch
+	ld a, [wCheckLevel]
+	and a
+	jr z, .match
+	push hl
+	push bc
+	ld a, d
+	ld hl, wPartyMon1Level
+	ld bc, wPartyMon2 - wPartyMon1
+	call AddNTimes
+	ld a, [wLoadedMonLevel]
+	cp [hl]
+	pop bc
+	pop hl
+	jr c, .noMatch
+.match
 	inc c
 	push hl
 	push de
@@ -151,7 +196,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld b, a
 	ld a, c
 	cp b
-	jp c, .nextEvoEntry1
+	jp c, .nextEvoEntry2
 	ld a, 1
 	ld [wRemovePokemon], a
 	push hl

@@ -84,6 +84,8 @@ ETHER         EQU $50
 MAX_ETHER     EQU $51
 ELIXER        EQU $52
 MAX_ELIXER    EQU $53
+SUN_STONE     EQU $62
+ICE_STONE     EQU $63
 HM_01         EQU $C4
 HM_02         EQU $C5
 HM_03         EQU $C6

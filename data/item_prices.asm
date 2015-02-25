@@ -96,3 +96,5 @@ ItemPrices: ; 4608 (1:4608)
 	money 0     ; 10F
 	money 0     ; 11F
 	money 0     ; B4F
+	money 2100  ; SUN_STONE
+	money 2100  ; ICE_STONE

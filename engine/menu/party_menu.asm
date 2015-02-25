@@ -149,11 +149,11 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
-	ld de,wcd6d
+	ld de,wEvolutionData
 	ld a,BANK(EvosMovesPointerTable)
-	ld bc,13
+	ld bc,29
 	call FarCopyData
-	ld hl,wcd6d
+	ld hl,wEvolutionData
 	ld de,.notAbleToEvolveText
 ; loop through the pokemon's evolution entries
 .checkEvolutionsLoop

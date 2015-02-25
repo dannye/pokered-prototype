@@ -99,6 +99,22 @@ ItemUsePtrTable: ; d5e1 (3:55e1)
 	dw ItemUsePPRestore  ; MAX_ETHER
 	dw ItemUsePPRestore  ; ELIXER
 	dw ItemUsePPRestore  ; MAX_ELIXER
+	dw UnusableItem
+	dw UnusableItem
+	dw UnusableItem
+	dw UnusableItem
+	dw UnusableItem
+	dw UnusableItem
+	dw UnusableItem
+	dw UnusableItem
+	dw UnusableItem
+	dw UnusableItem
+	dw UnusableItem
+	dw UnusableItem
+	dw UnusableItem
+	dw UnusableItem
+	dw ItemUseEvoStone   ; SUN_STONE
+	dw ItemUseEvoStone   ; ICE_STONE
 
 ItemUseBall: ; d687 (3:5687)
 	ld a,[W_ISINBATTLE]
