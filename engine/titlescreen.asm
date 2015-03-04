@@ -264,7 +264,7 @@ Func_4496: ; 4496 (1:4496)
 	REPT 10
 	call Random
 	ENDR
-	cp $98
+	cp NUM_POKEMON + 1
 	jr nc,.new
 	cp $00
 	jr z,.new
