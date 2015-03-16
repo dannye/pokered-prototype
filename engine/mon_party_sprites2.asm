@@ -2,7 +2,7 @@ LoadNicknameMonSprite:
 	call DisableLCD
 	xor a
 	ld [H_DOWNARROWBLINKCNT2], a
-	ld a, [wcd5d]
+	ld a, [wMonPartySpriteSpecies]
 	ld de, vNPCSprites
 	call LoadPartyMonSprite
 	call EnableLCD

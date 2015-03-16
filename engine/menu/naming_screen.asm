@@ -114,7 +114,7 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ld hl, wHPBarMaxHP + 1
 	ld [hli], a
 	ld [hli], a
-	ld [W_SUBANIMTRANSFORM], a
+	ld [wPartyMonAnimCounter], a
 .asm_65ed
 	call PrintAlphabet
 	ld a,%11100100
@@ -472,7 +472,7 @@ PrintNamingText: ; 68f8 (1:68f8)
 	dec a
 	jr z, .notNickname
 	ld a, [wcf91]
-	ld [wcd5d], a
+	ld [wMonPartySpriteSpecies], a
 	push af
 	callba LoadNicknameMonSprite
 	pop af
