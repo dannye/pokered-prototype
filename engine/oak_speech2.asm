@@ -12,8 +12,8 @@ LoadDefaultNamesPlayer: ; 695d (1:695d)
 	jr .asm_6999
 .asm_697a
 	ld hl, wPlayerName
-	xor a
-	ld [wd07d], a
+	xor a ; NAME_PLAYER_SCREEN
+	ld [wNamingScreenType], a
 	call DisplayNamingScreen
 	ld a, [wcf4b]
 	cp $50
@@ -33,7 +33,7 @@ YourNameIsText: ; 699f (1:699f)
 
 Func_69ec: ; 69ec (1:69ec)
 	push de
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld bc, $c0b
 	call ClearScreenArea
 	ld c, 10
@@ -122,7 +122,7 @@ asm_6a19: ; 6a19 (1:6a19)
 
 DisplayIntroNameTextBox: ; 6a6c (1:6a6c)
 	push de
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld b, $a
 	ld c, $9
 	call TextBoxBorder

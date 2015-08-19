@@ -255,7 +255,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	call DelayFrames
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld bc, $c14
 	call ClearScreenArea
 	ld a, $1
@@ -378,7 +378,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	push hl
 	xor a
 	ld [wRemovePokemon], a
-	ld [wcf95], a
+	ld [wRemoveMonFromBox], a
 	ld a, [wWhichPokemon]
 	push af
 	ld hl, wWhichPokemonRemove
