@@ -28,7 +28,7 @@ CeruleanCityScript4: ; 194a7 (6:54a7)
 	ld hl, wd75b
 	set 7, [hl]
 	ld a, $2
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [wJoyIgnore], a
@@ -55,7 +55,7 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ld [wSpriteStateData1 + $29], a
 	call Delay3
 	ld a, $2
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 .asm_194f7
 	ld a, [wd75a]
@@ -88,7 +88,7 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ld de, CeruleanCityMovement2
 .asm_19535
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	call MoveSprite
 	ld a, $1
 	ld [W_CERULEANCITYCURSCRIPT], a
@@ -115,9 +115,9 @@ CeruleanCityMovement2:
 
 CeruleanCityScript_1955d: ; 1955d (6:555d)
 	ld a,1
-	ld [$ff8c],a
+	ld [H_SPRITEINDEX],a
 	xor a ; SPRITE_FACING_DOWN
-	ld [$ff8d],a
+	ld [hSpriteFacingDirection],a
 	jp SetSpriteFacingDirectionAndDelay ; face object
 
 CeruleanCityScript1: ; 19567 (6:5567)
@@ -127,7 +127,7 @@ CeruleanCityScript1: ; 19567 (6:5567)
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $1
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd72d
 	set 6, [hl]
@@ -171,14 +171,14 @@ CeruleanCityScript2: ; 195b1 (6:55b1)
 	ld hl, wd75a
 	set 0, [hl]
 	ld a, $1
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $ff
 	ld [wc0ee], a
 	call PlaySound
 	callba Music_RivalAlternateStart
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	call SetSpriteMovementBytesToFF
 	ld a, [W_XCOORD]
 	cp $19
@@ -189,7 +189,7 @@ CeruleanCityScript2: ; 195b1 (6:55b1)
 	ld de, CeruleanCityMovement3
 .asm_195f3
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	call MoveSprite
 	ld a, $3
 	ld [W_CERULEANCITYCURSCRIPT], a
@@ -293,7 +293,7 @@ CeruleanCityText2: ; 1967c (6:567c)
 	ld hl, CeruleanCityText_196ee
 	ld de, CeruleanCityText_196ee
 	call SaveEndBattleTextPointers
-	ld a, [$ff8c]
+	ld a, [hSpriteIndexOrTextID]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters

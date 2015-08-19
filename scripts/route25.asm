@@ -95,7 +95,7 @@ Route25TextPointers: ; 51628 (14:5628)
 	dw Route25Text7
 	dw Route25Text8
 	dw Route25Text9
-	dw Predef5CText
+	dw PickUpItemText
 	dw Route25Text11
 	dw Route25RocketLeaderText
 
