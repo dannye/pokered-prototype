@@ -1,6 +1,6 @@
 UseItem_: ; d5c7 (3:55c7)
 	ld a,1
-	ld [wcd6a],a
+	ld [wActionResultOrTookBattleTurn],a ; initialise to success value
 	ld a,[wcf91]	;contains item_ID
 	cp a,HM_01
 	jp nc,ItemUseTMHM
@@ -439,8 +439,8 @@ ItemUseBall: ; d687 (3:5687)
 	ld a,[wPartyCount]
 	cp a,PARTY_LENGTH		;is party full?
 	jr z,.sendToBox
-	xor a
-	ld [wcc49],a
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation],a
 	call ClearSprites
 	call AddPartyMon	;add mon to Party
 	jr .End
@@ -659,7 +659,7 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	ld a,b
 	ld [wcf91],a
 	ld a,$01
-	ld [wccd4],a
+	ld [wForceEvolution],a
 	ld a,(SFX_02_3e - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
@@ -677,7 +677,7 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	call ItemUseNoEffect
 .canceledItemUse
 	xor a
-	ld [wcd6a],a
+	ld [wActionResultOrTookBattleTurn],a ; item not used
 	pop af
 	ret
 
@@ -707,7 +707,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 .emptyParty
 	ld hl,.emptyPartyText
 	xor a
-	ld [wcd6a],a ; item use failed
+	ld [wActionResultOrTookBattleTurn],a ; item use failed
 	jp PrintText
 .emptyPartyText
 	text "You don't have"
@@ -722,7 +722,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[wWhichPokemon]
 	call AddNTimes
 	ld a,[wWhichPokemon]
-	ld [wcf06],a
+	ld [wUsedItemOnWhichPokemon],a
 	ld d,a
 	ld a,[wcf91]
 	ld e,a
@@ -819,7 +819,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	push hl
 	push de
 	push bc
-	ld a,[wcf06]
+	ld a,[wUsedItemOnWhichPokemon]
 	ld c,a
 	ld hl,wPartyFoughtCurrentEnemyFlags
 	ld b,$02
@@ -827,7 +827,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,c
 	and a
 	jr z,.next
-	ld a,[wcf06]
+	ld a,[wUsedItemOnWhichPokemon]
 	ld c,a
 	ld hl,wPartyGainExpFlags
 	ld b,$01
@@ -1122,7 +1122,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jr .done
 .canceledItemUse
 	xor a
-	ld [wcd6a],a ; item use failed
+	ld [wActionResultOrTookBattleTurn],a ; item use failed
 	pop af
 	pop af
 .done
@@ -1281,17 +1281,17 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [wWhichPokemon],a
 	ld a,e
 	ld [wd11e],a
-	xor a
-	ld [wcc49],a ; load from player's party
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation],a
 	call LoadMonData
 	ld d,$01
 	callab PrintStatsBox ; display new stats text box
 	call WaitForTextScrollButtonPress ; wait for button press
-	xor a
-	ld [wcc49],a
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation],a
 	predef LearnMoveFromLevelUp ; learn level up move, if any
 	xor a
-	ld [wccd4],a
+	ld [wForceEvolution],a
 	callab TryEvolvingMon ; evolve pokemon, if appropriate
 	ld a,$01
 	ld [wUpdateSpritesEnabled],a
@@ -1400,7 +1400,7 @@ ItemUseEscapeRope: ; dfaf (3:5faf)
 	ld [W_SAFARIZONEENTRANCECURSCRIPT],a
 	inc a
 	ld [wEscapedFromBattle],a
-	ld [wcd6a],a ; item used
+	ld [wActionResultOrTookBattleTurn],a ; item used
 	ld a,[wd152]
 	and a ; using Dig?
 	ret nz ; if so, return
@@ -1566,7 +1566,7 @@ ItemUseXStat: ; e104 (3:6104)
 	jr nz,.inBattle
 	call ItemUseNotTime
 	ld a,2
-	ld [wcd6a],a ; item not used
+	ld [wActionResultOrTookBattleTurn],a ; item not used
 	ret
 .inBattle
 	ld hl,W_PLAYERMOVENUM
@@ -1799,7 +1799,7 @@ SuperRodCode: ; e283 (3:6283)
 	call ReadSuperRodData
 	ld a, e
 RodResponse: ; e28d (3:628d)
-	ld [wWhichTrade], a
+	ld [wRodResponse], a
 
 	dec a ; is there a bite?
 	jr nz, .next
@@ -1817,7 +1817,7 @@ RodResponse: ; e28d (3:628d)
 	push af
 	push hl
 	ld [hl], 0
-	callba Func_707b6
+	callba FishingAnim
 	pop hl
 	pop af
 	ld [hl], a
@@ -1979,8 +1979,8 @@ ItemUsePPRestore: ; e31e (3:631e)
 ; unsets zero flag if PP was restored, sets zero flag if not
 ; however, this is bugged for Max Ethers and Max Elixirs (see below)
 .restorePP
-	xor a
-	ld [wcc49],a ; party pokemon
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation],a
 	call GetMaxPP
 	ld hl,wPartyMon1Moves
 	ld bc,44
@@ -2059,7 +2059,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	call GoPAL_SET_CF1C
 	pop af
 	xor a
-	ld [wcd6a],a ; item use failed
+	ld [wActionResultOrTookBattleTurn],a ; item use failed
 	ret
 
 RaisePPWhichTechniqueText: ; e45d (3:645d)
@@ -2120,7 +2120,7 @@ ItemUseTMHM: ; e479 (3:6479)
 	and a
 	jr z,.useMachine
 	ld a,2
-	ld [wcd6a],a ; item not used
+	ld [wActionResultOrTookBattleTurn],a ; item not used
 	ret
 .useMachine
 	ld a,[wWhichPokemon]
@@ -2250,7 +2250,7 @@ SurfingAttemptFailed: ; e5b6 (3:65b6)
 
 ItemUseFailed: ; e5b9 (3:65b9)
 	xor a
-	ld [wcd6a],a ; item use failed
+	ld [wActionResultOrTookBattleTurn],a ; item use failed
 	jp PrintText
 
 ItemUseNotTimeText: ; e5c0 (3:65c0)
@@ -2317,13 +2317,13 @@ RestoreBonusPP: ; e606 (3:6606)
 	ld a,[wWhichPokemon]
 	call AddNTimes
 	push hl
-	ld de,wcd78 - 1
-	predef LoadMovePPs ; loads the normal max PP of each of the pokemon's moves to wcd78
+	ld de,wNormalMaxPPList - 1
+	predef LoadMovePPs ; loads the normal max PP of each of the pokemon's moves to wNormalMaxPPList
 	pop hl
 	ld c,21
 	ld b,0
 	add hl,bc ; hl now points to move 1 PP
-	ld de,wcd78
+	ld de,wNormalMaxPPList
 	ld b,0 ; initialize move counter to zero
 ; loop through the pokemon's moves
 .loop
@@ -2395,7 +2395,7 @@ AddBonusPP: ; e642 (3:6642)
 ; gets max PP of a pokemon's move (including PP from PP Ups)
 ; INPUT:
 ; [wWhichPokemon] = index of pokemon within party/box
-; [wcc49] = pokemon source
+; [wMonDataLocation] = pokemon source
 ; 00: player's party
 ; 01: enemy's party
 ; 02: current box
@@ -2405,7 +2405,7 @@ AddBonusPP: ; e642 (3:6642)
 ; OUTPUT:
 ; [wd11e] = max PP
 GetMaxPP: ; e677 (3:6677)
-	ld a,[wcc49]
+	ld a,[wMonDataLocation]
 	and a
 	ld hl,wPartyMon1Moves
 	ld bc,wPartyMon2 - wPartyMon1
@@ -2436,13 +2436,13 @@ GetMaxPP: ; e677 (3:6677)
 	ld de,wcd6d
 	ld a,BANK(Moves)
 	call FarCopyData
-	ld de,wcd72
+	ld de,wcd6d + 5 ; PP is byte 5 of move data
 	ld a,[de]
 	ld b,a ; b = normal max PP
 	pop hl
 	push bc
 	ld bc,21 ; PP offset if not player's in-battle pokemon data
-	ld a,[wcc49]
+	ld a,[wMonDataLocation]
 	cp a,4 ; player's in-battle pokemon?
 	jr nz,.addPPOffset
 	ld bc,17 ; PP offset if player's in-battle pokemon data
