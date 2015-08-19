@@ -683,7 +683,7 @@ SendTitleMonPalPacket:
 	ld [wd11e], a
 	call GetMonPalID
 SendTitlePalPacket:
-	ld [wcf32], a
+	ld [wcf30 + 2], a
 	ld hl, wcf2d
 	jp SendSGBPacket
 	
