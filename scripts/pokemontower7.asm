@@ -69,7 +69,7 @@ PokemonTower7Script4: ; 60d86 (18:4d86)
 	ld a, HS_POKEMONTOWER_7_MR_FUJI
 	ld [wcc4d], a
 	predef HideObject
-	ld a, $4
+	ld a, SPRITE_FACING_UP
 	ld [wSpriteStateData1 + 9], a
 	ld a, LAVENDER_HOUSE_1
 	ld [H_DOWNARROWBLINKCNT1], a
@@ -215,7 +215,7 @@ PokemonTower7Text3: ; 60e80 (18:4e80)
 	jp TextScriptEnd
 
 PokemonTower7FujiText:
-	db 8 ; asm
+	TX_ASM
 	ld hl, TowerRescueFujiText
 	call PrintText
 	ld hl, wd7e0
