@@ -72,4 +72,3 @@ _TitleScroll: ; 3726a (d:726a)
 	cp h
 	jr z, .wait2
 	ret
-

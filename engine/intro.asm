@@ -12,36 +12,39 @@ PlayIntro: ; 41682 (10:5682)
 	call DelayFrame
 	ret
 
-Func_417f0: ; 417f0 (10:57f0)
+IntroClearScreen: ; 417f0 (10:57f0)
 	ld hl, vBGMap1
 	ld bc, $240
-	jr asm_417fe
+	jr IntroClearCommon
 
-Func_417f8: ; 417f8 (10:57f8)
+IntroClearMiddleOfScreen: ; 417f8 (10:57f8)
+; clear the area of the tile map between the black bars on the top and bottom
 	hlCoord 0, 4
-	ld bc, $c8
-asm_417fe: ; 417fe (10:57fe)
+	ld bc, SCREEN_WIDTH * 10
+
+IntroClearCommon: ; 417fe (10:57fe)
 	ld [hl], $0
 	inc hl
 	dec bc
 	ld a, b
 	or c
-	jr nz, asm_417fe
+	jr nz, IntroClearCommon
 	ret
 
-Func_41807: ; 41807 (10:5807)
+IntroPlaceBlackTiles: ; 41807 (10:5807)
 	ld a, $1
-.asm_41809
+.loop
 	ld [hli], a
 	dec c
-	jr nz, .asm_41809
+	jr nz, .loop
 	ret
 
 CopyTileIDsFromList_ZeroBaseTileID: ; 41842 (10:5842)
-	ld c, $0
+	ld c, 0
 	predef_jump CopyTileIDsFromList
 
-Func_41849: ; 41849 (10:5849)
+PlayMoveSoundB: ; 41849 (10:5849)
+; unused
 	predef GetMoveSoundB
 	ld a, b
 	jp PlaySound
@@ -73,7 +76,7 @@ PlayShootingStar: ; 4188a (10:588a)
 	call DisableLCD
 	xor a
 	ld [W_CUROPPONENT], a
-	call Func_418e9
+	call IntroDrawBlackBars
 	call LoadIntroGraphics
 	call EnableLCD
 	ld hl, rLCDC
@@ -84,7 +87,7 @@ PlayShootingStar: ; 4188a (10:588a)
 	callba AnimateShootingStar
 	push af
 	pop af
-	jr c, .asm_418d0
+	jr c, .next ; skip the delay if the user interrupted the animation
 	hlCoord 7, 11
 	ld c,$06
 	ld a,$67
@@ -95,30 +98,31 @@ PlayShootingStar: ; 4188a (10:588a)
 	jr nz,.loop
 	ld c, 40
 	call DelayFrames
-.asm_418d0
+.next
 	ld a, BANK(Music_TitleScreen)
 	ld [wc0ef], a
 	ld [wc0f0], a
-	call Func_417f8
+	call IntroClearMiddleOfScreen
 	call ClearSprites
 	jp Delay3
 
-Func_418e9: ; 418e9 (10:58e9)
-	call Func_417f0
+IntroDrawBlackBars: ; 418e9 (10:58e9)
+; clear the screen and draw black bars on the top and bottom
+	call IntroClearScreen
 	hlCoord 0, 0
-	ld c, $50
-	call Func_41807
+	ld c, SCREEN_WIDTH * 4
+	call IntroPlaceBlackTiles
 	hlCoord 0, 14
-	ld c, $50
-	call Func_41807
+	ld c, SCREEN_WIDTH * 4
+	call IntroPlaceBlackTiles
 	ld hl, vBGMap1
 	ld c, $80
-	call Func_41807
+	call IntroPlaceBlackTiles
 	ld hl, vBGMap1 + $1c0
 	ld c, $80
-	jp Func_41807
+	jp IntroPlaceBlackTiles
 
-Func_4190c: ; 4190c (10:590c)
+EmptyFunc4: ; 4190c (10:590c)
 	ret
 
 GameFreakIntro: ; 41959 (10:5959)

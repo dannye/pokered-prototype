@@ -17,6 +17,7 @@ MOVE_NAMES     EQU $2c
 
 INCLUDE "macros.asm"
 INCLUDE "charmap.asm"
+INCLUDE "hram.asm"
 
 
 SECTION "Text 1", ROMX, BANK[TEXT_1]
@@ -1001,13 +1002,13 @@ _HiddenItemBagFullText:: ; 894e1 (22:54e1)
 _FoundHiddenCoinsText:: ; 8950b (22:550b)
 	text $52, " found"
 	line "@"
-	TX_BCD $ffa0, $c2
+	TX_BCD hCoins, $c2
 	text " coins!@@"
 
 _FoundHiddenCoins2Text:: ; 89523 (22:5523)
 	text $52, " found"
 	line "@"
-	TX_BCD $ffa0, $c2
+	TX_BCD hCoins, $c2
 	text " coins!@@"
 
 _DroppedHiddenCoinsText:: ; 8953b (22:553b)
@@ -2345,11 +2346,11 @@ _DreamWasEatenText:: ; 94aec (25:4aec)
 	line "dream was eaten!"
 	prompt
 
-_BattleCenterMText1:: ; 94b01 (25:4b01)
+_TradeCenterText1:: ; 94b01 (25:4b01)
 	text "!"
 	done
 
-_TradeCenterMText1:: ; 94b04 (25:4b04)
+_ColosseumText1:: ; 94b04 (25:4b04)
 	text "!"
 	done
 
@@ -2486,7 +2487,7 @@ _PokemartTellBuyPriceText:: ; a2619 (28:6619)
 	text "?"
 	line "That will be"
 	cont "¥@"
-	TX_BCD $ff9f, $c3
+	TX_BCD hMoney, $c3
 	text ". Ok?"
 	done
 
@@ -2513,7 +2514,7 @@ _PokemonSellingGreetingText:: ; a2690 (28:6690)
 _PokemartTellSellPriceText:: ; a26ae (28:66ae)
 	text "I can pay you"
 	line "¥@"
-	TX_BCD $ff9f, $c3
+	TX_BCD hMoney, $c3
 	text " for that."
 	done
 

@@ -79,7 +79,12 @@ PewterCityScript1: ; 19280 (6:5280)
 	ret
 
 MovementData_PewterGymGuyExit: ; 192ce (6:52ce)
-	db $C0,$C0,$C0,$C0,$C0,$FF
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db $FF
 
 PewterCityScript2: ; 192d3 (6:52d3)
 	ld a, [wd730]
@@ -143,7 +148,12 @@ PewterCityScript4: ; 19305 (6:5305)
 	ret
 
 MovementData_PewterMuseumGuyExit: ; 19353 (6:5353)
-	db $C0,$C0,$C0,$C0,$C0,$FF
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db $FF
 
 PewterCityScript5: ; 19359 (6:5359)
 	ld a, [wd730]
