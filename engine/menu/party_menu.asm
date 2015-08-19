@@ -21,7 +21,7 @@ DrawPartyMenu_: ; 12cd2 (4:6cd2)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
 	call ClearScreen
-	call UpdateSprites ; move sprites
+	call UpdateSprites
 RedrawPartyMenu_ReloadSprites:
 	callba LoadPartyMonSprites ; load pokemon icon graphics
 

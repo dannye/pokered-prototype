@@ -65,7 +65,7 @@ _TitleScroll: ; 3726a (d:726a)
 	jr nz, .wait
 
 	ld a, h
-	ld [rSCX], a ; $ff43
+	ld [rSCX], a
 
 .wait2
 	ld a, [$ff44] ; rLY

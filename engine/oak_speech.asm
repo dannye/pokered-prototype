@@ -1,11 +1,11 @@
 SetDefaultNames: ; 60ca (1:60ca)
 	ld a, [wd358]
 	push af
-	ld a, [W_OPTIONS] ; W_OPTIONS
+	ld a, [W_OPTIONS]
 	push af
 	ld a, [wd732]
 	push af
-	ld hl, wPlayerName ; wd158
+	ld hl, wPlayerName
 	ld bc, $d8a
 	xor a
 	call FillMemory
@@ -16,18 +16,18 @@ SetDefaultNames: ; 60ca (1:60ca)
 	pop af
 	ld [wd732], a
 	pop af
-	ld [W_OPTIONS], a ; W_OPTIONS
+	ld [W_OPTIONS], a
 	pop af
 	ld [wd358], a
 	ld a, [wd08a]
 	and a
 	call z, Func_5bff
 	ld hl, NintenText
-	ld de, wPlayerName ; wd158
+	ld de, wPlayerName
 	ld bc, $b
 	call CopyData
 	ld hl, SonyText
-	ld de, W_RIVALNAME ; wd34a
+	ld de, W_RIVALNAME
 	ld bc, $b
 	jp CopyData
 
@@ -107,10 +107,10 @@ Func_61bc: ; 61bc (1:61bc)
 	call PlayMusic
 	pop af
 	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+	ld [MBC1RomBank],a
 	ld c,4
 	call DelayFrames
-	ld de,RedSprite ; $4180
+	ld de,RedSprite
 	ld hl,vSprites
 	ld bc,(BANK(RedSprite) << 8) | $0C
 	call CopyVideoData
@@ -135,8 +135,8 @@ Func_61bc: ; 61bc (1:61bc)
 	call PlaySound ; stop music
 	pop af
 	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
-	ld c,$14
+	ld [MBC1RomBank],a
+	ld c,20
 	call DelayFrames
 	hlCoord 6, 5
 	ld b,7
@@ -145,7 +145,7 @@ Func_61bc: ; 61bc (1:61bc)
 	call LoadTextBoxTilePatterns
 	ld a,1
 	ld [wUpdateSpritesEnabled],a
-	ld c,$32
+	ld c,50
 	call DelayFrames
 	call GBFadeOutToWhite
 	jp ClearScreen
@@ -225,7 +225,7 @@ IntroPredef3B: ; 62a4 (1:62a4)
 .next
 	xor a
 	ld [$FFE1],a
-	predef_jump Func_3f0c6
+	predef_jump CopyUncompressedPicToTilemap
 
 GetNidoPalID:
 	ld a, PAL_MEW

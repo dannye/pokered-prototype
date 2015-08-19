@@ -1,17 +1,17 @@
 LoadDefaultNamesPlayer: ; 695d (1:695d)
 	call Func_6a12
-	ld de, DefaultNamesPlayer ; $6aa8
-	call Func_6a6c
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld de, DefaultNamesPlayer
+	call DisplayIntroNameTextBox
+	ld a, [wCurrentMenuItem]
 	and a
 	jr z, .asm_697a
-	ld hl, DefaultNamesPlayerList ; $6af2
+	ld hl, DefaultNamesPlayerList
 	call Func_6ad6
-	ld de, wPlayerName ; wd158
+	ld de, wPlayerName
 	call Func_69ec
 	jr .asm_6999
 .asm_697a
-	ld hl, wPlayerName ; wd158
+	ld hl, wPlayerName
 	xor a
 	ld [wd07d], a
 	call DisplayNamingScreen
@@ -20,7 +20,7 @@ LoadDefaultNamesPlayer: ; 695d (1:695d)
 	jr z, .asm_697a
 	call GetRedPalID
 	call Delay3
-	ld de, RedPicFront ; $6ede
+	ld de, RedPicFront
 	ld b, BANK(RedPicFront)
 	call IntroPredef3B
 .asm_6999
@@ -36,7 +36,7 @@ Func_69ec: ; 69ec (1:69ec)
 	ld hl, wTileMap
 	ld bc, $c0b
 	call ClearScreenArea
-	ld c, $a
+	ld c, 10
 	call DelayFrames
 	pop de
 	ld hl, wcd6d
@@ -58,9 +58,9 @@ asm_6a19: ; 6a19 (1:6a19)
 	push bc
 	ld [$ff8d], a
 	ld a, d
-	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
+	ld [H_DOWNARROWBLINKCNT1], a
 	ld a, e
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	ld c, a
 	ld a, [$ff8d]
 	and a
@@ -72,7 +72,7 @@ asm_6a19: ; 6a19 (1:6a19)
 	ld e, l
 .asm_6a2f
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	ld a, [$ff8d]
 	and a
 	jr nz, .asm_6a3c
@@ -95,9 +95,9 @@ asm_6a19: ; 6a19 (1:6a19)
 	ld [hl], a
 .asm_6a4a
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	call Delay3
-	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
+	ld a, [H_DOWNARROWBLINKCNT2]
 	ld c, a
 	ld h, d
 	ld l, e
@@ -111,38 +111,38 @@ asm_6a19: ; 6a19 (1:6a19)
 .asm_6a5f
 	ld d, h
 	ld e, l
-	ld a, [H_DOWNARROWBLINKCNT1] ; $ff8b
+	ld a, [H_DOWNARROWBLINKCNT1]
 	dec a
-	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
+	ld [H_DOWNARROWBLINKCNT1], a
 	jr nz, .asm_6a2f
 	pop bc
 	pop de
 	pop hl
 	ret
 
-Func_6a6c: ; 6a6c (1:6a6c)
+DisplayIntroNameTextBox: ; 6a6c (1:6a6c)
 	push de
 	ld hl, wTileMap
 	ld b, $a
 	ld c, $9
 	call TextBoxBorder
 	hlCoord 3, 0
-	ld de, .namestring ; $6aa3
+	ld de, .namestring
 	call PlaceString
 	pop de
 	hlCoord 2, 2
 	call PlaceString
 	call UpdateSprites
 	xor a
-	ld [wCurrentMenuItem], a ; wCurrentMenuItem
-	ld [wLastMenuItem], a ; wLastMenuItem
+	ld [wCurrentMenuItem], a
+	ld [wLastMenuItem], a
 	inc a
-	ld [wTopMenuItemX], a ; wTopMenuItemX
-	ld [wMenuWatchedKeys], a ; wMenuWatchedKeys
+	ld [wTopMenuItemX], a
+	ld [wMenuWatchedKeys], a
 	inc a
-	ld [wTopMenuItemY], a ; wTopMenuItemY
+	ld [wTopMenuItemY], a
 	inc a
-	ld [wMaxMenuItem], a ; wMaxMenuItem
+	ld [wMaxMenuItem], a
 	jp HandleMenuInput
 
 .namestring ; 6aa3 (1:6aa3)

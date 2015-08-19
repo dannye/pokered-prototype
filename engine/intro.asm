@@ -42,7 +42,7 @@ CopyTileIDsFromList_ZeroBaseTileID: ; 41842 (10:5842)
 	predef_jump CopyTileIDsFromList
 
 Func_41849: ; 41849 (10:5849)
-	predef Func_79869
+	predef GetMoveSoundB
 	ld a, b
 	jp PlaySound
 
@@ -52,12 +52,12 @@ LoadIntroGraphics: ; 41852 (10:5852)
 	ld bc, $10
 	ld a, BANK(BattleTransitionTile)
 	call FarCopyData2
-	ld hl, GameFreakIntro ; $5959
+	ld hl, GameFreakIntro
 	ld de, vChars2 + $600
 	ld bc, $140
 	ld a, BANK(GameFreakIntro)
 	call FarCopyData2
-	ld hl, GameFreakIntro ; $5959
+	ld hl, GameFreakIntro
 	ld de, vChars1
 	ld bc, $140
 	ld a, BANK(GameFreakIntro)
@@ -67,25 +67,25 @@ PlayShootingStar: ; 4188a (10:588a)
 	ld b, $c
 	call GoPAL_SET
 	callba LoadCopyrightAndTextBoxTiles
-	ld c, $b4
+	ld c, 180
 	call DelayFrames
 	call ClearScreen
 	call DisableLCD
 	xor a
-	ld [W_CUROPPONENT], a ; wd059
+	ld [W_CUROPPONENT], a
 	call Func_418e9
 	call LoadIntroGraphics
 	call EnableLCD
-	ld hl, rLCDC ; $ff40
+	ld hl, rLCDC
 	res 5, [hl]
 	set 3, [hl]
-	ld c, $40
+	ld c, 64
 	call DelayFrames
 	callba AnimateShootingStar
 	push af
 	pop af
 	jr c, .asm_418d0
-	ld hl,$c483
+	hlCoord 7, 11
 	ld c,$06
 	ld a,$67
 .loop
@@ -93,7 +93,7 @@ PlayShootingStar: ; 4188a (10:588a)
 	inc a
 	dec c
 	jr nz,.loop
-	ld c,$28
+	ld c, 40
 	call DelayFrames
 .asm_418d0
 	ld a, BANK(Music_TitleScreen)

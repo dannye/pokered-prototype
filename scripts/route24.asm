@@ -27,10 +27,10 @@ Route24TrainerHeader0: ; 5145b (14:545b)
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd7ef ; flag's byte
-	dw Route24BattleText1 ; 0x5571 TextBeforeBattle
-	dw Route24AfterBattleText1 ; 0x557b TextAfterBattle
-	dw Route24EndBattleText1 ; 0x5576 TextEndBattle
-	dw Route24EndBattleText1 ; 0x5576 TextEndBattle
+	dw Route24BattleText1 ; TextBeforeBattle
+	dw Route24AfterBattleText1 ; TextAfterBattle
+	dw Route24EndBattleText1 ; TextEndBattle
+	dw Route24EndBattleText1 ; TextEndBattle
 
 Route24TrainerHeader1:
 	db $1 ; flag's bit
@@ -45,57 +45,57 @@ Route24TrainerHeader2: ; 51467 (14:5467)
 	db $3 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw wd7ef ; flag's byte
-	dw Route24BattleText2 ; 0x5580 TextBeforeBattle
-	dw Route24AfterBattleText2 ; 0x558a TextAfterBattle
-	dw Route24EndBattleText2 ; 0x5585 TextEndBattle
-	dw Route24EndBattleText2 ; 0x5585 TextEndBattle
+	dw Route24BattleText2 ; TextBeforeBattle
+	dw Route24AfterBattleText2 ; TextAfterBattle
+	dw Route24EndBattleText2 ; TextEndBattle
+	dw Route24EndBattleText2 ; TextEndBattle
 
 Route24TrainerHeader3: ; 51473 (14:5473)
 	db $4 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw wd7ef ; flag's byte
-	dw Route24BattleText3 ; 0x558f TextBeforeBattle
-	dw Route24AfterBattleText3 ; 0x5599 TextAfterBattle
-	dw Route24EndBattleText3 ; 0x5594 TextEndBattle
-	dw Route24EndBattleText3 ; 0x5594 TextEndBattle
+	dw Route24BattleText3 ; TextBeforeBattle
+	dw Route24AfterBattleText3 ; TextAfterBattle
+	dw Route24EndBattleText3 ; TextEndBattle
+	dw Route24EndBattleText3 ; TextEndBattle
 
 Route24TrainerHeader4: ; 5147f (14:547f)
 	db $5 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw wd7ef ; flag's byte
-	dw Route24BattleText4 ; 0x559e TextBeforeBattle
-	dw Route24AfterBattleText4 ; 0x55a8 TextAfterBattle
-	dw Route24EndBattleText4 ; 0x55a3 TextEndBattle
-	dw Route24EndBattleText4 ; 0x55a3 TextEndBattle
+	dw Route24BattleText4 ; TextBeforeBattle
+	dw Route24AfterBattleText4 ; TextAfterBattle
+	dw Route24EndBattleText4 ; TextEndBattle
+	dw Route24EndBattleText4 ; TextEndBattle
 
 Route24TrainerHeader5: ; 5148b (14:548b)
 	db $6 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw wd7ef ; flag's byte
-	dw Route24BattleText5 ; 0x55ad TextBeforeBattle
-	dw Route24AfterBattleText5 ; 0x55b7 TextAfterBattle
-	dw Route24EndBattleText5 ; 0x55b2 TextEndBattle
-	dw Route24EndBattleText5 ; 0x55b2 TextEndBattle
+	dw Route24BattleText5 ; TextBeforeBattle
+	dw Route24AfterBattleText5 ; TextAfterBattle
+	dw Route24EndBattleText5 ; TextEndBattle
+	dw Route24EndBattleText5 ; TextEndBattle
 
 Route24TrainerHeader6: ; 51497 (14:5497)
 	db $7 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw wd7ef ; flag's byte
-	dw Route24BattleText6 ; 0x55bc TextBeforeBattle
-	dw Route24AfterBattleText6 ; 0x55c6 TextAfterBattle
-	dw Route24EndBattleText6 ; 0x55c1 TextEndBattle
-	dw Route24EndBattleText6 ; 0x55c1 TextEndBattle
+	dw Route24BattleText6 ; TextBeforeBattle
+	dw Route24AfterBattleText6 ; TextAfterBattle
+	dw Route24EndBattleText6 ; TextEndBattle
+	dw Route24EndBattleText6 ; TextEndBattle
 
 	db $ff
 
 Route24Text1: ; 514a4 (14:54a4)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route24TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24Text_51510: ; 51510 (14:5510)
-	TX_FAR _Route24Text_51510 ; 0x92721
+	TX_FAR _Route24Text_51510
 	db "@"
 
 Route24Text_5152b: ; 5152b (14:552b)
@@ -107,37 +107,37 @@ Route24Text_51530: ; 51530 (14:5530)
 	db "@"
 
 Route24Text2: ; 51535 (14:5535)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route24TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24Text3: ; 5153f (14:553f)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route24TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24Text4: ; 51549 (14:5549)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route24TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24Text5: ; 51553 (14:5553)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route24TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24Text6: ; 5155d (14:555d)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route24TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24Text7: ; 51567 (14:5567)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route24TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
