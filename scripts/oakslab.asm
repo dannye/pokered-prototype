@@ -166,8 +166,8 @@ OaksLabScript6: ; 1cc36 (7:4c36)
 	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
 	call StartSimulatingJoypadStates
-	ld a, $8
-	ld [wd528], a
+	ld a, PLAYER_DIR_UP
+	ld [wPlayerMovingDirection], a
 
 	ld a, $7
 	ld [W_OAKSLABCURSCRIPT], a
@@ -342,8 +342,8 @@ OaksLabScript10: ; 1cd6d (7:4d6d)
 	xor a ; SPRITE_FACING_DOWN
 	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
-	ld a, $8
-	ld [wd528], a
+	ld a, PLAYER_DIR_UP
+	ld [wPlayerMovingDirection], a
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
@@ -402,8 +402,8 @@ OaksLabScript11: ; 1cdb9 (7:4db9)
 	set 7, [hl]
 	xor a
 	ld [wJoyIgnore], a
-	ld a, $8
-	ld [wd528], a
+	ld a, PLAYER_DIR_UP
+	ld [wPlayerMovingDirection], a
 	ld a, $c
 	ld [W_OAKSLABCURSCRIPT], a
 	ret
@@ -411,8 +411,8 @@ OaksLabScript11: ; 1cdb9 (7:4db9)
 OaksLabScript12: ; 1ce03 (7:4e03)
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld a, $8
-	ld [wd528], a
+	ld a, PLAYER_DIR_UP
+	ld [wPlayerMovingDirection], a
 	call UpdateSprites
 	ld a, $1
 	ld [wSpriteIndex], a

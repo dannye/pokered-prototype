@@ -2035,7 +2035,7 @@ _DisplayPokedex: ; 7c18 (1:7c18)
 	ld a, [wd11e]
 	dec a
 	ld c, a
-	ld b, $1
+	ld b, FLAG_SET
 	ld hl, wPokedexSeen
 	predef FlagActionPredef
 	ld a, $1
@@ -3225,7 +3225,7 @@ MarkTownVisitedAndLoadMissableObjects: ; f113 (3:7113)
 	cp ROUTE_1
 	jr nc, .notInTown
 	ld c, a
-	ld b, $1
+	ld b, FLAG_SET
 	ld hl, W_TOWNVISITEDFLAG   ; mark town as visited (for flying)
 	predef FlagActionPredef
 .notInTown
@@ -3309,7 +3309,7 @@ InitializeMissableObjectsFlags: ; f175 (3:7175)
 	ld hl, W_MISSABLEOBJECTFLAGS
 	ld a, [wd048]
 	ld c, a
-	ld b, $1
+	ld b, FLAG_SET
 	call MissableObjectFlagAction ; set flag iff Item is hidden
 .asm_f19d
 	ld hl, wd048
@@ -3333,7 +3333,7 @@ IsObjectHidden: ; f1a6 (3:71a6)
 	ld a, [hli]
 	jr nz, .loop
 	ld c, a
-	ld b, $2
+	ld b, FLAG_TEST
 	ld hl, W_MISSABLEOBJECTFLAGS
 	call MissableObjectFlagAction
 	ld a, c
@@ -3352,7 +3352,7 @@ ShowObject2:
 	ld hl, W_MISSABLEOBJECTFLAGS
 	ld a, [wcc4d]
 	ld c, a
-	ld b, $0
+	ld b, FLAG_RESET
 	call MissableObjectFlagAction   ; reset "removed" flag
 	jp UpdateSprites
 
@@ -3362,7 +3362,7 @@ HideObject: ; f1d7 (3:71d7)
 	ld hl, W_MISSABLEOBJECTFLAGS
 	ld a, [wcc4d]
 	ld c, a
-	ld b, $1
+	ld b, FLAG_SET
 	call MissableObjectFlagAction   ; set "removed" flag
 	jp UpdateSprites
 
@@ -3632,7 +3632,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld a, [wd11e]
 	dec a
 	ld c, a
-	ld b, $2
+	ld b, FLAG_TEST
 	ld hl, wPokedexOwned
 	call FlagAction
 	ld a, c
@@ -3640,7 +3640,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld a, [wd11e]
 	dec a
 	ld c, a
-	ld b, $1
+	ld b, FLAG_SET
 	push bc
 	call FlagAction
 	pop bc
@@ -3872,7 +3872,7 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	ld a, [wd11e]
 	dec a
 	ld c, a
-	ld b, $1
+	ld b, FLAG_SET
 	ld hl, wPokedexOwned
 	push bc
 	call FlagAction ; add to owned pokemon

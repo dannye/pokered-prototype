@@ -265,9 +265,7 @@ DisplayTitleScreen: ; 42dd (1:42dd)
 	jp MainMenu
 
 .doClearSaveDialogue
-	ld b, BANK(DoClearSaveDialogue)
-	ld hl, DoClearSaveDialogue
-	jp Bankswitch
+	jpba DoClearSaveDialogue
 
 TitleScreenPickNewMon: ; 4496 (1:4496)
 	ld a, vBGMap0 / $100
