@@ -389,7 +389,7 @@ AnimateEXPBarAgain:
 AnimateEXPBar:
 	call IsCurrentMonBattleMon
 	ret nz
-	ld a, (SFX_08_3d - $4000) / 3
+	ld a, SFX_HEAL_HP
 	call PlaySoundWaitForCurrent
 	callab CalcEXPBarPixelLength
 	ld a, [wEXPBarPixelLength]

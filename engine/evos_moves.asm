@@ -618,7 +618,7 @@ WriteMonMoves: ; 3afb8 (e:6fb8)
 	jr nz, .findEmptySlotLoop
 
 ; no empty move slots found
-	pop de                        
+	pop de
 	push de
 	push hl
 	ld h, d
@@ -647,7 +647,7 @@ WriteMonMoves: ; 3afb8 (e:6fb8)
 	jr z, .nextMove
 
 ; write move PP value if learning moves from day care
-	push hl            
+	push hl
 	ld a, [hl]
 	ld hl, wPartyMon1PP - wPartyMon1Moves
 	add hl, de

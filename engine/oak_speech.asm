@@ -100,7 +100,7 @@ OakSpeech: ; 6115 (1:6115)
 	push af
 	ld a, $ff
 	call PlaySound
-	ld c, BANK(SFX_02_48)
+	ld c, BANK(SFX_Shrink_1)
 	ld a, SFX_SHRINK
 	call PlayMusic
 	pop af
