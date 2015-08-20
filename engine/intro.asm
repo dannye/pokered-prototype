@@ -52,17 +52,17 @@ PlayMoveSoundB: ; 41849 (10:5849)
 LoadIntroGraphics: ; 41852 (10:5852)
 	ld hl, BattleTransitionTile
 	ld de, vChars2 + $10
-	ld bc, $10
+	ld bc, BattleTransitionTileEnd - BattleTransitionTile
 	ld a, BANK(BattleTransitionTile)
 	call FarCopyData2
 	ld hl, GameFreakIntro
 	ld de, vChars2 + $600
-	ld bc, $140
+	ld bc, GameFreakIntroEnd - GameFreakIntro
 	ld a, BANK(GameFreakIntro)
 	call FarCopyData2
 	ld hl, GameFreakIntro
 	ld de, vChars1
-	ld bc, $140
+	ld bc, GameFreakIntroEnd - GameFreakIntro
 	ld a, BANK(GameFreakIntro)
 	jp FarCopyData2
 
@@ -100,8 +100,8 @@ PlayShootingStar: ; 4188a (10:588a)
 	call DelayFrames
 .next
 	ld a, BANK(Music_TitleScreen)
-	ld [wc0ef], a
-	ld [wc0f0], a
+	ld [wAudioROMBank], a
+	ld [wAudioSavedROMBank], a
 	call IntroClearMiddleOfScreen
 	call ClearSprites
 	jp Delay3
@@ -129,3 +129,4 @@ GameFreakIntro: ; 41959 (10:5959)
 	INCBIN "gfx/gamefreak_intro.2bpp"
 	INCBIN "gfx/gamefreak_logo.2bpp"
 	ds $10 ; blank tile
+GameFreakIntroEnd:

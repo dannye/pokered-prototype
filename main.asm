@@ -83,7 +83,7 @@ LoadMonData_:
 ;  2: boxmon
 ;  3: daycaremon
 ; Return monster id at wcf91 and its data at wLoadedMon.
-; Also load base stats at W_MONHDEXNUM for convenience.
+; Also load base stats at W_MONHEADER for convenience.
 
 	ld a, [wDayCareMonSpecies]
 	ld [wcf91], a
@@ -281,7 +281,7 @@ DetectCollisionBetweenSprites:
 	ld [hld], a ; zero [$c1ic] (directions in which collisions occurred)
 
 	ld a, [$ff91]
-	ld [hld], a ; [$c1ib] = adjusted X coordiate
+	ld [hld], a ; [$c1ib] = adjusted X coordinate
 	ld a, [$ff90]
 	ld [hl], a ; [$c1ia] = adjusted Y coordinate
 
@@ -587,7 +587,7 @@ INCLUDE "engine/cable_club.asm"
 LoadTrainerInfoTextBoxTiles: ; 5ae6 (1:5ae6)
 	ld de, TrainerInfoTextBoxTileGraphics
 	ld hl, vChars2 + $760
-	ld bc, (BANK(TrainerInfoTextBoxTileGraphics) << 8) +$09
+	lb bc, BANK(TrainerInfoTextBoxTileGraphics), (TrainerInfoTextBoxTileGraphicsEnd - TrainerInfoTextBoxTileGraphics) / $10
 	jp CopyVideoData
 
 INCLUDE "engine/menu/main_menu.asm"
@@ -1432,8 +1432,8 @@ DisplayMoneyBox: ; 74ba (1:74ba)
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	coord hl, 13, 1
-	ld b, $1
-	ld c, $6
+	ld b, 1
+	ld c, 6
 	call ClearScreenArea
 	coord hl, 12, 1
 	ld de, wPlayerMoney
@@ -1964,7 +1964,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 .asm_7ba6
 	ld d, h
 	ld e, l
-	ld bc, $b
+	ld bc, 11
 	add hl, bc
 	ld bc, wPartyMonNicks
 	ld a, [wRemoveMonFromBox]
@@ -2004,12 +2004,12 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	jr z, .asm_7bfa
 	ld hl, wBoxMonNicks
 .asm_7bfa
-	ld bc, $b
+	ld bc, 11
 	ld a, [wWhichPokemon]
 	call AddNTimes
 	ld d, h
 	ld e, l
-	ld bc, $b
+	ld bc, 11
 	add hl, bc
 	ld bc, wPokedexOwned
 	ld a, [wRemoveMonFromBox]
@@ -2065,7 +2065,7 @@ ClearVariablesAfterLoadingMapData: ; c335 (3:4335)
 	ld [hli], a
 	ld [hl], a
 	ld hl, wWhichTrade
-	ld bc, $1e
+	ld bc, wStandingOnWarpPadOrHole - wWhichTrade
 	call FillMemory
 	ret
 
@@ -3286,7 +3286,7 @@ LoadMissableObjects: ; f132 (3:7132)
 
 InitializeMissableObjectsFlags: ; f175 (3:7175)
 	ld hl, W_MISSABLEOBJECTFLAGS
-	ld bc, $20
+	ld bc, wMissableObjectFlagsEnd - W_MISSABLEOBJECTFLAGS
 	xor a
 	call FillMemory ; clear missable objects flags
 	ld hl, MapHS00
@@ -3577,7 +3577,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld d, h
 	ld e, l
 	ld hl, wPlayerName
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	ld a, [wMonDataLocation]
 	and a
@@ -3798,7 +3798,7 @@ AddPartyMon_WriteMovePP: ; f476 (3:7476)
 	push de
 	push bc
 	ld hl, Moves
-	ld bc, $6
+	ld bc, MoveEnd - Moves
 	call AddNTimes
 	ld de, wcd6d
 	ld a, BANK(Moves)
@@ -3848,7 +3848,7 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	ld hl, wEnemyMonOT
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
-	ld bc, $000b
+	ld bc, 11
 	call CopyData    ; write new mon's OT name (from an enemy mon)
 	ld hl, wPartyMonNicks
 	ld a, [wPartyCount]
@@ -3859,7 +3859,7 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	ld hl, wEnemyMonNicks
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
-	ld bc, $000b
+	ld bc, 11
 	call CopyData    ; write new mon's nickname (from an enemy mon)
 	ld a, [wcf91]
 	ld [wd11e], a
@@ -3990,7 +3990,7 @@ _MoveMon: ; f51e (3:751e)
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
 .asm_f5ec
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	ld a, [wMoveMonType]
 	cp PARTY_TO_DAYCARE
@@ -4020,7 +4020,7 @@ _MoveMon: ; f51e (3:751e)
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
 .asm_f62a
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	pop hl
 	ld a, [wMoveMonType]
@@ -4163,7 +4163,7 @@ HealParty:
 	push bc
 
 	ld hl, Moves
-	ld bc, 6
+	ld bc, MoveEnd - Moves
 	call AddNTimes
 	ld de, wcd6d
 	ld a, BANK(Moves)
@@ -4485,7 +4485,7 @@ START_MONEY EQU $3000
 	ld [hl], a
 
 	ld hl, W_GAMEPROGRESSFLAGS
-	ld bc, $c8
+	ld bc, wGameProgressFlagsEnd - W_GAMEPROGRESSFLAGS
 	call FillMemory ; clear all game progress flags
 
 	jp InitializeMissableObjectsFlags
@@ -4757,18 +4757,28 @@ SECTION "Graphics", ROMX, BANK[GFX]
 
 PokemonLogoGraphics:            INCBIN "gfx/pokemon_logo.2bpp"
 FontGraphics:                   INCBIN "gfx/font.1bpp"
+FontGraphicsEnd:
 ABTiles:                        INCBIN "gfx/AB.2bpp"
 HpBarAndStatusGraphics:         INCBIN "gfx/hp_bar_and_status.2bpp"
+HpBarAndStatusGraphicsEnd:
 BattleHudTiles1:                INCBIN "gfx/battle_hud1.1bpp"
+BattleHudTiles1End:
 BattleHudTiles2:                INCBIN "gfx/battle_hud2.1bpp"
 BattleHudTiles3:                INCBIN "gfx/battle_hud3.1bpp"
+BattleHudTiles3End:
 NintendoCopyrightLogoGraphics:  INCBIN "gfx/copyright.2bpp"
 GamefreakLogoGraphics:          INCBIN "gfx/gamefreak.2bpp"
+GamefreakLogoGraphicsEnd:
 TextBoxGraphics:                INCBIN "gfx/text_box.2bpp"
+TextBoxGraphicsEnd:
 PokedexTileGraphics:            INCBIN "gfx/pokedex.2bpp"
+PokedexTileGraphicsEnd:
 WorldMapTileGraphics:           INCBIN "gfx/town_map.2bpp"
+WorldMapTileGraphicsEnd:
 PlayerCharacterTitleGraphics:   INCBIN "gfx/player_title.2bpp"
+PlayerCharacterTitleGraphicsEnd:
 GottaCatchEmAllTiles:           INCBIN "gfx/gotta_catch_em_all.2bpp"
+GottaCatchEmAllTilesEnd:
 
 
 SECTION "Battle (bank 4)", ROMX, BANK[$4]
@@ -4793,6 +4803,7 @@ INCLUDE "engine/battle/get_trainer_name.asm"
 INCLUDE "engine/random.asm"
 
 EXPBarGraphics:  INCBIN "gfx/exp_bar.h8.2bpp"
+EXPBarGraphicsEnd:
 
 
 SECTION "NPC Sprites 2", ROMX, BANK[NPC_SPRITES_2]
@@ -5282,6 +5293,7 @@ SECTION "Battle (bank B)", ROMX, BANK[$B]
 INCLUDE "engine/battle/display_effectiveness.asm"
 
 TrainerInfoTextBoxTileGraphics:  INCBIN "gfx/trainer_info.2bpp"
+TrainerInfoTextBoxTileGraphicsEnd:
 CircleTile:                      INCBIN "gfx/circle_tile.2bpp"
 BadgeNumbersTileGraphics:        INCBIN "gfx/badge_numbers.2bpp"
 
@@ -6382,10 +6394,12 @@ Plateau_Block:     INCBIN "gfx/blocksets/plateau.bst"
 TradingAnimationGraphics:
 	INCBIN "gfx/game_boy.norepeat.2bpp"
 	INCBIN "gfx/link_cable.2bpp"
+TradingAnimationGraphicsEnd:
 
 TradingAnimationGraphics2:
 ; Pokeball traveling through the link cable.
 	INCBIN "gfx/trade2.2bpp"
+TradingAnimationGraphics2End:
 
 
 SECTION "bank1A",ROMX,BANK[$1A]
@@ -6393,6 +6407,7 @@ SECTION "bank1A",ROMX,BANK[$1A]
 INCLUDE "engine/battle/decrement_pp.asm"
 
 Version_GFX:       INCBIN "gfx/prototypeversion.2bpp" ; 10 tiles
+Version_GFXEnd:
 
 Dojo_GFX:
 Gym_GFX:           INCBIN "gfx/tilesets/gym.2bpp"

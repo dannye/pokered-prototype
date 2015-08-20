@@ -80,41 +80,41 @@ StatusScreen: ; 12953 (4:6953)
 	ld hl, wd72c
 	set 1, [hl]
 	ld a, $33
-	ld [$ff24], a ; Reduce the volume
+	ld [rNR50], a ; Reduce the volume
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
 	call LoadHpBarAndStatusTilePatterns
 	ld de, BattleHudTiles1  ; source
 	ld hl, vChars2 + $6d0 ; dest
-	ld bc, (BANK(BattleHudTiles1) << 8) + $03 ; bank bytes/8
+	lb bc, BANK(BattleHudTiles1), $03
 	call CopyVideoDataDouble ; ·│ :L and halfarrow line end
 	ld de, BattleHudTiles2
 	ld hl, vChars2 + $780
-	ld bc, (BANK(BattleHudTiles2) << 8) + $01
+	lb bc, BANK(BattleHudTiles2), $01
 	call CopyVideoDataDouble ; │
 	ld de, BattleHudTiles3
 	ld hl, vChars2 + $760
-	ld bc, (BANK(BattleHudTiles3) << 8) + $02
+	lb bc, BANK(BattleHudTiles3), $02
 	call CopyVideoDataDouble ; ─┘
 	ld de, PTile
 	ld hl, vChars2 + $720
-	ld bc,(BANK(PTile) << 8 | $01)
+	lb bc, BANK(PTile), (PTileEnd - PTile) / $8
 	call CopyVideoDataDouble ; P (for PP), inline
 	ld a, [hTilesetType]
 	push af
 	xor a
 	ld [hTilesetType], a
 	coord hl, 19, 1
-	ld bc, $060a
+	lb bc, 6, 10
 	call DrawLineBox ; Draws the box around name, HP and status
-	ld de, $fffa
+	ld de, -6
 	add hl, de
 	ld [hl], $f2 ; . after No ("." is a different one)
 	dec hl
 	ld [hl], "№"
 	coord hl, 19, 9
-	ld bc, $0806
+	lb bc, 8, 6
 	call DrawLineBox ; Draws the box around types, ID No. and OT
 	coord hl, 10, 9
 	ld de, Type1Text
@@ -138,7 +138,7 @@ StatusScreen: ; 12953 (4:6953)
 	call PlaceString ; "STATUS/"
 	coord hl, 14, 2
 	call PrintLevel ; Pokémon level
-	ld a, [W_MONHDEXNUM]
+	ld a, [W_MONHINDEX]
 	ld [wd11e], a
 	ld [wd0b5], a
 	predef IndexToPokedex
@@ -224,7 +224,7 @@ OKText: ; 12ac4 (4:6ac4)
 
 ; Draws a line starting from hl high b and wide c
 DrawLineBox: ; 0x12ac7
-	ld de, $0014 ; New line
+	ld de, SCREEN_WIDTH ; New line
 .PrintVerticalLine
 	ld [hl], $78 ; │
 	add hl, de
@@ -242,6 +242,7 @@ DrawLineBox: ; 0x12ac7
 
 PTile: ; 12adc (4:6adc) ; This is a single 1bpp "P" tile
 	INCBIN "gfx/p_tile.1bpp"
+PTileEnd:
 
 PrintStatsBox: ; 12ae4 (4:6ae4)
 	ld a, d
@@ -371,7 +372,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	call PrintNumber
 	ld a, "/"
 	ld [hli], a
-	ld de, wd11e
+	ld de, wMaxPP
 	lb bc, 1, 2
 	call PrintNumber
 	pop hl
@@ -416,7 +417,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	call StatusScreen_ClearName
 	coord hl, 9, 1
 	call StatusScreen_ClearName
-	ld a, [W_MONHDEXNUM]
+	ld a, [W_MONHINDEX]
 	ld [wd11e], a
 	call GetMonName
 	coord hl, 9, 1
@@ -430,7 +431,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	ld hl, wd72c
 	res 1, [hl]
 	ld a, $77
-	ld [$ff24], a
+	ld [rNR50], a
 	call GBPalWhiteOut
 	jp ClearScreen
 

@@ -191,7 +191,7 @@ AIMoveChoiceModification2: ; 397e7 (e:57e7)
 AIMoveChoiceModification3: ; 39817 (e:5817)
 	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offset)
 	ld de, wEnemyMonMoves ; enemy moves
-	ld b, $5
+	ld b, NUM_MOVES + 1
 .nextMove
 	dec b
 	ret z ; processed all 4 moves
@@ -208,7 +208,7 @@ AIMoveChoiceModification3: ; 39817 (e:5817)
 	pop de
 	pop bc
 	pop hl
-	ld a, [wd11e]
+	ld a, [wTypeEffectiveness]
 	cp $10
 	jr z, .nextMove
 	jr c, .notEffectiveMove
@@ -264,7 +264,7 @@ ReadMove: ; 39884 (e:5884)
 	push bc
 	dec a
 	ld hl,Moves
-	ld bc,6
+	ld bc,MoveEnd - Moves
 	call AddNTimes
 	ld de,W_ENEMYMOVENUM
 	call CopyData
@@ -665,7 +665,7 @@ AISwitchIfEnoughMons: ; 3a72a (e:672a)
 	inc d
 .Fainted
 	push bc
-	ld bc,$2C
+	ld bc, wEnemyMon2 - wEnemyMon1
 	add hl,bc
 	pop bc
 	dec c

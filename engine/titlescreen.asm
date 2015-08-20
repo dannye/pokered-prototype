@@ -1,6 +1,6 @@
 ; copy text of fixed length $b (like player name, rival name, mon names, ...)
 CopyFixedLengthText: ; 42b1 (1:42b1)
-	ld bc, $b
+	ld bc, 11
 	jp CopyData
 
 SetDefaultNamesBeforeTitlescreen: ; 42b7 (1:42b7)
@@ -18,8 +18,8 @@ SetDefaultNamesBeforeTitlescreen: ; 42b7 (1:42b7)
 	ld [hli], a
 	ld [hl], a
 	ld a, BANK(Music_TitleScreen)
-	ld [wc0ef], a
-	ld [wc0f0], a
+	ld [wAudioROMBank], a
+	ld [wAudioSavedROMBank], a
 
 DisplayTitleScreen: ; 42dd (1:42dd)
 	call GBPalWhiteOut
@@ -57,13 +57,12 @@ DisplayTitleScreen: ; 42dd (1:42dd)
 	call FarCopyData2          ; second chunk
 	ld hl, GottaCatchEmAllTiles
 	ld de, vChars2 + $500
-	ld bc, $1A0
+	ld bc, GottaCatchEmAllTilesEnd - GottaCatchEmAllTiles
 	ld a, BANK(GottaCatchEmAllTiles)
 	call FarCopyData2
 	ld hl, Version_GFX
 	ld de,vChars2 + $700
-	ld bc,$50
-
+	ld bc, Version_GFXEnd - Version_GFX
 	ld a, BANK(Version_GFX)
 	call FarCopyData2
 	call ClearBothBGMaps
@@ -223,7 +222,7 @@ DisplayTitleScreen: ; 42dd (1:42dd)
 	call Delay3
 	call WaitForSoundToFinish
 	ld a, MUSIC_TITLE_SCREEN
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	xor a
 	ld [wcc5b], a
@@ -322,7 +321,7 @@ ScrollTitleScreenGameVersion: ; 44cf (1:44cf)
 DrawPlayerCharacter: ; 44dd (1:44dd)
 	ld hl, PlayerCharacterTitleGraphics
 	ld de, vSprites
-	ld bc, $230
+	ld bc, PlayerCharacterTitleGraphicsEnd - PlayerCharacterTitleGraphics
 	ld a, BANK(PlayerCharacterTitleGraphics)
 	call FarCopyData2
 	call ClearSprites
@@ -382,7 +381,7 @@ LoadCopyrightAndTextBoxTiles: ; 4538 (1:4538)
 LoadCopyrightTiles: ; 4541 (1:4541)
 	ld de, NintendoCopyrightLogoGraphics
 	ld hl, vChars2 + $600
-	ld bc, (BANK(NintendoCopyrightLogoGraphics) << 8) + $1c
+	lb bc, BANK(NintendoCopyrightLogoGraphics), (GamefreakLogoGraphicsEnd - NintendoCopyrightLogoGraphics) / $10
 	call CopyVideoData
 	coord hl, 2, 7
 	ld de, CopyrightTextString

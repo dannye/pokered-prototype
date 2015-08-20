@@ -13,7 +13,7 @@ SilphCo7Script_51b77: ; 51b77 (14:5b77)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld hl, DataTable_51bc1
+	ld hl, SilphCo7GateCoords
 	call SilphCo7Text_51bc8
 	call SilphCo7Text_51bf4
 	CheckEvent EVENT_SILPH_CO_7_UNLOCKED_DOOR1
@@ -21,7 +21,7 @@ SilphCo7Script_51b77: ; 51b77 (14:5b77)
 	push af
 	ld a, $54
 	ld [wNewTileBlockID], a
-	ld bc, $305
+	lb bc, 3, 5
 	predef ReplaceTileBlock
 	pop af
 .asm_51b9e
@@ -30,7 +30,7 @@ SilphCo7Script_51b77: ; 51b77 (14:5b77)
 	push af
 	ld a, $54
 	ld [wNewTileBlockID], a
-	ld bc, $20a
+	lb bc, 2, 10
 	predef ReplaceTileBlock
 	pop af
 .asm_51bb1
@@ -38,11 +38,14 @@ SilphCo7Script_51b77: ; 51b77 (14:5b77)
 	ret nz
 	ld a, $54
 	ld [wNewTileBlockID], a
-	ld bc, $60a
+	lb bc, 6, 10
 	predef_jump ReplaceTileBlock
 
-DataTable_51bc1: ; 51bc1 (14:5bc1)
-	db $03,$05,$02,$0A,$06,$0A,$FF
+SilphCo7GateCoords: ; 51bc1 (14:5bc1)
+	db $03,$05
+	db $02,$0A
+	db $06,$0A
+	db $FF
 
 SilphCo7Text_51bc8: ; 51bc8 (14:5bc8)
 	push hl
@@ -128,7 +131,7 @@ SilphCo7Script0: ; 51c23 (14:5c23)
 	ld a, PLAYER_DIR_DOWN
 	ld [wPlayerMovingDirection], a
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
@@ -217,7 +220,7 @@ SilphCo7Script4: ; 51cc8 (14:5cc8)
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	callba Music_RivalAlternateStart
 	ld de, MovementData_51d1d
@@ -329,7 +332,7 @@ SilphCo7Text1:
 .givelapras
 	ld hl, .MeetLaprasGuyText
 	call PrintText
-	ld bc, (LAPRAS << 8) | 15
+	lb bc, LAPRAS, 15
 	call GivePokemon
 	jr nc, .done
 	ld a, [wSimulatedJoypadStatesEnd]

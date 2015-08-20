@@ -96,7 +96,7 @@ CableClub_DoBattleOrTradeAgain: ; 5345
 	ld a, SERIAL_PATCH_LIST_PART_TERMINATOR
 	ld [de], a ; end of part 1
 	inc de
-	ld bc, $100
+	lb bc, 1, 0
 	jr .patchPartyMonsLoop
 .finishedPatchingPlayerData
 	ld a, SERIAL_PATCH_LIST_PART_TERMINATOR
@@ -256,9 +256,9 @@ CableClub_DoBattleOrTradeAgain: ; 5345
 	dec c
 	jr nz, .unpatchEnemyMonsLoop
 	ld a, wEnemyMonOT % $100
-	ld [wcf8d], a
+	ld [wUnusedCF8D], a
 	ld a, wEnemyMonOT / $100
-	ld [wcf8e], a
+	ld [wUnusedCF8D + 1], a
 	xor a
 	ld [wTradeCenterPointerTableIndex], a
 	ld a, $ff
@@ -400,7 +400,7 @@ TradeCenter_SelectMon:
 	ld a, 1
 	ld [wTopMenuItemX], a
 	coord hl, 1, 1
-	ld bc, $0601
+	lb bc, 6, 1
 	call ClearScreenArea
 .playerMonMenu_HandleInput
 	ld hl, hFlags_0xFFF6
@@ -598,7 +598,7 @@ ReturnToCableClubRoom: ; 577d (1:577d)
 TradeCenter_DrawCancelBox:
 	coord hl, 11, 15
 	ld a, $7e
-	ld bc, 2 * 20 + 9
+	ld bc, 2 * SCREEN_WIDTH + 9
 	call FillMemory
 	coord hl, 0, 15
 	ld b, 1
@@ -614,7 +614,7 @@ CancelTextString:
 TradeCenter_PlaceSelectedEnemyMonMenuCursor:
 	ld a, [wSerialSyncAndExchangeNybbleReceiveData]
 	coord hl, 1, 9
-	ld bc, 20
+	ld bc, SCREEN_WIDTH
 	call AddNTimes
 	ld [hl], $ec ; cursor
 	ret
@@ -713,7 +713,7 @@ TradeCenter_Trade:
 	call TextCommandProcessor
 	call SaveScreenTilesToBuffer1
 	coord hl, 10, 7
-	ld bc, $080b
+	lb bc, 8, 11
 	ld a, TRADE_CANCEL_MENU
 	ld [wTwoOptionMenuID], a
 	ld a, TWO_OPTION_MENU
@@ -824,12 +824,12 @@ TradeCenter_Trade:
 	add hl, bc
 	ld a, [hl]
 	ld [wTradedEnemyMonSpecies], a
-	ld a, $a
-	ld [wMusicHeaderPointer], a
+	ld a, 10
+	ld [wAudioFadeOutControl], a
 	ld a, $2
-	ld [wc0f0], a
+	ld [wAudioSavedROMBank], a
 	ld a, MUSIC_SAFARI_ZONE
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	ld c, 100
 	call DelayFrames
@@ -915,12 +915,12 @@ CableClub_Run: ; 5a5f (1:5a5f)
 	inc a ; LINK_STATE_IN_CABLE_CLUB
 	ld [wLinkState], a
 	ld [$ffb5], a
-	ld a, $a
-	ld [wMusicHeaderPointer], a
+	ld a, 10
+	ld [wAudioFadeOutControl], a
 	ld a, BANK(Music_Celadon)
-	ld [wc0f0], a
+	ld [wAudioSavedROMBank], a
 	ld a, MUSIC_CELADON
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	jp PlaySound
 
 EmptyFunc3: ; 5aaf (1:5aaf)

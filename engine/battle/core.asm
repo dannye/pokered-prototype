@@ -102,7 +102,7 @@ SlidePlayerAndEnemySilhouettesOnScreen: ; 3c04c (f:404c)
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	coord hl, 1, 5
-	ld bc, $307
+	lb bc, 3, 7
 	call ClearScreenArea
 	call DisableLCD
 	call LoadFontTilePatterns
@@ -110,7 +110,7 @@ SlidePlayerAndEnemySilhouettesOnScreen: ; 3c04c (f:404c)
 	ld hl, vBGMap0
 	ld bc, $400
 .clearBackgroundLoop
-	ld a, $7f
+	ld a, " "
 	ld [hli], a
 	dec bc
 	ld a, b
@@ -717,8 +717,8 @@ HandlePoisonBurnLeechSeed_IncreaseEnemyHP: ; 3c4a3 (f:44a3)
 	ld [wHPBarMaxHP+1], a
 	ld a, [hl]
 	ld [wHPBarMaxHP], a
-	ld de, $fff2
-	add hl, de           ; skip back fomr max hp to current hp
+	ld de, wBattleMonHP - wBattleMonMaxHP
+	add hl, de           ; skip back from max hp to current hp
 	ld a, [hl]
 	ld [wHPBarOldHP], a ; add bc to current HP
 	add c
@@ -834,8 +834,17 @@ FaintEnemyPokemon: ; 0x3c567
 .wild
 	ld hl, W_PLAYERBATTSTATUS1
 	res AttackingMultipleTimes, [hl]
+; Bug. This only zeroes the high byte of the player's accumulated damage,
+; setting the accumulated damage to itself mod 256 instead of 0 as was probably
+; intended. That alone is problematic, but this mistake has another more severe
+; effect. This function's counterpart for when the player mon faints,
+; RemoveFaintedPlayerMon, zeroes both the high byte and the low byte. In a link
+; battle, the other player's Game Boy will call that function in response to
+; the enemy mon (the player mon from the other side's perspective) fainting,
+; and the states of the two Game Boys will go out of sync unless the damage
+; was congruent to 0 modulo 256.
 	xor a
-	ld [wPlayerNumHits], a
+	ld [wPlayerBideAccumulatedDamage], a
 	ld hl, wEnemyStatsToDouble ; clear enemy statuses
 	ld [hli], a
 	ld [hli], a
@@ -852,18 +861,18 @@ FaintEnemyPokemon: ; 0x3c567
 	coord de, 12, 6
 	call SlideDownFaintedMonPic
 	coord hl, 0, 0
-	ld bc, $40b
+	lb bc, 4, 11
 	call ClearScreenArea
 	ld a, [W_ISINBATTLE]
 	dec a
 	jr z, .wild_win
 	xor a
-	ld [wc0f1], a
-	ld [wc0f2], a
+	ld [wFrequencyModifier], a
+	ld [wTempoModifier], a
 	ld a, SFX_FAINT_FALL
 	call PlaySoundWaitForCurrent
 .sfxwait
-	ld a, [wc02a]
+	ld a, [wChannelSoundIDs + CH4]
 	cp SFX_FAINT_FALL
 	jr z, .sfxwait
 	ld a, SFX_FAINT_THUD
@@ -943,7 +952,7 @@ EnemyMonFaintedText: ; 0x3c63e
 EndLowHealthAlarm: ; 3c643 (f:4643)
 	xor a
 	ld [wLowHealthAlarm], a ;disable low health alarm
-	ld [wc02a], a
+	ld [wChannelSoundIDs + CH4], a
 	inc a
 	ld [wccf6], a
 	ret
@@ -1036,7 +1045,7 @@ TrainerDefeatedText: ; 3c6e9 (f:46e9)
 PlayBattleVictoryMusic: ; 3c6ee (f:46ee)
 	push af
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySoundWaitForCurrent
 	ld c, BANK(Music_DefeatedTrainer)
 	pop af
@@ -1092,15 +1101,14 @@ RemoveFaintedPlayerMon: ; 3c741 (f:4741)
 	ld [wLowHealthAlarm], a ;disable low health alarm
 	call WaitForSoundToFinish
 .skipWaitForSound
-; bug? if the player mon faints while the enemy mon is using bide,
-; the accumulated damage is overwritten. xxx what values can [wLowHealthAlarm] have here?
+; a is 0, so this zeroes the enemy's accumulated damage.
 	ld hl, wEnemyBideAccumulatedDamage
 	ld [hli], a
 	ld [hl], a
 	ld [wBattleMonStatus], a
 	call ReadPlayerMonCurHPAndStatus
 	coord hl, 9, 7
-	ld bc, $50b
+	lb bc, 5, 11
 	call ClearScreenArea
 	coord hl, 1, 10
 	coord de, 1, 11
@@ -1132,7 +1140,7 @@ DoUseNextMonDialogue: ; 3c79b (f:479b)
 	call PrintText
 .displayYesNoBox
 	coord hl, 13, 9
-	ld bc, $a0e
+	lb bc, 10, 14
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -1209,7 +1217,7 @@ HandlePlayerBlackOut: ; 3c837 (f:4837)
 	cp $c8 + SONY1
 	jr nz, .notSony1Battle
 	coord hl, 0, 0  ; sony 1 battle
-	ld bc, $815
+	lb bc, 8, 21
 	call ClearScreenArea
 	call ScrollTrainerPicAfterBattle
 	ld c, 40
@@ -1449,7 +1457,7 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	ld hl, TrainerAboutToUseText
 	call PrintText
 	coord hl, 0, 7
-	ld bc,$0801
+	lb bc, 8, 1
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
 	call DisplayTextBoxID
@@ -1484,7 +1492,7 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 .next4
 	call ClearSprites
 	coord hl, 0, 0
-	ld bc,$040B
+	lb bc, 4, 11
 	call ClearScreenArea
 	ld b,1
 	call GoPAL_SET
@@ -1886,7 +1894,7 @@ DrawPlayerHUDAndHPBar: ; 3cd60 (f:4d60)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	coord hl, 9, 7
-	ld bc, $50b
+	lb bc, 5, 11
 	call ClearScreenArea
 	callab PlacePlayerHUDTiles
 	coord hl, 18, 9
@@ -1936,7 +1944,7 @@ DrawPlayerHUDAndHPBar: ; 3cd60 (f:4d60)
 	ld [hl], $0
 	ret z
 	xor a
-	ld [wc02a], a
+	ld [wChannelSoundIDs + CH4], a
 	ret
 .asm_3cde6
 	ld hl, wLowHealthAlarm
@@ -1947,7 +1955,7 @@ DrawEnemyHUDAndHPBar: ; 3cdec (f:4dec)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	coord hl, 0, 0
-	ld bc, $40c
+	lb bc, 4, 12
 	call ClearScreenArea
 	callab PlaceEnemyHUDTiles
 	ld de, wEnemyMonNick
@@ -2055,11 +2063,11 @@ CenterMonName: ; 3ce9c (f:4e9c)
 .loop
 	inc de
 	ld a, [de]
-	cp $50
+	cp "@"
 	jr z, .done
 	inc de
 	ld a, [de]
-	cp $50
+	cp "@"
 	jr z, .done
 	dec hl
 	dec b
@@ -2091,7 +2099,7 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 ; the following happens for the old man tutorial
 	ld hl, wPlayerName
 	ld de, W_GRASSRATE
-	ld bc, $b
+	ld bc, 11
 	call CopyData  ; temporarily save the player name in unused space,
 	               ; which is supposed to get overwritten when entering a
 	               ; map with wild Pokémon. Due to an oversight, the data
@@ -2099,14 +2107,14 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 	               ; Missingno. glitch can show up.
 	ld hl, .oldManName
 	ld de, wPlayerName
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 ; the following simulates the keystrokes by drawing menus on screen
 	coord hl, 9, 14
 	ld [hl], "▶"
 	ld c, 80
 	call DelayFrames
-	ld [hl], $7f
+	ld [hl], " "
 	coord hl, 9, 16
 	ld [hl], "▶"
 	ld c, 50
@@ -2394,8 +2402,8 @@ PartyMenuOrRockOrRun:
 	jp DisplayBattleMenu
 .partyMonDeselected
 	coord hl, 11, 11
-	ld bc, $81
-	ld a, $7f
+	ld bc, 6 * SCREEN_WIDTH + 9
+	ld a, " "
 	call FillMemory
 	xor a ; NORMAL_PARTY_MENU
 	ld [wPartyMenuTypeOrMessageID], a
@@ -2585,7 +2593,7 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 .relearnmenu
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMon1Moves
-	ld bc, $2c
+	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
 	call .loadmoves
 	coord hl, 4, 7
@@ -2662,7 +2670,7 @@ SelectMenuItem: ; 3d2fe (f:52fe)
 	jr z, .select
 	coord hl, 5, 13
 	dec a
-	ld bc, $14
+	ld bc, SCREEN_WIDTH
 	call AddNTimes
 	ld [hl], $ec
 .select
@@ -2862,7 +2870,7 @@ SwapMovesInMenu: ; 3d435 (f:5435)
 	push hl
 	call .swapBytes ; swap moves
 	pop hl
-	ld bc, $15
+	ld bc, wPartyMon1PP - wPartyMon1Moves
 	add hl, bc
 	call .swapBytes ; swap move PP
 	xor a
@@ -2954,7 +2962,7 @@ PrintMenuItem: ; 3d4b6 (f:54b6)
 	lb bc, 1, 2
 	call PrintNumber
 	coord hl, 8, 11
-	ld de, wd11e
+	ld de, wMaxPP
 	lb bc, 1, 2
 	call PrintNumber
 	call GetCurrentMove
@@ -5190,7 +5198,7 @@ ReloadMoveData: ; 3e329 (f:6329)
 	ld [wd11e],a
 	dec a
 	ld hl,Moves
-	ld bc,$0006
+	ld bc,MoveEnd - Moves
 	call AddNTimes
 	ld a,BANK(Moves)
 	call FarCopyData ; copy the move's stats
@@ -5275,7 +5283,7 @@ AdjustDamageForMoveType: ; 3e3a5 (f:63a5)
 	ld d,a    ; d = type 1 of defender
 	ld e,[hl] ; e = type 2 of defender
 	ld a,[W_PLAYERMOVETYPE]
-	ld [wd11e],a
+	ld [wMoveType],a
 	ld a,[H_WHOSETURN]
 	and a
 	jr z,.next
@@ -5289,9 +5297,9 @@ AdjustDamageForMoveType: ; 3e3a5 (f:63a5)
 	ld d,a    ; d = type 1 of defender
 	ld e,[hl] ; e = type 2 of defender
 	ld a,[W_ENEMYMOVETYPE]
-	ld [wd11e],a
+	ld [wMoveType],a
 .next
-	ld a,[wd11e] ; move type
+	ld a,[wMoveType]
 	cp b ; does the move type match type 1 of the attacker?
 	jr z,.sameTypeAttackBonus
 	cp c ; does the move type match type 2 of the attacker?
@@ -5316,8 +5324,8 @@ AdjustDamageForMoveType: ; 3e3a5 (f:63a5)
 	ld hl,wDamageMultipliers
 	set 7,[hl]
 .skipSameTypeAttackBonus
-	ld a,[wd11e]
-	ld b,a ; b = move type
+	ld a,[wMoveType]
+	ld b,a
 	ld hl,TypeEffects
 .loop
 	ld a,[hli] ; a = "attacking type" of the current type pair
@@ -5380,29 +5388,29 @@ AdjustDamageForMoveType: ; 3e3a5 (f:63a5)
 ; function to tell how effective the type of an enemy attack is on the player's current pokemon
 ; this doesn't take into account the effects that dual types can have
 ; (e.g. 4x weakness / resistance, weaknesses and resistances canceling)
-; the result is stored in [wd11e]
+; the result is stored in [wTypeEffectiveness]
 ; ($05 is not very effective, $10 is neutral, $14 is super effective)
 ; as far is can tell, this is only used once in some AI code to help decide which move to use
 AIGetTypeEffectiveness: ; 3e449 (f:6449)
 	ld a,[W_ENEMYMOVETYPE]
-	ld d,a                 ; d = type of enemy move
+	ld d,a                    ; d = type of enemy move
 	ld hl,wBattleMonType
-	ld b,[hl]              ; b = type 1 of player's pokemon
+	ld b,[hl]                 ; b = type 1 of player's pokemon
 	inc hl
-	ld c,[hl]              ; c = type 2 of player's pokemon
+	ld c,[hl]                 ; c = type 2 of player's pokemon
 	ld a,$10
-	ld [wd11e],a           ; initialize [wd11e] to neutral effectiveness
+	ld [wTypeEffectiveness],a ; initialize to neutral effectiveness
 	ld hl,TypeEffects
 .loop
 	ld a,[hli]
 	cp a,$ff
 	ret z
-	cp d                   ; match the type of the move
+	cp d                      ; match the type of the move
 	jr nz,.nextTypePair1
 	ld a,[hli]
-	cp b                   ; match with type 1 of pokemon
+	cp b                      ; match with type 1 of pokemon
 	jr z,.done
-	cp c                   ; or match with type 2 of pokemon
+	cp c                      ; or match with type 2 of pokemon
 	jr z,.done
 	jr .nextTypePair2
 .nextTypePair1
@@ -5412,7 +5420,7 @@ AIGetTypeEffectiveness: ; 3e449 (f:6449)
 	jr .loop
 .done
 	ld a,[hl]
-	ld [wd11e],a           ; store damage multiplier
+	ld [wTypeEffectiveness],a ; store damage multiplier
 	ret
 
 INCLUDE "data/type_effects.asm"
@@ -6166,7 +6174,7 @@ GetCurrentMove: ; 3eabe (f:6abe)
 	ld [wd0b5], a
 	dec a
 	ld hl, Moves
-	ld bc, $6
+	ld bc, MoveEnd - Moves
 	call AddNTimes
 	ld a, BANK(Moves)
 	call FarCopyData
@@ -6314,7 +6322,7 @@ LoadEnemyMonData: ; 3eb01 (f:6b01)
 	call GetMonName
 	ld hl, wcd6d
 	ld de, wEnemyMonNick
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	ld a, [wEnemyMonSpecies2]
 	ld [wd11e], a
@@ -6563,12 +6571,12 @@ CalculateModifiedStats: ; 3ed99 (f:6d99)
 CalculateModifiedStat: ; 3eda5 (f:6da5)
 	push bc
 	push bc
-	ld a, [wd11e]
+	ld a, [wCalculateWhoseStats]
 	and a
 	ld a, c
 	ld hl, wBattleMonAttack
 	ld de, wPlayerMonUnmodifiedAttack
-	ld bc, wPlayerMonAttackMod
+	ld bc, wPlayerMonStatMods
 	jr z, .next
 	ld hl, wEnemyMonAttack
 	ld de, wEnemyMonUnmodifiedAttack
@@ -6701,22 +6709,22 @@ LoadHudTilePatterns: ; 3ee5b (f:6e5b)
 .lcdDisabled
 	ld hl, BattleHudTiles1
 	ld de, vChars2 + $6d0
-	ld bc, $18
+	ld bc, BattleHudTiles1End - BattleHudTiles1
 	ld a, BANK(BattleHudTiles1)
 	call FarCopyDataDouble
 	ld hl, BattleHudTiles2
 	ld de, vChars2 + $730
-	ld bc, $30
+	ld bc, BattleHudTiles3End - BattleHudTiles2
 	ld a, BANK(BattleHudTiles2)
 	jp FarCopyDataDouble
 .lcdEnabled
 	ld de, BattleHudTiles1
 	ld hl, vChars2 + $6d0
-	ld bc, (BANK(BattleHudTiles1) << 8) + $03
+	lb bc, BANK(BattleHudTiles1), (BattleHudTiles1End - BattleHudTiles1) / $8
 	call CopyVideoDataDouble
 	ld de, BattleHudTiles2
 	ld hl, vChars2 + $730
-	ld bc, (BANK(BattleHudTiles2) << 8) + $06
+	lb bc, BANK(BattleHudTiles2), (BattleHudTiles3End - BattleHudTiles2) / $8
 	jp CopyVideoDataDouble
 
 PrintEmptyString: ; 3ee94 (f:6e94)
@@ -6936,10 +6944,10 @@ InitBattle_Common: ; 3efeb (f:6feb)
 	ld [H_AUTOBGTRANSFERDEST + 1], a
 	call LoadScreenTilesFromBuffer1
 	coord hl, 9, 7
-	ld bc, $50a
+	lb bc, 5, 10
 	call ClearScreenArea
 	coord hl, 1, 0
-	ld bc, $40a
+	lb bc, 4, 10
 	call ClearScreenArea
 	call ClearSprites
 	ld a, [W_ISINBATTLE]
@@ -6979,8 +6987,8 @@ _LoadTrainerPic: ; 3f04b (f:704b)
 ; unreferenced
 ResetCryModifiers: ; 3f069 (f:7069)
 	xor a
-	ld [wc0f1], a
-	ld [wc0f2], a
+	ld [wFrequencyModifier], a
+	ld [wTempoModifier], a
 	jp PlaySound
 
 ; animates the mon "growing" out of the pokeball
@@ -7083,8 +7091,8 @@ LoadMonBackPic: ; 3f103 (f:7103)
 	ld a, [wBattleMonSpecies2]
 	ld [wcf91], a
 	coord hl, 1, 5
-	ld b, $7
-	ld c, $8
+	ld b, 7
+	ld c, 8
 	call ClearScreenArea
 	ld hl,  W_MONHBACKSPRITE - W_MONHEADER
 	call UncompressMonSprite
@@ -7920,7 +7928,7 @@ FellText: ; 3f683 (f:7683)
 
 PrintStatText: ; 3f688 (f:7688)
 	ld hl, StatsTextStrings
-	ld c, $50
+	ld c, "@"
 .asm_3f68d
 	dec b
 	jr z, .asm_3f696

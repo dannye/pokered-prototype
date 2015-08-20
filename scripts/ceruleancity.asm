@@ -65,7 +65,7 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	and a
 	jr z, .asm_19512
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 .asm_19512
 	ld c, BANK(Music_MeetRival)
@@ -170,7 +170,7 @@ CeruleanCityScript2: ; 195b1 (6:55b1)
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	callba Music_RivalAlternateStart
 	ld a, $1
@@ -297,7 +297,7 @@ CeruleanCityText2: ; 1967c (6:567c)
 .asm_4ca20
 	ld hl, CeruleanCityText_196f3
 	call PrintText
-	ld bc, (TM_28 << 8) + 1
+	lb bc, TM_28, 1
 	call GiveItem
 	jr c, .Success
 	ld hl, TM28NoRoomText

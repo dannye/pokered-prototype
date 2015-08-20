@@ -8,7 +8,7 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	call DisableLCD
 	ld hl,vBGMap0
 	ld bc, $800
-	ld a, $7f
+	ld a, " "
 	call FillMemory
 	call EnableLCD
 	ld hl, rLCDC
@@ -187,7 +187,7 @@ HoFLoadPlayerPics: ; 7033e (1c:433e)
 	ld a, BANK(RedPicFront)
 	call UncompressSpriteFromDE
 	ld hl, S_SPRITEBUFFER1
-	ld de, $a000
+	ld de, S_SPRITEBUFFER0
 	ld bc, $310
 	call CopyData
 	ld de, vFrontPic
@@ -280,9 +280,9 @@ HoFRecordMonInfo: ; 70404 (1c:4404)
 	jp CopyData
 
 HoFFadeOutScreenAndMusic: ; 70423 (1c:4423)
-	ld a, $a
-	ld [wcfc8], a
-	ld [wcfc9], a
+	ld a, 10
+	ld [wAudioFadeOutCounterReloadValue], a
+	ld [wAudioFadeOutCounter], a
 	ld a, $ff
-	ld [wMusicHeaderPointer], a
+	ld [wAudioFadeOutControl], a
 	jp GBFadeOutToWhite
