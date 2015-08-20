@@ -1,4 +1,4 @@
-KingdraBaseStats: ; 3908e (e:508e)
+KingdraBaseStats:
 db DEX_KINGDRA ; pokedex id
 db 55 ; base hp
 db 65 ; base attack
@@ -19,11 +19,11 @@ db 0
 db 0
 db 0 ; growth rate
 ; learnset
-db %00100000
-db %01111111
-db %00001000
-db %11000000
-db %11000010
-db %00001000
-db %00010010
+	tmlearn 6
+	tmlearn 9,10,11,12,13,14,15
+	tmlearn 20
+	tmlearn 31,32
+	tmlearn 34,39,40
+	tmlearn 44
+	tmlearn 50,53
 db BANK(KingdraPicFront)

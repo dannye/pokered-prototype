@@ -19,11 +19,11 @@ db 0
 db 0
 db 0 ; growth rate
 ; learnset
-db %00100000
-db %00000011
-db %00111000
-db %11010000
-db %00000011
-db %00101000
-db %00000010
+	tmlearn 6
+	tmlearn 9,10
+	tmlearn 20,21,22
+	tmlearn 29,31,32
+	tmlearn 33,34
+	tmlearn 44,46
+	tmlearn 50
 db BANK(VenonatPicFront)

@@ -1,4 +1,4 @@
-PichuBaseStats: ; 3867e (e:467e)
+PichuBaseStats:
 db DEX_PICHU ; pokedex id
 db 35 ; base hp
 db 55 ; base attack
@@ -19,11 +19,11 @@ db 0
 db 0
 db 0 ; growth rate
 ; learnset
-db %10110001
-db %10000011
-db %10001101
-db %11000001
-db %11000011
-db %00011000
-db %01000010
+	tmlearn 1,5,6,8
+	tmlearn 9,10,16
+	tmlearn 17,19,20,24
+	tmlearn 25,31,32
+	tmlearn 33,34,39,40
+	tmlearn 44,45
+	tmlearn 50,55
 db BANK(PichuPicFront)

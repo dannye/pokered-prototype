@@ -1,4 +1,4 @@
-MagnezoneBaseStats: ; 38cba (e:4cba)
+MagnezoneBaseStats:
 db DEX_MAGNEZONE ; pokedex id
 db 50 ; base hp
 db 60 ; base attack
@@ -19,11 +19,11 @@ db THUNDERSHOCK
 db 0
 db 0 ; growth rate
 ; learnset
-db %00100000
-db %01000011
-db %10001000
-db %11100001
-db %01000011
-db %00011000
-db %01000010
+	tmlearn 6
+	tmlearn 9,10,15
+	tmlearn 20,24
+	tmlearn 25,30,31,32
+	tmlearn 33,34,39
+	tmlearn 44,45
+	tmlearn 50,55
 db BANK(MagnezonePicFront)
