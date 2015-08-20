@@ -62,13 +62,13 @@ PewterGymScript_5c3df: ; 5c3df (17:43df)
 .asm_5c408
 	ld hl, W_OBTAINEDBADGES
 	set 0, [hl]
-	ld hl, wd72a
+	ld hl, wBeatGymFlags
 	set 0, [hl]
 	ld a, HS_ROUTE_22_RIVAL_1
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 
-	ResetEvents EVENT_1ST_ROUTE22_RIVAL_BATTLE, EVENT_ROUTE22_RIVAL_WANTS_FIGHT
+	ResetEvents EVENT_1ST_ROUTE22_RIVAL_BATTLE, EVENT_ROUTE22_RIVAL_WANTS_BATTLE
 
 	; deactivate gym trainers
 	SetEvent EVENT_BEAT_PEWTER_GYM_TRAINER_0
@@ -179,7 +179,7 @@ PewterGymAfterBattleText1: ; 5c4da (17:44da)
 
 PewterGymText3: ; 5c4df (17:44df)
 	TX_ASM
-	ld a, [wd72a]
+	ld a, [wBeatGymFlags]
 	bit 0, a
 	jr nz, .asm_5c50c
 	ld hl, PewterGymText_5c515

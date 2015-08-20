@@ -17,7 +17,7 @@ VermilionCityScript_197c0: ; 197c0 (6:57c0)
 	call Random
 	ld a, [$ffd4]
 	and $e
-	ld [wd743], a
+	ld [wFirstLockTrashCanIndex], a
 	ret
 
 VermilionCityScript_197cb: ; 197cb (6:57cb)
@@ -84,8 +84,8 @@ VermilionCityScript2: ; 19833 (6:5833)
 	ld [wJoyIgnore], a
 	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
-	ld [wccd4], a
-	ld a, $2
+	ld [wSimulatedJoypadStatesEnd + 1], a
+	ld a, 2
 	ld [wSimulatedJoypadStatesIndex], a
 	call StartSimulatingJoypadStates
 	ld a, $3

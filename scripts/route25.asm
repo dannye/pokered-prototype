@@ -20,7 +20,7 @@ Route25Script_515e1: ; 515e1 (14:55e1)
 	jr nz, .asm_515ff
 	ResetEventReuseHL EVENT_BILL_SAID_USE_CELL_SEPARATOR
 	ld a, HS_BILL_POKEMON
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef_jump ShowObject
 .asm_515ff
 	CheckEventAfterBranchReuseHL EVENT_GOT_SS_TICKET, EVENT_MET_BILL_2
@@ -28,10 +28,10 @@ Route25Script_515e1: ; 515e1 (14:55e1)
 	SetEventReuseHL EVENT_LEFT_BILLS_HOUSE_AFTER_HELPING
 	SetEventReuseHL EVENT_LEFT_BILLS_AFTER_HELPING_FIRST_TIME
 	ld a, HS_BILL_1
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, HS_BILL_2
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef_jump ShowObject
 
 HideRoute24_25Rockets:
@@ -53,7 +53,7 @@ HideRoute24_25Rockets:
 	ld a, [hli]
 	cp $ff
 	jp z, GBFadeInFromBlack
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	push hl
 	predef HideObject
 	pop hl

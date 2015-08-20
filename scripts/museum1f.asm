@@ -195,11 +195,11 @@ Museum1FText3: ; 5c256 (17:4256)
 	call GiveItem
 	jr nc, .BagFull
 	ld a, HS_GYM_GUY
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	SetEvent EVENT_GOT_OLD_AMBER
 	ld a, HS_OLD_AMBER
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld hl, ReceivedOldAmberText
 	jr .asm_5c288

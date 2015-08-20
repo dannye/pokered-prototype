@@ -16,9 +16,9 @@ CeladonMartElevatorScript: ; 48600 (12:4600)
 
 CeladonMartElevatorScript_4861c: ; 4861c (12:461c)
 	ld hl, wWarpEntries
-	ld a, [wd73b]
+	ld a, [wWarpedFromWhichWarp]
 	ld b, a
-	ld a, [wd73c]
+	ld a, [wWarpedFromWhichMap]
 	ld c, a
 	call CeladonMartElevatorScript_4862a
 
@@ -64,5 +64,5 @@ CeladonMartElevatorText1: ; 4865e (12:465e)
 	TX_ASM
 	call CeladonMartElevatorScript_48631
 	ld hl, CeldaonMartElevatorWarpMaps
-	predef Func_1c9c6
+	predef DisplayElevatorFloorMenu
 	jp TextScriptEnd

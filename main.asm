@@ -684,9 +684,9 @@ LoadSpecialWarpData: ; 62ff (1:62ff)
 	ld a, [wWhichDungeonWarp]
 	ld c, a
 	ld hl, DungeonWarpList
-	ld de, $0
-	ld a, $6
-	ld [wd12f], a
+	ld de, 0
+	ld a, 6
+	ld [wDungeonWarpDataEntrySize], a
 .dungeonWarpListLoop
 	ld a, [hli]
 	cp b
@@ -698,7 +698,7 @@ LoadSpecialWarpData: ; 62ff (1:62ff)
 	cp c
 	jr z, .matchedDungeonWarpID
 .nextDungeonWarp
-	ld a, [wd12f]
+	ld a, [wDungeonWarpDataEntrySize]
 	add e
 	ld e, a
 	jr .dungeonWarpListLoop
@@ -1639,39 +1639,39 @@ DisplayTwoOptionMenu: ; 7559 (1:7559)
 ; The bottom and right edges of the menu may remain after the function returns.
 
 TwoOptionMenu_SaveScreenTiles: ; 763e (1:763e)
-	ld de, wHPBarMaxHP
-	ld bc, $506
-.asm_7644
+	ld de, wBuffer
+	lb bc, 5, 6
+.loop
 	ld a, [hli]
 	ld [de], a
 	inc de
 	dec c
-	jr nz, .asm_7644
+	jr nz, .loop
 	push bc
-	ld bc, 14
+	ld bc, SCREEN_WIDTH - 6
 	add hl, bc
 	pop bc
 	ld c, $6
 	dec b
-	jr nz, .asm_7644
+	jr nz, .loop
 	ret
 
 TwoOptionMenu_RestoreScreenTiles: ; 7656 (1:7656)
-	ld de, wHPBarMaxHP
-	ld bc, $506
-.asm_765c
+	ld de, wBuffer
+	lb bc, 5, 6
+.loop
 	ld a, [de]
 	inc de
 	ld [hli], a
 	dec c
-	jr nz, .asm_765c
+	jr nz, .loop
 	push bc
-	ld bc, $e
+	ld bc, SCREEN_WIDTH - 6
 	add hl, bc
 	pop bc
-	ld c, $6
+	ld c, 6
 	dec b
-	jr nz, .asm_765c
+	jr nz, .loop
 	call UpdateSprites
 	ret
 
@@ -2049,7 +2049,7 @@ INCLUDE "data/map_songs.asm"
 INCLUDE "data/map_header_banks.asm"
 
 ClearVariablesAfterLoadingMapData: ; c335 (3:4335)
-	ld a, $90
+	ld a, SCREEN_HEIGHT_PIXELS
 	ld [hWY], a
 	ld [rWY], a
 	xor a
@@ -2060,7 +2060,7 @@ ClearVariablesAfterLoadingMapData: ; c335 (3:4335)
 	ld [hJoyReleased], a
 	ld [hJoyHeld], a
 	ld [wActionResultOrTookBattleTurn], a
-	ld [wd5a3], a
+	ld [wUnusedD5A3], a
 	ld hl, wCardKeyDoorY
 	ld [hli], a
 	ld [hl], a
@@ -3157,9 +3157,9 @@ RedrawMapView: ; eedc (3:6edc)
 	and $3
 	or $98
 	ld a, l
-	ld [wHPBarMaxHP], a
+	ld [wBuffer], a
 	ld a, h
-	ld [wHPBarMaxHP + 1], a
+	ld [wBuffer + 1], a ; this copy of the address is not used
 	ld a, 2
 	ld [$ffbe], a
 	ld c, 9 ; number of rows of 2x2 tiles (this covers the whole screen)
@@ -3167,25 +3167,25 @@ RedrawMapView: ; eedc (3:6edc)
 	push bc
 	push hl
 	push hl
-	ld hl, wTileMap - 2 * 20
-	ld de, 20
+	ld hl, wTileMap - 2 * SCREEN_WIDTH
+	ld de, SCREEN_WIDTH
 	ld a, [$ffbe]
-.asm_ef1a
+.calcWRAMAddrLoop
 	add hl, de
 	dec a
-	jr nz, .asm_ef1a
+	jr nz, .calcWRAMAddrLoop
 	call CopyToScreenEdgeTiles
 	pop hl
 	ld de, $20
 	ld a, [$ffbe]
 	ld c, a
-.asm_ef28
+.calcVRAMAddrLoop
 	add hl, de
 	ld a, h
 	and $3
 	or $98
 	dec c
-	jr nz, .asm_ef28
+	jr nz, .calcVRAMAddrLoop
 	ld [H_SCREENEDGEREDRAWADDR + 1], a
 	ld a, l
 	ld [H_SCREENEDGEREDRAWADDR], a
@@ -3291,7 +3291,7 @@ InitializeMissableObjectsFlags: ; f175 (3:7175)
 	call FillMemory ; clear missable objects flags
 	ld hl, MapHS00
 	xor a
-	ld [wd048], a
+	ld [wMissableObjectCounter], a
 .missableObjectsLoop
 	ld a, [hli]
 	cp $ff          ; end of list
@@ -3300,14 +3300,14 @@ InitializeMissableObjectsFlags: ; f175 (3:7175)
 	inc hl
 	ld a, [hl]
 	cp Hide
-	jr nz, .asm_f19d
+	jr nz, .skip
 	ld hl, W_MISSABLEOBJECTFLAGS
-	ld a, [wd048]
+	ld a, [wMissableObjectCounter]
 	ld c, a
 	ld b, FLAG_SET
-	call MissableObjectFlagAction ; set flag iff Item is hidden
-.asm_f19d
-	ld hl, wd048
+	call MissableObjectFlagAction ; set flag if Item is hidden
+.skip
+	ld hl, wMissableObjectCounter
 	inc [hl]
 	pop hl
 	inc hl
@@ -3341,21 +3341,21 @@ IsObjectHidden: ; f1a6 (3:71a6)
 	ret
 
 ; adds missable object (items, leg. pokemon, etc.) to the map
-; [wcc4d]: index of the missable object to be added (global index)
+; [wMissableObjectIndex]: index of the missable object to be added (global index)
 ShowObject: ; f1c8 (3:71c8)
 ShowObject2:
 	ld hl, W_MISSABLEOBJECTFLAGS
-	ld a, [wcc4d]
+	ld a, [wMissableObjectIndex]
 	ld c, a
 	ld b, FLAG_RESET
 	call MissableObjectFlagAction   ; reset "removed" flag
 	jp UpdateSprites
 
 ; removes missable object (items, leg. pokemon, etc.) from the map
-; [wcc4d]: index of the missable object to be removed (global index)
+; [wMissableObjectIndex]: index of the missable object to be removed (global index)
 HideObject: ; f1d7 (3:71d7)
 	ld hl, W_MISSABLEOBJECTFLAGS
-	ld a, [wcc4d]
+	ld a, [wMissableObjectIndex]
 	ld c, a
 	ld b, FLAG_SET
 	call MissableObjectFlagAction   ; set "removed" flag
@@ -3630,8 +3630,8 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld b, FLAG_TEST
 	ld hl, wPokedexOwned
 	call FlagAction
-	ld a, c
-	ld [wd153], a
+	ld a, c ; whether the mon was already flagged as owned
+	ld [wUnusedD153], a ; not read
 	ld a, [wd11e]
 	dec a
 	ld c, a
@@ -3681,7 +3681,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	inc de
 	jr .copyMonTypesAndMoves
 .copyEnemyMonData
-	ld bc, wPartyMon1DVs - wPartyMon1
+	ld bc, wEnemyMon1DVs - wEnemyMon1
 	add hl, bc
 	ld a, [wEnemyMonDVs] ; copy IVs from cur enemy mon
 	ld [hli], a
@@ -3752,7 +3752,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld a, [hExperience + 2]
 	ld [de], a
 	xor a
-	ld b, $a
+	ld b, NUM_STATS * 2
 .writeEVsLoop              ; set all EVs to 0
 	inc de
 	ld [de], a
@@ -3776,7 +3776,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	jr .done
 .calcFreshStats
 	pop hl
-	ld bc, $10
+	ld bc, wPartyMon1HPExp - 1 - wPartyMon1
 	add hl, bc
 	ld b, $0
 	call CalcStats         ; calculate fresh set of stats
@@ -3788,7 +3788,7 @@ LoadMovePPs: ; f473 (3:7473)
 	call GetPredefRegisters
 	; fallthrough
 AddPartyMon_WriteMovePP: ; f476 (3:7476)
-	ld b, $4
+	ld b, NUM_MOVES
 .pploop
 	ld a, [hli]     ; read move ID
 	and a
@@ -4453,7 +4453,7 @@ InitPlayerData2:
 	ld [wPlayerID + 1], a
 
 	ld a, $ff
-	ld [wd71b], a                 ; XXX what's this?
+	ld [wUnusedD71B], a
 
 	ld hl, wPartyCount
 	call InitializeEmptyList

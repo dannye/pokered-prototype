@@ -14,7 +14,7 @@ EvolutionAfterBattle: ; 3ad1c (e:6d1c)
 	ld a, [hTilesetType]
 	push af
 	xor a
-	ld [wd121], a
+	ld [wEvolutionOccurred], a
 	dec a
 	ld [wWhichPokemon], a
 	push hl
@@ -208,7 +208,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld [hl], a
 	pop hl
 	ld a, [wLoadedMonLevel]
-	jr .asm_3adb6
+	jr .doEvolution
 .checkTradeEvo
 	ld a, [wLinkState]
 	cp LINK_STATE_TRADING
@@ -218,7 +218,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [wLoadedMonLevel]
 	cp b ; is the mon's level greater than the evolution requirement?
 	jp c, Evolution_PartyMonLoop ; if so, go the next mon
-	jr .asm_3adb6
+	jr .doEvolution
 .checkItemEvo
 	ld a, [hli]
 	ld b, a ; evolution item
@@ -231,10 +231,10 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [wLoadedMonLevel]
 	cp b ; is the mon's level greater than the evolution requirement?
 	jp c, .nextEvoEntry2 ; if so, go the next evolution entry
-.asm_3adb6
+.doEvolution
 	ld [W_CURENEMYLVL], a
-	ld a, $1
-	ld [wd121], a
+	ld a, 1
+	ld [wEvolutionOccurred], a
 	push hl
 	ld a, [hl]
 	ld [wEvoNewSpecies], a
@@ -302,7 +302,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [wd11e]
 	dec a
 	ld hl, BaseStats
-	ld bc, $1c
+	ld bc, MonBaseStatsEnd - MonBaseStats
 	call AddNTimes
 	ld de, W_MONHEADER
 	call CopyData
@@ -417,7 +417,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [W_ISINBATTLE]
 	and a
 	ret nz
-	ld a, [wd121]
+	ld a, [wEvolutionOccurred]
 	and a
 	call nz, PlayDefaultMusic
 	ret
