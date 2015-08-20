@@ -5,12 +5,12 @@ Route24Object: ; 0x506a4 (size=67)
 
 	db $0 ; signs
 
-	db $8 ; people
-	db SPRITE_ROCKET, $5 + 4, $4 + 4, $ff, $d2, TRAINER | $1, ROCKET + $C8, $6
-	db SPRITE_ROCKET, $1b + 4, $5 + 4, $ff, $d1, TRAINER | $2, ROCKET + $C8, $2a
-	db SPRITE_ROCKET, $3 + 4, $d + 4, $ff, $d2, TRAINER | $3, ROCKET + $C8, $2b
-	db SPRITE_ROCKET, $7 + 4, $c + 4, $ff, $d3, TRAINER | $4, ROCKET + $C8, $2c
-	db SPRITE_ROCKET, $c + 4, $d + 4, $ff, $d2, TRAINER | $5, ROCKET + $C8, $2d
-	db SPRITE_ROCKET, $d + 4, $a + 4, $ff, $d3, TRAINER | $6, ROCKET + $C8, $2e
-	db SPRITE_ROCKET, $e + 4, $f + 4, $ff, $d2, TRAINER | $7, ROCKET + $C8, $2f
-	db SPRITE_BALL, $1c + 4, $7 + 4, $ff, $ff, ITEM | $8, TM_45
+	db $8 ; objects
+	object SPRITE_ROCKET, $4, $5, STAY, LEFT, $1, ROCKET + $C8, $6
+	object SPRITE_ROCKET, $5, $1b, STAY, UP, $2, ROCKET + $C8, $2a
+	object SPRITE_ROCKET, $d, $3, STAY, LEFT, $3, ROCKET + $C8, $2b
+	object SPRITE_ROCKET, $c, $7, STAY, RIGHT, $4, ROCKET + $C8, $2c
+	object SPRITE_ROCKET, $d, $c, STAY, LEFT, $5, ROCKET + $C8, $2d
+	object SPRITE_ROCKET, $a, $d, STAY, RIGHT, $6, ROCKET + $C8, $2e
+	object SPRITE_ROCKET, $f, $e, STAY, LEFT, $7, ROCKET + $C8, $2f
+	object SPRITE_BALL, $7, $1c, STAY, NONE, $8, TM_45

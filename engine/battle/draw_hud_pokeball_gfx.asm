@@ -123,7 +123,7 @@ PartyUpdateDone:
 	ld de, wTrainerFacingDirection
 	ld bc, $3
 	call CopyData
-	hlCoord 18, 10
+	coord hl, 18, 10
 	ld de, rIE
 	jr PlaceHUDTiles
 
@@ -141,7 +141,7 @@ PlaceEnemyHUDTiles: ; 3a919 (e:6919)
 	ld de, wTrainerFacingDirection
 	ld bc, $3
 	call CopyData
-	hlCoord 1, 2
+	coord hl, 1, 2
 	ld [hl], $72
 	ld a, [W_ISINBATTLE]
 	dec a
@@ -159,7 +159,7 @@ PlaceEnemyHUDTiles: ; 3a919 (e:6919)
 	ld a, c
 	and a
 	jr z, .notOwned
-	hlCoord 1, 1
+	coord hl, 1, 1
 	ld [hl], $E9
 .notOwned
 	pop hl

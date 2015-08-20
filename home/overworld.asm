@@ -674,10 +674,10 @@ PlayMapChangeSound:: ; 08c9 (0:08c9)
 	aCoord 8, 8 ; upper left tile of the 4x4 square the player's sprite is standing on
 	cp a,$0b ; door tile in tileset 0
 	jr nz,.didNotGoThroughDoor
-	ld a,(SFX_02_57 - SFX_Headers_02) / 3
+	ld a,SFX_GO_INSIDE
 	jr .playSound
 .didNotGoThroughDoor
-	ld a,(SFX_02_5c - SFX_Headers_02) / 3
+	ld a,SFX_GO_OUTSIDE
 .playSound
 	call PlaySound
 	ld a,[wMapPalOffset]
@@ -1227,9 +1227,9 @@ CollisionCheckOnLand:: ; 0bd1 (0:0bd1)
 	jr nc,.noCollision
 .collision
 	ld a,[wc02a]
-	cp a,(SFX_02_5b - SFX_Headers_02) / 3 ; check if collision sound is already playing
+	cp a,SFX_COLLISION ; check if collision sound is already playing
 	jr z,.setCarry
-	ld a,(SFX_02_5b - SFX_Headers_02) / 3
+	ld a,SFX_COLLISION
 	call PlaySound ; play collision sound (if it's not already playing)
 .setCarry
 	scf
@@ -1420,7 +1420,7 @@ LoadCurrentMapView:: ; 0caa (0:0caa)
 	ld bc,$0002
 	add hl,bc
 .copyToVisibleAreaBuffer
-	deCoord 0, 0 ; base address for the tiles that are directly transfered to VRAM during V-blank
+	coord de, 0, 0 ; base address for the tiles that are directly transfered to VRAM during V-blank
 	ld b, SCREEN_HEIGHT
 .rowLoop2
 	ld c, SCREEN_WIDTH
@@ -1693,7 +1693,7 @@ MoveTileBlockMapPointerNorth:: ; 0e85 (0:0e85)
 ; the portion of the map that was newly exposed due to the player's movement
 
 ScheduleNorthRowRedraw:: ; 0e91 (0:0e91)
-	hlCoord 0, 0
+	coord hl, 0, 0
 	call CopyToScreenEdgeTiles
 	ld a,[wMapViewVRAMPointer]
 	ld [H_SCREENEDGEREDRAWADDR],a
@@ -1705,7 +1705,7 @@ ScheduleNorthRowRedraw:: ; 0e91 (0:0e91)
 
 CopyToScreenEdgeTiles:: ; 0ea6 (0:0ea6)
 	ld de,wScreenEdgeTiles
-	ld c,2 * 20
+	ld c,2 * SCREEN_WIDTH
 .loop
 	ld a,[hli]
 	ld [de],a
@@ -1715,7 +1715,7 @@ CopyToScreenEdgeTiles:: ; 0ea6 (0:0ea6)
 	ret
 
 ScheduleSouthRowRedraw:: ; 0eb2 (0:0eb2)
-	hlCoord 0, 16
+	coord hl, 0, 16
 	call CopyToScreenEdgeTiles
 	ld a,[wMapViewVRAMPointer]
 	ld l,a
@@ -1734,7 +1734,7 @@ ScheduleSouthRowRedraw:: ; 0eb2 (0:0eb2)
 	ret
 
 ScheduleEastColumnRedraw:: ; 0ed3 (0:0ed3)
-	hlCoord 18, 0
+	coord hl, 18, 0
 	call ScheduleColumnRedrawHelper
 	ld a,[wMapViewVRAMPointer]
 	ld c,a
@@ -1772,7 +1772,7 @@ ScheduleColumnRedrawHelper:: ; 0ef2 (0:0ef2)
 	ret
 
 ScheduleWestColumnRedraw:: ; 0f08 (0:0f08)
-	hlCoord 0, 0
+	coord hl, 0, 0
 	call ScheduleColumnRedrawHelper
 	ld a,[wMapViewVRAMPointer]
 	ld [H_SCREENEDGEREDRAWADDR],a
@@ -1930,9 +1930,9 @@ CollisionCheckOnWater:: ; 0fb7 (0:0fb7)
 	jr .loop
 .collision
 	ld a,[wc02a]
-	cp a,(SFX_02_5b - SFX_Headers_02) / 3 ; check if collision sound is already playing
+	cp a,SFX_COLLISION ; check if collision sound is already playing
 	jr z,.setCarry
-	ld a,(SFX_02_5b - SFX_Headers_02) / 3
+	ld a,SFX_COLLISION
 	call PlaySound ; play collision sound (if it's not already playing)
 .setCarry
 	scf
@@ -2323,7 +2323,7 @@ LoadMapData:: ; 1241 (0:1241)
 	call LoadTilesetTilePatternData
 	call LoadCurrentMapView
 ; copy current map view to VRAM
-	hlCoord 0, 0
+	coord hl, 0, 0
 	ld de,vBGMap0
 	ld b,18
 .vramCopyLoop

@@ -19,9 +19,9 @@ SetDefaultNames: ; 60ca (1:60ca)
 	ld [W_OPTIONS], a
 	pop af
 	ld [wLetterPrintingDelayFlags], a
-	ld a, [wd08a]
+	ld a, [wOptionsInitialized]
 	and a
-	call z, Func_5bff
+	call z, InitOptions
 	ld hl, NintenText
 	ld de, wPlayerName
 	ld bc, $b
@@ -62,7 +62,7 @@ OakSpeech: ; 6115 (1:6115)
 	ld [wd0b5],a
 	ld [wcf91],a
 	call GetMonHeader
-	hlCoord 6, 4
+	coord hl, 6, 4
 	call LoadFlippedFrontSpriteByMonIndex
 	call MovePicLeft
 	ld hl,OakSpeechText2
@@ -101,7 +101,7 @@ OakSpeech: ; 6115 (1:6115)
 	ld a, $ff
 	call PlaySound
 	ld c, BANK(SFX_02_48)
-	ld a,(SFX_02_48 - SFX_Headers_02) / 3
+	ld a, SFX_SHRINK
 	call PlayMusic
 	pop af
 	ld [H_LOADEDROMBANK],a
@@ -136,7 +136,7 @@ OakSpeech: ; 6115 (1:6115)
 	ld [MBC1RomBank],a
 	ld c,20
 	call DelayFrames
-	hlCoord 6, 5
+	coord hl, 6, 5
 	ld b,7
 	ld c,7
 	call ClearScreenArea
@@ -219,9 +219,9 @@ IntroDisplayPicCenteredOrUpperRight: ; 62a4 (1:62a4)
 	pop bc
 	ld a,c
 	and a
-	hlCoord 15, 1
+	coord hl, 15, 1
 	jr nz,.next
-	hlCoord 6, 4
+	coord hl, 6, 4
 .next
 	xor a
 	ld [$FFE1],a

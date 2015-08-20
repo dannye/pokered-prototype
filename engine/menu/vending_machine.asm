@@ -17,15 +17,15 @@ VendingMachineMenu: ; 74ee0 (1d:4ee0)
 	ld [wTopMenuItemX], a
 	ld hl, wd730
 	set 6, [hl]
-	hlCoord 0, 3
+	coord hl, 0, 3
 	ld b, 8
 	ld c, 12
 	call TextBoxBorder
 	call UpdateSprites
-	hlCoord 2, 5
+	coord hl, 2, 5
 	ld de, DrinkText
 	call PlaceString
-	hlCoord 9, 6
+	coord hl, 9, 6
 	ld de, DrinkPriceText
 	call PlaceString
 	ld hl, wd730
@@ -58,7 +58,7 @@ VendingMachineMenu: ; 74ee0 (1d:4ee0)
 	ld c, 2
 	call DelayFrames
 	push bc
-	ld a, (SFX_02_53 - SFX_Headers_02) / 3
+	ld a, SFX_PUSH_BOULDER
 	call PlaySound
 	pop bc
 	dec b

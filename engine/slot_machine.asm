@@ -79,11 +79,11 @@ MainSlotMachineLoop: ; 37395 (d:7395)
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	ld [wMenuWatchMovingOutOfBounds], a
-	hlCoord 14, 11
+	coord hl, 14, 11
 	ld b, 5
 	ld c, 4
 	call TextBoxBorder
-	hlCoord 16, 12
+	coord hl, 16, 12
 	ld de, CoinMultiplierSlotMachineText
 	call PlaceString
 	call HandleMenuInput
@@ -116,7 +116,7 @@ MainSlotMachineLoop: ; 37395 (d:7395)
 	ld [hli], a
 	ld [hl], a
 	call WaitForSoundToFinish
-	ld a, (SFX_1f_66 - SFX_Headers_1f) / 3
+	ld a, SFX_SLOTS_NEW_SPIN
 	call PlaySound
 	ld hl, StartSlotMachineText
 	call PrintText
@@ -133,7 +133,7 @@ MainSlotMachineLoop: ; 37395 (d:7395)
 .skip2
 	ld hl, OneMoreGoSlotMachineText
 	call PrintText
-	hlCoord 14, 12
+	coord hl, 14, 12
 	ld bc, $0d0f
 	xor a ; YES_NO_MENU
 	ld [wTwoOptionMenuID], a
@@ -584,7 +584,7 @@ SlotReward15Func: ; 376e5 (d:76e5)
 	ret
 
 SlotReward100Func: ; 376f3 (d:76f3)
-	ld a, (SFX_1f_42 - SFX_Headers_1f) / 3
+	ld a, SFX_GET_KEY_ITEM
 	call PlaySound
 	xor a
 	ld [wSlotMachineFlags], a
@@ -595,7 +595,7 @@ SlotReward100Func: ; 376f3 (d:76f3)
 SlotReward300Func: ; 37702 (d:7702)
 	ld hl, YeahText
 	call PrintText
-	ld a, (SFX_1f_3b - SFX_Headers_1f) / 3
+	ld a, SFX_GET_ITEM_2
 	call PlaySound
 	call Random
 	cp $80
@@ -614,7 +614,7 @@ YeahText: ; 37722 (d:7722)
 
 SlotMachine_PrintWinningSymbol: ; 37728 (d:7728)
 ; prints winning symbol and down arrow in text box
-	hlCoord 2, 14
+	coord hl, 2, 14
 	ld a, [wSlotMachineWinningSymbol]
 	add $25
 	ld [hli], a
@@ -626,7 +626,7 @@ SlotMachine_PrintWinningSymbol: ; 37728 (d:7728)
 	ld [hli], a
 	inc a
 	ld [hl], a
-	hlCoord 18, 16
+	coord hl, 18, 16
 	ld [hl], $ee ; down arrow
 	ret
 
@@ -641,13 +641,13 @@ SlotMachine_SubtractBetFromPlayerCoins: ; 37741 (d:7741)
 	predef SubBCDPredef
 
 SlotMachine_PrintCreditCoins: ; 37754 (d:7754)
-	hlCoord 5, 1
+	coord hl, 5, 1
 	ld de, wPlayerCoins
 	ld c, $2
 	jp PrintBCDNumber
 
 SlotMachine_PrintPayoutCoins: ; 3775f (d:775f)
-	hlCoord 11, 1
+	coord hl, 11, 1
 	ld de, wPayoutCoins
 	ld bc, $8204 ; 2 bytes, 4 digits, leading zeroes
 	jp PrintNumber
@@ -689,7 +689,7 @@ SlotMachine_PayCoinsToPlayer: ; 3776b (d:776b)
 	predef AddBCDPredef
 	call SlotMachine_PrintCreditCoins
 	call SlotMachine_PrintPayoutCoins
-	ld a, (SFX_1f_65 - SFX_Headers_1f) / 3
+	ld a, SFX_SLOTS_REWARD
 	call PlaySound
 	ld a, [wAnimCounter]
 	dec a
@@ -724,19 +724,19 @@ SlotMachine_LightBalls: ; 377d5 (d:77d5)
 	jr z, SlotMachine_UpdateTwoCoinBallTiles
 
 SlotMachine_UpdateThreeCoinBallTiles: ; 377e3 (d:77e3)
-	hlCoord 3, 2
+	coord hl, 3, 2
 	call SlotMachine_UpdateBallTiles
-	hlCoord 3, 10
+	coord hl, 3, 10
 	call SlotMachine_UpdateBallTiles
 
 SlotMachine_UpdateTwoCoinBallTiles: ; 377ef (d:77ef)
-	hlCoord 3, 4
+	coord hl, 3, 4
 	call SlotMachine_UpdateBallTiles
-	hlCoord 3, 8
+	coord hl, 3, 8
 	call SlotMachine_UpdateBallTiles
 
 SlotMachine_UpdateOneCoinBallTiles: ; 377fb (d:77fb)
-	hlCoord 3, 6
+	coord hl, 3, 6
 
 SlotMachine_UpdateBallTiles: ; 377fe (d:77fe)
 	ld a, [wd08a]
@@ -837,7 +837,7 @@ SlotMachine_HandleInputWhileWheelsSpin: ; 37882 (d:7882)
 	jr z, .skip
 .loop
 	inc [hl]
-	ld a, (SFX_1f_64 - SFX_Headers_1f) / 3
+	ld a, SFX_SLOTS_STOP_WHEEL
 	jp PlaySound
 .skip
 	ld a, [de]
@@ -863,11 +863,11 @@ LoadSlotMachineTiles: ; 378a8 (d:78a8)
 	ld a, BANK(SlotMachineTiles2)
 	call FarCopyData2
 	ld hl, SlotMachineMap
-	deCoord 0, 0
+	coord de, 0, 0
 	ld bc, $00f0
 	call CopyData
 	call EnableLCD
-	ld hl, wTrainerEngageDistance
+	ld hl, wSlotMachineWheel1Offset
 	ld a, $1c
 	ld [hli], a
 	ld [hli], a

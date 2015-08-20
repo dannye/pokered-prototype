@@ -21,7 +21,7 @@ SetDefaultNamesBeforeTitlescreen: ; 42b7 (1:42b7)
 	ld [wc0ef], a
 	ld [wc0f0], a
 
-LoadTitlescreenGraphics: ; 42dd (1:42dd)
+DisplayTitleScreen: ; 42dd (1:42dd)
 	call GBPalWhiteOut
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
@@ -69,7 +69,7 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	call ClearBothBGMaps
 
 ; place tiles for pokemon logo (except for the last row)
-	hlCoord 2, 0
+	coord hl, 2, 0
 	ld a, $80
 	ld de, SCREEN_WIDTH
 	ld c, 6
@@ -87,7 +87,7 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	jr nz, .pokemonLogoTileLoop
 
 ; place tiles for the last row of the pokemon logo
-	hlCoord 2, 6
+	coord hl, 2, 6
 	ld a, $31
 	ld b, $10
 .pokemonLogoLastTileRowLoop
@@ -95,7 +95,7 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	inc a
 	dec b
 	jr nz, .pokemonLogoLastTileRowLoop
-	hlCoord 4, 7
+	coord hl, 4, 7
 	ld a, $50
 	ld b, $D
 .catchemallloop
@@ -103,14 +103,14 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	inc a
 	dec b
 	jr nz, .catchemallloop
-	hlCoord 4, 8
+	coord hl, 4, 8
 	ld b, $D
 .catchemallloop2
 	ld [hli], a
 	inc a
 	dec b
 	jr nz, .catchemallloop2
-	hlCoord 2, 17
+	coord hl, 2, 17
 	ld de, .tileScreenCopyrightTiles
 	ld b, $10
 .tileScreenCopyrightTilesLoop
@@ -161,7 +161,7 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	ld d, a
 	cp -3
 	jr nz, .skipPlayingSound
-	ld a, (SFX_1f_62 - SFX_Headers_1f) / 3
+	ld a, SFX_INTRO_CRASH
 	call PlaySound
 .skipPlayingSound
 	ld a, [hli]
@@ -195,7 +195,7 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	call LoadScreenTilesFromBuffer1
 	ld c, 36
 	call DelayFrames
-	ld a, (SFX_1f_63 - SFX_Headers_1f) / 3
+	ld a, SFX_INTRO_WHOOSH
 	call PlaySound
 
 ; scroll game version in from the right
@@ -367,7 +367,7 @@ ClearBothBGMaps: ; 4519 (1:4519)
 LoadTitleMonSprite: ; 4524 (1:4524)
 	ld [wcf91], a
 	ld [wd0b5], a
-	hlCoord 7, 10
+	coord hl, 7, 10
 	call GetMonHeader
 	jp LoadFrontSpriteByMonIndex
 
@@ -386,7 +386,7 @@ LoadCopyrightTiles: ; 4541 (1:4541)
 	ld hl, vChars2 + $600
 	ld bc, (BANK(NintendoCopyrightLogoGraphics) << 8) + $1c
 	call CopyVideoData
-	hlCoord 2, 7
+	coord hl, 2, 7
 	ld de, CopyrightTextString
 	call PlaceString
 	ld a, $e4
@@ -409,7 +409,7 @@ CopyrightTextString3:
 
 ; prints version text (red, blue)
 PrintGameVersionOnTitleScreen: ; 4598 (1:4598)
-	hlCoord 7, 9
+	coord hl, 7, 9
 	ld de, VersionOnTitleScreenText
 	jp PlaceString
 

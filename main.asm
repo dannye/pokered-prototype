@@ -155,7 +155,7 @@ INCLUDE "engine/overworld/oam.asm"
 INCLUDE "engine/oam_dma.asm"
 
 PrintWaitingText:
-	hlCoord 3, 10
+	coord hl, 3, 10
 	ld b, $1
 	ld c, $b
 	ld a, [W_ISINBATTLE]
@@ -166,7 +166,7 @@ PrintWaitingText:
 .asm_4c17
 	call CableClub_TextBoxBorder
 .asm_4c1a
-	hlCoord 4, 11
+	coord hl, 4, 11
 	ld de, WaitingText
 	call PlaceString
 	ld c, 50
@@ -1002,18 +1002,18 @@ DisplayTextIDInit: ; 7096 (1:7096)
 	ld a,[wd74b]
 	bit 5,a ; does the player have the pokedex?
 ; start menu with pokedex
-	hlCoord 10, 0
+	coord hl, 10, 0
 	ld b,$0e
 	ld c,$08
 	jr nz,.drawTextBoxBorder
 ; start menu without pokedex
-	hlCoord 10, 0
+	coord hl, 10, 0
 	ld b,$0c
 	ld c,$08
 	jr .drawTextBoxBorder
 ; if text ID is not 0 (i.e. not the start menu) then do a standard dialogue text box
 .notStartMenu
-	hlCoord 0, 12
+	coord hl, 0, 12
 	ld b,$04
 	ld c,$12
 .drawTextBoxBorder
@@ -1071,12 +1071,12 @@ DrawStartMenu: ; 710b (1:710b)
 	ld a,[wd74b]
 	bit 5,a ; does the player have the pokedex?
 ; menu with pokedex
-	hlCoord 10, 0
+	coord hl, 10, 0
 	ld b,$0e
 	ld c,$08
 	jr nz,.drawTextBoxBorder
 ; shorter menu if the player doesn't have the pokedex
-	hlCoord 10, 0
+	coord hl, 10, 0
 	ld b,$0c
 	ld c,$08
 .drawTextBoxBorder
@@ -1094,7 +1094,7 @@ DrawStartMenu: ; 710b (1:710b)
 	ld [wMenuWatchMovingOutOfBounds],a
 	ld hl,wd730
 	set 6,[hl] ; no pauses between printing each letter
-	hlCoord 12, 2
+	coord hl, 12, 2
 	ld a,[wd74b]
 	bit 5,a ; does the player have the pokedex?
 ; case for not having pokdex
@@ -1273,7 +1273,7 @@ GetTextBoxIDText: ; 7367 (1:7367)
 ; hl = address of upper left corner of text box
 GetAddressOfScreenCoords: ; 7375 (1:7375)
 	push bc
-	hlCoord 0, 0
+	coord hl, 0, 0
 	ld bc,20
 .loop ; loop to add d rows to the base address
 	ld a,d
@@ -1434,11 +1434,11 @@ DisplayMoneyBox: ; 74ba (1:74ba)
 	ld a, MONEY_BOX_TEMPLATE
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
-	hlCoord 13, 1
+	coord hl, 13, 1
 	ld b, $1
 	ld c, $6
 	call ClearScreenArea
-	hlCoord 12, 1
+	coord hl, 12, 1
 	ld de, wPlayerMoney
 	ld c, $a3
 	call PrintBCDNumber
@@ -1602,7 +1602,7 @@ DisplayTwoOptionMenu: ; 7559 (1:7559)
 	pop af
 	pop hl
 	ld [wFlags_0xcd60], a
-	ld a, (SFX_02_40 - SFX_Headers_02) / 3
+	ld a, SFX_PRESS_AB
 	call PlaySound
 	jr .pressedAButton
 .notNoYesMenu
@@ -1731,14 +1731,14 @@ DisplayFieldMoveMonMenu: ; 76e1 (1:76e1)
 	jr nz, .fieldMovesExist
 
 ; no field moves
-	hlCoord 11, 11
+	coord hl, 11, 11
 	ld b, 5
 	ld c, 7
 	call TextBoxBorder
 	call UpdateSprites
 	ld a, 12
 	ld [hFieldMoveMonMenuTopMenuItemX], a
-	hlCoord 13, 12
+	coord hl, 13, 12
 	ld de, PokemonMenuEntries
 	jp PlaceString
 
@@ -1747,7 +1747,7 @@ DisplayFieldMoveMonMenu: ; 76e1 (1:76e1)
 
 ; Calculate the text box position and dimensions based on the leftmost X coord
 ; of the field move names before adjusting for the number of field moves.
-	hlCoord 0, 11
+	coord hl, 0, 11
 	ld a, [wFieldMovesLeftmostXCoord]
 	dec a
 	ld e, a
@@ -1778,7 +1778,7 @@ DisplayFieldMoveMonMenu: ; 76e1 (1:76e1)
 	call UpdateSprites
 
 ; Calculate the position of the first field move name to print.
-	hlCoord 0, 12
+	coord hl, 0, 12
 	ld a, [wFieldMovesLeftmostXCoord]
 	inc a
 	ld e, a
@@ -1827,7 +1827,7 @@ DisplayFieldMoveMonMenu: ; 76e1 (1:76e1)
 	pop hl
 	ld a, [wFieldMovesLeftmostXCoord]
 	ld [hFieldMoveMonMenuTopMenuItemX], a
-	hlCoord 0, 12
+	coord hl, 0, 12
 	ld a, [wFieldMovesLeftmostXCoord]
 	inc a
 	ld e, a
@@ -2313,28 +2313,28 @@ PrintSafariZoneSteps: ; c52f (3:452f)
 	ret c
 	cp UNKNOWN_DUNGEON_2
 	ret nc
-	hlCoord 0, 0
+	coord hl, 0, 0
 	ld b, $3
 	ld c, $7
 	call TextBoxBorder
-	hlCoord 1, 1
+	coord hl, 1, 1
 	ld de, wSafariSteps
 	ld bc, $203
 	call PrintNumber
-	hlCoord 4, 1
+	coord hl, 4, 1
 	ld de, SafariSteps
 	call PlaceString
-	hlCoord 1, 3
+	coord hl, 1, 3
 	ld de, SafariBallText
 	call PlaceString
 	ld a, [W_NUMSAFARIBALLS]
 	cp $a
 	jr nc, .asm_c56d
-	hlCoord 5, 3
+	coord hl, 5, 3
 	ld a, $7f
 	ld [hl], a
 .asm_c56d
-	hlCoord 6, 3
+	coord hl, 6, 3
 	ld de, W_NUMSAFARIBALLS
 	ld bc, $102
 	jp PrintNumber
@@ -2628,7 +2628,7 @@ ApplyOutOfBattlePoisonDamage: ; c69c (3:469c)
 	jr z, .skipPoisonEffectAndSound
 	ld b, $2
 	predef ChangeBGPalColor0_4Frames ; change BG white to dark grey for 4 frames
-	ld a, (SFX_02_43 - SFX_Headers_02) / 3
+	ld a, SFX_POISONED
 	call PlaySound
 .skipPoisonEffectAndSound
 	predef AnyPartyAlive
@@ -3022,11 +3022,11 @@ DrawBadges: ; ea03 (3:6a03)
 	ld [hli], a
 	ld [hl], $60 ; First name
 
-	hlCoord 2, 11
+	coord hl, 2, 11
 	ld de, wTempObtainedBadgesBooleans
 	call .DrawBadgeRow
 
-	hlCoord 2, 14
+	coord hl, 2, 14
 	ld de, wTempObtainedBadgesBooleans + 4
 ;	call .DrawBadgeRow
 ;	ret
@@ -3502,7 +3502,7 @@ TryPushingBoulder: ; f225 (3:7225)
 	ld de, PushBoulderRightMovementData
 .done
 	call MoveSprite
-	ld a, (SFX_02_53 - SFX_Headers_02) / 3
+	ld a, SFX_PUSH_BOULDER
 	call PlaySound
 	ld hl, wFlags_0xcd60
 	set 1, [hl]
@@ -3533,7 +3533,7 @@ DoBoulderDustAnimation: ; f2b5 (3:72b5)
 	ld [H_SPRITEINDEX], a
 	call GetSpriteMovementByte2Pointer
 	ld [hl], $10
-	ld a, (SFX_02_56 - SFX_Headers_02) / 3
+	ld a, SFX_CUT
 	jp PlaySound
 
 ResetBoulderPushFlags: ; f2dd (3:72dd)
@@ -3733,7 +3733,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	dec de
 	dec de
 	xor a
-	ld [wHPBarMaxHP], a
+	ld [wLearningMovesFromDayCare], a
 	predef WriteMonMoves
 	pop de
 	ld a, [wPlayerID]  ; set trainer ID to player ID
@@ -3748,13 +3748,13 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	callab CalcExperience
 	pop de
 	inc de
-	ld a, [H_MULTIPLICAND] ; write experience
+	ld a, [hExperience] ; write experience
 	ld [de], a
 	inc de
-	ld a, [H_MULTIPLICAND+1]
+	ld a, [hExperience + 1]
 	ld [de], a
 	inc de
-	ld a, [H_MULTIPLICAND+2]
+	ld a, [hExperience + 2]
 	ld [de], a
 	xor a
 	ld b, $a

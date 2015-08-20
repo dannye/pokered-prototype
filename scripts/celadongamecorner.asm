@@ -454,7 +454,7 @@ CeladonGameCornerText12: ; 48edd (12:4edd)
 	ld hl, CeladonGameCornerText_48f09
 	call PrintText
 	call WaitForSoundToFinish
-	ld a, (SFX_02_57 - SFX_Headers_02) / 3
+	ld a, SFX_GO_INSIDE
 	call PlaySound
 	call WaitForSoundToFinish
 	ld hl, wd77e
@@ -468,7 +468,7 @@ CeladonGameCornerText12: ; 48edd (12:4edd)
 CeladonGameCornerText_48f09: ; 48f09 (12:4f09)
 	TX_FAR _CeladonGameCornerText_48f09
 	TX_ASM
-	ld a, (SFX_02_49 - SFX_Headers_02) / 3
+	ld a, SFX_SWITCH
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd
@@ -480,32 +480,32 @@ CeladonGameCornerText_48f19: ; 48f19 (12:4f19)
 CeladonGameCornerScript_48f1e: ; 48f1e (12:4f1e)
 	ld hl, wd730
 	set 6, [hl]
-	hlCoord 11, 0
+	coord hl, 11, 0
 	ld b, $5
 	ld c, $7
 	call TextBoxBorder
 	call UpdateSprites
-	hlCoord 12, 1
+	coord hl, 12, 1
 	ld b, $4
 	ld c, $7
 	call ClearScreenArea
-	hlCoord 12, 2
+	coord hl, 12, 2
 	ld de, GameCornerMoneyText
 	call PlaceString
-	hlCoord 12, 3
+	coord hl, 12, 3
 	ld de, GameCornerBlankText1
 	call PlaceString
-	hlCoord 12, 3
+	coord hl, 12, 3
 	ld de, wPlayerMoney
 	ld c, $a3
 	call PrintBCDNumber
-	hlCoord 12, 4
+	coord hl, 12, 4
 	ld de, GameCornerCoinText
 	call PlaceString
-	hlCoord 12, 5
+	coord hl, 12, 5
 	ld de, GameCornerBlankText2
 	call PlaceString
-	hlCoord 15, 5
+	coord hl, 15, 5
 	ld de, wPlayerCoins
 	ld c, $82
 	call PrintBCDNumber

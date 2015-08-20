@@ -13,9 +13,9 @@ Route2Object: ; 0x54022 (size=72)
 	db $37, $7, $3 ; Route2Text3
 	db $7, $d, $4 ; Route2Text4
 
-	db $2 ; people
-	db SPRITE_BALL, $2b + 4, $6 + 4, $ff, $ff, ITEM | $1, MOON_STONE
-	db SPRITE_BALL, $25 + 4, $11 + 4, $ff, $ff, ITEM | $2, HP_UP
+	db $2 ; objects
+	object SPRITE_BALL, $6, $2b, STAY, NONE, $1, MOON_STONE
+	object SPRITE_BALL, $11, $25, STAY, NONE, $2, HP_UP
 
 	; warp-to
 	EVENT_DISP ROUTE_2_WIDTH, $3, $c ; DIGLETTS_CAVE_EXIT

@@ -84,7 +84,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld hl,PokemartTellSellPriceText
 	ld bc,$0e01
 	call PrintText
-	hlCoord 14, 7
+	coord hl, 14, 7
 	ld bc,$080f
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
@@ -162,7 +162,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	call CopyStringToCF4B ; copy name to wcf4b
 	ld hl,PokemartTellBuyPriceText
 	call PrintText
-	hlCoord 14, 7
+	coord hl, 14, 7
 	ld bc,$080f
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
@@ -190,7 +190,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld a,1
 	ld [wBoughtOrSoldItemInMart],a
 .skipSettingFlag2
-	ld a,(SFX_02_5a - SFX_Headers_02) / 3
+	ld a,SFX_PURCHASE
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	ld hl,PokemartBoughtItemText

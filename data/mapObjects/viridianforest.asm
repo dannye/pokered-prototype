@@ -17,15 +17,15 @@ ViridianForestObject: ; 0x611da (size=127)
 	db $2d, $12, $d ; ViridianForestText13
 	db $3, $12, $e ; ViridianForestText14
 
-	db $8 ; people
-	db SPRITE_BUG_CATCHER, $a + 4, $1b + 4, $ff, $ff, $1 ; person
-	db SPRITE_BUG_CATCHER, $22 + 4, $1f + 4, $ff, $d2, TRAINER | $2, BUG_CATCHER + $C8, $1
-	db SPRITE_BUG_CATCHER, $1b + 4, $12 + 4, $ff, $d2, TRAINER | $3, BUG_CATCHER + $C8, $2
-	db SPRITE_BUG_CATCHER, $5 + 4, $9 + 4, $ff, $d2, TRAINER | $4, BUG_CATCHER + $C8, $3
-	db SPRITE_BALL, $1b + 4, $c + 4, $ff, $ff, ITEM | $5, ANTIDOTE
-	db SPRITE_BALL, $5 + 4, $14 + 4, $ff, $ff, ITEM | $6, POTION
-	db SPRITE_BALL, $24 + 4, $2 + 4, $ff, $ff, ITEM | $7, POKE_BALL
-	db SPRITE_BUG_CATCHER, $20 + 4, $3 + 4, $ff, $ff, $8 ; person
+	db $8 ; objects
+	object SPRITE_BUG_CATCHER, $1b, $a, STAY, NONE, $1
+	object SPRITE_BUG_CATCHER, $1f, $22, STAY, LEFT, $2, BUG_CATCHER + $C8, $1
+	object SPRITE_BUG_CATCHER, $12, $1b, STAY, LEFT, $3, BUG_CATCHER + $C8, $2
+	object SPRITE_BUG_CATCHER, $9, $5, STAY, LEFT, $4, BUG_CATCHER + $C8, $3
+	object SPRITE_BALL, $c, $1b, STAY, NONE, $5, ANTIDOTE
+	object SPRITE_BALL, $14, $5, STAY, NONE, $6, POTION
+	object SPRITE_BALL, $2, $24, STAY, NONE, $7, POKE_BALL
+	object SPRITE_BUG_CATCHER, $3, $20, STAY, NONE, $8
 
 	; warp-to
 	EVENT_DISP VIRIDIAN_FOREST_WIDTH, $0, $11 ; VIRIDIAN_FOREST_EXIT

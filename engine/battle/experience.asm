@@ -257,7 +257,7 @@ GainExperience: ; 5524f (15:524f)
 	ld a, [wd0b5]
 	ld [wd11e], a
 	predef LearnMoveFromLevelUp
-	ld hl, wccd3
+	ld hl, wCanEvolveFlags
 	ld a, [wWhichPokemon]
 	ld c, a
 	ld b, $1
@@ -379,7 +379,7 @@ AnimateEXPBarAgain:
 	ret nz
 	xor a
 	ld [wEXPBarPixelLength], a
-	hlCoord 17, 11
+	coord hl, 17, 11
 	ld a, $c0
 	ld c, $08
 .loop
@@ -399,7 +399,7 @@ AnimateEXPBar:
 	jr z, .done
 	ld b, a
 	ld c, $08
-	hlCoord 17, 11
+	coord hl, 17, 11
 .loop1
 	ld a, [hl]
 	cp $c8
@@ -417,7 +417,7 @@ AnimateEXPBar:
 	jr .loop1
 .done
 	ld bc, $08
-	hlCoord 10, 11
+	coord hl, 10, 11
 	ld de, wTileMapBackup + 10 + 11 * 20
 	call CopyData
 	ld c, $20

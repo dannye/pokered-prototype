@@ -7,17 +7,17 @@ Route25Object: ; 0x507b2 (size=94)
 	db $1 ; signs
 	db $7, $7, $b ; Route25Text11
 
-	db $a ; people
-	db SPRITE_ROCKET, $e + 4, $9 + 4, $ff, $d0, TRAINER | $1, ROCKET + $C8, $30
-	db SPRITE_ROCKET, $f + 4, $1f + 4, $ff, $d1, TRAINER | $2, ROCKET + $C8, $31
-	db SPRITE_ROCKET, $e + 4, $d + 4, $ff, $d0, TRAINER | $3, ROCKET + $C8, $32
-	db SPRITE_ROCKET, $e + 4, $1c + 4, $ff, $d3, TRAINER | $4, ROCKET + $C8, $33
-	db SPRITE_ROCKET, $e + 4, $8 + 4, $ff, $d2, TRAINER | $5, ROCKET + $C8, $34
-	db SPRITE_ROCKET, $c + 4, $21 + 4, $ff, $d0, TRAINER | $6, ROCKET + $C8, $35
-	db SPRITE_ROCKET, $10 + 4, $c + 4, $ff, $d3, TRAINER | $7, ROCKET + $C8, $36
-	db SPRITE_ROCKET, $f + 4, $5 + 4, $ff, $d1, TRAINER | $8, ROCKET + $C8, $37
-	db SPRITE_ROCKET, $c + 4, $22 + 4, $ff, $d3, TRAINER | $9, ROCKET + $C8, $38
-	db SPRITE_BALL, $10 + 4, $f + 4, $ff, $ff, ITEM | $a, TM_19
+	db $a ; objects
+	object SPRITE_ROCKET, $9, $e, STAY, DOWN, $1, ROCKET + $C8, $30
+	object SPRITE_ROCKET, $1f, $f, STAY, UP, $2, ROCKET + $C8, $31
+	object SPRITE_ROCKET, $d, $e, STAY, DOWN, $3, ROCKET + $C8, $32
+	object SPRITE_ROCKET, $1c, $e, STAY, RIGHT, $4, ROCKET + $C8, $33
+	object SPRITE_ROCKET, $8, $e, STAY, LEFT, $5, ROCKET + $C8, $34
+	object SPRITE_ROCKET, $21, $c, STAY, DOWN, $6, ROCKET + $C8, $35
+	object SPRITE_ROCKET, $c, $10, STAY, RIGHT, $7, ROCKET + $C8, $36
+	object SPRITE_ROCKET, $5, $f, STAY, UP, $8, ROCKET + $C8, $37
+	object SPRITE_ROCKET, $22, $c, STAY, RIGHT, $9, ROCKET + $C8, $38
+	object SPRITE_BALL, $f, $10, STAY, NONE, $a, TM_19
 
 	; warp-to
 	EVENT_DISP ROUTE_25_WIDTH, $5, $8 ; BILLS_HOUSE

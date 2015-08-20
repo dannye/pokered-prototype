@@ -19,7 +19,7 @@ IntroClearScreen: ; 417f0 (10:57f0)
 
 IntroClearMiddleOfScreen: ; 417f8 (10:57f8)
 ; clear the area of the tile map between the black bars on the top and bottom
-	hlCoord 0, 4
+	coord hl, 0, 4
 	ld bc, SCREEN_WIDTH * 10
 
 IntroClearCommon: ; 417fe (10:57fe)
@@ -88,7 +88,7 @@ PlayShootingStar: ; 4188a (10:588a)
 	push af
 	pop af
 	jr c, .next ; skip the delay if the user interrupted the animation
-	hlCoord 7, 11
+	coord hl, 7, 11
 	ld c,$06
 	ld a,$67
 .loop
@@ -109,10 +109,10 @@ PlayShootingStar: ; 4188a (10:588a)
 IntroDrawBlackBars: ; 418e9 (10:58e9)
 ; clear the screen and draw black bars on the top and bottom
 	call IntroClearScreen
-	hlCoord 0, 0
+	coord hl, 0, 0
 	ld c, SCREEN_WIDTH * 4
 	call IntroPlaceBlackTiles
-	hlCoord 0, 14
+	coord hl, 0, 14
 	ld c, SCREEN_WIDTH * 4
 	call IntroPlaceBlackTiles
 	ld hl, vBGMap1

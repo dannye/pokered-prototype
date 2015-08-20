@@ -16,14 +16,14 @@ ViridianCityObject: ; 0x18384 (size=104)
 	db $f, $6, $c ; PokeCenterSignText
 	db $1c, $12, $d ; ViridianCityText13
 
-	db $7 ; people
-	db SPRITE_BUG_CATCHER, $f + 4, $c + 4, $fe, $0, $1 ; person
-	db SPRITE_GAMBLER, $1d + 4, $d + 4, $ff, $ff, $2 ; person
-	db SPRITE_BUG_CATCHER, $10 + 4, $1d + 4, $fe, $0, $3 ; person
-	db SPRITE_GIRL, $a + 4, $14 + 4, $ff, $d3, $4 ; person
-	db SPRITE_LYING_OLD_MAN, $a + 4, $15 + 4, $ff, $ff, $5 ; person
-	db SPRITE_FISHER2, $20 + 4, $21 + 4, $ff, $d0, $6 ; person
-	db SPRITE_GAMBLER, $6 + 4, $17 + 4, $fe, $2, $7 ; person
+	db $7 ; objects
+	object SPRITE_BUG_CATCHER, $c, $f, WALK, $0, $1
+	object SPRITE_GAMBLER, $d, $1d, STAY, NONE, $2
+	object SPRITE_BUG_CATCHER, $1d, $10, WALK, $0, $3
+	object SPRITE_GIRL, $14, $a, STAY, RIGHT, $4
+	object SPRITE_LYING_OLD_MAN, $15, $a, STAY, NONE, $5
+	object SPRITE_FISHER2, $21, $20, STAY, DOWN, $6
+	object SPRITE_GAMBLER, $17, $6, WALK, $2, $7
 
 	; warp-to
 	EVENT_DISP VIRIDIAN_CITY_WIDTH, $f, $5 ; VIRIDIAN_POKECENTER

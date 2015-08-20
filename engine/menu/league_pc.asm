@@ -12,7 +12,7 @@ PKMNLeaguePC: ; 0x7657e
 	ld [hTilesetType], a
 	ld [W_SPRITEFLIPPED], a
 	ld [wUpdateSpritesEnabled], a
-	ld [wTrainerScreenX], a
+	ld [wHoFTeamIndex2], a
 	ld [wHoFTeamNo], a
 	ld a, [wNumHoFTeams]
 	ld b, a
@@ -27,13 +27,13 @@ PKMNLeaguePC: ; 0x7657e
 	ld hl, wHoFTeamNo
 	inc [hl]
 	push bc
-	ld a, [wTrainerScreenX]
-	ld [wHoFMonSpecies], a
+	ld a, [wHoFTeamIndex2]
+	ld [wHoFTeamIndex], a
 	callba LoadHallOfFameTeams
 	call LeaguePCShowTeam
 	pop bc
 	jr c, .doneShowingTeams
-	ld hl, wTrainerScreenX
+	ld hl, wHoFTeamIndex2
 	inc [hl]
 	ld a, [hl]
 	cp b
@@ -95,18 +95,18 @@ LeaguePCShowMon: ; 76610 (1d:6610)
 	ld b, $0B
 	ld c, 0
 	call GoPAL_SET
-	hlCoord 12, 5
+	coord hl, 12, 5
 	call GetMonHeader
 	call LoadFrontSpriteByMonIndex
 	call GBPalNormal
-	hlCoord 0, 13
+	coord hl, 0, 13
 	ld b, 2
 	ld c, $12
 	call TextBoxBorder
-	hlCoord 1, 15
+	coord hl, 1, 15
 	ld de, HallOfFameNoText
 	call PlaceString
-	hlCoord 16, 15
+	coord hl, 16, 15
 	ld de, wHoFTeamNo
 	ld bc, $0103
 	call PrintNumber

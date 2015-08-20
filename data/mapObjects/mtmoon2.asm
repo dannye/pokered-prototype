@@ -11,7 +11,7 @@ MtMoon2Object: ; 0x51a4d (size=68)
 
 	db $0 ; signs
 
-	db $0 ; people
+	db $0 ; objects
 
 	; warp-to
 	EVENT_DISP MT_MOON_2_WIDTH, $17, $14 ; MT_MOON_1
