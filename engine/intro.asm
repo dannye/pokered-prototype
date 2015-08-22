@@ -1,3 +1,7 @@
+MOVE_GENGAR_RIGHT   EQU $00
+MOVE_GENGAR_LEFT    EQU $01
+MOVE_NIDORINO_RIGHT EQU $ff
+
 PlayIntro: ; 41682 (10:5682)
 	xor a
 	ld [hJoyHeld], a
@@ -67,8 +71,8 @@ LoadIntroGraphics: ; 41852 (10:5852)
 	jp FarCopyData2
 
 PlayShootingStar: ; 4188a (10:588a)
-	ld b, $c
-	call GoPAL_SET
+	ld b, SET_PAL_GAME_FREAK_INTRO
+	call RunPaletteCommand
 	callba LoadCopyrightAndTextBoxTiles
 	ld c, 180
 	call DelayFrames

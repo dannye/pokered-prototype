@@ -10,11 +10,11 @@ MtMoon3Object: ; 0x49fdb (size=102)
 	db $0 ; signs
 
 	db $9 ; objects
-	object SPRITE_BLACK_HAIR_BOY_2, $3, $5, STAY, RIGHT, $1, SUPER_NERD + $C8, $2
-	object SPRITE_ROCKET, $1a, $8, STAY, DOWN, $2, ROCKET + $C8, $1
-	object SPRITE_ROCKET, $1b, $1c, STAY, DOWN, $3, ROCKET + $C8, $2
-	object SPRITE_ROCKET, $11, $13, STAY, UP, $4, ROCKET + $C8, $3
-	object SPRITE_ROCKET, $7, $1a, STAY, LEFT, $5, ROCKET + $C8, $4
+	object SPRITE_BLACK_HAIR_BOY_2, $3, $5, STAY, RIGHT, $1, OPP_SUPER_NERD, $2
+	object SPRITE_ROCKET, $1a, $8, STAY, DOWN, $2, OPP_ROCKET, $1
+	object SPRITE_ROCKET, $1b, $1c, STAY, DOWN, $3, OPP_ROCKET, $2
+	object SPRITE_ROCKET, $11, $13, STAY, UP, $4, OPP_ROCKET, $3
+	object SPRITE_ROCKET, $7, $1a, STAY, LEFT, $5, OPP_ROCKET, $4
 	object SPRITE_OMANYTE, $4, $10, STAY, NONE, $6, DOME_FOSSIL
 	object SPRITE_OMANYTE, $25, $1e, STAY, NONE, $7, HELIX_FOSSIL
 	object SPRITE_BALL, $6, $2, STAY, NONE, $8, HP_UP

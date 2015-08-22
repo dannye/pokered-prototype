@@ -23,7 +23,7 @@ CeruleanCityObject: ; 0x18786 (size=170)
 
 	db $b ; objects
 	object SPRITE_BLUE, $19, $4, STAY, DOWN, $1
-	object SPRITE_ROCKET, $1e, $7, STAY, NONE, $2, ROCKET + $C8, $5
+	object SPRITE_ROCKET, $1e, $7, STAY, NONE, $2, OPP_ROCKET, $5
 	object SPRITE_BLACK_HAIR_BOY_1, $7, $13, STAY, DOWN, $3
 	object SPRITE_BLACK_HAIR_BOY_2, $1d, $11, WALK, $1, $4
 	object SPRITE_BLACK_HAIR_BOY_2, $14, $19, WALK, $2, $5

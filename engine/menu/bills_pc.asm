@@ -170,8 +170,8 @@ BillsPCMenu: ; 214e8 (8:54e8)
 	ld a, 1
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call Delay3
-	ld b, $09
-	call GoPAL_SET
+	ld b, SET_PAL_OVERWORLD
+	call RunPaletteCommand
 	call HandleMenuInput
 	bit 1, a
 	jp nz, ExitBillsPC ; b button
@@ -449,7 +449,7 @@ DisplayDepositWithdrawMenu: ; 2174b (8:574b)
 	predef StatusScreen2
 	call LoadScreenTilesFromBuffer1
 	call ReloadTilesetTilePatterns
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	call LoadGBPal
 	jr .loop
 

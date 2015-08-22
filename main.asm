@@ -1079,7 +1079,7 @@ DrawStartMenu: ; 710b (1:710b)
 	ld c,$08
 .drawTextBoxBorder
 	call TextBoxBorder
-	ld a,%11001011 ; bit mask for down, up, start, B, and A buttons
+	ld a,D_DOWN | D_UP | START | B_BUTTON | A_BUTTON
 	ld [wMenuWatchedKeys],a
 	ld a,$02
 	ld [wTopMenuItemY],a ; Y position of first menu choice
@@ -1964,7 +1964,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 .asm_7ba6
 	ld d, h
 	ld e, l
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	add hl, bc
 	ld bc, wPartyMonNicks
 	ld a, [wRemoveMonFromBox]
@@ -2004,12 +2004,12 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	jr z, .asm_7bfa
 	ld hl, wBoxMonNicks
 .asm_7bfa
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	ld a, [wWhichPokemon]
 	call AddNTimes
 	ld d, h
 	ld e, l
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	add hl, bc
 	ld bc, wPokedexOwned
 	ld a, [wRemoveMonFromBox]
@@ -3146,7 +3146,7 @@ RedrawMapView: ; eedc (3:6edc)
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld [hTilesetType], a ; no flower/water BG tile animations
 	call LoadCurrentMapView
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	ld hl, wMapViewVRAMPointer
 	ld a, [hli]
 	ld h, [hl]
@@ -3174,7 +3174,7 @@ RedrawMapView: ; eedc (3:6edc)
 	add hl, de
 	dec a
 	jr nz, .calcWRAMAddrLoop
-	call CopyToScreenEdgeTiles
+	call CopyToRedrawRowOrColumnSrcTiles
 	pop hl
 	ld de, $20
 	ld a, [$ffbe]
@@ -3186,11 +3186,11 @@ RedrawMapView: ; eedc (3:6edc)
 	or $98
 	dec c
 	jr nz, .calcVRAMAddrLoop
-	ld [H_SCREENEDGEREDRAWADDR + 1], a
+	ld [hRedrawRowOrColumnDest + 1], a
 	ld a, l
-	ld [H_SCREENEDGEREDRAWADDR], a
-	ld a, REDRAWROW
-	ld [H_SCREENEDGEREDRAW], a
+	ld [hRedrawRowOrColumnDest], a
+	ld a, REDRAW_ROW
+	ld [hRedrawRowOrColumnMode], a
 	call DelayFrame
 	ld hl, $ffbe
 	inc [hl]
@@ -3577,7 +3577,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld d, h
 	ld e, l
 	ld hl, wPlayerName
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld a, [wMonDataLocation]
 	and a
@@ -3848,7 +3848,7 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	ld hl, wEnemyMonOT
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData    ; write new mon's OT name (from an enemy mon)
 	ld hl, wPartyMonNicks
 	ld a, [wPartyCount]
@@ -3859,7 +3859,7 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	ld hl, wEnemyMonNicks
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData    ; write new mon's nickname (from an enemy mon)
 	ld a, [wcf91]
 	ld [wd11e], a
@@ -3990,7 +3990,7 @@ _MoveMon: ; f51e (3:751e)
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
 .asm_f5ec
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld a, [wMoveMonType]
 	cp PARTY_TO_DAYCARE
@@ -4020,7 +4020,7 @@ _MoveMon: ; f51e (3:751e)
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
 .asm_f62a
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	pop hl
 	ld a, [wMoveMonType]
@@ -4498,21 +4498,23 @@ InitializeEmptyList:
 	ret
 
 
-IsItemInBag_: ; f8a5 (3:78a5)
+GetQuantityOfItemInBag: ; f8a5 (3:78a5)
+; In: b = item ID
+; Out: b = how many of that item are in the bag
 	call GetPredefRegisters
 	ld hl, wNumBagItems
-.asm_f8ab
+.loop
 	inc hl
 	ld a, [hli]
 	cp $ff
-	jr z, .asm_f8b7
+	jr z, .notInBag
 	cp b
-	jr nz, .asm_f8ab
+	jr nz, .loop
 	ld a, [hl]
 	ld b, a
 	ret
-.asm_f8b7
-	ld b, $0
+.notInBag
+	ld b, 0
 	ret
 
 FindPathToPlayer: ; f8ba (3:78ba)

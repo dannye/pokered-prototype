@@ -13,7 +13,7 @@ Route4Object: ; 0x543b2 (size=58)
 
 	db $3 ; objects
 	object SPRITE_LASS, $17, $2c, WALK, $0, $1
-	object SPRITE_LASS, $8, $2, STAY, RIGHT, $2, LASS + $C8, $4
+	object SPRITE_LASS, $8, $2, STAY, RIGHT, $2, OPP_LASS, $4
 	object SPRITE_BALL, $b, $19, STAY, NONE, $3, TM_04
 
 	; warp-to

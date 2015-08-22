@@ -369,7 +369,7 @@ OaksLabScript11: ; 1cdb9 (7:4db9)
 	ret nz
 
 	; define which team rival uses, and fight it
-	ld a, SONY1 + $C8
+	ld a, OPP_SONY1
 	ld [W_CUROPPONENT], a
 	ld a, [W_RIVALSTARTER]
 	cp STARTER2
@@ -437,13 +437,13 @@ OaksLabScript13: ; 1ce32 (7:4e32)
 	ld a, [W_XCOORD]
 	cp $4
 	; move left or right depending on where the player is standing
-	jr nz, .asm_1ce5b
-	ld a, $c0
-	jr .asm_1ce5d
-.asm_1ce5b
-	ld a, $80
-.asm_1ce5d
-	ld [wcc5b], a
+	jr nz, .moveLeft
+	ld a, NPC_MOVEMENT_RIGHT
+	jr .next
+.moveLeft
+	ld a, NPC_MOVEMENT_LEFT
+.next
+	ld [wNPCMovementDirections], a
 
 	ld a, $e
 	ld [W_OAKSLABCURSCRIPT], a
@@ -843,7 +843,7 @@ OaksLabScript_1d157: ; 1d157 (7:5157)
 	ld [hl], SPRITE_FACING_RIGHT
 	ld hl, wd730
 	set 6, [hl]
-	predef StarterDex  ; StarterDex
+	predef StarterDex
 	ld hl, wd730
 	res 6, [hl]
 	call ReloadMapData

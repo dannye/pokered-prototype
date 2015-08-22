@@ -35,14 +35,16 @@ RocketHideoutElevatorScript_45741: ; 45741 (11:5741)
 	ld hl, RocketHideoutElavatorFloors
 	call LoadItemList
 	ld hl, RocketHideoutElevatorWarpMaps
-	ld de, wcc5b
+	ld de, wElevatorWarpMaps
 	ld bc, RocketHideoutElevatorWarpMapsEnd - RocketHideoutElevatorWarpMaps
 	call CopyData
 	ret
 
 RocketHideoutElavatorFloors: ; 45754 (11:5754)
 	db $03 ; num elements in list
-	db $55, $54, $61 ; "B1F", "B2F", "B4F"
+	db FLOOR_B1F
+	db FLOOR_B2F
+	db FLOOR_B4F
 	db $FF ; terminator
 
 RocketHideoutElevatorWarpMaps: ; 45759 (11:5759)

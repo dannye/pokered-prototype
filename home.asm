@@ -646,10 +646,10 @@ GetPartyMonName2:: ; 15b4 (0:15b4)
 GetPartyMonName:: ; 15ba (0:15ba)
 	push hl
 	push bc
-	call SkipFixedLengthTextEntries ; add 11 to hl, a times
+	call SkipFixedLengthTextEntries ; add NAME_LENGTH to hl, a times
 	ld de,wcd6d
 	push de
-	ld bc,11
+	ld bc,NAME_LENGTH
 	call CopyData
 	pop de
 	pop bc
@@ -2244,7 +2244,7 @@ LoadGymLeaderAndCityName:: ; 317f (0:317f)
 	call CopyData   ; load city name
 	pop hl
 	ld de, wGymLeaderName
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	jp CopyData     ; load gym leader name
 
 ; reads specific information from trainer header (pointed to at W_TRAINERHEADERPTR)
@@ -2402,7 +2402,7 @@ EndTrainerBattle:: ; 3275 (0:3275)
 	ld b, FLAG_SET
 	call TrainerFlagAction   ; flag trainer as fought
 	ld a, [W_ENEMYMONORTRAINERCLASS]
-	cp $c8
+	cp 200
 	jr nc, .skipRemoveSprite    ; test if trainer was fought (in that case skip removing the corresponding sprite)
 	ld hl, W_MISSABLEOBJECTLIST
 	ld de, $2
@@ -2436,7 +2436,7 @@ InitBattleEnemyParameters:: ; 32d7 (0:32d7)
 	ld a, [wEngagedTrainerClass]
 	ld [W_CUROPPONENT], a
 	ld [W_ENEMYMONORTRAINERCLASS], a
-	cp $c8
+	cp 200
 	ld a, [wEngagedTrainerSet]
 	jr c, .noTrainer
 	ld [W_TRAINERNO], a
@@ -2600,11 +2600,11 @@ CheckIfAlreadyEngaged:: ; 33dd (0:33dd)
 
 PlayTrainerMusic:: ; 33e8 (0:33e8)
 	ld a, [wEngagedTrainerClass]
-	cp $c8 + SONY1
+	cp OPP_SONY1
 	ret z
-	cp $c8 + SONY2
+	cp OPP_SONY2
 	ret z
-	cp $c8 + SONY3
+	cp OPP_SONY3
 	ret z
 	ld a, [W_GYMLEADERNO]
 	and a
@@ -2712,7 +2712,7 @@ IsItemInBag:: ; 3493 (0:3493)
 ; set zero flag if item isn't in player's bag
 ; else reset zero flag
 ; related to Pokémon Tower and ghosts
-	predef IsItemInBag_
+	predef GetQuantityOfItemInBag
 	ld a,b
 	and a
 	ret
@@ -3265,7 +3265,7 @@ GetName:: ; 376b (0:376b)
 	jr nz,.otherEntries
 	;1 = MON_NAMES
 	call GetMonName
-	ld hl,11
+	ld hl,NAME_LENGTH
 	add hl,de
 	ld e,l
 	ld d,h
@@ -3826,12 +3826,12 @@ MoveMon:: ; 3a68 (0:3a68)
 	ld [MBC1RomBank], a
 	ret
 
-; skips a text entries, each of size 11 (like trainer name, OT name, rival name, ...)
-; hl: base pointer, will be incremented by $b * a
+; skips a text entries, each of size NAME_LENGTH (like trainer name, OT name, rival name, ...)
+; hl: base pointer, will be incremented by NAME_LENGTH * a
 SkipFixedLengthTextEntries:: ; 3a7d (0:3a7d)
 	and a
 	ret z
-	ld bc, 11
+	ld bc, NAME_LENGTH
 .skipLoop
 	add hl, bc
 	dec a
@@ -4470,7 +4470,7 @@ RestoreScreenTilesAndReloadTilePatterns:: ; 3dbe (0:3dbe)
 	call ReloadMapSpriteTilePatterns
 	call LoadScreenTilesFromBuffer2
 	call LoadTextBoxTilePatterns
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	jr Delay3
 
 
@@ -4500,13 +4500,13 @@ GBPalWhiteOut::
 	ret
 
 
-GoPAL_SET_CF1C:: ; 3ded (0:3ded)
+RunDefaultPaletteCommand:: ; 3ded (0:3ded)
 	ld b,$ff
-GoPAL_SET:: ; 3def (0:3def)
+RunPaletteCommand:: ; 3def (0:3def)
 	ld a,[wOnSGB]
 	and a
 	ret z
-	predef_jump Func_71ddf
+	predef_jump _RunPaletteCommand
 
 GetHealthBarColor::
 ; Return at hl the palette of

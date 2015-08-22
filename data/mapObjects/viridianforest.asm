@@ -19,9 +19,9 @@ ViridianForestObject: ; 0x611da (size=127)
 
 	db $8 ; objects
 	object SPRITE_BUG_CATCHER, $1b, $a, STAY, NONE, $1
-	object SPRITE_BUG_CATCHER, $1f, $22, STAY, LEFT, $2, BUG_CATCHER + $C8, $1
-	object SPRITE_BUG_CATCHER, $12, $1b, STAY, LEFT, $3, BUG_CATCHER + $C8, $2
-	object SPRITE_BUG_CATCHER, $9, $5, STAY, LEFT, $4, BUG_CATCHER + $C8, $3
+	object SPRITE_BUG_CATCHER, $1f, $22, STAY, LEFT, $2, OPP_BUG_CATCHER, $1
+	object SPRITE_BUG_CATCHER, $12, $1b, STAY, LEFT, $3, OPP_BUG_CATCHER, $2
+	object SPRITE_BUG_CATCHER, $9, $5, STAY, LEFT, $4, OPP_BUG_CATCHER, $3
 	object SPRITE_BALL, $c, $1b, STAY, NONE, $5, ANTIDOTE
 	object SPRITE_BALL, $14, $5, STAY, NONE, $6, POTION
 	object SPRITE_BALL, $2, $24, STAY, NONE, $7, POKE_BALL

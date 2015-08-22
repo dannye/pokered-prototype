@@ -6,13 +6,13 @@ LoadNicknameMonSprite:
 	ld de, vNPCSprites
 	call LoadPartyMonSprite
 	call EnableLCD
-	ld a, [$ff8c]
+	ld a, [H_SPRITEINDEX]
 	push af
 	xor a
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	call PlacePartyMonSprite
 	pop af
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	ret
 
 LoadPartyMonSprites:
@@ -64,7 +64,7 @@ PlacePartyMonSprite:
 	push hl
 	push de
 	push bc
-	ld a, [$ff8c]
+	ld a, [H_SPRITEINDEX]
 	add a
 	add a
 	add a
@@ -82,7 +82,7 @@ PlacePartyMonSprite:
 	ld bc, $10
 	call CopyData
 	ld hl, wOAMBuffer
-	ld de, wcc5b
+	ld de, wMonPartySpritesSavedOAM
 	ld bc, $60
 	call CopyData
 	pop bc

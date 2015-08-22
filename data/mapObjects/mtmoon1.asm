@@ -12,13 +12,13 @@ MtMoon1Object: ; 0x49b06 (size=145)
 	db $19, $7, $e ; MtMoon1Text14
 
 	db $d ; objects
-	object SPRITE_HIKER, $11, $8, STAY, DOWN, $1, HIKER + $C8, $1
-	object SPRITE_BUG_CATCHER, $5, $1c, STAY, RIGHT, $2, YOUNGSTER + $C8, $3
-	object SPRITE_LASS, $1e, $2, STAY, DOWN, $3, LASS + $C8, $5
-	object SPRITE_BLACK_HAIR_BOY_2, $16, $1b, STAY, UP, $4, SUPER_NERD + $C8, $1
-	object SPRITE_LASS, $1d, $1e, STAY, DOWN, $5, LASS + $C8, $6
-	object SPRITE_BUG_CATCHER, $3, $8, STAY, DOWN, $6, BUG_CATCHER + $C8, $7
-	object SPRITE_BUG_CATCHER, $1c, $10, STAY, RIGHT, $7, BUG_CATCHER + $C8, $8
+	object SPRITE_HIKER, $11, $8, STAY, DOWN, $1, OPP_HIKER, $1
+	object SPRITE_BUG_CATCHER, $5, $1c, STAY, RIGHT, $2, OPP_YOUNGSTER, $3
+	object SPRITE_LASS, $1e, $2, STAY, DOWN, $3, OPP_LASS, $5
+	object SPRITE_BLACK_HAIR_BOY_2, $16, $1b, STAY, UP, $4, OPP_SUPER_NERD, $1
+	object SPRITE_LASS, $1d, $1e, STAY, DOWN, $5, OPP_LASS, $6
+	object SPRITE_BUG_CATCHER, $3, $8, STAY, DOWN, $6, OPP_BUG_CATCHER, $7
+	object SPRITE_BUG_CATCHER, $1c, $10, STAY, RIGHT, $7, OPP_BUG_CATCHER, $8
 	object SPRITE_BALL, $9, $16, STAY, NONE, $8, POTION
 	object SPRITE_BALL, $14, $1f, STAY, NONE, $9, MOON_STONE
 	object SPRITE_BALL, $b, $2, STAY, NONE, $a, RARE_CANDY

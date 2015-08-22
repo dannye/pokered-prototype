@@ -57,7 +57,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	inc hl
 	ld a,b
 	ld [hli],a ; max menu item ID
-	ld a,%00000011 ; A button, B button
+	ld a,A_BUTTON | B_BUTTON
 	ld [hli],a ; menu watched keys
 	xor a
 	ld [hl],a
@@ -297,7 +297,7 @@ ErasePartyMenuCursors: ; 132ed (4:72ed)
 
 ItemMenuLoop: ; 132fc (4:72fc)
 	call LoadScreenTilesFromBuffer2DisableBGTransfer ; restore saved screen
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 
 StartMenu_Item: ; 13302 (4:7302)
 	ld a,[wLinkState]
@@ -354,7 +354,7 @@ StartMenu_Item: ; 13302 (4:7302)
 	inc hl
 	inc a ; a = 1
 	ld [hli],a ; max menu item ID
-	ld a,%00000011 ; A button, B button
+	ld a,A_BUTTON | B_BUTTON
 	ld [hli],a ; menu watched keys
 	xor a
 	ld [hl],a ; old menu item id
@@ -508,14 +508,14 @@ StartMenu_TrainerInfo: ; 13460 (4:7460)
 	ld [hTilesetType],a
 	call DrawTrainerInfo
 	predef DrawBadges ; draw badges
-	ld b,$0d
-	call GoPAL_SET
+	ld b, SET_PAL_TRAINER_CARD
+	call RunPaletteCommand
 	call GBPalNormal
 	call WaitForTextScrollButtonPress ; wait for button press
 	call GBPalWhiteOut
 	call LoadFontTilePatterns
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	call ReloadMapData
 	call LoadGBPal
 	pop af
@@ -811,36 +811,36 @@ SwitchPartyMon_InitVarOrSwapData: ; 13653 (4:7653)
 	call SkipFixedLengthTextEntries
 	push hl
 	ld de, wSwitchPartyMonTempBuffer
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wPartyMonOT
 	ld a, [wMenuItemToSwap]
 	call SkipFixedLengthTextEntries
 	pop de
 	push hl
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	pop de
 	ld hl, wSwitchPartyMonTempBuffer
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wPartyMonNicks
 	ld a, [wCurrentMenuItem]
 	call SkipFixedLengthTextEntries
 	push hl
 	ld de, wSwitchPartyMonTempBuffer
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wPartyMonNicks
 	ld a, [wMenuItemToSwap]
 	call SkipFixedLengthTextEntries
 	pop de
 	push hl
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	pop de
 	ld hl, wSwitchPartyMonTempBuffer
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld a, [wMenuItemToSwap]
 	ld [wSwappedMenuItem], a
