@@ -136,7 +136,7 @@ PAL_RAPIDASH EQU PAL_PONYTA ; $67 X
 	const PAL_SLOWBRO    ; $69
 	const PAL_MAGNEMITE  ; $6A X
 PAL_MAGNETON EQU PAL_MAGNEMITE ; $6A X
-	const PAL_FARFETCH_D ; $6B
+	const PAL_FARFETCHD  ; $6B
 	const PAL_DODUO      ; $6C
 	const PAL_DODRIO     ; $6D
 	const PAL_SEEL       ; $6E

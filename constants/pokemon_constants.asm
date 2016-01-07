@@ -63,7 +63,7 @@ const_value = 1
 	const POLITOED     ; $3D
 	const SLOWKING     ; $3E
 	const MAGNEZONE    ; $3F
-	const FARFETCH_D   ; $40
+	const FARFETCHD    ; $40
 	const VENONAT      ; $41
 	const DRAGONITE    ; $42
 	const STEELIX      ; $43
