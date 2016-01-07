@@ -1,4 +1,4 @@
-_FuchsiaHouse1Text1:: ; 9e2a3 (27:62a3)
+_FuchsiaHouse1Text1::
 	text "Safari Zone's"
 	line "Warden is old,"
 	cont "but still active!"
@@ -7,7 +7,7 @@ _FuchsiaHouse1Text1:: ; 9e2a3 (27:62a3)
 	line "false, though."
 	done
 
-_FuchsiaHouse1Text2:: ; 9e2f3 (27:62f3)
+_FuchsiaHouse1Text2::
 	text "Hmm? You've met"
 	line "Bill?"
 
@@ -18,7 +18,7 @@ _FuchsiaHouse1Text2:: ; 9e2f3 (27:62f3)
 	cont "even as a child!"
 	done
 
-_FuchsiaHouse1Text3:: ; 9e34d (27:634d)
+_FuchsiaHouse1Text3::
 	text "Bill files his"
 	line "own #mon data"
 	cont "on his PC!"

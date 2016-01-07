@@ -1,4 +1,4 @@
-_ViridianHouseText1:: ; 95d71 (25:5d71)
+_ViridianHouseText1::
 	text "Having a bird"
 	line "#mon in the"
 	cont "house is a lot of"
@@ -11,19 +11,19 @@ _ViridianHouseText1:: ; 95d71 (25:5d71)
 	cont "it."
 	done
 
-_ViridianHouseText2:: ; 95dc7 (25:5dc7)
+_ViridianHouseText2::
 	text "I love my"
 	line "Pidgester. She's"
 	cont "really one of a"
 	cont "kind!"
 	done
 
-_ViridianHouseText_1d5b1:: ; 95de1 (25:5de1)
+_ViridianHouseText_1d5b1::
 	text "Pidgester:"
 	line "Teweet!"
 	done
 
-_ViridianHouseText4:: ; 95df3 (25:5df3)
+_ViridianHouseText4::
 	text "Spearow"
 	line "Name: Pidgester"
 	done
