@@ -2,9 +2,9 @@ Route24Script: ; 513ad (14:53ad)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route24TrainerHeaders
 	ld de, Route24ScriptPointers
-	ld a, [W_ROUTE24CURSCRIPT]
+	ld a, [wRoute24CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_ROUTE24CURSCRIPT], a
+	ld [wRoute24CurScript], a
 	ret
 
 Route24ScriptPointers: ; 513cb (14:53cb)

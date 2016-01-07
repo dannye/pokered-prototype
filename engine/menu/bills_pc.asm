@@ -214,7 +214,7 @@ BillsPCDeposit: ; 215ac (8:55ac)
 	call PrintText
 	jp BillsPCMenu
 .partyLargeEnough
-	ld a, [W_NUMINBOX]
+	ld a, [wNumInBox]
 	cp MONS_PER_BOX
 	jr nz, .boxNotFull
 	ld hl, BoxFullText
@@ -256,7 +256,7 @@ BillsPCDeposit: ; 215ac (8:55ac)
 	jp BillsPCMenu
 
 BillsPCWithdraw: ; 21618 (8:5618)
-	ld a, [W_NUMINBOX]
+	ld a, [wNumInBox]
 	and a
 	jr nz, .boxNotEmpty
 	ld hl, NoMonText
@@ -270,7 +270,7 @@ BillsPCWithdraw: ; 21618 (8:5618)
 	call PrintText
 	jp BillsPCMenu
 .partyNotFull
-	ld hl, W_NUMINBOX
+	ld hl, wNumInBox
 	call DisplayMonListMenu
 	jp c, BillsPCMenu
 	call DisplayDepositWithdrawMenu
@@ -293,14 +293,14 @@ BillsPCWithdraw: ; 21618 (8:5618)
 	jp BillsPCMenu
 
 BillsPCRelease: ; 21673 (8:5673)
-	ld a, [W_NUMINBOX]
+	ld a, [wNumInBox]
 	and a
 	jr nz, .loop
 	ld hl, NoMonText
 	call PrintText
 	jp BillsPCMenu
 .loop
-	ld hl, W_NUMINBOX
+	ld hl, wNumInBox
 	call DisplayMonListMenu
 	jp c, BillsPCMenu
 	ld hl, OnceReleasedText
@@ -514,7 +514,7 @@ CableClubLeftGameboy:: ; 5824 (8:5825)
 	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
 	cp SPRITE_FACING_RIGHT
 	ret nz
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	cp TRADE_CENTER
 	ld a, LINK_STATE_START_TRADE
 	jr z, .next
@@ -531,7 +531,7 @@ CableClubRightGameboy:: ; 5845 (8:5845)
 	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
 	cp SPRITE_FACING_LEFT
 	ret nz
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	cp TRADE_CENTER
 	ld a, LINK_STATE_START_TRADE
 	jr z, .next

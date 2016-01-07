@@ -4,9 +4,9 @@ Route25Script: ; 515cb (14:55cb)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route25TrainerHeaders
 	ld de, Route25ScriptPointers
-	ld a, [W_ROUTE25CURSCRIPT]
+	ld a, [wRoute25CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_ROUTE25CURSCRIPT], a
+	ld [wRoute25CurScript], a
 	ret
 
 Route25Script_515e1: ; 515e1 (14:55e1)
@@ -37,10 +37,10 @@ Route25Script_515e1: ; 515e1 (14:55e1)
 HideRoute24_25Rockets:
 	CheckEventHL EVENT_LEFT_BILLS_AFTER_HELPING_FIRST_TIME
 	ret z
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	cp $6
 	ret nz
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	cp $8
 	ret nz
 	res 2, [hl]
