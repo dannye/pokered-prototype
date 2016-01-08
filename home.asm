@@ -152,7 +152,7 @@ CheckForUserInterruption:: ; 12f8 (0:12f8)
 	ld a,$64
 	cp c
 	jr nz,.notHalf
-	callab SendTitleMonPalPacket
+	call LoadTitleMonSprite
 	ld a, [wWhichTrade]
 	ld c, $64
 .notHalf
@@ -305,7 +305,7 @@ LoadFrontSpriteByMonIndex:: ; 1389 (0:1389)
 	pop hl
 	jr z, .invalidDexNumber ; dex #0 invalid
 	cp NUM_POKEMON + 1
-	jr c, .validDexNumber   ; dex >#151 invalid
+	jr c, .validDexNumber   ; dex >#182 invalid
 .invalidDexNumber
 	ld a, RHYDON ; $1
 	ld [wcf91], a
@@ -315,6 +315,7 @@ LoadFrontSpriteByMonIndex:: ; 1389 (0:1389)
 	ld de, vFrontPic
 	call LoadMonFrontSprite
 	pop hl
+CopyUncompressedPicToHL_:
 	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, Bank(CopyUncompressedPicToHL)
@@ -744,14 +745,6 @@ UncompressMonSprite:: ; 1627 (0:1627)
 	ld [wSpriteInputPtr],a    ; fetch sprite input pointer
 	ld a,[hl]
 	ld [wSpriteInputPtr+1],a
-; define (by index number) the bank that a pokemon's image is in
-; index = Mew, bank 1
-; index = Kabutops fossil, bank $B
-;	index < $1F, bank 9
-; $1F ≤ index < $4A, bank $A
-; $4A ≤ index < $74, bank $B
-; $74 ≤ index < $99, bank $C
-; $99 ≤ index,       bank $D
 	ld a,[wcf91] ; XXX name for this ram location
 	cp FOSSIL_KABUTOPS
 	jr z,.RecallBank
@@ -759,12 +752,18 @@ UncompressMonSprite:: ; 1627 (0:1627)
 	jr z,.RecallBank
 	cp MON_GHOST
 	jr z,.RecallBank
-	ld a,[$D0D3]
+	ld a,[wMonHPicBank]
 	jr .GotBank
 .RecallBank
 	ld a,BANK(FossilKabutopsPic)
 .GotBank
 	jp UncompressSpriteData
+
+LoadUncompressedSilhouette:
+	ld hl, wMonHSpriteDim
+	ld a, [hli]
+	ld c, a
+	jr LoadUncompressedSpriteData
 
 ; de: destination location
 LoadMonFrontSprite:: ; 1665 (0:1665)

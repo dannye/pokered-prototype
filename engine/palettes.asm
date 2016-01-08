@@ -705,16 +705,9 @@ SendTitleMonPalPacket:
 	ld a, [wcf91]
 	ld [wd11e], a
 	call GetMonPalID
-SendTitlePalPacket:
 	ld [wPalPacket + 5], a
 	ld hl, wPalPacket
 	jp SendSGBPacket
-	
-SendTitleBlackPalPacket:
-	ld hl, PalPacket_Titlescreen
-	call CopyPalPacket
-	ld a, PAL_BLACK2
-	jr SendTitlePalPacket
 
 CopyPalPacket:
 	ld bc, $0010

@@ -56,7 +56,7 @@ clean:
 asm_opt = -h
 
 # Make a symfile for debugging.
-link_opt = -n poke$*.sym
+link_opt = -n $*.sym
 
 # Header options for rgbfix.
 dmg_opt        = -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03

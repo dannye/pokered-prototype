@@ -131,7 +131,11 @@ DisplayTitleScreen: ; 42dd (1:42dd)
 	ld a,MEWTWO ; which Pokemon to show first on the title screen
 
 	ld [wTitleMonSpecies], a
-	call LoadTitleMonSprite
+	ld [wcf91], a
+	ld [wd0b5], a
+	coord hl, 7, 10
+	call GetMonHeader
+	call LoadFrontSpriteByMonIndex
 	ld a, $e0
 	ld [H_AUTOBGTRANSFERDEST], a
 	ld a, (vBGMap0 + $200) / $100
@@ -272,23 +276,24 @@ TitleScreenPickNewMon: ; 4496 (1:4496)
 
 .new
 ; Generate a new TitleMon.
-	REPT 10
+	REPT 4
 	call Random
 	ENDR
 	cp NUM_POKEMON + 1
 	jr nc,.new
-	cp $00
+	and a
 	jr z,.new
+	push af
 	ld [wd11e], a
 	callab PokedexToIndex
 	ld a, [wd11e]
+	pop bc
 	ld hl, wTitleMonSpecies
 	cp [hl]
 	jr z, .new
 	ld [hl], a
-	callab SendTitleBlackPalPacket
-	ld a, [wTitleMonSpecies]
-	call LoadTitleMonSprite
+	call LoadTitleMonSilhouette
+	callab SendTitleMonPalPacket
 
 	ld a, $90
 	ld [hWY], a
@@ -362,11 +367,35 @@ ClearBothBGMaps: ; 4519 (1:4519)
 	jp FillMemory
 
 LoadTitleMonSprite: ; 4524 (1:4524)
+	ld de, vFrontPic
+	jp LoadMonFrontSprite
+
+LoadTitleMonSilhouette:
 	ld [wcf91], a
 	ld [wd0b5], a
-	coord hl, 7, 10
 	call GetMonHeader
-	jp LoadFrontSpriteByMonIndex
+	push bc
+	dec b
+	ld l, b
+	ld h, 0
+	ld bc, SilhouettePointers
+	add hl, hl
+	add hl, bc
+	ld bc, 2
+	ld de, wSpriteInputPtr
+	ld a, BANK(SilhouettePointers)
+	call FarCopyData
+	pop af
+	cp 152
+	ld a, BANK(BulbasaurSilhouette)
+	jr c,.gotBank
+	inc a
+.gotBank
+	call UncompressSpriteData
+	ld de, vFrontPic
+	call LoadUncompressedSilhouette
+	coord hl, 7, 10
+	jp CopyUncompressedPicToHL_
 
 TitleScreenCopyTileMapToVRAM: ; 4533 (1:4533)
 	ld [H_AUTOBGTRANSFERDEST + 1], a

@@ -286,5 +286,4 @@ PAL_GARY3 EQU PAL_GARY1     ; $DC X
 	const PAL_HERO          ; $F1
 	const PAL_IVYSAURB      ; $F2
 	const PAL_VENUSAURB     ; $F3
-	const PAL_BLACK2        ; $F4
-	const PAL_PARTYMENU     ; $F5
+	const PAL_PARTYMENU     ; $F4
