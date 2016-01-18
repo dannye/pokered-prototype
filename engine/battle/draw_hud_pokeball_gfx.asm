@@ -147,7 +147,7 @@ PlaceEnemyHUDTiles: ; 3a919 (e:6919)
 	dec a
 	jr  nz, .noBattle
 	push hl
-	ld a, [wEnemyMon]
+	ld a, [wEnemyMonSpecies2]
 	ld [wd11e], a
 	callab IndexToPokedex
 	ld a, [wd11e]
