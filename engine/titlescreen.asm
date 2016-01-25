@@ -370,10 +370,23 @@ LoadTitleMonSprite: ; 4524 (1:4524)
 	ld de, vFrontPic
 	jp LoadMonFrontSprite
 
+LoadFlippedSilhouette:
+	ld a, 1
+	ld [wSpriteFlipped], a
+	ld a, [wcf91]
+	ld b, a
+	push de
+	pop hl
+	jp LoadSilhouette
+
 LoadTitleMonSilhouette:
 	ld [wcf91], a
 	ld [wd0b5], a
 	call GetMonHeader
+	coord hl, 7, 10
+
+LoadSilhouette:
+	push hl
 	push bc
 	dec b
 	ld l, b
@@ -394,7 +407,7 @@ LoadTitleMonSilhouette:
 	call UncompressSpriteData
 	ld de, vFrontPic
 	call LoadUncompressedSilhouette
-	coord hl, 7, 10
+	pop hl
 	jp CopyUncompressedPicToHL_
 
 TitleScreenCopyTileMapToVRAM: ; 4533 (1:4533)

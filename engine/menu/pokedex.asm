@@ -467,25 +467,43 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	call PrintNumber ; print pokedex number
 	ld hl,wPokedexOwned
 	call IsPokemonBitSet
+	ld a, [wd11e]
+	ld b, a
 	pop af
 	ld [wd11e],a
 	ld a,[wcf91]
 	ld [wd0b5],a
 	pop de
 	push af
-	push bc
 	push de
 	push hl
+	push bc
 	call Delay3
 	call GBPalNormal
 	call GetMonHeader ; load pokemon picture location
+	pop bc
+	push bc
+	ld a,c
+	and a
+	jr nz,.loadPic
+	coord de, 1, 1
+	ld a, [wcf91]
+	push af
+	ld a, b
+	ld [wcf91], a
+	callba LoadFlippedSilhouette
+	pop af
+	ld [wcf91], a
+	jr .playCry
+.loadPic
 	coord hl, 1, 1
 	call LoadFlippedFrontSpriteByMonIndex ; draw pokemon picture
+.playCry
 	ld a,[wcf91]
 	call PlayCry ; play pokemon cry
+	pop bc
 	pop hl
 	pop de
-	pop bc
 	pop af
 	ld a,c
 	and a
