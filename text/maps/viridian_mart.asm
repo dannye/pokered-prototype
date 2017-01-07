@@ -1,24 +1,3 @@
-_ViridianPokeCenterText2::
-_ViridianPokeCenterText1::
-	text "That receptionist"
-	line "over there told"
-	cont "me I could use"
-	cont "that PC."
-
-	para "Too bad I'm too"
-	line "old to know how"
-	cont "to operate one..."
-	done
-
-_ViridianPokeCenterText3::
-	text "#mon Centers"
-	line "are everywhere,"
-	cont "and they're all"
-	cont "free to use."
-
-	para "Isn't it great?"
-	done
-
 _ViridianMartText1::
 	text "Okay! Say hi to"
 	line "Prof.Oak for me!"
