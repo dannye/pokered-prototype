@@ -1,4 +1,4 @@
-SFX_Shooting_Star_Ch1:
+SFX_Shooting_Star_Ch4:
 	duty 2
 	unknownsfx0x10 95
 	unknownsfx0x20 4, 64, 224, 7

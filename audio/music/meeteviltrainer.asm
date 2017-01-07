@@ -1,4 +1,4 @@
-Music_MeetEvilTrainer_Ch1::
+Music_MeetEvilTrainer_Ch0::
 	tempo 100
 	volume 7, 7
 	duty 2
@@ -8,7 +8,7 @@ Music_MeetEvilTrainer_Ch1::
 Music_MeetEvilTrainer_branch_7f6ae::
 	octave 1
 	callchannel Music_MeetEvilTrainer_1
-	callchannel Music_MeetEvilTrainer_Ch1_1
+	callchannel Music_MeetEvilTrainer_Ch0_1
 	callchannel Music_MeetEvilTrainer_1
 	F# 2
 	D# 1
@@ -22,7 +22,7 @@ Music_MeetEvilTrainer_branch_7f6ae::
 	B_ 1
 	rest 1
 	callchannel Music_MeetEvilTrainer_1
-	callchannel Music_MeetEvilTrainer_Ch1_1
+	callchannel Music_MeetEvilTrainer_Ch0_1
 	callchannel Music_MeetEvilTrainer_1
 	F# 2
 	D# 1
@@ -32,7 +32,7 @@ Music_MeetEvilTrainer_branch_7f6ae::
 	D_ 2
 	octave 1
 	callchannel Music_MeetEvilTrainer_2
-	callchannel Music_MeetEvilTrainer_Ch1_2
+	callchannel Music_MeetEvilTrainer_Ch0_2
 	octave 2
 	D_ 2
 	octave 1
@@ -50,7 +50,7 @@ Music_MeetEvilTrainer_branch_7f6ae::
 	D_ 2
 	octave 1
 	callchannel Music_MeetEvilTrainer_2
-	callchannel Music_MeetEvilTrainer_Ch1_2
+	callchannel Music_MeetEvilTrainer_Ch0_2
 	octave 2
 	D_ 2
 	octave 1
@@ -74,7 +74,7 @@ Music_MeetEvilTrainer_1:
 	rest 1
 	endchannel
 
-Music_MeetEvilTrainer_Ch1_1:
+Music_MeetEvilTrainer_Ch0_1:
 	A# 2
 	D# 1
 	rest 1
@@ -102,7 +102,7 @@ Music_MeetEvilTrainer_2:
 	rest 1
 	endchannel
 
-Music_MeetEvilTrainer_Ch1_2:
+Music_MeetEvilTrainer_Ch0_2:
 	octave 2
 	D_ 2
 	octave 1
@@ -119,14 +119,14 @@ Music_MeetEvilTrainer_Ch1_2:
 	endchannel
 
 
-Music_MeetEvilTrainer_Ch2::
+Music_MeetEvilTrainer_Ch1::
 	duty 1
 	notetype 12, 11, 6
 
 Music_MeetEvilTrainer_branch_7f6c2::
 	octave 2
 	callchannel Music_MeetEvilTrainer_1
-	callchannel Music_MeetEvilTrainer_Ch2_1
+	callchannel Music_MeetEvilTrainer_Ch1_1
 	callchannel Music_MeetEvilTrainer_1
 	F# 2
 	D# 1
@@ -140,7 +140,7 @@ Music_MeetEvilTrainer_branch_7f6c2::
 	B_ 1
 	rest 1
 	callchannel Music_MeetEvilTrainer_1
-	callchannel Music_MeetEvilTrainer_Ch2_1
+	callchannel Music_MeetEvilTrainer_Ch1_1
 	callchannel Music_MeetEvilTrainer_1
 	F# 2
 	D# 1
@@ -150,7 +150,7 @@ Music_MeetEvilTrainer_branch_7f6c2::
 	D_ 2
 	octave 2
 	callchannel Music_MeetEvilTrainer_2
-	callchannel Music_MeetEvilTrainer_Ch2_2
+	callchannel Music_MeetEvilTrainer_Ch1_2
 	octave 3
 	D_ 2
 	octave 2
@@ -168,7 +168,7 @@ Music_MeetEvilTrainer_branch_7f6c2::
 	D_ 2
 	octave 2
 	callchannel Music_MeetEvilTrainer_2
-	callchannel Music_MeetEvilTrainer_Ch2_2
+	callchannel Music_MeetEvilTrainer_Ch1_2
 	octave 3
 	D_ 2
 	octave 2
@@ -178,7 +178,7 @@ Music_MeetEvilTrainer_branch_7f6c2::
 	rest 9
 	loopchannel 0, Music_MeetEvilTrainer_branch_7f6c2
 
-Music_MeetEvilTrainer_Ch2_1:
+Music_MeetEvilTrainer_Ch1_1:
 	A# 2
 	D# 1
 	rest 1
@@ -193,7 +193,7 @@ Music_MeetEvilTrainer_Ch2_1:
 	rest 1
 	endchannel
 
-Music_MeetEvilTrainer_Ch2_2:
+Music_MeetEvilTrainer_Ch1_2:
 	octave 3
 	D_ 2
 	octave 2
@@ -210,13 +210,13 @@ Music_MeetEvilTrainer_Ch2_2:
 	endchannel
 
 
-Music_MeetEvilTrainer_Ch3::
+Music_MeetEvilTrainer_Ch2::
 	notetype 12, 1, 0
 
 Music_MeetEvilTrainer_branch_7f6ee::
 	octave 4
 	callchannel Music_MeetEvilTrainer_1
-	callchannel Music_MeetEvilTrainer_Ch3_1
+	callchannel Music_MeetEvilTrainer_Ch2_1
 	callchannel Music_MeetEvilTrainer_1
 	F# 2
 	D# 1
@@ -230,7 +230,7 @@ Music_MeetEvilTrainer_branch_7f6ee::
 	B_ 1
 	rest 1
 	callchannel Music_MeetEvilTrainer_1
-	callchannel Music_MeetEvilTrainer_Ch3_1
+	callchannel Music_MeetEvilTrainer_Ch2_1
 	callchannel Music_MeetEvilTrainer_1
 	F# 2
 	D# 1
@@ -240,7 +240,7 @@ Music_MeetEvilTrainer_branch_7f6ee::
 	D_ 2
 	octave 4
 	callchannel Music_MeetEvilTrainer_2
-	callchannel Music_MeetEvilTrainer_Ch3_2
+	callchannel Music_MeetEvilTrainer_Ch2_2
 	octave 5
 	D_ 2
 	octave 4
@@ -258,7 +258,7 @@ Music_MeetEvilTrainer_branch_7f6ee::
 	D_ 2
 	octave 4
 	callchannel Music_MeetEvilTrainer_2
-	callchannel Music_MeetEvilTrainer_Ch3_2
+	callchannel Music_MeetEvilTrainer_Ch2_2
 	octave 5
 	D_ 2
 	octave 4
@@ -268,7 +268,7 @@ Music_MeetEvilTrainer_branch_7f6ee::
 	rest 9
 	loopchannel 0, Music_MeetEvilTrainer_branch_7f6ee
 
-Music_MeetEvilTrainer_Ch3_1:
+Music_MeetEvilTrainer_Ch2_1:
 	A# 2
 	D# 1
 	rest 1
@@ -283,7 +283,7 @@ Music_MeetEvilTrainer_Ch3_1:
 	rest 1
 	endchannel
 
-Music_MeetEvilTrainer_Ch3_2:
+Music_MeetEvilTrainer_Ch2_2:
 	octave 5
 	D_ 2
 	octave 4

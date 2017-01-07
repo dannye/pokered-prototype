@@ -1,4 +1,4 @@
-Music_TitleScreen_Ch1::
+Music_TitleScreen_Ch0::
 	tempo 130
 	volume 7, 7
 	toggleperfectpitch
@@ -33,8 +33,8 @@ Music_TitleScreen_Ch1::
 	octave 3
 .mainLoop
 	A_ 2
-	callchannel Music_TitleScreen_Ch1_sub_2
-	callchannel Music_TitleScreen_Ch1_sub_0
+	callchannel Music_TitleScreen_Ch0_sub_2
+	callchannel Music_TitleScreen_Ch0_sub_0
 	A# 2
 	A_ 2
 	A_ 2
@@ -47,7 +47,7 @@ Music_TitleScreen_Ch1::
 	D_ 2
 	octave 1 ; X
 	G_ 6
-	callchannel Music_TitleScreen_Ch1_sub_0
+	callchannel Music_TitleScreen_Ch0_sub_0
 	A# 2
 	A_ 2
 	A_ 2
@@ -58,11 +58,11 @@ Music_TitleScreen_Ch1::
 	C_ 4
 	D# 2
 	D# 6
-	callchannel Music_TitleScreen_Ch1_sub_0
+	callchannel Music_TitleScreen_Ch0_sub_0
 	notetype 12, 15, 7
 	octave 1 ; X
 	A# 6
-	callchannel Music_TitleScreen_Ch1_sub_0
+	callchannel Music_TitleScreen_Ch0_sub_0
 	notetype 12, 15, 7
 	octave 1 ; X
 	A# 6
@@ -70,7 +70,7 @@ Music_TitleScreen_Ch1::
 	C_ 6
 	D_ 6
 	notetype 12, 7, 5
-	callchannel Music_TitleScreen_Ch1_sub_2
+	callchannel Music_TitleScreen_Ch0_sub_2
 	notetype 12, 12, 7
 	octave 3
 	G_ 2
@@ -140,7 +140,7 @@ Music_TitleScreen_Ch1::
 	A_ 2
 	A_ 2
 	A_ 2
-	callchannel Music_TitleScreen_Ch1_sub_1
+	callchannel Music_TitleScreen_Ch0_sub_1
 	notetype 12, 6, 7
 	octave 2
 	A# 2
@@ -156,7 +156,7 @@ Music_TitleScreen_Ch1::
 	octave 3
 	D_ 2
 	notetype 12, 8, 7
-	callchannel Music_TitleScreen_Ch1_sub_3
+	callchannel Music_TitleScreen_Ch0_sub_3
 	A_ 4
 	octave 2
 	D_ 2
@@ -189,11 +189,11 @@ Music_TitleScreen_Ch1::
 	octave 3
 	D_ 8
 	rest 6
-	callchannel Music_TitleScreen_Ch1_sub_1
+	callchannel Music_TitleScreen_Ch0_sub_1
 	notetype 12, 8, 7
 	rest 12
 	G_ 2
-	callchannel Music_TitleScreen_Ch1_sub_3
+	callchannel Music_TitleScreen_Ch0_sub_3
 	A_ 8
 	rest 2
 	D# 16
@@ -245,7 +245,7 @@ Music_TitleScreen_Ch1::
 	A# 2
 	loopchannel 0, .mainLoop
 
-Music_TitleScreen_Ch1_sub_0::
+Music_TitleScreen_Ch0_sub_0::
 	notetype 12, 7, 5
 	octave 3
 	A# 2
@@ -255,7 +255,7 @@ Music_TitleScreen_Ch1_sub_0::
 	A# 2
 	endchannel
 
-Music_TitleScreen_Ch1_sub_1::
+Music_TitleScreen_Ch0_sub_1::
 	notetype 12, 15, 7
 	octave 2
 	D_ 2
@@ -270,7 +270,7 @@ Music_TitleScreen_Ch1_sub_1::
 	octave 3
 	endchannel
 
-Music_TitleScreen_Ch1_sub_2::
+Music_TitleScreen_Ch0_sub_2::
 	octave 3
 	A_ 2
 	A_ 2
@@ -283,7 +283,7 @@ Music_TitleScreen_Ch1_sub_2::
 	G_ 6
 	endchannel
 
-Music_TitleScreen_Ch1_sub_3::
+Music_TitleScreen_Ch0_sub_3::
 	G_ 2
 	A# 2
 	octave 4
@@ -295,7 +295,7 @@ Music_TitleScreen_Ch1_sub_3::
 	endchannel
 
 
-Music_TitleScreen_Ch2::
+Music_TitleScreen_Ch1::
 	duty 3
 	notetype 6, 7, 0
 	octave 4
@@ -364,7 +364,7 @@ Music_TitleScreen_Ch2::
 	F_ 2
 	D_ 4
 	C_ 4
-	callchannel Music_TitleScreen_Ch2_sub_0
+	callchannel Music_TitleScreen_Ch1_sub_0
 	D_ 10
 	rest 4
 	notetype 12, 7, 5
@@ -406,9 +406,9 @@ Music_TitleScreen_Ch2::
 	F_ 2
 	D_ 4
 	C_ 2
-	callchannel Music_TitleScreen_Ch2_sub_0
+	callchannel Music_TitleScreen_Ch1_sub_0
 	D_ 12
-	callchannel Music_TitleScreen_Ch2_sub_1
+	callchannel Music_TitleScreen_Ch1_sub_1
 	G_ 2
 	F_ 2
 	D_ 4
@@ -447,7 +447,7 @@ Music_TitleScreen_Ch2::
 	octave 4
 	C_ 1
 	D_ 11
-	callchannel Music_TitleScreen_Ch2_sub_1
+	callchannel Music_TitleScreen_Ch1_sub_1
 	G_ 2
 	F_ 2
 	G_ 4
@@ -494,7 +494,7 @@ Music_TitleScreen_Ch2::
 	rest 16
 	loopchannel 0, .mainLoop
 
-Music_TitleScreen_Ch2_sub_0::
+Music_TitleScreen_Ch1_sub_0::
 	octave 3
 	A# 4
 	rest 4
@@ -508,7 +508,7 @@ Music_TitleScreen_Ch2_sub_0::
 	octave 4
 	endchannel
 
-Music_TitleScreen_Ch2_sub_1::
+Music_TitleScreen_Ch1_sub_1::
 	octave 3
 	rest 2
 	D_ 2
@@ -524,27 +524,27 @@ Music_TitleScreen_Ch2_sub_1::
 	endchannel
 
 
-Music_TitleScreen_Ch3::
+Music_TitleScreen_Ch2::
 	notetype 12, 1, 2
 	octave 4
-	callchannel Music_TitleScreen_Ch3_sub_0
+	callchannel Music_TitleScreen_Ch2_sub_0
 .mainLoop
-	callchannel Music_TitleScreen_Ch3_sub_0
-	callchannel Music_TitleScreen_Ch3_sub_0
-	callchannel Music_TitleScreen_Ch3_sub_0
-	callchannel Music_TitleScreen_Ch3_sub_0
+	callchannel Music_TitleScreen_Ch2_sub_0
+	callchannel Music_TitleScreen_Ch2_sub_0
+	callchannel Music_TitleScreen_Ch2_sub_0
+	callchannel Music_TitleScreen_Ch2_sub_0
 	F_ 2
 	F_ 2
 	F_ 2
-	callchannel Music_TitleScreen_Ch3_sub_2
-	callchannel Music_TitleScreen_Ch3_sub_0
-	callchannel Music_TitleScreen_Ch3_sub_0
-	callchannel Music_TitleScreen_Ch3_sub_0
+	callchannel Music_TitleScreen_Ch2_sub_2
+	callchannel Music_TitleScreen_Ch2_sub_0
+	callchannel Music_TitleScreen_Ch2_sub_0
+	callchannel Music_TitleScreen_Ch2_sub_0
 	F_ 2
 	F_ 2
 	F_ 2
-	callchannel Music_TitleScreen_Ch3_sub_2
-	callchannel Music_TitleScreen_Ch3_sub_1
+	callchannel Music_TitleScreen_Ch2_sub_2
+	callchannel Music_TitleScreen_Ch2_sub_1
 	D_ 4
 	octave 3
 	A# 2
@@ -554,13 +554,13 @@ Music_TitleScreen_Ch3::
 	octave 3
 	A# 4
 	octave 4
-	callchannel Music_TitleScreen_Ch3_sub_1
+	callchannel Music_TitleScreen_Ch2_sub_1
 	F_ 4
 	C_ 2
 	F_ 4
 	F_ 2
 	C_ 4
-	callchannel Music_TitleScreen_Ch3_sub_1
+	callchannel Music_TitleScreen_Ch2_sub_1
 	C_ 4
 	octave 3
 	A_ 2
@@ -582,7 +582,7 @@ Music_TitleScreen_Ch3::
 	octave 4
 	D_ 2
 	D# 2
-	callchannel Music_TitleScreen_Ch3_sub_3
+	callchannel Music_TitleScreen_Ch2_sub_3
 	C_ 4
 	octave 3
 	A_ 2
@@ -592,7 +592,7 @@ Music_TitleScreen_Ch3::
 	A_ 2
 	octave 4
 	C_ 4
-	callchannel Music_TitleScreen_Ch3_sub_3
+	callchannel Music_TitleScreen_Ch2_sub_3
 	octave 3
 	A_ 4
 	octave 4
@@ -655,7 +655,7 @@ Music_TitleScreen_Ch3::
 	F_ 2
 	loopchannel 0, .mainLoop
 
-Music_TitleScreen_Ch3_sub_0::
+Music_TitleScreen_Ch2_sub_0::
 	G_ 2
 	G_ 2
 	G_ 2
@@ -674,7 +674,7 @@ Music_TitleScreen_Ch3_sub_0::
 	F_ 2
 	endchannel
 
-Music_TitleScreen_Ch3_sub_1::
+Music_TitleScreen_Ch2_sub_1::
 	D# 4
 	octave 3
 	A# 2
@@ -686,7 +686,7 @@ Music_TitleScreen_Ch3_sub_1::
 	octave 4
 	endchannel
 
-Music_TitleScreen_Ch3_sub_2::
+Music_TitleScreen_Ch2_sub_2::
 	G_ 2
 	G_ 2
 	G_ 2
@@ -702,7 +702,7 @@ Music_TitleScreen_Ch3_sub_2::
 	F_ 2
 	endchannel
 
-Music_TitleScreen_Ch3_sub_3::
+Music_TitleScreen_Ch2_sub_3::
 	D# 4
 	octave 3
 	A# 2
@@ -715,7 +715,7 @@ Music_TitleScreen_Ch3_sub_3::
 	endchannel
 
 
-Music_TitleScreen_Ch4::
+Music_TitleScreen_Ch3::
 	dspeed 12
 	cymbal3 16
 	cymbal2 16
@@ -735,14 +735,14 @@ Music_TitleScreen_Ch4::
 	snare9 4
 	snare1 2
 	snare9 2
-	callchannel Music_TitleScreen_Ch4_sub_0
+	callchannel Music_TitleScreen_Ch3_sub_0
 	mutedsnare3 4
 	mutedsnare3 4
 	mutedsnare3 2
 	snare2 2
 	mutedsnare3 2
 	cymbal3 2
-	callchannel Music_TitleScreen_Ch4_sub_0
+	callchannel Music_TitleScreen_Ch3_sub_0
 	mutedsnare3 4
 	mutedsnare3 2
 	snare2 2
@@ -754,7 +754,7 @@ Music_TitleScreen_Ch4::
 	mutedsnare3 4
 	mutedsnare3 4
 	mutedsnare3 4
-	callchannel Music_TitleScreen_Ch4_sub_0
+	callchannel Music_TitleScreen_Ch3_sub_0
 	cymbal3 6
 	cymbal2 6
 	cymbal3 4
@@ -790,7 +790,7 @@ Music_TitleScreen_Ch4::
 	mutedsnare3 4
 	rest 16
 .loop2
-	callchannel Music_TitleScreen_Ch4_sub_1
+	callchannel Music_TitleScreen_Ch3_sub_1
 	loopchannel 3, .loop2
 	mutedsnare3 4
 	snare1 4
@@ -802,7 +802,7 @@ Music_TitleScreen_Ch4::
 	snare1 4
 	mutedsnare3 4
 	snare1 4
-	callchannel Music_TitleScreen_Ch4_sub_1
+	callchannel Music_TitleScreen_Ch3_sub_1
 	snare8 4
 	snare1 2
 	cymbal3 6
@@ -810,7 +810,7 @@ Music_TitleScreen_Ch4::
 	rest 14
 	cymbal3 2
 .loop3
-	callchannel Music_TitleScreen_Ch4_sub_1
+	callchannel Music_TitleScreen_Ch3_sub_1
 	loopchannel 6, .loop3
 	cymbal3 4
 	snare1 2
@@ -834,14 +834,14 @@ Music_TitleScreen_Ch4::
 	rest 2
 	loopchannel 0, .mainLoop
 
-Music_TitleScreen_Ch4_sub_0::
+Music_TitleScreen_Ch3_sub_0::
 	mutedsnare3 4
 	mutedsnare3 4
 	mutedsnare3 4
 	mutedsnare3 4
 	endchannel
 
-Music_TitleScreen_Ch4_sub_1::
+Music_TitleScreen_Ch3_sub_1::
 	mutedsnare3 4
 	snare1 4
 	mutedsnare3 4

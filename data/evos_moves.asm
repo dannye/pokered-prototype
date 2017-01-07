@@ -170,19 +170,19 @@ EvosMovesPointerTable:
 	dw Mon074_EvosMoves
 	dw Mon137_EvosMoves
 	dw Mon142_EvosMoves
-	dw Mon184_EvosMoves	;MissingNo
+	dw Mon184_EvosMoves ;MissingNo
 	dw Mon081_EvosMoves
-	dw Mon185_EvosMoves	;MissingNo
-	dw Mon186_EvosMoves	;MissingNo
+	dw Mon185_EvosMoves ;MissingNo
+	dw Mon186_EvosMoves ;MissingNo
 	dw Mon004_EvosMoves
 	dw Mon007_EvosMoves
 	dw Mon005_EvosMoves
 	dw Mon008_EvosMoves
 	dw Mon006_EvosMoves
-	dw Mon187_EvosMoves	;MissingNo
-	dw Mon188_EvosMoves	;MissingNo
-	dw Mon189_EvosMoves	;MissingNo
-	dw Mon190_EvosMoves	;MissingNo
+	dw Mon187_EvosMoves ;MissingNo
+	dw Mon188_EvosMoves ;MissingNo
+	dw Mon189_EvosMoves ;MissingNo
+	dw Mon190_EvosMoves ;MissingNo
 	dw Mon043_EvosMoves
 	dw Mon044_EvosMoves
 	dw Mon045_EvosMoves

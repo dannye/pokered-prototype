@@ -371,7 +371,7 @@ ExpPointsText:
 
 GrewLevelText:
 	TX_FAR _GrewLevelText
-	db $0b
+	TX_SFX_LEVEL_UP
 	db "@"
 
 AnimateEXPBarAgain:

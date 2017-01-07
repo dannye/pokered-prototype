@@ -1,4 +1,4 @@
-Music_Gym_Ch1::
+Music_Gym_Ch0::
 	tempo 130
 	volume 7, 7
 	duty 0
@@ -30,7 +30,7 @@ Music_Gym_Ch1::
 	rest 8
 	notetype 12, 10, 0
 
-Music_Gym_Ch1_branch_1::
+Music_Gym_Ch0_branch_1::
 	E_ 16
 	D_ 12
 	G_ 3
@@ -74,33 +74,33 @@ Music_Gym_Ch1_branch_1::
 	B_ 8
 	D_ 8
 	E_ 16
-	loopchannel 0, Music_Gym_Ch1_branch_1
+	loopchannel 0, Music_Gym_Ch0_branch_1
 
 
-Music_Gym_Ch2::
+Music_Gym_Ch1::
 	duty 0
 	octave 2
 	notetype 12, 7, 0
-	callchannel Music_Gym_Ch2_branch_3
+	callchannel Music_Gym_Ch1_branch_3
 	notetype 12, 10, 0
-	callchannel Music_Gym_Ch2_branch_3
+	callchannel Music_Gym_Ch1_branch_3
 	notetype 12, 12, 0
-	callchannel Music_Gym_Ch2_branch_3
+	callchannel Music_Gym_Ch1_branch_3
 	notetype 12, 13, 0
 
-Music_Gym_Ch2_branch_1::
+Music_Gym_Ch1_branch_1::
 	E_ 1
 	F_ 1
 	E_ 1
 	rest 1
-	loopchannel 3, Music_Gym_Ch2_branch_1
+	loopchannel 3, Music_Gym_Ch1_branch_1
 	notetype 12, 15, 0
 	E_ 1
 	F_ 1
 	E_ 10
 	rest 8
 
-Music_Gym_Ch2_branch_2::
+Music_Gym_Ch1_branch_2::
 	notetype 12, 11, 0
 	octave 1
 	B_ 16
@@ -216,14 +216,14 @@ Music_Gym_Ch2_branch_2::
 	F# 8
 	E_ 16
 	notetype 12, 15, 0
-	loopchannel 0, Music_Gym_Ch2_branch_2
+	loopchannel 0, Music_Gym_Ch1_branch_2
 
-Music_Gym_Ch2_branch_3::
+Music_Gym_Ch1_branch_3::
 	E_ 1
 	F_ 1
 	E_ 1
 	rest 1
-	loopchannel 3, Music_Gym_Ch2_branch_3
+	loopchannel 3, Music_Gym_Ch1_branch_3
 	G_ 1
 	rest 1
 	F_ 1
@@ -231,20 +231,20 @@ Music_Gym_Ch2_branch_3::
 	endchannel
 
 
-Music_Gym_Ch3::
+Music_Gym_Ch2::
 	notetype 12, 1, 0
 	rest 16
 	rest 16
 	octave 4
 
-Music_Gym_Ch3_branch_1::
+Music_Gym_Ch2_branch_1::
 	B_ 1
 	octave 5
 	C_ 1
 	octave 4
 	B_ 1
 	rest 1
-	loopchannel 3, Music_Gym_Ch3_branch_1
+	loopchannel 3, Music_Gym_Ch2_branch_1
 	octave 5
 	D_ 1
 	rest 1
@@ -252,14 +252,14 @@ Music_Gym_Ch3_branch_1::
 	rest 1
 	octave 4
 
-Music_Gym_Ch3_branch_2::
+Music_Gym_Ch2_branch_2::
 	B_ 1
 	octave 5
 	C_ 1
 	octave 4
 	B_ 1
 	rest 1
-	loopchannel 3, Music_Gym_Ch3_branch_2
+	loopchannel 3, Music_Gym_Ch2_branch_2
 	B_ 1
 	octave 5
 	C_ 1
@@ -271,7 +271,7 @@ Music_Gym_Ch3_branch_2::
 	G_ 1
 	A_ 1
 
-Music_Gym_Ch3_branch_3::
+Music_Gym_Ch2_branch_3::
 	B_ 14
 	octave 5
 	D_ 1
@@ -377,10 +377,10 @@ Music_Gym_Ch3_branch_3::
 	F# 1
 	G_ 1
 	A_ 1
-	loopchannel 0, Music_Gym_Ch3_branch_3
+	loopchannel 0, Music_Gym_Ch2_branch_3
 
 
-Music_Gym_Ch4::
+Music_Gym_Ch3::
 	dspeed 12
 	rest 4
 	snare4 2
@@ -410,7 +410,7 @@ Music_Gym_Ch4::
 	snare6 1
 	snare6 1
 
-Music_Gym_Ch4_branch_1::
+Music_Gym_Ch3_branch_1::
 	snare6 1
 	snare6 1
 	snare6 1
@@ -425,9 +425,9 @@ Music_Gym_Ch4_branch_1::
 	snare6 1
 	snare6 1
 	snare6 1
-	loopchannel 16, Music_Gym_Ch4_branch_1
+	loopchannel 16, Music_Gym_Ch3_branch_1
 
-Music_Gym_Ch4_branch_2::
+Music_Gym_Ch3_branch_2::
 	mutedsnare4 2
 	mutedsnare4 2
 	mutedsnare4 1
@@ -450,7 +450,7 @@ Music_Gym_Ch4_branch_2::
 	mutedsnare4 1
 	mutedsnare4 2
 	mutedsnare4 2
-	loopchannel 4, Music_Gym_Ch4_branch_2
+	loopchannel 4, Music_Gym_Ch3_branch_2
 	mutedsnare4 2
 	mutedsnare4 2
 	mutedsnare4 1
@@ -463,4 +463,4 @@ Music_Gym_Ch4_branch_2::
 	snare6 1
 	snare6 1
 	snare6 1
-	loopchannel 0, Music_Gym_Ch4_branch_1
+	loopchannel 0, Music_Gym_Ch3_branch_1

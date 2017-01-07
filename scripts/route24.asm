@@ -1,6 +1,6 @@
 Route24Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, Route24TrainerHeaders
+	ld hl, Route24TrainerHeader0
 	ld de, Route24ScriptPointers
 	ld a, [wRoute24CurScript]
 	call ExecuteCurMapScriptInTable
@@ -22,7 +22,6 @@ Route24TextPointers:
 	dw Route24Text7
 	dw PickUpItemText
 
-Route24TrainerHeaders:
 Route24TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_0
 	db ($4 << 4) ; trainer's view range
@@ -42,45 +41,45 @@ Route24TrainerHeader1:
 	dw Route24Text_5152b ; TextEndBattle
 
 Route24TrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_2
+	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_1
 	db ($1 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_2
+	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_1
 	dw Route24BattleText2 ; TextBeforeBattle
 	dw Route24AfterBattleText2 ; TextAfterBattle
 	dw Route24EndBattleText2 ; TextEndBattle
 	dw Route24EndBattleText2 ; TextEndBattle
 
 Route24TrainerHeader3:
-	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_3
+	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_2
 	db ($1 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_3
+	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_2
 	dw Route24BattleText3 ; TextBeforeBattle
 	dw Route24AfterBattleText3 ; TextAfterBattle
 	dw Route24EndBattleText3 ; TextEndBattle
 	dw Route24EndBattleText3 ; TextEndBattle
 
 Route24TrainerHeader4:
-	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_4
+	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_3
 	db ($1 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_4
+	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_3
 	dw Route24BattleText4 ; TextBeforeBattle
 	dw Route24AfterBattleText4 ; TextAfterBattle
 	dw Route24EndBattleText4 ; TextEndBattle
 	dw Route24EndBattleText4 ; TextEndBattle
 
 Route24TrainerHeader5:
-	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_5
+	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_4
 	db ($1 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_5
+	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_4
 	dw Route24BattleText5 ; TextBeforeBattle
 	dw Route24AfterBattleText5 ; TextAfterBattle
 	dw Route24EndBattleText5 ; TextEndBattle
 	dw Route24EndBattleText5 ; TextEndBattle
 
 Route24TrainerHeader6:
-	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_6
+	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_5
 	db ($1 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_6
+	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_5
 	dw Route24BattleText6 ; TextBeforeBattle
 	dw Route24AfterBattleText6 ; TextAfterBattle
 	dw Route24EndBattleText6 ; TextEndBattle

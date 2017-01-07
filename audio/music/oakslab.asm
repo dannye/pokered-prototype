@@ -1,4 +1,4 @@
-Music_OaksLab_Ch1::
+Music_OaksLab_Ch0::
 	tempo 164
 	volume 7, 7
 	vibrato 6, 2, 5
@@ -16,7 +16,7 @@ Music_OaksLab_Ch1::
 	E_ 1
 	F# 1
 
-Music_OaksLab_Ch1_branch_1::
+Music_OaksLab_Ch0_branch_1::
 	D# 6
 	C# 1
 	octave 3
@@ -123,9 +123,9 @@ Music_OaksLab_Ch1_branch_1::
 	rest 1
 	F# 1
 	rest 1
-	loopchannel 0, Music_OaksLab_Ch1_branch_1
+	loopchannel 0, Music_OaksLab_Ch0_branch_1
 
-Music_OaksLab_Ch2::
+Music_OaksLab_Ch1::
 	vibrato 8, 2, 4
 	duty 3
 	notetype 12, 10, 7
@@ -148,7 +148,7 @@ Music_OaksLab_Ch2::
 	G# 1
 	A# 1
 
-Music_OaksLab_Ch2_branch_1::
+Music_OaksLab_Ch1_branch_1::
 	B_ 6
 	A# 1
 	G# 1
@@ -198,9 +198,9 @@ Music_OaksLab_Ch2_branch_1::
 	rest 1
 	A# 1
 	rest 1
-	loopchannel 0, Music_OaksLab_Ch2_branch_1
+	loopchannel 0, Music_OaksLab_Ch1_branch_1
 
-Music_OaksLab_Ch3::
+Music_OaksLab_Ch2::
 	vibrato 6, 3, 8
 	notetype 12, 2, 6
 	rest 8
@@ -215,7 +215,7 @@ Music_OaksLab_Ch3::
 	octave 2
 	A# 1
 
-Music_OaksLab_Ch3_branch_1::
+Music_OaksLab_Ch2_branch_1::
 	B_ 6
 	octave 3
 	D# 1
@@ -297,4 +297,4 @@ Music_OaksLab_Ch3_branch_1::
 	octave 2
 	A# 1
 	rest 1
-	loopchannel 0, Music_OaksLab_Ch3_branch_1
+	loopchannel 0, Music_OaksLab_Ch2_branch_1

@@ -1,6 +1,6 @@
 MtMoon3Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, MtMoon3TrainerHeaders
+	ld hl, MtMoon3TrainerHeader0
 	ld de, MtMoon3ScriptPointers
 	ld a, [wMtMoon3CurScript]
 	call ExecuteCurMapScriptInTable
@@ -30,8 +30,7 @@ MtMoon3TextPointers:
 	dw PickUpItemText
 	dw PickUpItemText
 
-MtMoon3TrainerHeaders:
-MtMoon3TrainerHeader1:
+MtMoon3TrainerHeader0:
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7f6 ; flag's byte
@@ -40,7 +39,7 @@ MtMoon3TrainerHeader1:
 	dw MtMoon3EndBattleText1 ; 0x5fa4 TextEndBattle
 	dw MtMoon3EndBattleText1 ; 0x5fa4 TextEndBattle
 
-MtMoon3TrainerHeader0:
+MtMoon3TrainerHeader1:
 	dbEventFlagBit EVENT_BEAT_MT_MOON_3_TRAINER_0
 	db ($4 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_MT_MOON_3_TRAINER_0
@@ -50,27 +49,27 @@ MtMoon3TrainerHeader0:
 	dw MtMoon3EndBattleText2 ; TextEndBattle
 
 MtMoon3TrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_MT_MOON_3_TRAINER_2
+	dbEventFlagBit EVENT_BEAT_MT_MOON_3_TRAINER_1
 	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MT_MOON_3_TRAINER_2
+	dwEventFlagAddress EVENT_BEAT_MT_MOON_3_TRAINER_1
 	dw MtMoon3BattleText3 ; TextBeforeBattle
 	dw MtMoon3AfterBattleText3 ; TextAfterBattle
 	dw MtMoon3EndBattleText3 ; TextEndBattle
 	dw MtMoon3EndBattleText3 ; TextEndBattle
 
 MtMoon3TrainerHeader3:
-	dbEventFlagBit EVENT_BEAT_MT_MOON_3_TRAINER_3
+	dbEventFlagBit EVENT_BEAT_MT_MOON_3_TRAINER_2
 	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MT_MOON_3_TRAINER_3
+	dwEventFlagAddress EVENT_BEAT_MT_MOON_3_TRAINER_2
 	dw MtMoon3BattleText4 ; TextBeforeBattle
 	dw MtMoon3AfterBattleText4 ; TextAfterBattle
 	dw MtMoon3EndBattleText4 ; TextEndBattle
 	dw MtMoon3EndBattleText4 ; TextEndBattle
 
 MtMoon3TrainerHeader4:
-	dbEventFlagBit EVENT_BEAT_MT_MOON_3_TRAINER_4
+	dbEventFlagBit EVENT_BEAT_MT_MOON_3_TRAINER_3
 	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MT_MOON_3_TRAINER_4
+	dwEventFlagAddress EVENT_BEAT_MT_MOON_3_TRAINER_3
 	dw MtMoon3BattleText5 ; TextBeforeBattle
 	dw MtMoon3AfterBattleText5 ; TextAfterBattle
 	dw MtMoon3EndBattleText5 ; TextEndBattle
@@ -80,13 +79,13 @@ MtMoon3TrainerHeader4:
 
 MtMoon3Text1:
 	TX_ASM
-	ld hl, MtMoon3TrainerHeader1
+	ld hl, MtMoon3TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 MtMoon3Text2:
 	TX_ASM
-	ld hl, MtMoon3TrainerHeader0
+	ld hl, MtMoon3TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 

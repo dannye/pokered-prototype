@@ -6,15 +6,7 @@ MD5 := md5sum -c --quiet
 pic      := $(PYTHON) extras/pokemontools/pic.py compress
 includes := $(PYTHON) extras/pokemontools/scan_includes.py
 
-base_obj := \
-	audio.o \
-	main.o \
-	text.o \
-	wram.o
-
-$(foreach obj, $(base_obj:.o=), \
-	$(eval $(obj)_dep := $(shell $(includes) $(obj).asm)) \
-)
+objs := audio.o main.o text.o wram.o
 
 .SUFFIXES:
 .SUFFIXES: .asm .o .gbc .png .2bpp .1bpp .pic
@@ -33,17 +25,18 @@ compare: prototype
 	@$(MD5) roms.md5
 
 clean:
-	rm -f $(roms) $(base_obj) $(roms:.gbc=.sym)
+	rm -f $(roms) $(objs) $(roms:.gbc=.sym)
 	find . \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pic' \) -exec rm {} +
 
 %.asm: ;
-$(base_obj): %.o: %.asm $$(%_dep)
-	rgbasm -h -o $@ $*.asm
 
-dmg_opt  = -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03
-prototype_opt  = $(dmg_opt) -t "POKEMON PRO"
+%.o: dep = $(shell $(includes) $(@D)/$*.asm)
+$(objs): %.o: %.asm $$(dep)
+	rgbasm -D _RED -h -o $@ $*.asm
 
-%.gbc: $(base_obj)
+prototype_opt  = -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON PRO"
+
+%.gbc: $(objs)
 	rgblink -n $*.sym -o $@ $^
 	rgbfix $($*_opt) $@
 

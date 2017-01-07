@@ -1,4 +1,4 @@
-Music_Cities1_Ch1::
+Music_Cities1_Ch0::
 	tempo 234
 	duty 3
 	notetype 12, 12, 5
@@ -7,7 +7,7 @@ Music_Cities1_Ch1::
 	rest 16
 	rest 16
 
-Music_Cities1_Ch1_branch_1::
+Music_Cities1_Ch0_branch_1::
 	notetype 12, 10, 5
 	octave 2
 	C_ 4
@@ -74,10 +74,10 @@ Music_Cities1_Ch1_branch_1::
 	C_ 4
 	octave 1
 	F_ 8
-	loopchannel 0, Music_Cities1_Ch1_branch_1
+	loopchannel 0, Music_Cities1_Ch0_branch_1
 
 
-Music_Cities1_Ch2::
+Music_Cities1_Ch1::
 	duty 2
 	notetype 12, 13, 5
 	rest 16
@@ -85,7 +85,7 @@ Music_Cities1_Ch2::
 	rest 16
 	rest 16
 
-Music_Cities1_Ch2_branch_1::
+Music_Cities1_Ch1_branch_1::
 	rest 16
 	rest 16
 	octave 2
@@ -141,14 +141,14 @@ Music_Cities1_Ch2_branch_1::
 	octave 2
 	F_ 8
 	rest 8
-	loopchannel 0, Music_Cities1_Ch2_branch_1
+	loopchannel 0, Music_Cities1_Ch1_branch_1
 
 
-Music_Cities1_Ch3::
+Music_Cities1_Ch2::
 	notetype 12, 2, 6
 	toggleperfectpitch
 
-Music_Cities1_Ch3_branch_1::
+Music_Cities1_Ch2_branch_1::
 	octave 2
 	F_ 2
 	octave 3
@@ -173,4 +173,4 @@ Music_Cities1_Ch3_branch_1::
 	F_ 2
 	A_ 2
 	F_ 2
-	loopchannel 0, Music_Cities1_Ch3_branch_1
+	loopchannel 0, Music_Cities1_Ch2_branch_1

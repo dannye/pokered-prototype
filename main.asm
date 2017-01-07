@@ -1,5 +1,4 @@
 INCLUDE "constants.asm"
-INCLUDE "charmap.asm"
 
 NPC_SPRITES_1 EQU $4
 NPC_SPRITES_2 EQU $5
@@ -1704,19 +1703,26 @@ TwoOptionMenuStrings:
 	dw .NoYesMenu
 
 .NoYesMenu
-	db "No",$4E,"Yes@"
+	db   "No"
+	next "Yes@"
 .YesNoMenu
-	db "Yes",$4E,"No@"
+	db   "Yes"
+	next "No@"
 .NorthWestMenu
-	db "North",$4E,"West@"
+	db   "North"
+	next "West@"
 .SouthEastMenu
-	db "South",$4E,"East@"
+	db   "South"
+	next "East@"
 .NorthEastMenu
-	db "North",$4E,"East@"
+	db   "North"
+	next "East@"
 .TradeCancelMenu
-	db "Trade",$4E,"Cancel@"
+	db   "Trade"
+	next "Cancel@"
 .HealCancelMenu
-	db "Heal",$4E,"Cancel@"
+	db   "Heal"
+	next "Cancel@"
 
 DisplayFieldMoveMonMenu:
 	xor a

@@ -1,4 +1,4 @@
-Music_WildBattle_Ch1::
+Music_WildBattle_Ch0::
 	tempo 107
 	duty 2
 	notetype 12, 10, 0
@@ -133,7 +133,7 @@ Music_WildBattle_Ch1::
 	loopchannel 0, .mainLoop
 
 
-Music_WildBattle_Ch2::
+Music_WildBattle_Ch1::
 	notetype 12, 9, 0
 	rest 8
 	duty 2
@@ -328,7 +328,7 @@ Music_WildBattle_Ch2::
 	loopchannel 0, .mainLoop
 
 
-Music_WildBattle_Ch3::
+Music_WildBattle_Ch2::
 	notetype 12, 1, 4
 	octave 3
 .loop1
@@ -338,16 +338,16 @@ Music_WildBattle_Ch3::
 	loopchannel 8, .loop1
 	octave 2
 .mainLoop
-	callchannel Music_WildBattle_Ch3_sub_0
-	callchannel Music_WildBattle_Ch3_sub_0
-	callchannel Music_WildBattle_Ch3_sub_0
-	callchannel Music_WildBattle_Ch3_sub_0
-	callchannel Music_WildBattle_Ch3_sub_0
-	callchannel Music_WildBattle_Ch3_sub_0
-	callchannel Music_WildBattle_Ch3_sub_0
-	callchannel Music_WildBattle_Ch3_sub_0
-	callchannel Music_WildBattle_Ch3_sub_0
-	callchannel Music_WildBattle_Ch3_sub_0
+	callchannel Music_WildBattle_Ch2_sub_0
+	callchannel Music_WildBattle_Ch2_sub_0
+	callchannel Music_WildBattle_Ch2_sub_0
+	callchannel Music_WildBattle_Ch2_sub_0
+	callchannel Music_WildBattle_Ch2_sub_0
+	callchannel Music_WildBattle_Ch2_sub_0
+	callchannel Music_WildBattle_Ch2_sub_0
+	callchannel Music_WildBattle_Ch2_sub_0
+	callchannel Music_WildBattle_Ch2_sub_0
+	callchannel Music_WildBattle_Ch2_sub_0
 	D_ 8
 	A_ 8
 	C_ 8
@@ -369,11 +369,11 @@ Music_WildBattle_Ch3::
 	D_ 2
 	A_ 2
 	C_ 4
-	callchannel Music_WildBattle_Ch3_sub_0
-	callchannel Music_WildBattle_Ch3_sub_0
+	callchannel Music_WildBattle_Ch2_sub_0
+	callchannel Music_WildBattle_Ch2_sub_0
 	loopchannel 0, .mainLoop
 
-Music_WildBattle_Ch3_sub_0::
+Music_WildBattle_Ch2_sub_0::
 	D_ 2
 	A_ 2
 	D_ 2
