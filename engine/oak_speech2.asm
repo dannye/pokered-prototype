@@ -186,7 +186,10 @@ GetDefaultName: ; 6ad6 (1:6ad6)
 	jp CopyData
 
 DefaultNamesPlayerList: ; 6af2 (1:6af2)
-	db "New Name@Ash@Dan@Jack@"
+	db "New Name@"
+	db "Ash@"
+	db "Dan@"
+	db "Jack@"
 
 TextTerminator_6b20: ; 6b20 (1:6b20)
 	db "@"

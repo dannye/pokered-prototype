@@ -263,6 +263,14 @@ tx_pre_jump: MACRO
 	jp PrintPredefTextID
 ENDM
 
+TX_SFX_KEY_ITEM: macro
+	db $11
+endm
+
+TX_CONGRATSSFX: macro
+	db $10
+endm
+
 WALK EQU $FE
 STAY EQU $FF
 
