@@ -455,3 +455,6 @@ PrintGameVersionOnTitleScreen:
 ; these point to special tiles specifically loaded for that purpose and are not usual text
 VersionOnTitleScreenText:
 	db $7F,$70,$71,$72,$73,$74,$7F,$7F,"@" ; "Prototype"
+
+NintenText: db "NINTEN@"
+SonyText:   db "Gary@"
