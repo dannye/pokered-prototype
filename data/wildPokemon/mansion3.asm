@@ -12,4 +12,3 @@ MansionMons3:
 	db 42,MUK
 
 	db $00
-

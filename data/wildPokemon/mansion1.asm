@@ -12,4 +12,3 @@ MansionMons1:
 	db 39,MUK
 
 	db $00
-
