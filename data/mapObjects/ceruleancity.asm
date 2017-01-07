@@ -1,4 +1,4 @@
-CeruleanCityObject: ; 0x18786 (size=170)
+CeruleanCityObject:
 	db $2c ; border block
 
 	db $a ; warps

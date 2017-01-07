@@ -1,4 +1,4 @@
-ChoosePlayerName: ; 695d (1:695d)
+ChoosePlayerName:
 	call OakSpeechSlidePicRight
 	ld de, DefaultNamesPlayer
 	call DisplayIntroNameTextBox
@@ -27,11 +27,11 @@ ChoosePlayerName: ; 695d (1:695d)
 	ld hl, YourNameIsText
 	jp PrintText
 
-YourNameIsText: ; 699f (1:699f)
+YourNameIsText:
 	TX_FAR _YourNameIsText
 	db "@"
 
-OakSpeechSlidePicLeft: ; 69ec (1:69ec)
+OakSpeechSlidePicLeft:
 	push de
 	coord hl, 0, 0
 	lb bc, 12, 11
@@ -48,12 +48,12 @@ OakSpeechSlidePicLeft: ; 69ec (1:69ec)
 	ld a, $ff
 	jr OakSpeechSlidePicCommon
 
-OakSpeechSlidePicRight: ; 6a12 (1:6a12)
+OakSpeechSlidePicRight:
 	coord hl, 5, 4
 	lb de, 6, 6 * SCREEN_WIDTH + 5
 	xor a
 
-OakSpeechSlidePicCommon: ; 6a19 (1:6a19)
+OakSpeechSlidePicCommon:
 	push hl
 	push de
 	push bc
@@ -126,7 +126,7 @@ OakSpeechSlidePicCommon: ; 6a19 (1:6a19)
 	pop hl
 	ret
 
-DisplayIntroNameTextBox: ; 6a6c (1:6a6c)
+DisplayIntroNameTextBox:
 	push de
 	coord hl, 0, 0
 	ld b, $a
@@ -151,17 +151,17 @@ DisplayIntroNameTextBox: ; 6a6c (1:6a6c)
 	ld [wMaxMenuItem], a
 	jp HandleMenuInput
 
-.namestring ; 6aa3 (1:6aa3)
+.namestring
 	db "Name@"
 
-DefaultNamesPlayer: ; 6aa8 (1:6aa8)
+DefaultNamesPlayer:
 	db   "New Name"
 	next "Ash"
 	next "Dan"
 	next "Jack"
 	db   "@"
 
-GetDefaultName: ; 6ad6 (1:6ad6)
+GetDefaultName:
 ; a = name index
 ; hl = name list
 	ld b, a
@@ -185,11 +185,11 @@ GetDefaultName: ; 6ad6 (1:6ad6)
 	ld bc, $14
 	jp CopyData
 
-DefaultNamesPlayerList: ; 6af2 (1:6af2)
+DefaultNamesPlayerList:
 	db "New Name@"
 	db "Ash@"
 	db "Dan@"
 	db "Jack@"
 
-TextTerminator_6b20: ; 6b20 (1:6b20)
+TextTerminator_6b20:
 	db "@"

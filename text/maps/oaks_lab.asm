@@ -1,18 +1,18 @@
 _OaksLabGaryText1::
-	text $53, ": Hey,"
-	line $52, "! Do you"
+	text "<RIVAL>: Hey,"
+	line "<PLAYER>! Do you"
 	cont "know where"
 	cont "grandpa is?"
 	done
 
 _OaksLabText40::
-	text $53, ": Go ahead"
+	text "<RIVAL>: Go ahead"
 	line "and choose,"
-	cont $52, "!"
+	cont "<PLAYER>!"
 	done
 
 _OaksLabText41::
-	text $53, ": Wow! This"
+	text "<RIVAL>: Wow! This"
 	line "is so cool!"
 	done
 
@@ -47,7 +47,7 @@ _OaksLabMonEnergeticText::
 	prompt
 
 _OaksLabReceivedMonText::
-	text $52, " received"
+	text "<PLAYER> received"
 	line "a @"
 	TX_RAM wcd6d
 	text "!@@"
@@ -58,7 +58,7 @@ _OaksLabLastMonText::
 	done
 
 _OaksLabText_1d2f0::
-	text "Oak: Now, ", $52, ","
+	text "Oak: Now, <PLAYER>,"
 	line "which #mon do"
 	cont "you want?"
 	done
@@ -69,14 +69,14 @@ _OaksLabText_1d2f5::
 	done
 
 _OaksLabText_1d2fa::
-	text "Oak: ", $52, ","
+	text "Oak: <PLAYER>,"
 	line "we have to find"
 	cont "Mewtwo before"
 	cont "Team Rocket!"
 	done
 
 _OaksLabDeliverParcelText1::
-	text "Oak: Oh, ", $52, "!"
+	text "Oak: Oh, <PLAYER>!"
 
 	para "How are you and"
 	line "your #mon"
@@ -85,11 +85,11 @@ _OaksLabDeliverParcelText1::
 	para "What? You have"
 	line "something for me?"
 
-	para $52, " delivered"
+	para "<PLAYER> delivered"
 	line "Oak's Letter.@@"
 
 _OaksLabDeliverParcelText2::
-	db $0
+	text ""
 	para "Hmm... Mhm..."
 	line "Right."
 	done
@@ -97,7 +97,7 @@ _OaksLabDeliverParcelText2::
 _OaksLabAroundWorldText::
 	text "#mon around the"
 	line "world wait for"
-	cont "you, ", $52, "!"
+	cont "you, <PLAYER>!"
 	done
 
 _OaksLabGivePokeballsText1::
@@ -111,11 +111,11 @@ _OaksLabGivePokeballsText1::
 	cont "to capture wild"
 	cont "#mon."
 
-	para $52, " got 5"
+	para "<PLAYER> got 5"
 	line "# Balls!@@"
 
 _OaksLabGivePokeballsText2::
-	db $0
+	text ""
 	para "When a wild"
 	line "#mon appears,"
 	cont "it's fair game."
@@ -220,19 +220,19 @@ _OaksLabLeavingText::
 	done
 
 _OaksLabRivalPickingMonText::
-	text $53, ": I'll take"
+	text "<RIVAL>: I'll take"
 	line "this one, then!"
 	done
 
 _OaksLabRivalReceivedMonText::
-	text $53, " received"
+	text "<RIVAL> received"
 	line "a @"
 	TX_RAM wcd6d
 	text "!@@"
 
 _OaksLabRivalChallengeText::
-	text $53, ": Wait"
-	line $52, "!"
+	text "<RIVAL>: Wait"
+	line "<PLAYER>!"
 
 	para "Don't you think we"
 	line "should try out a"
@@ -245,12 +245,12 @@ _OaksLabRivalChallengeText::
 
 _OaksLabText_1d3be::
 _OaksLabText_1d3c3::
-	text $53, ": Wow!"
+	text "<RIVAL>: Wow!"
 	line "Great match!"
 	prompt
 
 _OaksLabRivalToughenUpText::
-	text $53, ": We both"
+	text "<RIVAL>: We both"
 	line "have a lot of"
 	cont "work to do for"
 	cont "sure. Well, we"
@@ -258,18 +258,18 @@ _OaksLabRivalToughenUpText::
 	prompt
 
 _OaksLabText21::
-	text $53, ": Grandpa!"
+	text "<RIVAL>: Grandpa!"
 	done
 
 _OaksLabText22::
-	text $53, ": What did"
+	text "<RIVAL>: What did"
 	line "you call me for?"
 	done
 
 _OaksLabText23::
 	text "Oak: Good, I'm"
 	line "glad you're here,"
-	cont $53,"."
+	cont "<RIVAL>."
 	done
 
 _OaksLabText24::
@@ -284,11 +284,11 @@ _OaksLabText24::
 	done
 
 _OaksLabText25::
-	text "Oak: ", $52, " and"
-	line $53, "! Take"
+	text "Oak: <PLAYER> and"
+	line "<RIVAL>! Take"
 	cont "these with you!"
 
-	para $52, " got"
+	para "<PLAYER> got"
 	line "#dex from Oak!@@"
 
 _OaksLabText26::
@@ -310,11 +310,11 @@ _OaksLabText26::
 	done
 
 _OaksLabText27::
-	text $53, ": Alright!"
+	text "<RIVAL>: Alright!"
 	line "Grandpa, we won't"
 	cont "let you down!"
 
-	para $52, ", my"
+	para "<PLAYER>, my"
 	line "sister, Daisy,"
 	cont "has an extra map"
 	cont "of Kanto."

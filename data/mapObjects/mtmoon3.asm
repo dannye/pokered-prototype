@@ -1,4 +1,4 @@
-MtMoon3Object: ; 0x49fdb (size=102)
+MtMoon3Object:
 	db $19 ; border block
 
 	db $4 ; warps

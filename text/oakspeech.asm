@@ -80,4 +80,3 @@ _OakSpeechText3::
 
 	para "Hurry!"
 	done
-

@@ -2,7 +2,7 @@ MOVE_GENGAR_RIGHT   EQU $00
 MOVE_GENGAR_LEFT    EQU $01
 MOVE_NIDORINO_RIGHT EQU $ff
 
-PlayIntro: ; 41682 (10:5682)
+PlayIntro:
 	xor a
 	ld [hJoyHeld], a
 	inc a
@@ -16,17 +16,17 @@ PlayIntro: ; 41682 (10:5682)
 	call DelayFrame
 	ret
 
-IntroClearScreen: ; 417f0 (10:57f0)
+IntroClearScreen:
 	ld hl, vBGMap1
 	ld bc, $240
 	jr IntroClearCommon
 
-IntroClearMiddleOfScreen: ; 417f8 (10:57f8)
+IntroClearMiddleOfScreen:
 ; clear the area of the tile map between the black bars on the top and bottom
 	coord hl, 0, 4
 	ld bc, SCREEN_WIDTH * 10
 
-IntroClearCommon: ; 417fe (10:57fe)
+IntroClearCommon:
 	ld [hl], $0
 	inc hl
 	dec bc
@@ -35,7 +35,7 @@ IntroClearCommon: ; 417fe (10:57fe)
 	jr nz, IntroClearCommon
 	ret
 
-IntroPlaceBlackTiles: ; 41807 (10:5807)
+IntroPlaceBlackTiles:
 	ld a, $1
 .loop
 	ld [hli], a
@@ -43,17 +43,17 @@ IntroPlaceBlackTiles: ; 41807 (10:5807)
 	jr nz, .loop
 	ret
 
-CopyTileIDsFromList_ZeroBaseTileID: ; 41842 (10:5842)
+CopyTileIDsFromList_ZeroBaseTileID:
 	ld c, 0
 	predef_jump CopyTileIDsFromList
 
-PlayMoveSoundB: ; 41849 (10:5849)
+PlayMoveSoundB:
 ; unused
 	predef GetMoveSoundB
 	ld a, b
 	jp PlaySound
 
-LoadIntroGraphics: ; 41852 (10:5852)
+LoadIntroGraphics:
 	ld hl, BattleTransitionTile
 	ld de, vChars2 + $10
 	ld bc, BattleTransitionTileEnd - BattleTransitionTile
@@ -70,7 +70,7 @@ LoadIntroGraphics: ; 41852 (10:5852)
 	ld a, BANK(GameFreakIntro)
 	jp FarCopyData2
 
-PlayShootingStar: ; 4188a (10:588a)
+PlayShootingStar:
 	ld b, SET_PAL_GAME_FREAK_INTRO
 	call RunPaletteCommand
 	callba LoadCopyrightAndTextBoxTiles
@@ -110,7 +110,7 @@ PlayShootingStar: ; 4188a (10:588a)
 	call ClearSprites
 	jp Delay3
 
-IntroDrawBlackBars: ; 418e9 (10:58e9)
+IntroDrawBlackBars:
 ; clear the screen and draw black bars on the top and bottom
 	call IntroClearScreen
 	coord hl, 0, 0
@@ -126,10 +126,10 @@ IntroDrawBlackBars: ; 418e9 (10:58e9)
 	ld c, $80
 	jp IntroPlaceBlackTiles
 
-EmptyFunc4: ; 4190c (10:590c)
+EmptyFunc4:
 	ret
 
-GameFreakIntro: ; 41959 (10:5959)
+GameFreakIntro:
 	INCBIN "gfx/gamefreak_intro.2bpp"
 	INCBIN "gfx/gamefreak_logo.2bpp"
 	ds $10 ; blank tile

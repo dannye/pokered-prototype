@@ -1,4 +1,4 @@
-ExternalMapEntries: ; 71313 (1c:5313)
+ExternalMapEntries:
 	EMAP $0,$F,PalletTownName
 	EMAP $3,$E,ViridianCityName
 	EMAP $3,$9,PewterCityName
@@ -37,7 +37,7 @@ ExternalMapEntries: ; 71313 (1c:5313)
 	EMAP $2,$2,Route24Name
 	EMAP $1,$1,Route25Name
 
-InternalMapEntries: ; 71382 (1c:5382)
+InternalMapEntries:
 	IMAP OAKS_LAB,                  $0,$F,PalletTownName
 	IMAP VIRIDIAN_GYM,              $3,$E,ViridianCityName
 	IMAP VIRIDIAN_FOREST_ENTRANCE,  $3,$C,Route2Name

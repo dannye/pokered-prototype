@@ -1,4 +1,4 @@
-PrizeMonLevelDictionary: ; 5298a (14:698a)
+PrizeMonLevelDictionary:
 	db ABRA,9
 	db CLEFAIRY,8
 	db NIDORINA,17

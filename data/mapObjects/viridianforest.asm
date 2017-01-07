@@ -1,4 +1,4 @@
-ViridianForestObject: ; 0x611da (size=127)
+ViridianForestObject:
 	db $2 ; border block
 
 	db $6 ; warps
