@@ -16,4 +16,6 @@ Route19Object: ; 0x54e9a (size=87)
 	object SPRITE_SWIMMER, $8, $2b, STAY, LEFT, $7, OPP_BEAUTY, $c
 	object SPRITE_SWIMMER, $b, $2b, STAY, RIGHT, $8, OPP_BEAUTY, $d
 	object SPRITE_SWIMMER, $9, $2a, STAY, UP, $9, OPP_SWIMMER, $8
-	object SPRITE_SWIMMER, $a, $2c, STAY, DOWN, $a, BEAUTY + $C8, $e
+	object SPRITE_SWIMMER, $a, $2c, STAY, DOWN, $a, OPP_BEAUTY, $e
+
+	; warp-to

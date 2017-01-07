@@ -129,4 +129,3 @@ _Museum1FText_5c2bc::
 	text "The Amber is"
 	line "clear and gold!"
 	done
-

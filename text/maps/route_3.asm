@@ -143,4 +143,3 @@ _Route3Text10::
 	text "Route 3"
 	line "Mt.Moon Ahead"
 	done
-

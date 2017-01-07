@@ -27,4 +27,3 @@ _ViridianHouseText4::
 	text "Spearow"
 	line "Name: Pidgester"
 	done
-

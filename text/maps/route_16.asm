@@ -118,4 +118,3 @@ _Route16Text9::
 	line "Celadon City -"
 	cont "Fuchsia City"
 	done
-

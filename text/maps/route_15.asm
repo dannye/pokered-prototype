@@ -169,4 +169,3 @@ _Route15Text12::
 	line "West to Fuchsia"
 	cont "City"
 	done
-

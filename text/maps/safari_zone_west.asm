@@ -29,4 +29,3 @@ _SafariZoneWestText8::
 	text "Area 3"
 	line "East: Center Area"
 	done
-

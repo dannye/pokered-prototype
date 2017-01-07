@@ -21,4 +21,3 @@ _CeladonMansion1Text5::
 	text "Celadon Mansion"
 	line "Manager's Suite"
 	done
-

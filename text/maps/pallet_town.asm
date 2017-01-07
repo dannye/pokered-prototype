@@ -46,4 +46,3 @@ _PalletTownText6::
 _PalletTownText7::
 	text $53,"'s house "
 	done
-

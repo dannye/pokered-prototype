@@ -39,4 +39,3 @@ _StandByMeText::
 _TVWrongSideText::
 	text "Oops, wrong side."
 	done
-

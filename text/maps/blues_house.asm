@@ -41,4 +41,3 @@ _BluesHouseText3::
 	text "It's a big map!"
 	line "This is useful!"
 	done
-

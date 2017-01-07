@@ -193,4 +193,3 @@ _Route17Text16::
 	text "Cycling Road"
 	line "Slope ends here!"
 	done
-
